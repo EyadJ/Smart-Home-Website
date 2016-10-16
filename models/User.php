@@ -161,8 +161,77 @@ public static function getUserName($email)
 		}
 	}
 
+public static function getIdByEmail($email) 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) {
+		  die('error: unable to connect to database');
+		}
+
+		$email = $db->escape_string($email);
+		$sql = "SELECT UserID FROM user WHERE Email = '$email';";
+
+		$result = $db->query($sql);
+	 
+		if ($result->num_rows >= 1)  // id number exists
+		{ 			
+			$row = $result->fetch_assoc();
+			$UserID  = $row['UserID'];
+			return $UserID;
+		}
+		else 
+		{
+			return "couldn't find email";
+		}
+	}
+	
+public static function isAdmin($email) 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) {
+		  die('error: unable to connect to database');
+		}
+
+		$email = $db->escape_string($email);
+		$sql = "SELECT isAdmin FROM user WHERE Email = '$email';";
+
+		$result = $db->query($sql);
+	 
+		if ($result->num_rows >= 1)  // id number exists
+		{ 			
+			$row = $result->fetch_assoc();
+			$isAdmin  = $row['isAdmin'];
+			return $isAdmin;
+		}
+		else 
+		{
+			return "couldn't find email";
+		}
+	}
 
 
+public static function getUserAutherisedRooms($UserID) 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) {
+		  die('unable to connect to database [' . $db->connect_error .']');
+		}
+
+		$UserID = $db->escape_string($UserID);
+		$sql = "SELECT * FROM room WHERE RoomID in 
+		(SELECT RoomID FROM user_authorized_rooms WHERE UserID = '$UserID')";
+
+		$result = $db->query($sql);
+	 
+		if ($result->num_rows >= 1)  // id number exists
+		{ 			
+			return $result;
+		}
+		else 
+		{
+			return NULL;
+		}
+	}
 
 
 

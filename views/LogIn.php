@@ -46,7 +46,7 @@ table {
                 </div>
 				<div id='page-container'>
 				
-                <div class="right-div" style="width:97%; float:center;">
+                <div style="width:50%; float:right; margin-right: 25%;">
 
 
      <div class="table-hoder">

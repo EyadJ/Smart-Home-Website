@@ -28,11 +28,13 @@
 			
 			$UserName = user::getUserName($email);
 			$isAdmin = user::isAdmin($email);
+			$UserID = user::getIdByEmail($email);
 			//var_dump($UserName);
 			//var_dump($email);
 			//var_dump($isAdmin);
 			
 			$_SESSION["UserName"] = $UserName;  
+			$_SESSION["UserID"] = $UserID;  
 			$_SESSION["Email"] = $email;        
 			$_SESSION["Admin"] = $isAdmin;   
 
