@@ -2,16 +2,16 @@
 
 <html>
 <head>
-<title>Rooms</title>
+<title>Homepage</title>
   <link href="../controllers/style.css" rel="stylesheet"/>
   
 </head>
 <body>
  
             <div class="allcontainer">
-	 <img src="../controllers/images/smarthome-background.jpg"
+			<img src="../controllers/images/smarthome-background.jpg" 
 			style="width:100%; position:fixed; top:40px;" /> 
-<div id="page-header">
+            <div id="page-header">
 <div class="page-logo">
 
 <?php
@@ -33,24 +33,7 @@ include_once("../controllers/SessionInfo.php");
 ?>
 				</ul>
 				</div>
-                <div class="right-div">
-
-
- <div class="table-hoder">
-	<div class="personal-bg-table">
-            <span>Rooms</span>
-	</div>
-	<table style="background-color:white; border:0px solid transparent;"> 
-			
-		<?php
-		include_once("../controllers/RoomsHandling.php");
-		?>
-		
-	</table>
-</div>
-<!--250px-->
-		 
-        </div>
+         
 	</div>
 
 </body>

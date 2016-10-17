@@ -11,7 +11,7 @@ require_once("config.php");
 class Room
 {
 	
-	public static function getRoomsDetails() 
+	public static function getAllRoomsDetails() 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) {
@@ -30,6 +30,7 @@ class Room
 			return NULL;
 		}
 	}
+	
 
 public static function getRoomName($RoomID) 
 	{

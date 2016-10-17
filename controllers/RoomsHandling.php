@@ -10,7 +10,7 @@
 	
 	if ($isAdmin == TRUE)
 	{
-		$result = Room::getRoomsDetails();
+		$result = Room::getAllRoomsDetails();
 	}
 	else	//$isAdmin == FALSE (print only rooms which are autherized to some user)
 	{

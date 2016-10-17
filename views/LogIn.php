@@ -38,10 +38,12 @@ table {
 </head>
 <body onload="checkPass();">
  <div class="allcontainer">
-            <div id="page-header">
+	 <img src="../controllers/images/smarthome-background.jpg"
+			style="width:100%; position:fixed; top:40px;" /> 
+<div id="page-header">
           
                 <div class="page-logo2">
-                 <img height="80px;" src="../controllers/images/Capture.PNG"/>
+                 <a href="HomePage.php"><img height="80px;" src="../controllers/images/Capture.PNG"/></a>
                 </div>
                 </div>
 				<div id='page-container'>

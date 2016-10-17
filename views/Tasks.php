@@ -9,6 +9,10 @@
 <body>
  
             <div class="allcontainer">
+
+			<img src="../controllers/images/smarthome-background.jpg"
+			style="width:100%; position:fixed; top:40px;" /> 
+
             <div id="page-header">
 <div class="page-logo">
 
@@ -18,7 +22,7 @@ include_once("../controllers/SessionInfo.php");
 
 </div>
 	<div class="page-logo2">
-	 <img height="80px;" src="../controllers/images/Capture.PNG"/>
+	 <a href="HomePage.php"><img height="80px;" src="../controllers/images/Capture.PNG"/></a>
 	</div>
 	</div>
 	<div id='page-container'>
@@ -40,9 +44,9 @@ include_once("../controllers/SessionInfo.php");
 	</div>
 	<table style="background-color:white; border:0px solid transparent;"> 
 			
-	<?php
+		<?php
 		include_once("../controllers/TasksHandling.php");
-	?>
+		?>
 		
 	</table>
 </div>

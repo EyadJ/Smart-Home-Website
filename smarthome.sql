@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 03, 2016 at 10:57 PM
+-- Generation Time: Oct 04, 2016 at 02:57 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -45,15 +45,15 @@ CREATE TABLE IF NOT EXISTS `device` (
 INSERT INTO `device` (`DeviceID`, `RoomID`, `DeviceName`, `DeviceState`, `GateNum`, `DeviceImgPath_on`, `DeviceImgPath_off`) VALUES
 (101, 101, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png'),
 (102, 101, 'AC', b'1', 0, 'cooler_on.png', 'cooler_off.png'),
-(103, 101, 'Curtains', b'0', 0, 'curtains_opened.png', 'curtains_closed.png'),
+(103, 101, 'Curtains', b'1', 0, 'curtains_opened.png', 'curtains_closed.png'),
 (201, 102, 'Roof Lamp', b'0', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png'),
-(202, 102, 'AC', b'0', 0, 'cooler_on.png', 'cooler_off.png'),
+(202, 102, 'AC', b'1', 0, 'cooler_on.png', 'cooler_off.png'),
 (203, 102, 'Curtains', b'0', 0, 'curtains_opened.png', 'curtains_closed.png'),
 (301, 103, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png'),
 (302, 103, 'AC', b'0', 0, 'cooler_on.png', 'cooler_off.png'),
 (303, 103, 'Curtains', b'0', 0, 'curtains_opened.png', 'curtains_closed.png'),
 (401, 104, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png'),
-(402, 104, 'AC', b'1', 0, 'cooler_on.png', 'cooler_off.png'),
+(402, 104, 'AC', b'0', 0, 'cooler_on.png', 'cooler_off.png'),
 (403, 104, 'Curtains', b'1', 0, 'curtains_opened.png', 'curtains_closed.png'),
 (501, 105, 'Roof Lamp', b'0', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png'),
 (502, 105, 'AC', b'1', 0, 'cooler_on.png', 'cooler_off.png'),
@@ -63,7 +63,7 @@ INSERT INTO `device` (`DeviceID`, `RoomID`, `DeviceName`, `DeviceState`, `GateNu
 (701, 107, 'Roof Lamp', b'0', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png'),
 (801, 108, 'Roof Lamp', b'0', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png'),
 (901, 109, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png'),
-(902, 109, 'Garage Door', b'1', 0, 'Garage-door_open.png', 'Garage-door_closed.png'),
+(902, 109, 'Garage Door', b'0', 0, 'Garage-door_open.png', 'Garage-door_closed.png'),
 (1001, 110, 'Security Camera 1', b'1', 0, 'security-camera_on.png', 'security-camera_off.png'),
 (1002, 110, 'Security Camera 2', b'0', 0, 'security-camera_on.png', 'security-camera_off.png');
 
@@ -94,7 +94,7 @@ INSERT INTO `room` (`RoomID`, `RoomName`, `RoomImgPath`) VALUES
 (107, 'Parents Bathroom', 'Bathroom1.png'),
 (108, 'Bathroom', 'Bathroom2.jpg'),
 (109, 'Garage', 'garage.jpg'),
-(110, 'House Parameters', '');
+(110, 'House Parameters', 'house_parameters.png');
 
 -- --------------------------------------------------------
 
@@ -152,10 +152,10 @@ CREATE TABLE IF NOT EXISTS `task` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `taskdevices`
+-- Table structure for table `task_devices`
 --
 
-CREATE TABLE IF NOT EXISTS `taskdevices` (
+CREATE TABLE IF NOT EXISTS `task_devices` (
   `TaskID` int(6) NOT NULL,
   `SensorID` int(4) NOT NULL,
   `DeviceID` int(4) NOT NULL,
@@ -197,6 +197,34 @@ INSERT INTO `user` (`userID`, `Email`, `UserName`, `Description`, `Password`, `i
 (6, 'Khaled.alghamdi@yahoo.com', 'Khaled alghamdi', 'Son', '43211', 0, 'khaled.jpg'),
 (7, 'Sarah.alghamdi@gmail.com', 'Sarah Alghamdi', 'Daughter', '44332211', 0, 'sarah.jpg');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_authorized_rooms`
+--
+
+CREATE TABLE IF NOT EXISTS `user_authorized_rooms` (
+  `UserID` int(4) NOT NULL,
+  `RoomID` int(4) NOT NULL,
+  PRIMARY KEY (`UserID`,`RoomID`),
+  KEY `UserID` (`UserID`),
+  KEY `RoomID` (`RoomID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_authorized_rooms`
+--
+
+INSERT INTO `user_authorized_rooms` (`UserID`, `RoomID`) VALUES
+(4, 101),
+(4, 106),
+(4, 107),
+(5, 102),
+(5, 109),
+(6, 103),
+(6, 109),
+(7, 104);
+
 --
 -- Constraints for dumped tables
 --
@@ -221,12 +249,19 @@ ALTER TABLE `task`
   ADD CONSTRAINT `task_ibfk_2` FOREIGN KEY (`RoomID`) REFERENCES `room` (`RoomID`);
 
 --
--- Constraints for table `taskdevices`
+-- Constraints for table `task_devices`
 --
-ALTER TABLE `taskdevices`
-  ADD CONSTRAINT `taskdevices_ibfk_3` FOREIGN KEY (`SensorID`) REFERENCES `sensor` (`SensorID`),
-  ADD CONSTRAINT `taskdevices_ibfk_1` FOREIGN KEY (`TaskID`) REFERENCES `task` (`TaskID`),
-  ADD CONSTRAINT `taskdevices_ibfk_2` FOREIGN KEY (`DeviceID`) REFERENCES `device` (`DeviceID`);
+ALTER TABLE `task_devices`
+  ADD CONSTRAINT `task_devices_ibfk_3` FOREIGN KEY (`SensorID`) REFERENCES `sensor` (`SensorID`),
+  ADD CONSTRAINT `task_devices_ibfk_1` FOREIGN KEY (`TaskID`) REFERENCES `task` (`TaskID`),
+  ADD CONSTRAINT `task_devices_ibfk_2` FOREIGN KEY (`DeviceID`) REFERENCES `device` (`DeviceID`);
+
+--
+-- Constraints for table `user_authorized_rooms`
+--
+ALTER TABLE `user_authorized_rooms`
+  ADD CONSTRAINT `user_authorized_rooms_ibfk_2` FOREIGN KEY (`RoomID`) REFERENCES `room` (`RoomID`),
+  ADD CONSTRAINT `user_authorized_rooms_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `user` (`userID`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

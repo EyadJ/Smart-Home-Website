@@ -1,7 +1,7 @@
 body {
     margin: 0;
     background-color: #e9ecf3;
-}
+	}
 
 table {
     color: #191919;
@@ -146,7 +146,7 @@ table {
     font-family: "Open Sans", sans-serif,Arial;
     font-size: 16px;
     font-weight: 500;
-    padding: 1px 0 10px 10%;
+    padding: 1px 0 10px 3%;
     color: #696e6e;
     display: inline-block;
     width: 90%;
@@ -170,43 +170,11 @@ table {
     width: 90%;
     line-height: 2;
     }
-/*
-	.li-menu-admin {
+	.open {
     font-family: "Open Sans", sans-serif,Arial;
     font-size: 16px;
     font-weight: 500;
-    padding: 1px 0 10px 10%;
-    color: red;
-    display: inline-block;
-    width: 90%;
-    line-height: 2;
-    background-color: red;
-    border-left: 3px solid #e9ecf3;
-    -webkit-box-shadow: 1px 3px 1px 0px rgba(224,217,224,0.67);
-    -moz-box-shadow: 1px 3px 1px 0px rgba(224,217,224,0.67);
-    box-shadow: 1px 3px 1px 0px rgba(224,217,224,0.67);
-	}
-*/
-
-/*.
-	li-menu-admin:hover {
-    font-family: "Open Sans", sans-serif,Arial;
-    font-size: 16px;
-    font-weight: 500;
-    padding: 10px 0 10px 10%;
-    color: blue;
-    display: inline-block;
-    background-color: blue;
-    border-left: 3px solid #45c2c4;
-    width: 90%;
-    line-height: 2;
-    }
-*/
-.open {
-    font-family: "Open Sans", sans-serif,Arial;
-    font-size: 16px;
-    font-weight: 500;
-    padding: 10px 0 10px 10%;
+    padding: 10px 0 10px 3%;
     color: #45c2c4;
     display: inline-block;
     background-color: #f2f6f9;
@@ -214,6 +182,48 @@ table {
     width: 90%;
     line-height: 2;
 }
+
+	.li-menu-admin {
+    font-family: "Open Sans", sans-serif,Arial;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 1px 0 10px 3%;
+    color: white;
+    display: inline-block;
+    width: 90%;
+    line-height: 2;
+    background-color: #808080;
+    border-left: 3px solid #e9ecf3;
+    -webkit-box-shadow: 1px 3px 1px 0px rgba(224,217,224,0.67);
+    -moz-box-shadow: 1px 3px 1px 0px rgba(224,217,224,0.67);
+    box-shadow: 1px 3px 1px 0px rgba(224,217,224,0.67);
+	}
+
+.open-admin{
+    font-family: "Open Sans", sans-serif,Arial;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px 0 10px 3%;
+    color: black;
+    display: inline-block;
+    background-color:  #808080;
+    border-left: 3px solid black;
+    width: 90%;
+    line-height: 2;
+}
+
+	.li-menu-admin:hover {
+        font-family: "Open Sans", sans-serif,Arial;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 10px 0 10px 10%;
+    color: black;
+    display: inline-block;
+    background-color: #808080;
+    border-left: 3px solid black;
+    width: 90%;
+    line-height: 2;
+    }
 
 .right-div {
     float: right;
