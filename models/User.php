@@ -68,15 +68,15 @@ class User
 		}
 	}
 
-	public static function getUserDetails($email) 
+	public static function getUserDetailsByID($UserID) 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) {
 		  die('unable to connect to database [' . $db->connect_error .']');
 		}
 
-		$email = $db->escape_string($email);
-		$sql = "SELECT * FROM user WHERE Email = '$email'";
+		$UserID = $db->escape_string($UserID);
+		$sql = "SELECT * FROM user WHERE userID = '$UserID'";
 
 		$result = $db->query($sql);
 	 
@@ -88,7 +88,7 @@ class User
 		}
 		else 
 		{
-			return "couldn't find email";
+			return "couldn't find User ID";
 		}
 	}
 	
@@ -233,7 +233,61 @@ public static function getUserAutherisedRooms($UserID)
 		}
 	}
 
+public static function modifyUserDetails 
+($userID, $UserName, $Email, $Description, $Password) 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) 
+		{
+			die('error: unable to connect to database');
+		}
+		//in the following lines we escape quotation such as ' and "
+		$UserName = $db->escape_string($UserName);
+		$Email = $db->escape_string($Email);
+		$Description = $db->escape_string($Description);
+		$Password = $db->escape_string($Password);
 
+		$sql = "UPDATE user "
+			. " SET UserName = '$UserName'" 
+			. " ,Email = '$Email'" 
+			. " ,Description = '$Description'" 
+			. " ,Password = '$Password'" 
+			. " WHERE userID = $userID;";
+
+		if ($db->query($sql)) //TRUE
+		{ 
+			return TRUE;
+		} 
+		else 
+		{
+			return FALSE;
+		}
+	}
+	
+	public static function modifyUserImagePath ($userID, $UserImagePath) 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) 
+		{
+			die('error: unable to connect to database');
+		}
+		$UserImagePath = $db->escape_string($UserImagePath);
+		
+		$sql = "UPDATE user SET"
+			. " UserImagePath = '$UserImagePath'" 
+			. " WHERE userID = $userID;";
+
+		if ($db->query($sql)) //TRUE
+		{ 
+			
+			//return TRUE;
+		} 
+		else 
+		{
+			return FALSE;
+		}
+	}
+	
 
 
 

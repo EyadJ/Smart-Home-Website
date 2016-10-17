@@ -14,13 +14,13 @@
 			</td>
 			<td><B>".$row['UserName']."</B></td>
 			<td>
-			<img src='../controllers/images/add-unavailable.png' width='40' height='40'/>
+			<img src='../controllers/images/add-unavailable.png' width='50' height='50'/>
 			</td>
 			<td>
-			<img src='../controllers/images/Modify-unavailable.png' width='40' height='40'/>
+			<img src='../controllers/images/Modify-unavailable.png' width='50' height='50'/>
 			</td>
 			<td>
-			<img src='../controllers/images/Delete_Icon-unavailable.png' width='40' height='40'/>
+			<img src='../controllers/images/Delete_Icon-unavailable.png' width='50' height='50'/>
 			</td></tr>"  ;	
 		}
 		else
@@ -30,15 +30,15 @@
 			<td><B>".$row['UserName']."</B></td>
 			<td>
 			<a href='RoomsAuthorisation.php?var=$row[userID]'>
-			<img src='../controllers/images/Add.ico' width='40' height='40'/>
+			<img src='../controllers/images/Add.ico' width='50' height='50'/>
 			</a></td>
 			<td>
 			<a href='modifyUserSettings.php?var=$row[userID]'>
-			<img src='../controllers/images/Modify.jpg' width='40' height='40'/>
+			<img src='../controllers/images/Modify.jpg' width='50' height='50'/>
 			</td></a>
 			<td>
 			<a href='deleteUser.php?var=$row[UserName]'>
-			<img src='../controllers/images/Delete_Icon.png' width='40' height='40'/>
+			<img src='../controllers/images/Delete_Icon.png' width='50' height='50'/>
 			</a></td></tr>"  ;	
 		}		
     }

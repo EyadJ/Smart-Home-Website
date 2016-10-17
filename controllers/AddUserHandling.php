@@ -12,6 +12,7 @@
 	
 	$target_dir = "../controllers/images/users/";
 	$basename = basename($_FILES["fileToUpload"]["name"]);
+	 
 	$target_file = $target_dir . $basename;
 	$uploadOk = 1;
 	$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);

@@ -46,7 +46,7 @@ table {
                  <a href="HomePage.php"><img height="80px;" src="../controllers/images/Capture.PNG"/></a>
                 </div>
                 </div>
-				<div id='page-container'>
+				<!--<div id='page-container'>-->
 				
                 <div style="width:50%; float:right; margin-right: 25%;">
 
@@ -58,8 +58,8 @@ table {
             <hr class="hr-table" />
         </div>
   
-<form  name="formR" method="post" action="../controllers/LogInHandling.php">
-<table align="center"  style="width:420px">
+<form name="formR" method="post" action="../controllers/LogInHandling.php">
+<table align="center" style="top:100px; position:relative; width:420px; background-color:white;">
 <th colspan="2" ><h1>Log in</h1></th>
 
 <?php

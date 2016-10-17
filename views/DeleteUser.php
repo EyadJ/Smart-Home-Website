@@ -1,4 +1,4 @@
-<?php /*error_reporting(0);*/ session_start();  if(!isset($_SESSION["Email"]) || $_SESSION["Admin"] == FALSE || $_SESSION["Email"] != $_SESSION["Admin"]){  header("Location: Rooms.php"); } ?>
+<?php /*error_reporting(0);*/ session_start();  if(!isset($_SESSION["Email"]) || $_SESSION["Admin"] == FALSE ){  header("Location: Rooms.php"); } ?>
 
 
 <html >

@@ -17,19 +17,37 @@
 		$result = User::getUserAutherisedRooms($UserID);	
 	}
 
+	$counter=0;
+	echo "<tr align='center'>";
+	
 	while($row = $result->fetch_assoc()) 
 	{
+		if($counter>1)
+		{
+			echo "</tr><tr align='center' >";
+			$counter=0;
+		}
+		
 			$RoomID = $row['RoomID'];
 			//	echo  $RoomID ; 
 			$Devices = Device::getDevicesDetailsByRoomID($RoomID);
 			
 			echo
-			"<tr align='center'>
-			<td style='width:80;'>
+			"<td style=
+			'width:80; 
+			border-left: 2px solid black; 
+			border-bottom: 2px solid black; 
+			border-top: 2px solid black;
+			'>
 			<B>".$row['RoomName']."</B>
 			<br />
 			<img src='../controllers/images/rooms/".$row['RoomImgPath']."' width='240' height='240'/>
-			</td><td style='width:60px;'>";
+			</td><td style=
+			'width:60px; 
+			border-right: 2px solid black;
+			border-bottom: 2px solid black; 
+			border-top: 2px solid black;
+			'>";
 			
 		
 			while($row2 = $Devices->fetch_assoc()) 
@@ -50,6 +68,8 @@
 				</a><br />";
 			}
 			
-			echo"</td></tr>"  ;		
+			echo"</td>"  ;		
+	$counter++;
 	}
+	echo"</tr>";
 ?>

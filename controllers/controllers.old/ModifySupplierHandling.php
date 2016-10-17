@@ -58,7 +58,13 @@ if(isset($_FILES["fileToUpload"]))
 		 
 	}
 }
-	$modifiedSuccessfully = Supplier::modifySupplierDetails($_SESSION['lastSelectedSupplierId'], $_POST['name'], $_POST['Email'], $_POST['fax'], $_POST['tel'], $_POST['website']);
+	$modifiedSuccessfully = Supplier::modifySupplierDetails(
+	$_SESSION['lastSelectedSupplierId'],
+	$_POST['name'],
+	$_POST['Email'],
+	$_POST['fax'],
+	$_POST['tel'],
+	$_POST['website']);
        
 	//echo $modifiedSuccessfully;
 	 
