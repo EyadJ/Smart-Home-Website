@@ -10,10 +10,14 @@
 
 </head>
 <body>
+
      <div class="allcontainer">
 	 <img src="../controllers/images/smarthome-background.jpg"
 			style="width:100%; position:fixed; top:40px;" /> 
+			 
+			
 <div id="page-header">
+
                 <div class="page-logo">
 <?php
 include_once("../controllers/SessionInfo.php");
@@ -35,13 +39,15 @@ include_once("../controllers/SessionInfo.php");
 				</div>
                 <div class="right-div">
 
-
-     <div class="table-hoder">
+			 
+     
         <div class="personal-bg-table">
-            <span>Add User </span>
-            <div class="clearfix"></div>
+            <span>Add User</span>
             <hr class="hr-table" />
         </div>
+           
+			
+       
   
 
     

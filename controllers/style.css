@@ -2,6 +2,8 @@ body {
     margin: 0;
     background-color: #e9ecf3;
 	}
+	
+
 
 table {
     color: #191919;
@@ -107,12 +109,13 @@ table {
 }
 
 .menu {
-    float: left;
-    width: 14%;
+    
+    width: 190px;
     //min-width: 120px;
     position: fixed;
     top: 90px;
-    left: 1.5%;
+    //left: 15%;
+	right:75%;
     z-index: 2;
 }
 
@@ -226,9 +229,11 @@ table {
     }
 
 .right-div {
-    float: right;
+    float: left;
     width: 50%;
-    margin-right: 25%;
+	min-width: 650px;
+    //margin-right: 25%;
+    margin-left: 25%;
     margin-top: 0px;
     background: #fff;
 }
@@ -292,10 +297,10 @@ table {
 .personal-bg-table {
     background-color: #fff;
     font-family: "Open Sans", sans-serif,Arial;
-    font-size: 22px;
-    font-weight: 500;
-    padding: 20px 2%;
-    color: #45c2c4;
+    font-size: 23px;
+    font-weight: 600;
+    padding: 15px 2%;
+    color: black;
     line-height: 1.2;
     -webkit-border-top-left-radius: 5px;
     -moz-border-top-left-radius: 5px;
@@ -473,7 +478,7 @@ table {
 .hr-table {
     width: 100%;
     height: 2px;
-    background-color: #45c2c4;
+    background-color: Black;
     border: none;
     float: left;
 }
@@ -581,4 +586,48 @@ tr {
 }
 
 
+.tooltip {
+    position: relative;
+    display: inline-block;
+    //border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
 
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+ 
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+.abc {
+	margin-left:0.5%; 
+	//margin-right:auto; 
+	margin-top:3px; 
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: relative;
+    z-index: 2;
+}
+
+/*
+<div class="tooltip">Hover over me
+  <span class="tooltiptext">Tooltip text</span>
+</div>
+*/

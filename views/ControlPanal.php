@@ -2,7 +2,7 @@
 
 <html >
 <head >
-<title>Control Panal page</title>
+<title>Control Panal</title>
    
     <link href="../controllers/style.css" rel="stylesheet"/>
 
@@ -39,24 +39,22 @@ include_once("../controllers/SessionInfo.php");
                 <div class="right-div">
 
 
-     <div class="table-hoder">
+    
         <div class="personal-bg-table">
             <span>Control Panal</span>
-            <div class="clearfix"></div>
             <hr class="hr-table" />
         </div>
   
-            <div style="vertical-align:middle; padding-left:20px; display:block;">
-<a padding-left:20px;  href="addUser.php" style="text-decoration:none; ">
-<div style="display:inline-block; vertical-align:middle;">
-    <img src="../controllers/images/add.png" width="40" height="40" />
-</div>
-<div style="display: inline-block; vertical-align: middle;">
-    <span>Add New User</span>
-</div>
-</a>
-      
-         </div>
+	<div style=" margin-left:auto; margin-right:auto; width:50px;">
+			
+		<a class="tooltip" href="addUser.php" style="text-decoration:none; ">
+			
+				<span class="tooltiptext">Add new user</span>
+			<img align="center" src="../controllers/images/addUser4.png" width="60" height="60" />
+			
+		</a>
+		
+	</div>
     
     <form method="post">
     
@@ -70,12 +68,12 @@ include_once("../controllers/SessionInfo.php");
 </tr></thead>
 
 <?php
- include_once("../controllers/ControlPanalHandling.php");
+ include_once("../controllers/PreControlPanal.php");
 ?>
 
 </table>
 </form>
-		</div>
+	
 
 		<div class="clearfix">
 		<br />

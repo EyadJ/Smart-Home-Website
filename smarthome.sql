@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 05, 2016 at 03:53 PM
+-- Generation Time: Oct 06, 2016 at 09:06 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -19,6 +19,21 @@ SET time_zone = "+00:00";
 --
 -- Database: `smarthome`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `camera_images`
+--
+
+CREATE TABLE IF NOT EXISTS `camera_images` (
+  `imgID` int(5) NOT NULL AUTO_INCREMENT,
+  `cameraID` int(4) NOT NULL,
+  `imgDate` timestamp NOT NULL,
+  `imgPath` varchar(60) NOT NULL,
+  PRIMARY KEY (`imgID`),
+  KEY `cameraID` (`cameraID`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 -- --------------------------------------------------------
 
@@ -44,26 +59,26 @@ CREATE TABLE IF NOT EXISTS `device` (
 --
 
 INSERT INTO `device` (`DeviceID`, `RoomID`, `DeviceName`, `DeviceState`, `GateNum`, `DeviceImgPath_on`, `DeviceImgPath_off`, `lastStatusChange`) VALUES
-(101, 101, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', '2016-10-04 15:02:32'),
-(102, 101, 'AC', b'0', 0, 'cooler_on.png', 'cooler_off.png', '2016-10-05 07:08:02'),
-(103, 101, 'Curtains', b'1', 0, 'curtains_opened.png', 'curtains_closed.png', '2016-10-04 15:02:34'),
-(201, 102, 'Roof Lamp', b'0', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', '2016-10-05 07:08:11'),
-(202, 102, 'AC', b'1', 0, 'cooler_on.png', 'cooler_off.png', '0000-00-00 00:00:00'),
-(203, 102, 'Curtains', b'1', 0, 'curtains_opened.png', 'curtains_closed.png', '2016-10-04 15:02:36'),
+(101, 101, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', '2016-10-06 18:24:34'),
+(102, 101, 'AC', b'0', 0, 'cooler_on.png', 'cooler_off.png', '2016-10-06 18:24:30'),
+(103, 101, 'Curtains', b'0', 0, 'curtains_opened.png', 'curtains_closed.png', '2016-10-06 18:24:36'),
+(201, 102, 'Roof Lamp', b'0', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', '2016-10-05 15:47:55'),
+(202, 102, 'AC', b'1', 0, 'cooler_on.png', 'cooler_off.png', '2016-10-05 15:48:01'),
+(203, 102, 'Curtains', b'0', 0, 'curtains_opened.png', 'curtains_closed.png', '2016-10-06 13:22:51'),
 (301, 103, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', '0000-00-00 00:00:00'),
-(302, 103, 'AC', b'0', 0, 'cooler_on.png', 'cooler_off.png', '0000-00-00 00:00:00'),
-(303, 103, 'Curtains', b'1', 0, 'curtains_opened.png', 'curtains_closed.png', '2016-10-04 15:02:59'),
+(302, 103, 'AC', b'1', 0, 'cooler_on.png', 'cooler_off.png', '2016-10-06 18:24:36'),
+(303, 103, 'Curtains', b'0', 0, 'curtains_opened.png', 'curtains_closed.png', '2016-10-06 18:24:37'),
 (401, 104, 'Roof Lamp', b'0', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', '2016-10-04 15:03:02'),
 (402, 104, 'AC', b'1', 0, 'cooler_on.png', 'cooler_off.png', '2016-10-05 06:04:19'),
-(403, 104, 'Curtains', b'1', 0, 'curtains_opened.png', 'curtains_closed.png', '0000-00-00 00:00:00'),
+(403, 104, 'Curtains', b'1', 0, 'curtains_opened.png', 'curtains_closed.png', '2016-10-06 12:37:49'),
 (501, 105, 'Roof Lamp', b'0', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', '0000-00-00 00:00:00'),
 (502, 105, 'AC', b'1', 0, 'cooler_on.png', 'cooler_off.png', '0000-00-00 00:00:00'),
-(503, 105, 'Curtains', b'1', 0, 'curtains_opened.png', 'curtains_closed.png', '0000-00-00 00:00:00'),
+(503, 105, 'Curtains', b'0', 0, 'curtains_opened.png', 'curtains_closed.png', '2016-10-06 12:37:50'),
 (601, 106, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', '0000-00-00 00:00:00'),
-(602, 106, 'AC', b'0', 0, 'cooler_on.png', 'cooler_off.png', '2016-10-04 17:29:08'),
+(602, 106, 'AC', b'1', 0, 'cooler_on.png', 'cooler_off.png', '2016-10-06 12:42:41'),
 (701, 107, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', '2016-10-04 15:02:35'),
 (801, 108, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', '0000-00-00 00:00:00'),
-(901, 109, 'Roof Lamp', b'0', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', '2016-10-04 15:02:46'),
+(901, 109, 'Roof Lamp', b'0', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', '2016-10-06 18:27:21'),
 (902, 109, 'Garage Door', b'0', 0, 'Garage-door_open.png', 'Garage-door_closed.png', '0000-00-00 00:00:00'),
 (1001, 110, 'Security Camera 1', b'1', 0, 'security-camera_on.png', 'security-camera_off.png', '2016-10-04 15:02:43'),
 (1002, 110, 'Security Camera 2', b'0', 0, 'security-camera_on.png', 'security-camera_off.png', '2016-10-05 12:11:53');
@@ -100,12 +115,13 @@ INSERT INTO `room` (`RoomID`, `RoomName`, `RoomImgPath`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `room_background`
+-- Table structure for table `room_backgrounds`
 --
 
-CREATE TABLE IF NOT EXISTS `room_background` (
+CREATE TABLE IF NOT EXISTS `room_backgrounds` (
   `ImageID` int(5) NOT NULL,
   `RoomID` int(4) NOT NULL,
+  `isDefault` bit(1) NOT NULL,
   `ImgPath` varchar(50) CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`ImageID`,`RoomID`),
   KEY `RoomID` (`RoomID`)
@@ -162,6 +178,7 @@ CREATE TABLE IF NOT EXISTS `task` (
   `TaskID` int(6) NOT NULL,
   `userID` int(4) NOT NULL,
   `RoomID` int(4) NOT NULL,
+  `isDefault` bit(1) NOT NULL,
   `TaskName` varchar(50) CHARACTER SET utf8 NOT NULL,
   `ActionTime` date NOT NULL,
   `Duration_Minute` int(3) NOT NULL,
@@ -253,16 +270,22 @@ INSERT INTO `user_authorized_rooms` (`UserID`, `RoomID`) VALUES
 --
 
 --
+-- Constraints for table `camera_images`
+--
+ALTER TABLE `camera_images`
+  ADD CONSTRAINT `camera_images_ibfk_1` FOREIGN KEY (`cameraID`) REFERENCES `device` (`DeviceID`);
+
+--
 -- Constraints for table `device`
 --
 ALTER TABLE `device`
   ADD CONSTRAINT `device_ibfk_1` FOREIGN KEY (`RoomID`) REFERENCES `room` (`RoomID`);
 
 --
--- Constraints for table `room_background`
+-- Constraints for table `room_backgrounds`
 --
-ALTER TABLE `room_background`
-  ADD CONSTRAINT `room_background_ibfk_1` FOREIGN KEY (`RoomID`) REFERENCES `room` (`RoomID`);
+ALTER TABLE `room_backgrounds`
+  ADD CONSTRAINT `room_backgrounds_ibfk_1` FOREIGN KEY (`RoomID`) REFERENCES `room` (`RoomID`);
 
 --
 -- Constraints for table `sensor`

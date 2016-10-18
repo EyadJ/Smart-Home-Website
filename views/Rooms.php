@@ -35,15 +35,15 @@ include_once("../controllers/SessionInfo.php");
 				</div>
                 <div class="right-div">
 
-
- <div class="table-hoder">
-	<div class="personal-bg-table">
+<div class="personal-bg-table">
             <span>Rooms</span>
-	</div>
+            <hr class="hr-table" />
+        </div>
+ 
 	<table style="background-color:white; border:0px solid transparent;"> 
 			
 		<?php
-		include_once("../controllers/RoomsHandling.php");
+		include_once("../controllers/PreRooms.php");
 		?>
 		
 	</table>

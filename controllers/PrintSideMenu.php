@@ -33,9 +33,9 @@ class PrintSideMenu
 		
 		$text = "<a style='text-decoration: none;' href=" . $pageNoSpace . ".php><li class='li-menu-admin "
 		. $isOpen . "'>".
-		"<img  width='30px' src='../controllers/images/controlPanal.png' />&nbsp;".
+		"<img  style='float: left; ' width='30px' src='../controllers/images/controlPanal.png' />&nbsp;".
 		"Control Panal" . 
-		"<img align='right' width='30px' src='../controllers/images/adminLogo.png' />".
+		/*"<img align='right' width='30px' src='../controllers/images/adminLogo.png' />".*/
 		"</li></a>" ;
 
 		return $text;
