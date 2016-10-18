@@ -242,6 +242,7 @@ public static function modifyUserDetails
 			die('error: unable to connect to database');
 		}
 		//in the following lines we escape quotation such as ' and "
+		$userID = $db->escape_string($userID);
 		$UserName = $db->escape_string($UserName);
 		$Email = $db->escape_string($Email);
 		$Description = $db->escape_string($Description);
@@ -280,7 +281,7 @@ public static function modifyUserDetails
 		if ($db->query($sql)) //TRUE
 		{ 
 			
-			//return TRUE;
+			return TRUE;
 		} 
 		else 
 		{

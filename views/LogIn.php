@@ -60,7 +60,7 @@ table {
   
 <form name="formR" method="post" action="../controllers/LogInHandling.php">
 <table align="center" style="top:100px; position:relative; width:420px; background-color:white;">
-<th colspan="2" ><h1>Log in</h1></th>
+<th colspan="2" ><h1 style="color:black;">Log in</h1></th>
 
 <?php
 	include_once("../controllers/PreLogIn.php");

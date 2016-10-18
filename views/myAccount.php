@@ -55,7 +55,7 @@ include_once("../controllers/SessionInfo.php");
 
 &nbsp;
 
-<a href="Rooms.php">
+<a href="HomePage.php">
 <button type = "button" align="Right">Cancel</button></a>
 
 </td></tr>

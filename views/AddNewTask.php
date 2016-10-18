@@ -4,9 +4,6 @@
 <head>
 <title>Add User</title>
     <link href="../controllers/style.css" rel="stylesheet"/>
-<script type="text/javascript">    
-
-</script>
 
 </head>
 <body>

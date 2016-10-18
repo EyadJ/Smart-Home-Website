@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 	include_once("../models/User.php");
 	include_once("../models/Room.php");
@@ -41,7 +41,27 @@
 			'>
 			<B>".$row['RoomName']."</B>
 			<br />
-			<img src='../controllers/images/rooms/".$row['RoomImgPath']."' width='240' height='240'/>
+			
+			<div style='width:240px; margin-right:auto; margin-left:auto;'>
+			
+			<a href='RoomSettings.php?var=". $RoomID ."' > 
+			<img src='../controllers/images/settings-icon (1).png' 
+			width='40px' 
+			height='40px'
+			style='
+			z-index:0;
+			position:absolute;
+			margin-top:193px;
+			right:63px;
+			'
+			/>
+			</a>
+			
+			
+			<img src='../controllers/images/rooms/".$row['RoomImgPath']."' width='240px' height='240px'/>
+			</div>
+			
+			
 			</td><td style=
 			'width:60px; 
 			border-right: 2px solid black;

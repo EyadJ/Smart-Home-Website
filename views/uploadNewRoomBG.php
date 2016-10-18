@@ -2,7 +2,7 @@
 
 <html>
 <head>
-<title>Tasks</title>
+<title>Upload New Room Background</title>
   <link href="../controllers/style.css" rel="stylesheet"/>
   
 </head>
@@ -38,19 +38,24 @@ include_once("../controllers/SessionInfo.php");
                 <div class="right-div">
 
 <div class="personal-bg-table">
-            <span>Tasks</span>
+            <span>Upload New Room Background</span>
             <hr class="hr-table" />
         </div>
 				
 				
-
+			
+	<form method="post" action="../controllers/UploadNewRoomBgHandling.php">
+				
 	<table style="background-color:white; border:0px solid transparent;"> 
 			
 		<?php
-		include_once("../controllers/PreTasks.php");
+		include_once("../controllers/PreUploadNewRoomBG.php");
 		?>
 		
 	</table>
+	
+	</form>
+	
 </div>
 
         </div>
