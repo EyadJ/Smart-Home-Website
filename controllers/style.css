@@ -165,7 +165,10 @@ table {
         font-family: "Open Sans", sans-serif,Arial;
     font-size: 16px;
     font-weight: 500;
-    padding: 10px 0 10px 10%;
+    padding: 1px 0 10px 7%;
+	border-top-right-radius: 15px;
+	border-bottom-right-radius: 15px;
+
     color: #45c2c4;
     display: inline-block;
     background-color: #f2f6f9;
@@ -177,7 +180,7 @@ table {
     font-family: "Open Sans", sans-serif,Arial;
     font-size: 16px;
     font-weight: 500;
-    padding: 10px 0 10px 3%;
+    padding: 1px 0 10px 3%;
     color: #45c2c4;
     display: inline-block;
     background-color: #f2f6f9;
@@ -206,7 +209,7 @@ table {
     font-family: "Open Sans", sans-serif,Arial;
     font-size: 16px;
     font-weight: 500;
-    padding: 10px 0 10px 3%;
+    padding: 1px 0 10px 3%;
     color: black;
     display: inline-block;
     background-color:  #808080;
@@ -219,7 +222,10 @@ table {
         font-family: "Open Sans", sans-serif,Arial;
     font-size: 16px;
     font-weight: 500;
-    padding: 10px 0 10px 10%;
+    padding: 1px 0 10px 7%;
+	border-top-right-radius: 15px;
+	border-bottom-right-radius: 15px;
+
     color: black;
     display: inline-block;
     background-color: #808080;
@@ -229,13 +235,15 @@ table {
     }
 
 .right-div {
+	border-radius :15px;
     float: left;
     width: 50%;
 	min-width: 650px;
     //margin-right: 25%;
     margin-left: 25%;
-    margin-top: 0px;
+    //margin-top: 0px;
     background: #fff;
+	margin-bottom: 0.75cm;
 }
 
 .personal-hoder {
@@ -604,6 +612,8 @@ tr {
  
     /* Position the tooltip text - see examples below! */
     position: absolute;
+	margin-left:40px; 
+	margin-top:-20px; 
     z-index: 1;
 }
 

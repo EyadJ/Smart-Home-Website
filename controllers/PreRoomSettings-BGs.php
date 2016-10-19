@@ -11,9 +11,9 @@
 	$RoomID = $_GET["var"];
 	
 		echo'<form method="post" action="../controllers/UploadNewRoomBgHandling.php?var=' . $RoomID . '" enctype="multipart/form-data">
-		<table id="my_table" style="display:none; margin-left:auto; margin-right:auto; width:303px;"><tr><th>
-				<input type="file" name="fileToUpload" id="my_file" style="display:none;" required/>
-				<input type="submit" id="my_submit" value="Upload" style="display:none;" />
+		<table id="uploadTable" style="display:none; margin-left:auto; margin-right:auto; width:303px;"><tr><th>
+				<input type="file" name="fileToUpload" id="my_file" required />
+				<input type="submit" id="my_submit" value="Upload" />
 				</th></tr></table>
 				</form>
 				';
@@ -97,10 +97,11 @@
 					<img src='../controllers/images/Delete_Icon-unavailable2.png' 
 					width='50px' 
 					height='50px'
-					/>
+					style=
+					opacity: 0.5;
+					'/>
 					</div>";
 				}
-				
 				
 				
 				echo"

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 08, 2016 at 12:05 AM
+-- Generation Time: Oct 08, 2016 at 08:47 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -97,15 +97,15 @@ CREATE TABLE `room` (
 
 INSERT INTO `room` (`RoomID`, `RoomName`, `RoomImgPath`) VALUES
 (101, 'Parents Room', 'bedroom-double1.png'),
-(102, 'Ahmad\'s Room', 'bedroom-male0.png'),
-(103, 'Khaled\'s Room', 'bedroom-male0.png'),
-(104, 'Sarah\'s Room', ''),
-(105, 'Living Room', 'livingroom2.png'),
-(106, 'Kitchen', 'kitchen1.png'),
+(102, 'Ahmad\'s Room', 'bedroom-male1.png'),
+(103, 'Khaled\'s Room', 'bedroom-male3.png'),
+(104, 'Sarah\'s Room', 'bedroom-female1.png'),
+(105, 'Living Room', 'livingroom1.png'),
+(106, 'Kitchen', 'kitchen2.png'),
 (107, 'Parents Bathroom', 'bathroom0.png'),
 (108, 'Bathroom', 'bathroom1.png'),
-(109, 'Garage', 'garage3.png'),
-(110, 'House Parameters', 'house-parameters1.png');
+(109, 'Garage', 'garage2.png'),
+(110, 'House Parameters', 'house-parameters2.png');
 
 -- --------------------------------------------------------
 
@@ -261,8 +261,7 @@ INSERT INTO `user` (`userID`, `Email`, `UserName`, `Description`, `Password`, `i
 (4, 'Huda.Azzahrani@gmail.com', 'Huda Azzahrani', 'Mother', '123455', 0, 'huda.png'),
 (5, 'Ahmad.alghamdi@hotmail.com', 'Ahmad alghamdi', 'Son', '123123', 0, 'ahmad.jpg'),
 (6, 'Khaled.alghamdi@yahoo.com', 'Khaled alghamdi', 'Son', '43211', 0, 'khaled.jpg'),
-(7, 'Sarah.alghamdi@gmail.com', 'Sarah Alghamdi', 'Daughter', '44332211', 0, 'sarah.jpg'),
-(12, 'asd@asd.asd', 'asd3', 'asds', 'asd123', 0, 'heffner-performance-audi-r8-twinturbo-4.jpg');
+(7, 'Sarah.alghamdi@gmail.com', 'Sarah Alghamdi', 'Daughter', '44332211', 0, 'sarah.jpg');
 
 -- --------------------------------------------------------
 
@@ -373,7 +372,7 @@ ALTER TABLE `camera_images`
 -- AUTO_INCREMENT for table `room_backgrounds`
 --
 ALTER TABLE `room_backgrounds`
-  MODIFY `ImageID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `ImageID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 --
 -- AUTO_INCREMENT for table `user`
 --

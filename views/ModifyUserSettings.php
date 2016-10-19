@@ -12,16 +12,11 @@
 	 <img src="../controllers/images/smarthome-background.jpg"
 			style="width:100%; position:fixed; top:40px;" /> 
 			
-            <div id="page-header">
-                <div class="page-logo">
+           
 <?php
-include_once("../controllers/SessionInfo.php");
+include_once("../controllers/Header.php");
 ?> 
-                            </div>
-                <div class="page-logo2">
-                 <a href="HomePage.php"><a href="HomePage.php"><img height="80px;" src="../controllers/images/Capture.PNG"/></a></a>
-                </div>
-                </div>
+                 
 				<div id='page-container'>
 				 <div class='menu'>
 				<ul class='ui-menu'>
