@@ -14,11 +14,11 @@
 	
 	//^^^^^ALREADY INCLUDED IN (PreRoomSettings-BGs.php)- LEFT FOR CONVENIENCE^^^^^^
 	//
-	//----------------------------------------------------------------------------//
-	//
+	//-------------------------------------------	---------------------------------//
+	// 
 		echo'<form method="post" action="../controllers/CreateNewTask.php?var=' . $RoomID . '">
 		<table id="CreateNewTaskTable" style="display:none; margin-left:auto; margin-right:auto; width:90%;"><tr><th>
-				<input type="submit" id="my_submit" value="Upload" />
+				<input type="submit" id="my_submit" value="Create" />
 				</th></tr></table>
 				</form>
 				';

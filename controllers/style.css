@@ -11,7 +11,7 @@ table {
 	border:2px solid black;
 	border-spacing:1px ;
 	background: #f5f5f5;
-	//border-collapse: collapse;
+	/*border-collapse: collapse;*/
 	font-size: 14px;
 	line-height: 1.5;
 	margin: 20px auto;
@@ -58,7 +58,7 @@ table {
 
 .allcontainer {
     background-color: #e9ecf3;
-    //min-width: 1019px;
+    /*min-width: 1019px;*/
 }
 
 #page-header {
@@ -491,6 +491,15 @@ table {
     float: left;
 }
 
+.hr-table-hidden-div {
+    width: 100%;
+    height: 2px;
+    background-color: Black;
+    border: none;
+    float: left;
+	margin:0px;
+}
+
 .spanNmae {
     font-family: "Open Sans", sans-serif,Arial;
     font-size: 18px;
@@ -542,13 +551,6 @@ box-shadow: 1px 3px 1px 0px rgba(224,217,224,0.67);
     padding-left:20px; 
     display:block;
 }
-
-
-
-
-
-
-
 
 
 

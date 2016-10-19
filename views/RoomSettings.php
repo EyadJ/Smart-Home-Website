@@ -101,6 +101,9 @@ include_once("../controllers/Header.php");
 		
 
 <div id="right-div1-hidden" class="right-div" style="display:none;">	
+
+		<div class="personal-bg-table" align="center" style="line-height: 40%;"> <hr class="hr-table-hidden-div"/>.<br />.<br />.</div>	
+
 <a  href="#" onclick="HideUnhideDiv1();return false;" style="text-decoration:none; ">	
 		<img src="../controllers/images/div-plus-green2.png"
 				id="div-plus1"
@@ -108,13 +111,14 @@ include_once("../controllers/Header.php");
 				height="35px" 
 				style="
 				margin-left:97.5%;
-				margin-top:-1.5%;
+				margin-top:-7.5%;
 				" />
 	</a>
 	<br />
 </div>
 	
 		<div id="right-div1" class="right-div">
+	
 	
 	<a  href="#" onclick="HideUnhideDiv1();return false;" style="text-decoration:none; ">	
 		<img src="../controllers/images/div-minus-red.png"
@@ -146,8 +150,10 @@ include_once("../controllers/Header.php");
 
 
 
-
 <div id="right-div2-hidden" class="right-div" style="display:none;">	
+
+		<div class="personal-bg-table" align="center" style="line-height: 40%;"> <hr class="hr-table-hidden-div"/>.<br />.<br />.</div>	
+
 <a  href="#" onclick="HideUnhideDiv2();return false;" style="text-decoration:none; ">	
 		<img src="../controllers/images/div-plus-green2.png"
 				id="div-plus1"
@@ -155,10 +161,10 @@ include_once("../controllers/Header.php");
 				height="35px" 
 				style="
 				margin-left:97.5%;
-				margin-top:-1.5%;
+				margin-top:-7.5%;
 				" />
 	</a>
-	<br />
+		
 </div>
 
 		<div id="right-div2" class="right-div">

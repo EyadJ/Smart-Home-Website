@@ -156,7 +156,7 @@ include_once("../controllers/Header.php");
  <font style="color:black;">We are proud that we deal only with the best Companies in the medical instruments industry:</font>
     </div>
 <div  height="300px">
-<table style="solid black;background-color:white; height:400px;" align="center" > 
+<table style="background-color:white; height:400px;" align="center" > 
 
 <tr> 
 <td> 
