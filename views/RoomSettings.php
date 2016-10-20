@@ -1,5 +1,8 @@
 <?php /*error_reporting(0);*/ session_start(); if(!isset($_SESSION["Email"])){ header("Location: LogIn.php"); } ?>
 
+<?php include_once("../controllers/PreRoomSettings.php"); ?>
+
+
 <html>
 <head>
 <title>Room Settings</title>
@@ -104,7 +107,7 @@ include_once("../controllers/Header.php");
 
 		<div class="personal-bg-table" align="center" style="line-height: 40%;"> <hr class="hr-table-hidden-div"/>.<br />.<br />.</div>	
 
-<a  href="#" onclick="HideUnhideDiv1();return false;" style="text-decoration:none; ">	
+<a href="#" onclick="HideUnhideDiv1();return false;" style="text-decoration:none; ">	
 		<img src="../controllers/images/div-plus-green2.png"
 				id="div-plus1"
 				width="35px" 
@@ -120,7 +123,7 @@ include_once("../controllers/Header.php");
 		<div id="right-div1" class="right-div">
 	
 	
-	<a  href="#" onclick="HideUnhideDiv1();return false;" style="text-decoration:none; ">	
+	<a href="#" onclick="HideUnhideDiv1();return false;" style="text-decoration:none; ">	
 		<img src="../controllers/images/div-minus-red.png"
 				id="div-minus1"
 				width="40px" 
@@ -197,13 +200,7 @@ include_once("../controllers/Header.php");
 
        	<br /><br /><br />
 		</div>
-		
-		
-		
-		
-		
-		
-		
+
         </div>
 	</div>
 

@@ -76,7 +76,7 @@ class User
 		}
 
 		$UserID = $db->escape_string($UserID);
-		$sql = "SELECT * FROM user WHERE userID = '$UserID'";
+		$sql = "SELECT * FROM user WHERE userID = $UserID";
 
 		$result = $db->query($sql);
 	 
@@ -137,23 +137,23 @@ public static function deleteUser($UserName)
 		}
 	}
 
-public static function getUserName($email) 
+public static function getUserName($UserID) 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) {
 		  die('error: unable to connect to database');
 		}
 
-		$email = $db->escape_string($email);
-		$sql = "SELECT UserName FROM user WHERE Email = '$email';";
+		$UserID = $db->escape_string($UserID);
+		$sql = "SELECT UserName FROM user WHERE UserID = '$UserID';";
 
 		$result = $db->query($sql);
 	 
 		if ($result->num_rows >= 1)  // id number exists
 		{ 			
 			$row = $result->fetch_assoc();
-			$userName  = $row['UserName'];
-			return $userName;
+			$UserName  = $row['UserName'];
+			return $UserName	;
 		}
 		else 
 		{
@@ -185,15 +185,15 @@ public static function getIdByEmail($email)
 		}
 	}
 	
-public static function isAdmin($email) 
+public static function isAdmin($UserID) 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) {
 		  die('error: unable to connect to database');
 		}
 
-		$email = $db->escape_string($email);
-		$sql = "SELECT isAdmin FROM user WHERE Email = '$email';";
+		$UserID = $db->escape_string($UserID);
+		$sql = "SELECT isAdmin FROM user WHERE UserID = '$UserID';";
 
 		$result = $db->query($sql);
 	 
@@ -230,6 +230,32 @@ public static function getUserAutherisedRooms($UserID)
 		else 
 		{
 			return NULL;
+		}
+	}
+
+public static function isUserAutherisedForRoom($UserID, $RoomID) 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) {
+		  die('unable to connect to database [' . $db->connect_error .']');
+		}
+
+		$UserID = $db->escape_string($UserID);
+		$RoomID = $db->escape_string($RoomID);
+		
+		$sql = "SELECT * FROM user_authorized_rooms 
+				WHERE RoomID = $RoomID
+				AND UserID = $UserID";
+
+		$result = $db->query($sql);
+	 
+		if ($result->num_rows >= 1)  // id number exists
+		{ 			
+			return TRUE;
+		}
+		else 
+		{
+			return FALSE;
 		}
 	}
 

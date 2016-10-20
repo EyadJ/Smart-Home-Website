@@ -72,7 +72,7 @@ table {
     height: 92px;
     filter: none;
     background: #fff;
-    z-index: 1;
+    z-index: 15;
 	border-bottom-color:blue;
     -webkit-box-shadow: 0 4px 2px -2px rgba(224,217,224,0.50);
     -moz-box-shadow: 0 4px 2px -2px rgba(224,217,224,0.50);

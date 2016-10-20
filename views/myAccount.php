@@ -1,4 +1,4 @@
-<?php error_reporting(0); session_start();  if(!isset($_SESSION["Email"]) || $_SESSION["Admin"] == FALSE){  header("Location: Homepage.php"); } ?>
+<?php error_reporting(0); session_start();  if(!isset($_SESSION["Email"])){  header("Location: Homepage.php"); } ?>
 
 <html>
 <head>
@@ -38,7 +38,7 @@ include_once("../controllers/Header.php");
   	
 	
 <?php 
-	include_once("../controllers/PreModifyUserSettings.php");
+	include_once("../controllers/PreMyAccount.php");
 ?>
 	
     

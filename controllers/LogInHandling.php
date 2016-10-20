@@ -1,5 +1,5 @@
 <?php
-		include_once("../models/user.php");
+		include_once("../models/User.php");
 
 	if(isset($_POST['Pass']) && isset($_POST['Email']))
 	{
@@ -15,9 +15,9 @@
 
 			if (isset($_POST['rememberme'])) 
 			{
-			/* Set cookie to last 1 year */
-			setcookie("Email", $_POST["Email"], time()+60*60*24*365, "/");
-			setcookie("Pass", $_POST["Pass"], time()+60*60*24*365, "/");
+			/* Set cookie to last 1 day */
+			setcookie("Email", $_POST["Email"], time()+60*60*24, "/");
+			setcookie("Pass", $_POST["Pass"], time()+60*60*24, "/");
 			} 
 			else 
 			{
@@ -26,17 +26,17 @@
 				setcookie("Pass", "", time() - 3600, "/");
 			}
 			
-			$UserName = user::getUserName($email);
-			$isAdmin = user::isAdmin($email);
 			$UserID = user::getIdByEmail($email);
+			$isAdmin = user::isAdmin($UserID);
+			$UserName = user::getUserName($UserID);
 			//var_dump($UserName);
 			//var_dump($email);
 			//var_dump($isAdmin);
 			
-			$_SESSION["UserName"] = $UserName;  
-			$_SESSION["UserID"] = $UserID;  
-			$_SESSION["Email"] = $email;        
-			$_SESSION["Admin"] = $isAdmin;   
+			$_SESSION["UserName"] = $UserName;
+			$_SESSION["UserID"] = $UserID;
+			$_SESSION["Email"] = $email;
+			$_SESSION["Admin"] = $isAdmin;
 
 			header("Location:../views/Rooms.php");
 		}

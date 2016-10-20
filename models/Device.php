@@ -45,8 +45,9 @@ public static function switchDeviceStatus($DeviceID, $newStatus)
 		$DeviceID = $db->escape_string($DeviceID);
 		$newStatus = $db->escape_string($newStatus);
 	
-		$sql = "UPDATE device "
-			. " SET DeviceState = $newStatus" 
+		$sql = "UPDATE device SET "
+			. " DeviceState = $newStatus" 
+			. ",isStatusChanged = 1" 
 			. " WHERE DeviceID = $DeviceID;";
 
 		if ($db->query($sql) == TRUE) 

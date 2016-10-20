@@ -1,13 +1,7 @@
 <?php 
 	include_once("../models/User.php");
 
-	$UserID = $_GET["var"];
-
-	//check if $_GET["var"] was manuplated and changed to other admin's ID
-	if(user::isAdmin($UserID))
-	{
-		header("Location:../views/HomePage.php");
-	}
+	$UserID = $_SESSION["UserID"];
 
 	$row = User::getUserDetailsByID($UserID);
 	
