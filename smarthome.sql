@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 19, 2016 at 08:19 PM
+-- Generation Time: Oct 21, 2016 at 07:40 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -58,23 +58,23 @@ CREATE TABLE `device` (
 --
 
 INSERT INTO `device` (`DeviceID`, `RoomID`, `DeviceName`, `DeviceState`, `GateNum`, `DeviceImgPath_on`, `DeviceImgPath_off`, `isStatusChanged`, `lastStatusChange`, `StepperMotorMoves`, `Watts`) VALUES
-(101, 101, 'Roof Lamp', b'0', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'1', '2016-10-19 13:27:10', NULL, 120),
+(101, 101, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-20 13:07:19', NULL, 120),
 (102, 101, 'AC', b'1', 0, 'cooler_on.png', 'cooler_off.png', b'1', '2016-10-19 13:14:18', NULL, 1800),
-(103, 101, 'Curtains', b'1', 0, 'curtains_opened.png', 'curtains_closed.png', b'1', '2016-10-19 13:27:08', 0, 0),
+(103, 101, 'Curtains', b'1', 0, 'curtains_opened.png', 'curtains_closed.png', b'1', '2016-10-20 13:06:49', 0, 0),
 (201, 102, 'Roof Lamp', b'0', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-19 11:31:53', NULL, 60),
 (202, 102, 'AC', b'0', 0, 'cooler_on.png', 'cooler_off.png', b'1', '2016-10-19 11:31:18', NULL, 1200),
 (203, 102, 'Curtains', b'1', 0, 'curtains_opened.png', 'curtains_closed.png', b'1', '2016-10-19 13:27:06', 0, 0),
-(401, 104, 'Roof Lamp', b'0', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-19 11:31:56', NULL, 60),
+(401, 104, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-20 13:07:24', NULL, 60),
 (402, 104, 'AC', b'0', 0, 'cooler_on.png', 'cooler_off.png', b'0', '2016-10-19 11:31:05', NULL, 1200),
 (403, 104, 'Curtains', b'1', 0, 'curtains_opened.png', 'curtains_closed.png', b'0', '2016-10-19 07:12:46', 0, 0),
 (501, 105, 'Roof Lamp', b'0', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-19 11:32:33', NULL, 180),
 (502, 105, 'AC', b'1', 0, 'cooler_on.png', 'cooler_off.png', b'0', '2016-10-19 11:32:38', NULL, 2400),
-(503, 105, 'Curtains', b'0', 0, 'curtains_opened.png', 'curtains_closed.png', b'0', '2016-10-19 07:12:50', 0, 0),
+(503, 105, 'Curtains', b'1', 0, 'curtains_opened.png', 'curtains_closed.png', b'1', '2016-10-20 13:06:50', 0, 0),
 (601, 106, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-19 11:33:29', NULL, 120),
-(602, 106, 'AC', b'1', 0, 'cooler_on.png', 'cooler_off.png', b'0', '2016-10-19 11:33:25', NULL, 1800),
-(701, 107, 'Roof Lamp', b'0', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'1', '2016-10-19 11:33:49', NULL, 60),
+(602, 106, 'AC', b'0', 0, 'cooler_on.png', 'cooler_off.png', b'1', '2016-10-20 13:07:01', NULL, 1800),
+(701, 107, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'1', '2016-10-20 13:07:02', NULL, 60),
 (801, 108, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-19 11:33:51', NULL, 60),
-(901, 109, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'1', '2016-10-19 11:33:59', NULL, 120),
+(901, 109, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-20 13:07:17', NULL, 120),
 (902, 109, 'Garage Door', b'1', 0, 'Garage-door_open.png', 'Garage-door_closed.png', b'0', '2016-10-19 07:12:55', 0, 0),
 (1001, 110, 'Security Camera 1', b'1', 0, 'security-camera_on.png', 'security-camera_off.png', b'0', '2016-10-04 15:02:43', NULL, 0),
 (1002, 110, 'Security Camera 2', b'0', 0, 'security-camera_on.png', 'security-camera_off.png', b'0', '2016-10-05 12:11:53', NULL, 0);
@@ -169,9 +169,9 @@ INSERT INTO `room_backgrounds` (`ImageID`, `RoomID`, `isDefault`, `ImgPath`) VAL
 
 CREATE TABLE `sensor` (
   `SensorID` int(4) NOT NULL,
+  `SensorTypeID` int(2) NOT NULL,
   `RoomID` int(4) NOT NULL,
-  `SensorName` varchar(20) NOT NULL,
-  `SenesorState` bit(1) NOT NULL,
+  `SenesorState` bit(1) NOT NULL DEFAULT b'1',
   `GateNum` int(3) NOT NULL,
   `SensorValue` int(4) NOT NULL DEFAULT '0',
   `lastStatusChange` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP
@@ -181,23 +181,59 @@ CREATE TABLE `sensor` (
 -- Dumping data for table `sensor`
 --
 
-INSERT INTO `sensor` (`SensorID`, `RoomID`, `SensorName`, `SenesorState`, `GateNum`, `SensorValue`, `lastStatusChange`) VALUES
-(101, 101, 'Motion Sensor', b'0', 0, 0, '2016-10-01 21:00:00'),
-(102, 101, 'Temperature Sensor', b'0', 0, 27, '2016-10-19 09:07:08'),
-(201, 102, 'Motion Sensor', b'0', 0, 0, '2016-10-01 21:00:00'),
-(202, 102, 'Temperature Sensor', b'0', 0, 20, '2016-10-19 09:07:04'),
-(401, 104, 'Motion Sensor', b'0', 0, 0, '2016-10-01 21:00:00'),
-(402, 104, 'Temperature Sensor', b'0', 0, 18, '2016-10-19 09:06:59'),
-(501, 105, 'Motion Sensor', b'0', 0, 0, '2016-10-01 21:00:00'),
-(502, 105, 'Temperature Sensor', b'0', 0, 16, '2016-10-19 09:06:53'),
-(601, 106, 'Motion Sensor', b'0', 0, 0, '2016-10-01 21:00:00'),
-(602, 106, 'Temperature Sensor', b'0', 0, 23, '2016-10-19 09:06:45'),
-(603, 106, 'Smoke Detector', b'0', 0, 0, '2016-10-01 21:00:00'),
-(701, 107, 'Motion Sensor', b'0', 0, 0, '2016-10-01 21:00:00'),
-(801, 108, 'Motion Sensor', b'0', 0, 0, '2016-10-01 21:00:00'),
-(901, 109, 'Motion Sensor', b'0', 0, 0, '2016-10-01 21:00:00'),
-(1001, 110, 'Motion Sensor', b'0', 0, 0, '2016-10-01 21:00:00'),
-(1002, 110, 'Motion Sensor', b'0', 0, 0, '2016-10-01 21:00:00');
+INSERT INTO `sensor` (`SensorID`, `SensorTypeID`, `RoomID`, `SenesorState`, `GateNum`, `SensorValue`, `lastStatusChange`) VALUES
+(100, 20, 101, b'1', 0, 0, '2016-10-20 21:00:00'),
+(101, 10, 101, b'0', 0, 0, '2016-10-20 13:50:20'),
+(102, 12, 101, b'0', 0, 27, '2016-10-20 13:51:01'),
+(103, 13, 101, b'1', 0, 0, '2016-10-19 21:00:00'),
+(200, 20, 102, b'1', 0, 0, '2016-10-20 21:00:00'),
+(201, 10, 102, b'0', 0, 0, '2016-10-20 13:50:23'),
+(202, 12, 102, b'0', 0, 20, '2016-10-20 13:50:58'),
+(203, 13, 102, b'1', 0, 0, '2016-10-19 21:00:00'),
+(400, 20, 104, b'1', 0, 0, '2016-10-20 21:00:00'),
+(401, 10, 104, b'0', 0, 0, '2016-10-20 13:50:25'),
+(402, 12, 104, b'0', 0, 18, '2016-10-20 13:50:56'),
+(403, 13, 104, b'1', 0, 0, '2016-10-19 21:00:00'),
+(500, 20, 105, b'1', 0, 0, '2016-10-20 21:00:00'),
+(501, 10, 105, b'0', 0, 0, '2016-10-20 13:50:26'),
+(502, 12, 105, b'0', 0, 16, '2016-10-20 13:50:54'),
+(503, 13, 105, b'1', 0, 0, '2016-10-19 21:00:00'),
+(600, 20, 106, b'1', 0, 0, '2016-10-20 21:00:00'),
+(601, 10, 106, b'0', 0, 0, '2016-10-20 13:50:28'),
+(602, 12, 106, b'0', 0, 23, '2016-10-20 13:50:52'),
+(604, 11, 106, b'0', 0, 0, '2016-10-20 14:14:57'),
+(700, 20, 107, b'1', 0, 0, '2016-10-20 21:00:00'),
+(701, 10, 107, b'0', 0, 0, '2016-10-20 13:50:30'),
+(800, 20, 108, b'1', 0, 0, '2016-10-20 21:00:00'),
+(801, 10, 108, b'0', 0, 0, '2016-10-20 13:50:32'),
+(900, 20, 109, b'1', 0, 0, '2016-10-20 21:00:00'),
+(901, 10, 109, b'0', 0, 0, '2016-10-20 13:50:35'),
+(1000, 20, 110, b'1', 0, 0, '2016-10-20 21:00:00'),
+(1001, 10, 110, b'0', 0, 0, '2016-10-20 13:50:36'),
+(1002, 10, 110, b'0', 0, 0, '2016-10-20 13:50:37');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sensor_type`
+--
+
+CREATE TABLE `sensor_type` (
+  `SensorTypeID` int(2) NOT NULL,
+  `SensorName` varchar(20) NOT NULL,
+  `SensorImgPath` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `sensor_type`
+--
+
+INSERT INTO `sensor_type` (`SensorTypeID`, `SensorName`, `SensorImgPath`) VALUES
+(10, 'Motion Sensor', 'motion-sensor4.jpg'),
+(11, 'Smoke Detector', 'smoke-sensor3.png'),
+(12, 'Temperature Sensor', 'temperature-sensor2.png'),
+(13, 'Light Sensor', 'light-sensor3.png'),
+(20, 'Clock', 'timer7.png');
 
 -- --------------------------------------------------------
 
@@ -209,19 +245,21 @@ CREATE TABLE `task` (
   `TaskID` int(6) NOT NULL,
   `userID` int(4) NOT NULL,
   `RoomID` int(4) NOT NULL,
+  `isDisabled` bit(1) NOT NULL DEFAULT b'0',
   `isDefault` bit(1) NOT NULL DEFAULT b'0',
   `TaskName` varchar(50) CHARACTER SET utf8 NOT NULL,
-  `ActionTime` timestamp NOT NULL,
-  `Duration_Minute` int(3) NOT NULL,
-  `repeatDaily` bit(1) NOT NULL
+  `ActionTime` time DEFAULT NULL,
+  `repeatDaily` bit(1) NOT NULL,
+  `ActionDate` date DEFAULT NULL,
+  `Duration_Minute` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `task`
 --
 
-INSERT INTO `task` (`TaskID`, `userID`, `RoomID`, `isDefault`, `TaskName`, `ActionTime`, `Duration_Minute`, `repeatDaily`) VALUES
-(1, 1, 101, b'1', 'asd', '2016-10-15 13:18:42', 2, b'1');
+INSERT INTO `task` (`TaskID`, `userID`, `RoomID`, `isDisabled`, `isDefault`, `TaskName`, `ActionTime`, `repeatDaily`, `ActionDate`, `Duration_Minute`) VALUES
+(1, 1, 101, b'0', b'1', 'asd', '07:15:00', b'1', '2016-10-13', 2);
 
 -- --------------------------------------------------------
 
@@ -332,7 +370,14 @@ ALTER TABLE `room_backgrounds`
 --
 ALTER TABLE `sensor`
   ADD PRIMARY KEY (`SensorID`),
-  ADD KEY `sensor_ibfk_1` (`RoomID`);
+  ADD KEY `sensor_ibfk_1` (`RoomID`),
+  ADD KEY `SensorTypeID` (`SensorTypeID`);
+
+--
+-- Indexes for table `sensor_type`
+--
+ALTER TABLE `sensor_type`
+  ADD PRIMARY KEY (`SensorTypeID`);
 
 --
 -- Indexes for table `task`
@@ -379,7 +424,7 @@ ALTER TABLE `camera_images`
 -- AUTO_INCREMENT for table `room_backgrounds`
 --
 ALTER TABLE `room_backgrounds`
-  MODIFY `ImageID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `ImageID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 --
 -- AUTO_INCREMENT for table `task`
 --
@@ -416,7 +461,8 @@ ALTER TABLE `room_backgrounds`
 -- Constraints for table `sensor`
 --
 ALTER TABLE `sensor`
-  ADD CONSTRAINT `sensor_ibfk_1` FOREIGN KEY (`RoomID`) REFERENCES `room` (`RoomID`);
+  ADD CONSTRAINT `sensor_ibfk_1` FOREIGN KEY (`RoomID`) REFERENCES `room` (`RoomID`),
+  ADD CONSTRAINT `sensor_ibfk_2` FOREIGN KEY (`SensorTypeID`) REFERENCES `sensor_type` (`SensorTypeID`);
 
 --
 -- Constraints for table `task`

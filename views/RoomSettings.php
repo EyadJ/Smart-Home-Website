@@ -69,7 +69,39 @@ function HideUnhideDiv2()
 		document.getElementById("right-div2-hidden").style.display ="inline";
 	}
 }
-  
+ 
+function HideUnhideActionTime(z) 
+{
+	z.checked = true;
+	
+	var x = document.getElementById("clockSensor").checked;
+	
+	if (x == true)
+	{
+		document.getElementById("actionTime").style.display = "block";
+	}
+	else
+	{
+		document.getElementById("actionTime").style.display = "none";
+	}
+}
+
+function HideUnhideActionDate() 
+{
+	var x = document.getElementById("actionDate").style.display;	
+	
+	if (x == "none")
+	{
+		document.getElementById("actionDate").style.display = "inline";
+		document.getElementById("repeatDaily").checked = false;
+	}
+	else
+	{
+		document.getElementById("actionDate").style.display = "none";
+		document.getElementById("repeatDaily").checked = true;
+	}
+}
+ 
   </script>
   
 </head>

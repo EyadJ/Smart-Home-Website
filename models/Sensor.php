@@ -20,7 +20,9 @@ class Sensor
 
 		$RoomID = $db->escape_string($RoomID);
 
-		$sql = "SELECT * FROM sensor where RoomID = '$RoomID'";
+		$sql = "SELECT * FROM sensor s, sensor_type st
+				WHERE RoomID = '$RoomID' AND
+				s.SensorTypeID = st.SensorTypeID";
 		$result = $db->query($sql);
 	 
 		if ($result->num_rows >= 1)  
