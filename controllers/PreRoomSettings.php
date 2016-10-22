@@ -1,10 +1,10 @@
 <?php
 
-	include_once("../models/User.php");
-	include_once("../models/Room.php");
-	include_once("../models/Device.php");
-	include_once("../models/Sensor.php");
-	include_once("../models/Task.php");
+	include_once("../models/user.php");
+	include_once("../models/room.php");
+	include_once("../models/device.php");
+	include_once("../models/sensor.php");
+	include_once("../models/task.php");
 
 	$isAdmin = $_SESSION["Admin"];
 	$UserID = $_SESSION["UserID"];

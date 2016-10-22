@@ -1,5 +1,5 @@
 <?php
-	include_once("../models/User.php");
+	include_once("../models/user.php");
 
 	$result = User::getUsersDetails();
 	while($row = $result->fetch_assoc()) 

@@ -1,6 +1,6 @@
 <?php
 
-include_once("../models/Device.php");
+include_once("../models/device.php");
 
 	$DeviceID = $_GET['DeviceID'];
 	$newStatus = $_GET['newStatus'];

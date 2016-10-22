@@ -1,5 +1,6 @@
-<?php 
-	include_once("../models/User.php");
+<?php /*error_reporting(0);*/ session_start(); if(!isset($_SESSION["Email"])){ header("Location: LogIn.php"); } 
+
+	include_once("../models/user.php");
 	session_start();
 	
 if(isset($_POST["Save"]))

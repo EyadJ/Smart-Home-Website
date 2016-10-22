@@ -1,6 +1,6 @@
 <?php
 
-	include_once("../models/Room.php");
+	include_once("../models/room.php");
 
 	$RoomID = $_GET["roomID"];
 	$RoomName = $_GET["newBG"];

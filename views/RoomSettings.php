@@ -226,8 +226,15 @@ include_once("../controllers/Header.php");
 					</a>
 		</div>	
 	
+	
 		<?php
-		include_once("../controllers/PreRoomSettings-tasks.php");
+		include_once("../controllers/PreRoomSettings-viewTasks.php");
+		?>
+		
+	
+	
+		<?php
+		include_once("../controllers/PreRoomSettings-createTask.php");
 		?>
 
        	<br /><br /><br />

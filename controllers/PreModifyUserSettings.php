@@ -1,5 +1,5 @@
 <?php 
-	include_once("../models/User.php");
+	include_once("../models/user.php");
 
 	$UserID = $_GET["var"];
 

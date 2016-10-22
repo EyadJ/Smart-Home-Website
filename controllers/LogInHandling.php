@@ -1,5 +1,5 @@
 <?php
-		include_once("../models/User.php");
+		include_once("../models/user.php");
 
 	if(isset($_POST['Pass']) && isset($_POST['Email']))
 	{
