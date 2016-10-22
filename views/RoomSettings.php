@@ -86,19 +86,19 @@ function HideUnhideActionTime(z)
 	}
 }
 
-function HideUnhideActionDate() 
+function HideUnhideActionDate(y) 
 {
-	var x = document.getElementById("actionDate").style.display;	
+	x = y.nextSibling;
 	
-	if (x == "none")
+	if (x.display == "none")
 	{
-		document.getElementById("actionDate").style.display = "inline";
-		document.getElementById("repeatDaily").checked = false;
+		x.display = "inline";
+		//y.checked = false;
 	}
 	else
 	{
-		document.getElementById("actionDate").style.display = "none";
-		document.getElementById("repeatDaily").checked = true;
+		x.display = "none";
+		//y.checked = true;
 	}
 }
  
@@ -226,17 +226,18 @@ include_once("../controllers/Header.php");
 					</a>
 		</div>	
 	
+	<?php
+		include_once("../controllers/PreRoomSettings-createTask.php");
+		?>
+
+		
 	
 		<?php
 		include_once("../controllers/PreRoomSettings-viewTasks.php");
 		?>
 		
 	
-	
-		<?php
-		include_once("../controllers/PreRoomSettings-createTask.php");
-		?>
-
+		
        	<br /><br /><br />
 		</div>
 

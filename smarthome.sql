@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 21, 2016 at 07:40 PM
+-- Generation Time: Oct 22, 2016 at 08:13 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -60,7 +60,7 @@ CREATE TABLE `device` (
 INSERT INTO `device` (`DeviceID`, `RoomID`, `DeviceName`, `DeviceState`, `GateNum`, `DeviceImgPath_on`, `DeviceImgPath_off`, `isStatusChanged`, `lastStatusChange`, `StepperMotorMoves`, `Watts`) VALUES
 (101, 101, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-20 13:07:19', NULL, 120),
 (102, 101, 'AC', b'1', 0, 'cooler_on.png', 'cooler_off.png', b'1', '2016-10-19 13:14:18', NULL, 1800),
-(103, 101, 'Curtains', b'1', 0, 'curtains_opened.png', 'curtains_closed.png', b'1', '2016-10-20 13:06:49', 0, 0),
+(103, 101, 'Curtains', b'1', 0, 'curtains_opened.png', 'curtains_closed.png', b'1', '2016-10-22 09:48:49', 0, 0),
 (201, 102, 'Roof Lamp', b'0', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-19 11:31:53', NULL, 60),
 (202, 102, 'AC', b'0', 0, 'cooler_on.png', 'cooler_off.png', b'1', '2016-10-19 11:31:18', NULL, 1200),
 (203, 102, 'Curtains', b'1', 0, 'curtains_opened.png', 'curtains_closed.png', b'1', '2016-10-19 13:27:06', 0, 0),
@@ -76,7 +76,7 @@ INSERT INTO `device` (`DeviceID`, `RoomID`, `DeviceName`, `DeviceState`, `GateNu
 (801, 108, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-19 11:33:51', NULL, 60),
 (901, 109, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-20 13:07:17', NULL, 120),
 (902, 109, 'Garage Door', b'1', 0, 'Garage-door_open.png', 'Garage-door_closed.png', b'0', '2016-10-19 07:12:55', 0, 0),
-(1001, 110, 'Security Camera 1', b'1', 0, 'security-camera_on.png', 'security-camera_off.png', b'0', '2016-10-04 15:02:43', NULL, 0),
+(1001, 110, 'Security Camera 1', b'0', 0, 'security-camera_on.png', 'security-camera_off.png', b'1', '2016-10-22 19:50:56', NULL, 0),
 (1002, 110, 'Security Camera 2', b'0', 0, 'security-camera_on.png', 'security-camera_off.png', b'0', '2016-10-05 12:11:53', NULL, 0);
 
 -- --------------------------------------------------------
@@ -102,7 +102,7 @@ INSERT INTO `room` (`RoomID`, `RoomName`, `RoomImgPath`) VALUES
 (105, 'Living Room', 'livingroom3.png'),
 (106, 'Kitchen', 'kitchen1.png'),
 (107, 'Parents Bathroom', 'bathroom0.png'),
-(108, 'Bathroom', 'bathroom6.png'),
+(108, 'Bathroom', 'bathroom5.png'),
 (109, 'Garage', 'garage2.png'),
 (110, 'House Parameters', 'house-parameters2.png');
 
@@ -245,6 +245,7 @@ CREATE TABLE `task` (
   `TaskID` int(6) NOT NULL,
   `userID` int(4) NOT NULL,
   `RoomID` int(4) NOT NULL,
+  `SensorID` int(4) NOT NULL,
   `isDisabled` bit(1) NOT NULL DEFAULT b'0',
   `isDefault` bit(1) NOT NULL DEFAULT b'0',
   `TaskName` varchar(50) CHARACTER SET utf8 NOT NULL,
@@ -258,8 +259,11 @@ CREATE TABLE `task` (
 -- Dumping data for table `task`
 --
 
-INSERT INTO `task` (`TaskID`, `userID`, `RoomID`, `isDisabled`, `isDefault`, `TaskName`, `ActionTime`, `repeatDaily`, `ActionDate`, `Duration_Minute`) VALUES
-(1, 1, 101, b'0', b'1', 'asd', '07:15:00', b'1', '2016-10-13', 2);
+INSERT INTO `task` (`TaskID`, `userID`, `RoomID`, `SensorID`, `isDisabled`, `isDefault`, `TaskName`, `ActionTime`, `repeatDaily`, `ActionDate`, `Duration_Minute`) VALUES
+(6, 1, 108, 801, b'0', b'0', 'open lights on motion sensor', NULL, b'1', NULL, 2),
+(18, 1, 101, 100, b'0', b'0', 'alarm', '05:20:00', b'0', '2016-10-23', 5),
+(19, 1, 101, 102, b'0', b'0', 'turn ac on', NULL, b'1', NULL, 30),
+(20, 1, 104, 403, b'0', b'0', 'morning routine', NULL, b'1', NULL, 30);
 
 -- --------------------------------------------------------
 
@@ -269,19 +273,25 @@ INSERT INTO `task` (`TaskID`, `userID`, `RoomID`, `isDisabled`, `isDefault`, `Ta
 
 CREATE TABLE `task_devices` (
   `TaskID` int(6) NOT NULL,
-  `SensorID` int(4) NOT NULL,
   `DeviceID` int(4) NOT NULL,
-  `RequiredDeviceStatus` bit(1) NOT NULL DEFAULT b'0'
+  `RequiredDeviceStatus` bit(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `task_devices`
 --
 
-INSERT INTO `task_devices` (`TaskID`, `SensorID`, `DeviceID`, `RequiredDeviceStatus`) VALUES
-(1, 101, 101, b'1'),
-(1, 101, 102, b'0'),
-(1, 101, 103, b'1');
+INSERT INTO `task_devices` (`TaskID`, `DeviceID`, `RequiredDeviceStatus`) VALUES
+(6, 801, b'0'),
+(18, 101, b'1'),
+(18, 102, b'0'),
+(18, 103, b'1'),
+(19, 101, NULL),
+(19, 102, b'1'),
+(19, 103, b'0'),
+(20, 401, b'1'),
+(20, 402, b'0'),
+(20, 403, b'1');
 
 -- --------------------------------------------------------
 
@@ -385,14 +395,14 @@ ALTER TABLE `sensor_type`
 ALTER TABLE `task`
   ADD PRIMARY KEY (`TaskID`),
   ADD KEY `userID` (`userID`),
-  ADD KEY `RoomID` (`RoomID`);
+  ADD KEY `RoomID` (`RoomID`),
+  ADD KEY `SensorID` (`SensorID`);
 
 --
 -- Indexes for table `task_devices`
 --
 ALTER TABLE `task_devices`
-  ADD PRIMARY KEY (`TaskID`,`SensorID`,`DeviceID`),
-  ADD KEY `SensorID` (`SensorID`),
+  ADD PRIMARY KEY (`TaskID`,`DeviceID`),
   ADD KEY `DeviceID` (`DeviceID`);
 
 --
@@ -429,7 +439,7 @@ ALTER TABLE `room_backgrounds`
 -- AUTO_INCREMENT for table `task`
 --
 ALTER TABLE `task`
-  MODIFY `TaskID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `TaskID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `user`
 --
@@ -469,13 +479,13 @@ ALTER TABLE `sensor`
 --
 ALTER TABLE `task`
   ADD CONSTRAINT `task_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`),
-  ADD CONSTRAINT `task_ibfk_2` FOREIGN KEY (`RoomID`) REFERENCES `room` (`RoomID`);
+  ADD CONSTRAINT `task_ibfk_2` FOREIGN KEY (`RoomID`) REFERENCES `room` (`RoomID`),
+  ADD CONSTRAINT `task_ibfk_3` FOREIGN KEY (`SensorID`) REFERENCES `sensor` (`SensorID`);
 
 --
 -- Constraints for table `task_devices`
 --
 ALTER TABLE `task_devices`
-  ADD CONSTRAINT `task_devices_ibfk_2` FOREIGN KEY (`SensorID`) REFERENCES `sensor` (`SensorID`),
   ADD CONSTRAINT `task_devices_ibfk_3` FOREIGN KEY (`DeviceID`) REFERENCES `device` (`DeviceID`),
   ADD CONSTRAINT `task_devices_ibfk_4` FOREIGN KEY (`TaskID`) REFERENCES `task` (`TaskID`);
 
