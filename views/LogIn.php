@@ -38,8 +38,8 @@ table {
 </head>
 <body onload="checkPass();">
  <div class="allcontainer">
-	 <img src="../controllers/images/smarthome-background.jpg"
-			style="width:100%; position:fixed; top:40px;" /> 
+	 
+			 
 <div id="page-header">
           
                 <div class="page-logo2">

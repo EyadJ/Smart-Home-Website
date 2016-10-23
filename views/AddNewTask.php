@@ -9,8 +9,8 @@
 <body>
      <div class="allcontainer">
 	 
-	 <img src="../controllers/images/smarthome-background.jpg"
-			style="width:100%; position:fixed; top:40px;" /> 
+	 
+			 
 
 <?php
 include_once("../controllers/Header.php");
@@ -75,7 +75,7 @@ include_once("../controllers/Header.php");
 
 &nbsp;&nbsp;<input type="submit" value="Save"/> 
 &nbsp;&nbsp;<input type="reset" value="Reset" />
-&nbsp;&nbsp;<a href="ControlPanal.php"><button type = "button" >Cancel</button></a> 
+&nbsp;&nbsp;<a href="Users.php"><button type = "button" >Cancel</button></a> 
 
 </td></tr>
 

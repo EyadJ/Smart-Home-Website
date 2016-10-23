@@ -86,19 +86,19 @@ function HideUnhideActionTime(z)
 	}
 }
 
-function HideUnhideActionDate(y) 
+function HideUnhideActionDate() 
 {
-	x = y.nextSibling;
+	var x = document.getElementById("actionDate").style.display;	
 	
-	if (x.display == "none")
+	if (x == "none")
 	{
-		x.display = "inline";
-		//y.checked = false;
+		document.getElementById("actionDate").style.display = "inline";
+		document.getElementById("repeatDaily").checked = false;
 	}
 	else
 	{
-		x.display = "none";
-		//y.checked = true;
+		document.getElementById("actionDate").style.display = "none";
+		document.getElementById("repeatDaily").checked = true;
 	}
 }
  
@@ -109,8 +109,8 @@ function HideUnhideActionDate(y)
  
             <div class="allcontainer">
 
-			<img src="../controllers/images/smarthome-background.jpg"
-			style="width:100%; position:fixed; top:40px;" /> 
+			
+			 
 
 <?php
 include_once("../controllers/Header.php");
@@ -135,11 +135,13 @@ include_once("../controllers/Header.php");
 		</div>
 		
 
+
+
 <div id="right-div1-hidden" class="right-div" style="display:none;">	
 
 		<div class="personal-bg-table" align="center" style="line-height: 40%;"> <hr class="hr-table-hidden-div"/>.<br />.<br />.</div>	
 
-<a href="#" onclick="HideUnhideDiv1();return false;" style="text-decoration:none; ">	
+<a  href="#" onclick="HideUnhideDiv1();return false;" style="text-decoration:none; ">	
 		<img src="../controllers/images/div-plus-green2.png"
 				id="div-plus1"
 				width="35px" 
@@ -149,62 +151,16 @@ include_once("../controllers/Header.php");
 				margin-top:-7.5%;
 				" />
 	</a>
-	<br />
-</div>
 	
-		<div id="right-div1" class="right-div">
+<div class="hidden-right-div-secondary-title" style="width:180px;"><b>Tasks in This Room</b></div>
+
 	
-	
-	<a href="#" onclick="HideUnhideDiv1();return false;" style="text-decoration:none; ">	
-		<img src="../controllers/images/div-minus-red.png"
-				id="div-minus1"
-				width="40px" 
-				height="40px" 
-				style="
-				margin-left:97.5%;
-				margin-top:-1.5%;
-				" />
-	</a>		
-	<br />
-				
-			<div style=" margin-left:auto; margin-right:auto; width:50px;">
-			
-					<a  href="#" onclick="unHideUpload();return false;" style="text-decoration:none; ">
-						<div class="tooltip"><span class="tooltiptext">Upload image</span>
-							<img align="center" id="abc" src="../controllers/images/Upload3.png" width="60" height="60" />
-						</div>
-					</a>
-				</div>	
-				
-				
-		<?php
-		include_once("../controllers/PreRoomSettings-BGs.php");
-		?>
-	<br /><br /><br />
 </div>
 
 
+	<div id="right-div1" class="right-div">
 
-<div id="right-div2-hidden" class="right-div" style="display:none;">	
-
-		<div class="personal-bg-table" align="center" style="line-height: 40%;"> <hr class="hr-table-hidden-div"/>.<br />.<br />.</div>	
-
-<a  href="#" onclick="HideUnhideDiv2();return false;" style="text-decoration:none; ">	
-		<img src="../controllers/images/div-plus-green2.png"
-				id="div-plus1"
-				width="35px" 
-				height="35px" 
-				style="
-				margin-left:97.5%;
-				margin-top:-7.5%;
-				" />
-	</a>
-		
-</div>
-
-		<div id="right-div2" class="right-div">
-
-		<a  href="#" onclick="HideUnhideDiv2();return false;" style="text-decoration:none; ">	
+		<a  href="#" onclick="HideUnhideDiv1();return false;" style="text-decoration:none; ">	
 		<img src="../controllers/images/div-minus-red.png"
 				id="div-minus1"
 				width="40px" 
@@ -217,6 +173,9 @@ include_once("../controllers/Header.php");
 		<br />
 		
 		
+            <div class="right-div-secondary-title" style="width:180px;"><b>Tasks in This Room</b></div>
+            		
+		
 		<div style=" margin-left:auto; margin-right:auto; width:50px;">
 			
 					<a  href="#" onclick="unHideNewTask();return false;" style="text-decoration:none; ">
@@ -226,7 +185,7 @@ include_once("../controllers/Header.php");
 					</a>
 		</div>	
 	
-	<?php
+		<?php
 		include_once("../controllers/PreRoomSettings-createTask.php");
 		?>
 
@@ -240,6 +199,66 @@ include_once("../controllers/Header.php");
 		
        	<br /><br /><br />
 		</div>
+		
+	
+
+
+
+<div id="right-div2-hidden" class="right-div" style="display:none;">	
+
+		<div class="personal-bg-table" align="center" style="line-height: 40%;"> <hr class="hr-table-hidden-div"/>.<br />.<br />.</div>	
+
+<a href="#" onclick="HideUnhideDiv2();return false;" style="text-decoration:none; ">	
+		<img src="../controllers/images/div-plus-green2.png"
+				id="div-plus1"
+				width="35px" 
+				height="35px" 
+				style="
+				margin-left:97.5%;
+				margin-top:-7.5%;
+				" />
+	</a>
+	<br />
+	
+	<div class="hidden-right-div-secondary-title" style="width:170px;"><b>Room Background</b></div>
+            		
+</div>
+	
+		<div id="right-div2" class="right-div">
+	
+	
+	<a href="#" onclick="HideUnhideDiv2();return false;" style="text-decoration:none; ">	
+		<img src="../controllers/images/div-minus-red.png"
+				id="div-minus1"
+				width="40px" 
+				height="40px" 
+				style="
+				margin-left:97.5%;
+				margin-top:-1.5%;
+				" />
+	</a>	
+
+            <div class="right-div-secondary-title" style="width:170px;"><b>Room Background</b></div>
+	
+				
+			<div style=" margin-left:auto; margin-right:auto; width:50px;">
+			
+					<a  href="#" onclick="unHideUpload();return false;" style="text-decoration:none; ">
+						<div class="tooltip"><span class="tooltiptext">Upload image</span>
+							<img align="center" id="abc" src="../controllers/images/Upload3.png" width="60" height="60" />
+						</div>
+					</a>
+				</div>
+				
+				
+		<?php
+		include_once("../controllers/PreRoomSettings-BGs.php");
+		?>
+	<br /><br /><br />
+</div>
+	
+		
+		
 
         </div>
 	</div>

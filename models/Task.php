@@ -93,6 +93,8 @@ class Task
 			return FALSE;
 		}
 	}
+	
+	
 
 	public static function getUserTasksForOneRoom($UserID, $RoomID) 
 	{
@@ -120,7 +122,6 @@ class Task
 	
 			
 
-	
 	public static function getTaskDevices($TaskID) 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);

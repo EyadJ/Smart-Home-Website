@@ -30,7 +30,9 @@
 		<th width='35%'>Select one Sensor</th>
 		<th width='35%'>Select Device/s Required Action</th></tr>";
 		
-	echo"<tr><td>Description <input type='text' name='TaskName' placeholder='This field is Optional'/></td><td rowspan='3'>";
+	echo"<tr><td height='33%'>Description 
+		<input type='text' name='TaskName' placeholder='This field is Optional'/>
+		</td><td rowspan='3'>";
 		
 		
 		while($row = $Sensors->fetch_assoc()) 
@@ -69,8 +71,11 @@
 			
 			
 		echo"</td></tr>
-		<tr><td>Duration <input type='number' name='Duration_Minute' placeholder='Duration in Minutes' required/> </td></tr>
-		<tr><td>
+		<tr><td height='33%'>Duration 
+		<input type='number' name='Duration_Minute' placeholder='Duration in Minutes' required/> 
+		</td></tr>
+		
+		<tr><td height='34%'>
 		<label>Repeat Daily <input type='checkbox' name='repeatDaily' id='repeatDaily' checked 
 		onchange='HideUnhideActionDate();return false;'/></label>
 		<div id='actionDate' style='display:none;'><br />

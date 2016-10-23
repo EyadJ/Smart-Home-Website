@@ -60,7 +60,7 @@ if(isset($_POST["Save"]))
 			   
 			//echo $modifiedSuccessfully;
 	 
-			header("Location: ../views/controlPanal.php");
+			header("Location: ../views/Users.php");
 }
 	
 ?>

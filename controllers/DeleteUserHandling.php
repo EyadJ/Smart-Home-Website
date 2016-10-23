@@ -20,6 +20,6 @@
 	
 	if(isset($_POST["messageRecieved"]))
 	{
-		header("Location: ../views/ControlPanal.php");
+		header("Location: ../views/Users.php");
 	}
 ?>

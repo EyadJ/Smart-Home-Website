@@ -9,8 +9,8 @@
 <body>
  
             <div class="allcontainer">
-			<img src="../controllers/images/smarthome-background.jpg" 
-			style="width:100%; position:fixed; top:40px;" /> 
+			 
+			 
 
 <?php
 include_once("../controllers/Header.php");

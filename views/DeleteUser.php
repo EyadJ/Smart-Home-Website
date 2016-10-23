@@ -35,8 +35,8 @@
 </head>
 <body onload="confirmMessage();">
            <div class="allcontainer">
-	 <img src="../controllers/images/smarthome-background.jpg"
-			style="width:100%; position:fixed; top:40px;" /> 
+	 
+			 
 
 <?php
 include_once("../controllers/Header.php");
@@ -72,7 +72,7 @@ include_once("../controllers/Header.php");
 		
 	<tr><th>	
 	<input type='submit' value='Delete' name='deleted'>
-	<a href='ControlPanal.php'><button type='button'>Cancel</button></a>
+	<a href='Users.php'><button type='button'>Cancel</button></a>
 	</th></tr>
 
 		</table>

@@ -24,7 +24,7 @@ class PrintSideMenu
 		
 		$isOpen = "";
 
-		$pageNoSpace = str_replace(' ', '', "Control Panal");
+		$pageNoSpace = str_replace(' ', '', "Users");
 
 		if($pageNoSpace == $page)
 		{
@@ -33,8 +33,8 @@ class PrintSideMenu
 		
 		$text = "<a style='text-decoration: none;' href=" . $pageNoSpace . ".php><li class='li-menu-admin "
 		. $isOpen . "'>".
-		"<img  style='float: left; ' width='30px' src='../controllers/images/controlPanal.png' />&nbsp;".
-		"Control Panal" . 
+		"Users" . 
+		"<img  style='position:absolute; right:8%; margin-top:2px; width:38px;' src='../controllers/images/Users.png' />".
 		/*"<img align='right' width='30px' src='../controllers/images/adminLogo.png' />".*/
 		"</li></a>" ;
 

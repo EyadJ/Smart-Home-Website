@@ -54,7 +54,7 @@
 			$insertedSuccessfully = user::addNewUser($_POST['userName'], $_POST['Description'],
 			$_POST['email'], $_POST['Pass'], $isAdmin, $basename);
 		
-			header("Location: ../views/ControlPanal.php");
+			header("Location: ../views/Users.php");
 			//echo $addedSuccessfully;
 			//echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
 		}

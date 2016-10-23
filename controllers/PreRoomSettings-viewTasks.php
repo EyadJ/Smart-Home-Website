@@ -117,9 +117,8 @@
 			
 			<td><input type='number' name='Duration_Minute' value='$row[Duration_Minute]' style='width:60px;' required/></td>
 			
-			<td><input type='checkbox' name='repeatDaily' $RepeatDailyValue 
-			onchange='HideUnhideActionDate(this);'/>
-			<div style='display:none;'><br />
+			<td><input type='checkbox' name='repeatDaily' $RepeatDailyValue />
+			<div style='display:inline;'><br />
 			<b>Action Date </b><input type='date' name='ActionDate' />
 			</div></td><td>
 			";
@@ -172,12 +171,10 @@
 				
 				if($taskDevicesArray[$i]["DeviceID"] == $devices[$i]["DeviceID"])
 				{
-					if($taskDevicesArray[$i]["ReqDevState"] == -1)
-						$option1 = "checked";
-					else if($taskDevicesArray[$i]["ReqDevState"] == 1)
-						$option2 = "checked";
-					else if($taskDevicesArray[$i]["ReqDevState"] == 0)
-						$option3 = "checked";
+					$var = $taskDevicesArray[$i]["ReqDevState"];
+						 if($var ==-1) $option1 = "checked";
+					else if($var == 1) $option2 = "checked";
+					else if($var == 0) $option3 = "checked";
 				}
 					
 					
@@ -205,6 +202,19 @@
 					</form>
 					";
 		}
-	}	
+	} 
+	else // ($Tasks == NULL)
+	{
+		echo"<br/ ><table><th><b>This Room has no Tasks to Display</b></th></table>";
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 ?>
