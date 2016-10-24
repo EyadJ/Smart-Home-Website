@@ -28,6 +28,7 @@ function HideUnhideDiv1()
   
   
 </head>
+
 <body>
      <div class="allcontainer">
 	 
@@ -121,10 +122,6 @@ include_once("../controllers/Header.php");
 	<br /><br /><br />
 		</div>
 
-		
-                <div class="clearfix">
-                <br />
-                <br />
-                </div>
+		   
 </body>
 </html>

@@ -55,8 +55,8 @@
 		//
 		while ($row = $Tasks->fetch_assoc())
 		{
-				$actionTimeValue = "";
-				$actionDateValue = "";
+				//$actionTimeValue = "";
+				//$actionDateValue = "";
 				$RepeatDailyValue = "";
 				$isDisabledValue = "";
 				$TaskID = $row["TaskID"];
@@ -74,6 +74,8 @@
 					$i++;
 				}
 				
+				/*	(Apparently there was no need for those checks, just assign the value directly)
+				
 				if($row["ActionTime"] != NULL)
 				{
 					$actionTimeValue = " value = '$row[ActionTime]' ";
@@ -83,6 +85,7 @@
 				{
 					$actionDateValue = " value = '$row[ActionDate]' ";
 				}
+				*/
 				
 				if($row["repeatDaily"] == 1)
 				{
@@ -92,8 +95,21 @@
 				if($row["isDisabled"] == 1)
 				{
 					$isDisabledValue = " checked ";
-				}			
-
+				}		
+				
+				if($row["isDefault"] == 1) //task is undeletable but possible to disable
+				{
+					$isDefaultValue = "<div class='tooltip'>
+					<span class='tooltiptext'>Default (Undeletable)</span>
+					<img src='../controllers/images/Delete_Icon-unavailable2.png' width='50px' height='50px'/></div>";
+				}
+				else //($row["isDefault"] == 0) 
+				{
+					$isDefaultValue = 
+					"<a href = deleteTask.php?var=$TaskID>
+					<img src='../controllers/images/Delete_Icon2.png' width='50px' height='50px'/>
+					</a>";
+				}
 				
 		//form and table header	(one task)
 		echo"<form method='post' action='../controllers/CreateNewTaskHandling.php'>
@@ -119,7 +135,7 @@
 			
 			<td><input type='checkbox' name='repeatDaily' $RepeatDailyValue />
 			<div style='display:inline;'><br />
-			<b>Action Date </b><input type='date' name='ActionDate' />
+			<b>Action Date </b><input type='date' name='ActionDate' value = '$row[ActionDate]' />
 			</div></td><td>
 			";
 			
@@ -147,7 +163,7 @@
 					
 					</td><td>Action Time</td></tr>
 					
-					<tr><td><input type='time' name='ActionTime' $actionTimeValue/></td></tr>
+					<tr><td><input type='time' name='ActionTime' value = '$row[ActionTime]' /></td></tr>
 					</table>";
 				}
 				else
@@ -191,21 +207,20 @@
 				
 			
 					echo "</td>
-					<td><input type='checkbox' name='isDisabled' id='isDisabled' $isDisabledValue </td>
+					<td><input type='checkbox' name='isDisabled' id='isDisabled' $isDisabledValue /></td>
 					<td style='background-color:#CCCCCC;'><input type='submit' name='SaveChanges' value='Save' /></td>
 					<td style='background-color:#CCCCCC;'>
-					<a href = deleteTask.php?var=$TaskID>
-					<img src='../controllers/images/Delete_Icon2.png' width='50px' height='50px'/>
-					</a></td>
-					
-					</tr></table>
-					</form>
-					";
+					$isDefaultValue
+					</td></tr></table></form>";
 		}
 	} 
 	else // ($Tasks == NULL)
 	{
-		echo"<br/ ><table><th><b>This Room has no Tasks to Display</b></th></table>";
+		echo"<br/ ><table style='border:0;'><tr>
+		<th style='border:0; height:30px; font-family:Courier New, Courier, monospace; font-size:18px; font-weight:800;'>
+		This Room has no Tasks to Display
+		</th>
+		</tr></table>";
 		
 	}
 	

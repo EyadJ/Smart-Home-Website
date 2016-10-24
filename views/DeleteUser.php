@@ -79,10 +79,6 @@ include_once("../controllers/Header.php");
 		</form>
                 </div>
 
-                <div class="clearfix">
-                <br />
-                <br />
-                            </div>
     </div>
 </body>
 </html>

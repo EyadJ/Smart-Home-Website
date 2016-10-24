@@ -75,7 +75,7 @@ include_once("../controllers/Header.php");
 				" />
 	</a>
 	
-<div class="hidden-right-div-secondary-title" style="width:145px;"><b>Rooms Settings</b></div>
+<div class="hidden-right-div-secondary-title" style="width:161px;"><b>Rooms & Devices</b></div>
 
 	
 </div>
@@ -98,7 +98,7 @@ include_once("../controllers/Header.php");
 		<br />
 		
 		
-            <div class="right-div-secondary-title" style="width:145px;"><b>Rooms Settings</b></div>
+            <div class="right-div-secondary-title" style="width:161px;"><b>Rooms & Devices</b></div>
             		
 		
 	<table style="background-color:white; border:0px solid transparent;"> 

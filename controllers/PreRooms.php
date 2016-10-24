@@ -38,6 +38,8 @@
 			border-left: 2px solid black; 
 			border-bottom: 2px solid black; 
 			border-top: 2px solid black;
+			padding-bottom:50px;
+			padding-top:50px;
 			'>
 			<B>".$row['RoomName']."</B>
 			<br />

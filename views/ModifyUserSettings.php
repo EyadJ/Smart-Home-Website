@@ -29,7 +29,6 @@ include_once("../controllers/Header.php");
 				</div>
                 <div class="right-div">
 
-     <div class="table-hoder">
         <div class="personal-bg-table">
             <span>Modify User Settings</span>
             <div class="clearfix"></div>
@@ -57,12 +56,9 @@ include_once("../controllers/Header.php");
     </table>
 </form>
 
-                </div>
 
-                <div class="clearfix">
-                <br />
-                <br />
-                </div>
+	<br />
+	<br />
             </div>
 </body>
 </html>

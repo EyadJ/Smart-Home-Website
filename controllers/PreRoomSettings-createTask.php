@@ -25,13 +25,13 @@
 		<input type='hidden' name='UserID' value='$UserID'/>
 		<input type='hidden' name='RoomID' value='$RoomID'/>
 		
-		<table id='CreateNewTaskTable' style='display:none; margin-left:auto; margin-right:auto; width:90%;'>
+		<table id='CreateNewTaskTable' style='display:none; margin-left:auto; margin-right:auto; width:80%;'>
 		<tr><th width='30%'>Settings</th>
 		<th width='35%'>Select one Sensor</th>
 		<th width='35%'>Select Device/s Required Action</th></tr>";
 		
 	echo"<tr><td height='33%'>Description 
-		<input type='text' name='TaskName' placeholder='This field is Optional'/>
+		<input type='text' name='TaskName' placeholder='Simple Name for the Task'/>
 		</td><td rowspan='3'>";
 		
 		
@@ -71,8 +71,8 @@
 			
 			
 		echo"</td></tr>
-		<tr><td height='33%'>Duration 
-		<input type='number' name='Duration_Minute' placeholder='Duration in Minutes' required/> 
+		<tr><td height='33%'>Duration (Alarm)
+		<input type='number' name='Duration_Minute' placeholder='Duration in Minutes'/> 
 		</td></tr>
 		
 		<tr><td height='34%'>

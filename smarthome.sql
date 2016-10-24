@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 23, 2016 at 06:01 PM
+-- Generation Time: Oct 24, 2016 at 06:25 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -58,25 +58,29 @@ CREATE TABLE `device` (
 --
 
 INSERT INTO `device` (`DeviceID`, `RoomID`, `DeviceName`, `DeviceState`, `GateNum`, `DeviceImgPath_on`, `DeviceImgPath_off`, `isStatusChanged`, `lastStatusChange`, `StepperMotorMoves`, `Watts`) VALUES
-(101, 101, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-20 13:07:19', NULL, 120),
-(102, 101, 'AC', b'1', 0, 'cooler_on.png', 'cooler_off.png', b'1', '2016-10-23 16:30:44', NULL, 1800),
-(103, 101, 'Curtains', b'1', 0, 'curtains_opened.png', 'curtains_closed.png', b'1', '2016-10-22 09:48:49', 0, 0),
+(101, 101, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'1', '2016-10-24 17:54:18', NULL, 120),
+(102, 101, 'AC', b'1', 0, 'cooler_on.png', 'cooler_off.png', b'1', '2016-10-24 17:54:17', NULL, 1800),
+(103, 101, 'Curtains', b'1', 0, 'curtains_opened.png', 'curtains_closed.png', b'1', '2016-10-24 14:13:23', 0, 0),
+(104, 101, 'Alarm', b'0', 0, 'alarm.png', 'alarm_off.png', b'1', '2016-10-24 17:55:36', NULL, 0),
 (201, 102, 'Roof Lamp', b'0', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-19 11:31:53', NULL, 60),
 (202, 102, 'AC', b'0', 0, 'cooler_on.png', 'cooler_off.png', b'1', '2016-10-19 11:31:18', NULL, 1200),
-(203, 102, 'Curtains', b'1', 0, 'curtains_opened.png', 'curtains_closed.png', b'1', '2016-10-19 13:27:06', 0, 0),
+(203, 102, 'Curtains', b'1', 0, 'curtains_opened.png', 'curtains_closed.png', b'1', '2016-10-24 17:13:14', 0, 0),
+(204, 102, 'Alarm', b'0', 0, 'alarm.png', 'alarm_off.png', b'1', '2016-10-24 17:52:49', NULL, 0),
 (401, 104, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-20 13:07:24', NULL, 60),
 (402, 104, 'AC', b'0', 0, 'cooler_on.png', 'cooler_off.png', b'0', '2016-10-19 11:31:05', NULL, 1200),
 (403, 104, 'Curtains', b'1', 0, 'curtains_opened.png', 'curtains_closed.png', b'0', '2016-10-19 07:12:46', 0, 0),
+(404, 104, 'Alarm', b'0', 0, 'alarm.png', 'alarm_off.png', b'1', '2016-10-24 17:52:54', NULL, 0),
 (501, 105, 'Roof Lamp', b'0', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-19 11:32:33', NULL, 180),
 (502, 105, 'AC', b'1', 0, 'cooler_on.png', 'cooler_off.png', b'0', '2016-10-19 11:32:38', NULL, 2400),
 (503, 105, 'Curtains', b'1', 0, 'curtains_opened.png', 'curtains_closed.png', b'1', '2016-10-20 13:06:50', 0, 0),
+(504, 105, 'Alarm', b'0', 0, 'alarm.png', 'alarm_off.png', b'0', '2016-10-24 17:14:33', NULL, 0),
 (601, 106, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-19 11:33:29', NULL, 120),
 (602, 106, 'AC', b'0', 0, 'cooler_on.png', 'cooler_off.png', b'1', '2016-10-20 13:07:01', NULL, 1800),
 (701, 107, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'1', '2016-10-23 17:01:17', NULL, 60),
 (801, 108, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-19 11:33:51', NULL, 60),
 (901, 109, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-20 13:07:17', NULL, 120),
 (902, 109, 'Garage Door', b'1', 0, 'Garage-door_open.png', 'Garage-door_closed.png', b'0', '2016-10-19 07:12:55', 0, 0),
-(1001, 110, 'Security Camera 1', b'0', 0, 'security-camera_on.png', 'security-camera_off.png', b'1', '2016-10-22 19:50:56', NULL, 0),
+(1001, 110, 'Security Camera 1', b'0', 0, 'security-camera_on.png', 'security-camera_off.png', b'1', '2016-10-24 17:55:29', NULL, 0),
 (1002, 110, 'Security Camera 2', b'0', 0, 'security-camera_on.png', 'security-camera_off.png', b'0', '2016-10-05 12:11:53', NULL, 0);
 
 -- --------------------------------------------------------
@@ -99,7 +103,7 @@ INSERT INTO `room` (`RoomID`, `RoomName`, `RoomImgPath`) VALUES
 (101, 'Parents Room', 'bedroom-double1.png'),
 (102, 'Ahmad\'s Room', 'bedroom-male1.png'),
 (104, 'Sarah\'s Room', 'bedroom-female1.png'),
-(105, 'Living Room', 'livingroom3.png'),
+(105, 'Living Room', 'livingroom2.png'),
 (106, 'Kitchen', 'kitchen1.png'),
 (107, 'Parents Bathroom', 'bathroom0.png'),
 (108, 'Bathroom', 'bathroom5.png'),
@@ -260,11 +264,11 @@ CREATE TABLE `task` (
 --
 
 INSERT INTO `task` (`TaskID`, `userID`, `RoomID`, `SensorID`, `isDisabled`, `isDefault`, `TaskName`, `ActionTime`, `repeatDaily`, `ActionDate`, `Duration_Minute`) VALUES
-(6, 1, 108, 801, b'0', b'0', 'open lights on motion sensor', NULL, b'1', NULL, 2),
+(6, 1, 108, 801, b'0', b'1', 'open lights on motion sensor', NULL, b'1', NULL, 2),
 (18, 1, 101, 100, b'0', b'0', 'alarm', '05:20:00', b'0', '2016-10-23', 5),
 (19, 1, 101, 102, b'0', b'0', 'turn ac on', NULL, b'1', NULL, 30),
 (20, 1, 104, 403, b'0', b'0', 'morning routine', NULL, b'1', NULL, 30),
-(21, 1, 109, 900, b'0', b'0', 'Test', '20:07:00', b'0', '2016-10-23', 45);
+(21, 1, 109, 900, b'1', b'0', 'Test', '20:07:00', b'0', '2016-10-23', 45);
 
 -- --------------------------------------------------------
 
@@ -283,16 +287,19 @@ CREATE TABLE `task_devices` (
 --
 
 INSERT INTO `task_devices` (`TaskID`, `DeviceID`, `RequiredDeviceStatus`) VALUES
-(6, 801, b'0'),
+(6, 801, b'1'),
 (18, 101, b'1'),
 (18, 102, b'0'),
 (18, 103, b'1'),
+(18, 104, b'1'),
 (19, 101, NULL),
 (19, 102, b'1'),
 (19, 103, b'0'),
+(19, 104, NULL),
 (20, 401, b'1'),
 (20, 402, b'0'),
 (20, 403, b'1'),
+(20, 404, b'1'),
 (21, 901, b'0'),
 (21, 902, b'1');
 
@@ -320,7 +327,7 @@ INSERT INTO `user` (`userID`, `Email`, `UserName`, `Description`, `Password`, `i
 (1, 'eyad.jaamour@gmail.com', 'Eyad Jaamour', 'Admin', '1234', 1, 'eyad.jpg'),
 (2, 'mkb_2011@hotmail.com', 'Mohsen Bakhashab', 'Admin', '1234', 1, 'Mohsen.jpg'),
 (3, 'abdullah.alghamdi@gmail.com', 'Abdullah Alghamdi', 'Father', '123321', 1, 'abdullah.jpg'),
-(4, 'Huda.Azzahrani@gmail.com', 'Huda Azzahrani', 'Mother', '123455', 0, 'huda.png'),
+(4, 'Huda.Azzahrani@gmail.com', 'Huda Azzahrani', 'Mother', '12345', 0, 'huda.png'),
 (5, 'Ahmad.alghamdi@hotmail.com', 'Ahmad alghamdi', 'Son', '123123', 0, 'ahmad.jpg'),
 (7, 'Sarah.alghamdi@gmail.com', 'Sarah Alghamdi', 'Daughter', '44332211', 0, 'sarah.jpg');
 
@@ -437,7 +444,7 @@ ALTER TABLE `camera_images`
 -- AUTO_INCREMENT for table `room_backgrounds`
 --
 ALTER TABLE `room_backgrounds`
-  MODIFY `ImageID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `ImageID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 --
 -- AUTO_INCREMENT for table `task`
 --
