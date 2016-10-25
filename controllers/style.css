@@ -694,6 +694,35 @@ tr {
 }
 
 
+
+
+.dim {	
+	display:none;
+    height:100%;
+    width:100%;
+    position:fixed;
+    left:0;
+    top:0;
+    z-index:120;
+    background-color:black;
+    filter: alpha(opacity=75); /* internet explorer */
+    -khtml-opacity: 0.75;      /* khtml, old safari */
+      -moz-opacity: 0.75;      /* mozilla, netscape */
+           opacity: 0.75;      /* fx, safari, opera */
+}
+
+.dialog {
+	display:none;
+	position:fixed; 
+	top:0; 
+	left:0; 
+	right:0; 
+	bottom:0; 
+	margin:auto; 
+	z-index:121;
+	border:3;
+}
+
 /*
 <div class="tooltip">Hover over me
   <span class="tooltiptext">Tooltip text</span>

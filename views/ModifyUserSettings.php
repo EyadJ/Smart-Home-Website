@@ -5,6 +5,26 @@
 <title>Modify User Settings</title>
     <link href="../controllers/style.css" rel="stylesheet"/>
 
+	   
+  <script>
+  
+function HideUnhideDiv1() 
+{
+	var x = document.getElementById("right-div1").style.display;	
+	
+	if (x=="none")
+	{
+		document.getElementById("right-div1").style.display ="inline";
+		document.getElementById("right-div1-hidden").style.display ="none";
+	}
+	else
+	{
+		document.getElementById("right-div1").style.display ="none";
+		document.getElementById("right-div1-hidden").style.display ="inline";
+	}
+}
+
+</script>
 </head>
 <body>
      <div class="allcontainer">
@@ -28,37 +48,74 @@ include_once("../controllers/Header.php");
 				</ul>
 				</div>
                 <div class="right-div">
-
         <div class="personal-bg-table">
             <span>Modify User Settings</span>
-            <div class="clearfix"></div>
             <hr class="hr-table" />
         </div>
-  	
+	 </div>
 	
+	
+	
+<div id="right-div1-hidden" class="right-div" style="display:none;">	
+
+		<div class="personal-bg-table" align="center" style="line-height: 40%;"> <hr class="hr-table-hidden-div"/>.<br />.<br />.</div>	
+
+<a  href="#" onclick="HideUnhideDiv1();return false;" style="text-decoration:none; ">	
+		<img src="../controllers/images/div-plus-green2.png"
+				id="div-plus1"
+				width="35px" 
+				height="35px" 
+				style="
+				margin-left:97.5%;
+				margin-top:-7.5%;
+				" />
+	</a>
+	
+<div class="hidden-right-div-secondary-title" style="width:123px;"><b>User Settings</b></div>
+
+	
+</div>
+
+
+
+	
+	<div id="right-div1" class="right-div">
+
+		<a  href="#" onclick="HideUnhideDiv1();return false;" style="text-decoration:none; ">	
+		<img src="../controllers/images/div-minus-red.png"
+				id="div-minus1"
+				width="40px" 
+				height="40px" 
+				style="
+				margin-left:97.5%;
+				margin-top:-1.5%;
+				" />
+		</a>		
+		<br />
+		
+		
+            <div class="right-div-secondary-title" style="width:123px;"><b>User Settings</b></div>
+
 <?php 
 	include_once("../controllers/PreModifyUserSettings.php");
 ?>
 	
     
 <tr><td align="center" colspan="2">
-<input type="submit" value="Save" name="Save" style="font-weight:bold; margin-left:3px;" />
-
-&nbsp;
-<input type="reset" value="Reset" />
-
-&nbsp;
+<input type="submit" value="Save" name="Save" style="font-weight:bold; margin-left:3px;" /> &nbsp;
+<input type="reset" value="Reset" /> &nbsp;
 
 <a href="Users.php">
-<button type = "button" align="Right">Cancel</button></a>
+<button type = "button" align="Right">Cancel</button>
+</a>
 
 </td></tr>
-    </table>
+</table>
 </form>
+<br /><br />
+</div>
 
-
-	<br />
-	<br />
-            </div>
+	
+           
 </body>
 </html>

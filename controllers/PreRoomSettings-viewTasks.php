@@ -131,7 +131,7 @@
 		//table body (one task)
 		echo"<tr><td><textarea name='TaskName' cols='10' rows='5' style='resize:vertical;'>$row[TaskName]</textarea></td>
 			
-			<td><input type='number' name='Duration_Minute' value='$row[Duration_Minute]' style='width:60px;' required/></td>
+			<td><input type='number' name='SelectedSensorValue' value='$row[SelectedSensorValue]' style='width:60px;' required/></td>
 			
 			<td><input type='checkbox' name='repeatDaily' $RepeatDailyValue />
 			<div style='display:inline;'><br />

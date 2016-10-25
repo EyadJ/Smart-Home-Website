@@ -11,7 +11,7 @@
 		$RoomID = $_POST["RoomID"];
 		$TaskName = $_POST["TaskName"];
 		$selectedSensorID = $_POST["sensors"];
-		$Duration_Minute = $_POST["Duration_Minute"];
+		$SelectedSensorValue = $_POST["SelectedSensorValue"];
 		//---------//
 		//
 		$ActionTime;
@@ -55,7 +55,7 @@
 			$RoomID,
 			$TaskName,
 			$ActionTime,
-			$Duration_Minute,
+			$SelectedSensorValue,
 			$repeatDaily,
 			$ActionDate,
 			$selectedSensorID,

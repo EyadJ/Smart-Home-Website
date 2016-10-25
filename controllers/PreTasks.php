@@ -24,8 +24,6 @@ echo "<br /><hr class='hr-table-divider' /><hr class='hr-table-divider2' />";
 	{
 			$RoomID = $r_Row['RoomID'];
 
-			$Devices = Device::getDevicesDetailsByRoomID($RoomID);
-			
 			echo"
 			
 			<table style='width:110px; margin-left:2.2%;  margin-bottom:-15px; display:inline-block;'>
@@ -54,8 +52,8 @@ echo "<br /><hr class='hr-table-divider' /><hr class='hr-table-divider2' />";
 		if($Tasks != NULL)
 		{
 			
-			$devices;
-			$sensors;
+			$devices = NULL;
+			$sensors = NULL;
 			
 			$devices_Original = Device::getDevicesDetailsByRoomID($RoomID);
 			$i = 0;
@@ -152,7 +150,7 @@ echo "<br /><hr class='hr-table-divider' /><hr class='hr-table-divider2' />";
 			//table body (one task)
 			echo"<tr><td><b>$row[TaskName]</b></td>
 				
-				<td><input type='number' name='Duration_Minute' value='$row[Duration_Minute]' style='width:60px;' required/></td>
+				<td><input type='number' name='SelectedSensorValue' value='$row[SelectedSensorValue]' style='width:60px;' required/></td>
 				
 				<td><input type='checkbox' name='repeatDaily' $RepeatDailyValue />
 				<div style='display:inline;'><br />
@@ -182,20 +180,21 @@ echo "<br /><hr class='hr-table-divider' /><hr class='hr-table-divider2' />";
 				for ($i = 0; $i < count($devices); $i++)
 				{
 					$additional = "";
-					
+
 					if($taskDevicesArray[$i]["DeviceID"] == $devices[$i]["DeviceID"])
 					{
 						$var = $taskDevicesArray[$i]["ReqDevState"];
-							 if($var ==-1) $additional = "";
-						else if($var == 1) $additional = "";
-						else if($var == 0) $additional = "";
+							 if($var == NULL) $additional = "not-available.png";
+						else if($var == 1) $additional = "on.png";
+						else if($var == 0) $additional = "off.png";
 					}
 						
 						
 					echo"<table style='width:80px; margin:5; border:0; display:inline;'><tr>
-					
 					<td style='border:0;'>
 					<img src='../controllers/images/devices/" . $devices[$i]["DeviceImgPath_on"] . "' width='40' height='40' />
+					</td></tr><tr><td style='border:0;'>
+					<img src='../controllers/images/$additional' height='20' />
 					</td></tr></table>";
 				}
 					

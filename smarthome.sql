@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 24, 2016 at 06:25 PM
+-- Generation Time: Oct 25, 2016 at 06:14 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -61,15 +61,15 @@ INSERT INTO `device` (`DeviceID`, `RoomID`, `DeviceName`, `DeviceState`, `GateNu
 (101, 101, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'1', '2016-10-24 17:54:18', NULL, 120),
 (102, 101, 'AC', b'1', 0, 'cooler_on.png', 'cooler_off.png', b'1', '2016-10-24 17:54:17', NULL, 1800),
 (103, 101, 'Curtains', b'1', 0, 'curtains_opened.png', 'curtains_closed.png', b'1', '2016-10-24 14:13:23', 0, 0),
-(104, 101, 'Alarm', b'0', 0, 'alarm.png', 'alarm_off.png', b'1', '2016-10-24 17:55:36', NULL, 0),
+(104, 101, 'Alarm', b'0', 0, 'alarm.png', 'alarm_off.png', b'1', '2016-10-25 03:54:00', NULL, 0),
 (201, 102, 'Roof Lamp', b'0', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-19 11:31:53', NULL, 60),
 (202, 102, 'AC', b'0', 0, 'cooler_on.png', 'cooler_off.png', b'1', '2016-10-19 11:31:18', NULL, 1200),
 (203, 102, 'Curtains', b'1', 0, 'curtains_opened.png', 'curtains_closed.png', b'1', '2016-10-24 17:13:14', 0, 0),
-(204, 102, 'Alarm', b'0', 0, 'alarm.png', 'alarm_off.png', b'1', '2016-10-24 17:52:49', NULL, 0),
+(204, 102, 'Alarm', b'0', 0, 'alarm.png', 'alarm_off.png', b'1', '2016-10-24 18:29:43', NULL, 0),
 (401, 104, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-20 13:07:24', NULL, 60),
 (402, 104, 'AC', b'0', 0, 'cooler_on.png', 'cooler_off.png', b'0', '2016-10-19 11:31:05', NULL, 1200),
 (403, 104, 'Curtains', b'1', 0, 'curtains_opened.png', 'curtains_closed.png', b'0', '2016-10-19 07:12:46', 0, 0),
-(404, 104, 'Alarm', b'0', 0, 'alarm.png', 'alarm_off.png', b'1', '2016-10-24 17:52:54', NULL, 0),
+(404, 104, 'Alarm', b'0', 0, 'alarm.png', 'alarm_off.png', b'1', '2016-10-24 18:29:34', NULL, 0),
 (501, 105, 'Roof Lamp', b'0', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-19 11:32:33', NULL, 180),
 (502, 105, 'AC', b'1', 0, 'cooler_on.png', 'cooler_off.png', b'0', '2016-10-19 11:32:38', NULL, 2400),
 (503, 105, 'Curtains', b'1', 0, 'curtains_opened.png', 'curtains_closed.png', b'1', '2016-10-20 13:06:50', 0, 0),
@@ -79,7 +79,7 @@ INSERT INTO `device` (`DeviceID`, `RoomID`, `DeviceName`, `DeviceState`, `GateNu
 (701, 107, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'1', '2016-10-23 17:01:17', NULL, 60),
 (801, 108, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-19 11:33:51', NULL, 60),
 (901, 109, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-20 13:07:17', NULL, 120),
-(902, 109, 'Garage Door', b'1', 0, 'Garage-door_open.png', 'Garage-door_closed.png', b'0', '2016-10-19 07:12:55', 0, 0),
+(902, 109, 'Garage Door', b'0', 0, 'Garage-door_open.png', 'Garage-door_closed.png', b'1', '2016-10-25 03:54:26', 0, 0),
 (1001, 110, 'Security Camera 1', b'0', 0, 'security-camera_on.png', 'security-camera_off.png', b'1', '2016-10-24 17:55:29', NULL, 0),
 (1002, 110, 'Security Camera 2', b'0', 0, 'security-camera_on.png', 'security-camera_off.png', b'0', '2016-10-05 12:11:53', NULL, 0);
 
@@ -256,19 +256,21 @@ CREATE TABLE `task` (
   `ActionTime` time DEFAULT NULL,
   `repeatDaily` bit(1) NOT NULL,
   `ActionDate` date DEFAULT NULL,
-  `Duration_Minute` int(3) NOT NULL
+  `AlarmDuration` int(3) NOT NULL DEFAULT '0',
+  `AlarmInterval` int(2) NOT NULL DEFAULT '0',
+  `SelectedSensorValue` int(3) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `task`
 --
 
-INSERT INTO `task` (`TaskID`, `userID`, `RoomID`, `SensorID`, `isDisabled`, `isDefault`, `TaskName`, `ActionTime`, `repeatDaily`, `ActionDate`, `Duration_Minute`) VALUES
-(6, 1, 108, 801, b'0', b'1', 'open lights on motion sensor', NULL, b'1', NULL, 2),
-(18, 1, 101, 100, b'0', b'0', 'alarm', '05:20:00', b'0', '2016-10-23', 5),
-(19, 1, 101, 102, b'0', b'0', 'turn ac on', NULL, b'1', NULL, 30),
-(20, 1, 104, 403, b'0', b'0', 'morning routine', NULL, b'1', NULL, 30),
-(21, 1, 109, 900, b'1', b'0', 'Test', '20:07:00', b'0', '2016-10-23', 45);
+INSERT INTO `task` (`TaskID`, `userID`, `RoomID`, `SensorID`, `isDisabled`, `isDefault`, `TaskName`, `ActionTime`, `repeatDaily`, `ActionDate`, `AlarmDuration`, `AlarmInterval`, `SelectedSensorValue`) VALUES
+(6, 1, 108, 801, b'0', b'1', 'open lights on motion sensor', NULL, b'1', NULL, 0, 0, 2),
+(18, 1, 101, 100, b'0', b'0', 'alarm', '05:20:00', b'0', '2016-10-23', 0, 0, 5),
+(19, 1, 101, 102, b'0', b'0', 'turn ac on', NULL, b'1', NULL, 0, 0, 30),
+(20, 1, 104, 403, b'0', b'0', 'morning routine', NULL, b'1', NULL, 0, 0, 30),
+(21, 1, 109, 900, b'1', b'0', 'Test', '20:07:00', b'0', '2016-10-23', 0, 0, 45);
 
 -- --------------------------------------------------------
 
@@ -315,7 +317,8 @@ CREATE TABLE `user` (
   `UserName` varchar(25) CHARACTER SET utf8 NOT NULL,
   `Description` varchar(15) NOT NULL,
   `Password` varchar(20) NOT NULL,
-  `isAdmin` tinyint(1) NOT NULL,
+  `isAdmin` bit(1) NOT NULL DEFAULT b'0',
+  `isDisabled` bit(1) NOT NULL DEFAULT b'0',
   `UserImagePath` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -323,13 +326,13 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`userID`, `Email`, `UserName`, `Description`, `Password`, `isAdmin`, `UserImagePath`) VALUES
-(1, 'eyad.jaamour@gmail.com', 'Eyad Jaamour', 'Admin', '1234', 1, 'eyad.jpg'),
-(2, 'mkb_2011@hotmail.com', 'Mohsen Bakhashab', 'Admin', '1234', 1, 'Mohsen.jpg'),
-(3, 'abdullah.alghamdi@gmail.com', 'Abdullah Alghamdi', 'Father', '123321', 1, 'abdullah.jpg'),
-(4, 'Huda.Azzahrani@gmail.com', 'Huda Azzahrani', 'Mother', '12345', 0, 'huda.png'),
-(5, 'Ahmad.alghamdi@hotmail.com', 'Ahmad alghamdi', 'Son', '123123', 0, 'ahmad.jpg'),
-(7, 'Sarah.alghamdi@gmail.com', 'Sarah Alghamdi', 'Daughter', '44332211', 0, 'sarah.jpg');
+INSERT INTO `user` (`userID`, `Email`, `UserName`, `Description`, `Password`, `isAdmin`, `isDisabled`, `UserImagePath`) VALUES
+(1, 'eyad.jaamour@gmail.com', 'Eyad Jaamour', 'Admin', '1234', b'1', b'0', 'eyad.jpg'),
+(2, 'mkb_2011@hotmail.com', 'Mohsen Bakhashab', 'Admin', '1234', b'1', b'0', 'Mohsen.jpg'),
+(3, 'abdullah.alghamdi@gmail.com', 'Abdullah Alghamdi', 'Father', '123321', b'1', b'0', 'abdullah.jpg'),
+(4, 'Huda.Azzahrani@gmail.com', 'Huda Azzahrani', 'Mother', '12345', b'0', b'0', 'huda.png'),
+(5, 'Ahmad.alghamdi@hotmail.com', 'Ahmad alghamdi', 'Son', '123123', b'0', b'0', 'ahmad.jpg'),
+(7, 'Sarah.alghamdi@gmail.com', 'Sarah Alghamdi', 'Daughter', '44332211', b'0', b'0', 'sarah.jpg');
 
 -- --------------------------------------------------------
 
@@ -454,7 +457,7 @@ ALTER TABLE `task`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `userID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `userID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- Constraints for dumped tables
 --

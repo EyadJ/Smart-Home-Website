@@ -37,9 +37,10 @@
 			<img src='../controllers/images/Modify.jpg' width='50' height='50'/>
 			</td></a>
 			<td>
-			<a href='deleteUser.php?var=$row[UserName]'>
+			<a href='#' onclick='deleteUserMsg($row[userID]);return false;' style='text-decoration:none;'>
 			<img src='../controllers/images/Delete_Icon.png' width='50' height='50'/>
 			</a></td></tr>"  ;	
+			//$row[UserName]
 		}		
     }
 ?>

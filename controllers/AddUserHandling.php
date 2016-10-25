@@ -3,14 +3,6 @@
 
 	include_once("../models/user.php");
 	
-	$isAdmin = 0;
-	
-	if (isset($_POST['isAdmin']) )//&& $_POST['isAdmin'] == "on")
-	{
-		$isAdmin = 1;
-	}
-	
-	
 	$target_dir = "../controllers/images/users/";
 	$basename = basename($_FILES["fileToUpload"]["name"]);
 	 
@@ -52,7 +44,7 @@
 		if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) 
 		{
 			$insertedSuccessfully = user::addNewUser($_POST['userName'], $_POST['Description'],
-			$_POST['email'], $_POST['Pass'], $isAdmin, $basename);
+			$_POST['email'], $_POST['Pass'], $basename);
 		
 			header("Location: ../views/Users.php");
 			//echo $addedSuccessfully;

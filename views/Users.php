@@ -40,6 +40,24 @@ function HideUnhideNewUser()
 	}
 }
 
+function deleteUserMsg(id) 
+{
+	document.getElementById("deleteMsg").style.display ="inline";	
+	document.getElementById("deleteMsgDim").style.display ="inline";	
+	
+	document.getElementById("deleteUserForm").action="../controllers/DeleteUserHandling.php?var=" + id ;
+}
+
+function deleteUserSubmitClicked() 
+{
+	document.getElementById("deleteUserForm").submit();
+}
+
+function hideDeleteUserMsg() 
+{
+	document.getElementById("deleteMsg").style.display ="none";	
+	document.getElementById("deleteMsgDim").style.display ="none";	
+}
   </script>
   
   
@@ -48,11 +66,42 @@ function HideUnhideNewUser()
 
            <div class="allcontainer">
 	
+	
+	
+
+
+<form name="delete" method="post" id="deleteUserForm">
+
+<div class="dim" id="deleteMsgDim"></div>  
+		<table  class="dialog" id="deleteMsg" style="width:450px; height:146px;">
+			<tr><td>
+			<b><h3 id="message">Are you sure you want to delete This User ?</h3></b><br />
+			&nbsp;<b>NOTE:</b> Make sure the user has no <u>Tasks</u> or <u>Rooms</u> under his name in order to delete him/her.
+			</td></tr>
+			<tr><th style="height:30px;">	
+			<a href='#' onclick="deleteUserSubmitClicked();return false;" style="text-decoration:none; ">
+			<button type='button' style="color:red;">Delete</button>
+			</a>
+			<a href='#' onclick="hideDeleteUserMsg();return false;" style="text-decoration:none; ">
+			<button type='button'>Cancel</button>
+			</a>
+			</th></tr>
+		</table>
+		
+	</form>
+
+
+	
+
 <?php
 include_once("../controllers/Header.php");
 ?> 
              
 				<div id='page-container'>
+			
+
+
+			
 				 <div class='menu'>
 				<ul class='ui-menu'>
 <?php
@@ -63,15 +112,11 @@ include_once("../controllers/Header.php");
 				</ul>
 				</div>
                 <div class="right-div">
-
-
-    
         <div class="personal-bg-table">
             <span>Users</span>
             <hr class="hr-table" />
         </div>
-  </div>
-	
+	</div>
 	
 	
 
@@ -126,7 +171,7 @@ include_once("../controllers/Header.php");
 	
 	<!----------------------------------------------------------------->
 <form name="formR" method="post" enctype="multipart/form-data" action="../controllers/addUserHandling.php">
-<table id='AddNewUserTable' style="width:80%; display:none;">
+<table id='AddNewUserTable' style="width:58.5%; display:none;">
 
 <tr><td>Username</td><td align="left">
 &nbsp;&nbsp;<input type="text" name="userName" maxlength="25" required/> &nbsp; (First & Last Names) 
@@ -147,22 +192,22 @@ include_once("../controllers/Header.php");
     <tr><td>ConfirmPassword</td><td align=left>
 &nbsp;&nbsp;<input type="password" name="ConPass" required/>
         </td></tr>
-	
-	<tr><td>Administrator Privilege</td><td align="left">
-&nbsp;&nbsp;<input type="checkbox" name="isAdmin" />
-    </td>
-    </tr>	
 		
 <tr><td>Img</td><td  align="left">
 <input type="file" name="fileToUpload" id="fileToUpload" required/>
     
     </td>
-    </tr>    
+    </tr>
+    <tr><td colspan="2"><b>Please add the required rooms for this user to control after the user is created</b></td></tr>
 <tr><td align="left" colspan="2">
 
-&nbsp;&nbsp;<input type="submit" value="Save"/> 
-&nbsp;&nbsp;<input type="reset" value="Reset" />
-&nbsp;&nbsp;<a href="Users.php"><button type = "button" >Cancel</button></a> 
+<div style="width:200px; margin-left:auto; margin-right:auto; ">
+<input type="submit" value="Save"/>&nbsp;
+<input type="reset" value="Reset" />&nbsp;
+<a href="#" onclick="HideUnhideNewUser();return false;" style="text-decoration:none;">
+<button type = "button" >Cancel</button>
+</a> 
+</div>
 
 </td></tr>
 

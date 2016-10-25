@@ -101,6 +101,16 @@ function HideUnhideActionDate()
 		document.getElementById("repeatDaily").checked = true;
 	}
 }
+
+function HideAlarmDetails() 
+{
+	document.getElementById("alarmDetails").style.display ="none";
+}
+
+function UnhideAlarmDetails() 
+{
+	document.getElementById("alarmDetails").style.display ="inline";
+}
  
   </script>
   
