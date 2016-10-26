@@ -70,20 +70,28 @@ function HideUnhideDiv2()
 	}
 }
  
-function HideUnhideActionTime(z) 
+function HideAllButParameter(x) 
 {
-	z.checked = true;
-	
-	var x = document.getElementById("clockSensor").checked;
-	
-	if (x == true)
+	var array = document.getElementsByClassName("SensorsValues");
+
+	for(i = 0; i < array.length; i++)
 	{
-		document.getElementById("actionTime").style.display = "block";
+		if(array[i].id == x)
+			array[i].style.display = "block";
+		else
+			array[i].style.display = "none";
 	}
-	else
-	{
-		document.getElementById("actionTime").style.display = "none";
-	}
+	//document.getElementById("SelectedSensor").value = 11;
+}
+
+function UnhideMotionSensorSecondaryOption() 
+{
+	document.getElementById("MotionSensorDurationTable").style.display = "block";
+}
+
+function HideMotionSensorSecondaryOption() 
+{
+	document.getElementById("MotionSensorDurationTable").style.display = "none";
 }
 
 function HideUnhideActionDate() 

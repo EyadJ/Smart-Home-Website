@@ -11,7 +11,7 @@ require_once("config.php");
 class User
 {
 	
-	public static function addNewUser($userName, $description, $email, $password, $isAdmin, $imgPath) 
+	public static function addNewUser($userName, $description, $email, $password, $imgPath) 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) 
@@ -26,11 +26,10 @@ class User
 		$description = $db->escape_string($description);
 		$email = $db->escape_string($email);
 		$password = $db->escape_string($password);
-		$isAdmin = $db->escape_string($isAdmin);
 		$imgPath = $db->escape_string($imgPath);
 
-		$sql = "INSERT INTO user (UserName, Description, Email, Password, isAdmin, UserImagePath) "
-		  . " VALUES ('$userName', '$description', '$email', '$password', '$isAdmin', '$imgPath');";
+		$sql = "INSERT INTO user (UserName, Description, Email, Password, UserImagePath) "
+		  . " VALUES ('$userName', '$description', '$email', '$password', '$imgPath');";
 
 		$db->query($sql);
 
@@ -113,7 +112,7 @@ class User
 		}
 	}
 
-public static function deleteUser($UserName) 
+public static function deleteUser($userID) 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) 
@@ -121,9 +120,9 @@ public static function deleteUser($UserName)
 			die('error: unable to connect to database');
 		}
 
-		$UserName = $db->escape_string($UserName);
+		$userID = $db->escape_string($userID);
 		
-		$sql = "DELETE FROM user WHERE UserName = '$UserName';";
+		$sql = "DELETE FROM user WHERE userID = $userID;";
 		
 		$result = $db->query($sql);
 

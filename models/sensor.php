@@ -35,7 +35,29 @@ class Sensor
 		}
 	}
 
+public static function getSensorsTypeId($SensorID) 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) {
+		  die('unable to connect to database [' . $db->connect_error .']');
+		}
 
+		$SensorID = $db->escape_string($SensorID);
+
+		$sql = "SELECT SensorTypeID FROM sensor
+				WHERE SensorID = $SensorID";
+		$result = $db->query($sql);
+	 
+		if ($result->num_rows >= 1)  
+		{ 	
+			$row = $result->fetch_assoc();	
+			return $row["SensorTypeID"];
+		}
+		else 
+		{
+			return NULL;
+		}
+	}
 
 
 

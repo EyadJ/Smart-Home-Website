@@ -11,8 +11,8 @@ require_once("config.php");
 class Task
 {
 	
-	public static function createNewTask($UserID, $RoomID, $TaskName, $ActionTime, $SelectedSensorValue, $repeatDaily,
-										 $ActionDate, $SensorID, $DevicesID, $RequiredDevicesStatus) 
+	public static function createNewTask($UserID, $RoomID, $TaskName, $ActionTime, $SelectedSensorValue, $repeatDaily, $ActionDate, 
+										$SensorID, $AlarmDuration, $AlarmInterval, $DevicesID, $RequiredDevicesStatus) 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) {
@@ -27,6 +27,8 @@ class Task
 		$TaskName = $db->escape_string($TaskName);
 		$SelectedSensorValue = $db->escape_string($SelectedSensorValue);
 		$repeatDaily = $db->escape_string($repeatDaily);
+		$AlarmDuration = $db->escape_string($AlarmDuration);
+		$AlarmInterval = $db->escape_string($AlarmInterval);
 		if ($ActionTime != NULL) $ActionTime = $db->escape_string($ActionTime);
 		if ($ActionDate != NULL) $ActionDate = $db->escape_string($ActionDate);
 		//
@@ -35,23 +37,32 @@ class Task
 
 		if($ActionDate != NULL && $ActionTime != NULL)
 		{
-			$sql = "INSERT INTO task (userID, RoomID, SensorID, TaskName, ActionTime, SelectedSensorValue, repeatDaily, ActionDate) "
-		  . " VALUES ($UserID, $RoomID, $SensorID, '$TaskName', '$ActionTime', $SelectedSensorValue, $repeatDaily, '$ActionDate')";
+			$sql = "INSERT INTO task 
+			(userID, RoomID, SensorID, TaskName, ActionTime, SelectedSensorValue, repeatDaily,
+			ActionDate, AlarmDuration, AlarmInterval) "
+		  . " VALUES ($UserID, $RoomID, $SensorID, '$TaskName', '$ActionTime', $SelectedSensorValue,
+		  $repeatDaily, '$ActionDate', $AlarmDuration, $AlarmInterval)";
 		}
 		else if ($ActionDate == NULL && $ActionTime != NULL)
 		{
-			$sql = "INSERT INTO task (userID, RoomID, SensorID, TaskName, ActionTime, SelectedSensorValue, repeatDaily) "
-		  . " VALUES ($UserID, $RoomID, $SensorID, '$TaskName', '$ActionTime', $SelectedSensorValue, $repeatDaily)";
+			$sql = "INSERT INTO task (userID, RoomID, SensorID, TaskName, ActionTime, SelectedSensorValue,
+			repeatDaily, AlarmDuration, AlarmInterval) "
+		  . " VALUES ($UserID, $RoomID, $SensorID, '$TaskName', '$ActionTime', $SelectedSensorValue, 
+		  $repeatDaily, $AlarmDuration, $AlarmInterval)";
 		}
 		else if ($ActionDate != NULL && $ActionTime == NULL)
 		{
-			$sql = "INSERT INTO task (userID, RoomID, SensorID, TaskName, SelectedSensorValue, repeatDaily, ActionDate) "
-		  . " VALUES ($UserID, $RoomID, $SensorID, '$TaskName', $SelectedSensorValue, $repeatDaily, '$ActionDate')";
+			$sql = "INSERT INTO task (userID, RoomID, SensorID, TaskName, SelectedSensorValue, repeatDaily,
+			ActionDate, AlarmDuration, AlarmInterval) "
+		  . " VALUES ($UserID, $RoomID, $SensorID, '$TaskName', $SelectedSensorValue, $repeatDaily,
+		  '$ActionDate', $AlarmDuration, $AlarmInterval)";
 		}
 		else if ($ActionDate == NULL && $ActionTime == NULL)
 		{
-			$sql = "INSERT INTO task (userID, RoomID, SensorID, TaskName, SelectedSensorValue, repeatDaily) "
-		  . " VALUES ($UserID, $RoomID, $SensorID, '$TaskName', $SelectedSensorValue, $repeatDaily)";
+			$sql = "INSERT INTO task (userID, RoomID, SensorID, TaskName, SelectedSensorValue, repeatDaily,
+			AlarmDuration, AlarmInterval) "
+		  . " VALUES ($UserID, $RoomID, $SensorID, '$TaskName', $SelectedSensorValue, $repeatDaily, 
+		  $AlarmDuration, $AlarmInterval)";
 		}
 		
 		//
@@ -170,7 +181,58 @@ class Task
 		}
 	}
 
+	public static function isDefault($TaskID) 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) {
+		  die('unable to connect to database [' . $db->connect_error .']');
+		}
+
+		$TaskID = $db->escape_string($TaskID);
+
+		$sql = "SELECT isDefault FROM task WHERE TaskID = $TaskID";
+		$result = $db->query($sql);
+	 
+		if ($result->num_rows >= 1)  
+		{
+			$row = $result->fetch_assoc();	
+			
+			if($row["isDefault"] == 1) return TRUE;
+			else if($row["isDefault"] == 0) return FALSE;	
+		}
+		else 
+		{
+			return FALSE;
+		}
+	}
 	
+	public static function deleteTask($TaskID) 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) 
+		{
+			die('error: unable to connect to database');
+		}
+
+		$TaskID = $db->escape_string($TaskID);
+		
+		if(task::isDefault($TaskID)) return FALSE; 
+	
+		$sql = "DELETE FROM task_devices WHERE TaskID = $TaskID;";
+		$result = $db->query($sql);
+		
+		if ($result) //is true 
+		{ 
+			$sql = "DELETE FROM task WHERE TaskID = $TaskID;";
+			$result = $db->query($sql);
+
+			return TRUE;
+		} 
+		else 
+		{
+			return FALSE; 
+		}
+	}
 
 
 

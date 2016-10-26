@@ -67,6 +67,7 @@
 				$taskDevicesArray ;
 				$i = 0;
 				
+				
 				while ($DeviceRow = $taskDevices->fetch_assoc())
 				{
 					$taskDevicesArray[$i]["DeviceID"] = $DeviceRow["DeviceID"];
@@ -106,7 +107,7 @@
 				else //($row["isDefault"] == 0) 
 				{
 					$isDefaultValue = 
-					"<a href = deleteTask.php?var=$TaskID>
+					"<a href ='../controllers/DeleteTaskHandling.php?var=$TaskID&var2=$RoomID'>
 					<img src='../controllers/images/Delete_Icon2.png' width='50px' height='50px'/>
 					</a>";
 				}

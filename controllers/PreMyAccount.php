@@ -9,7 +9,8 @@
 	<form name="formR" method="post" 
 	action="../controllers/ModifyUserSettingsHandling.php?var=' . $UserID . '" 
 	enctype="multipart/form-data">
-	<table >	
+	<br />
+	<table style="width:70%;">	
 
 
 	<tr><td>Name</td><td align="left" align="center">

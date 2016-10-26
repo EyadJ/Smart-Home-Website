@@ -8,7 +8,7 @@ instead of having 4 columns for each sensor's value, we will have only one colum
 
 	-Temperature Sensor: the temp degree of which the task is required to execute
 
-	-Light sensor: the level of light intencity
+	-Light sensor: the level of Light intensity
 
 //-----------------------------------------------------------------------------------------------------------------------//
 

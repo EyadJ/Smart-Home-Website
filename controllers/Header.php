@@ -11,6 +11,11 @@
 		"&nbsp;&nbsp;
 
 
+		<a href='notificationCenter.php' style='text-decoration:none;'>
+		<img style='margin-top:57.5px;' width='20px' src='../controllers/images/notification.png' />
+		</a>
+		
+		
 		<a href='myAccount.php' style='text-decoration:none;'>
 		<img style='margin-top:57.5px;' width='20px' src='../controllers/images/my-account.png' />
 		</a>

@@ -80,14 +80,13 @@ echo "<br /><hr class='hr-table-divider' /><hr class='hr-table-divider2' />";
 
 					
 			//form and table header	(one task)
-			echo"<table id='viewAllTasksTable'>
+			echo"<table id='viewAllTasksTable' style=' border: none;'>
 				<tr style='line-height: 16px;'>
-				<th width='10%'>Description</th>
-				<th width='8%'>Duration (Minutes)</th>
-				<th width='6.5%'>Repeat Daily</th>
-				<th width='15%'>Selected Sensor</th>
-				<th width='30%'>Selected Device/s Action</th>
-				<th width='5%'>Task Enabled</th>
+				<th width='10%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Description</th>
+				<th width='6.5%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Repeat Daily</th>
+				<th width='15%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Selected Sensor</th>
+				<th width='30%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Selected Device/s Action</th>
+				<th width='5%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Task Enabled</th>
 				</tr>";
 			
 
@@ -102,7 +101,7 @@ echo "<br /><hr class='hr-table-divider' /><hr class='hr-table-divider2' />";
 			{
 					//$actionTimeValue = "";
 					//$actionDateValue = "";
-					$RepeatDailyValue = "";
+					$RepeatDailyValue = $row["repeatDaily"];
 					$isDisabledValue = "";
 					$TaskID = $row["TaskID"];
 					$selectedSensorID = $row["SensorID"];
@@ -132,11 +131,6 @@ echo "<br /><hr class='hr-table-divider' /><hr class='hr-table-divider2' />";
 					}
 					*/
 					
-					if($row["repeatDaily"] == 1)
-					{
-						$RepeatDailyValue = " checked ";
-					}
-					
 					if($row["isDisabled"] == 1)
 					{
 						$isDisabledValue = "x-red.png";
@@ -147,16 +141,34 @@ echo "<br /><hr class='hr-table-divider' /><hr class='hr-table-divider2' />";
 					}
 
 			
+			echo "<tr style='border:0px; background-color:white; height:17px;'>
+				<td style='border:0px;'></td>
+				<td style='border:0px;'></td>
+				<td style='border:0px;'></td>
+				<td style='border:0px;'></td>
+				<td style='border:0px;'></td>
+				</tr>";
+			
+			
 			//table body (one task)
-			echo"<tr><td><b>$row[TaskName]</b></td>
+			echo"<tr><td style='border-bottom: 2px solid black; border-top: 2px solid black;'><b>$row[TaskName]</b></td>
+			
+				<td style='border-bottom: 2px solid black; border-top: 2px solid black;'>";
 				
-				<td><input type='number' name='SelectedSensorValue' value='$row[SelectedSensorValue]' style='width:60px;' required/></td>
+				if($RepeatDailyValue == 0)
+				{
+					echo "<img src='../controllers/images/NoRepeatDaily.png' width='30' height='30' />
+					<div style='display:inline;'><br />
+					<b>Action Date </b><input type='date' name='ActionDate' value = '$row[ActionDate]' 
+					style='width:130px;' readonly/></div>";
+				}
+				else if ($RepeatDailyValue == 1)
+				{
+					echo "<img src='../controllers/images/Checkmark1.png' width='30' height='30' />";
+				}
 				
-				<td><input type='checkbox' name='repeatDaily' $RepeatDailyValue />
-				<div style='display:inline;'><br />
-				<b>Action Date </b><input type='date' name='ActionDate' value = '$row[ActionDate]' />
-				</div></td><td>
-				";
+				
+				echo "</td><td style='border-bottom: 2px solid black; border-top: 2px solid black;'>";
 				
 				for ($i = 0; $i < count($sensors); $i++)
 				{
@@ -166,7 +178,7 @@ echo "<br /><hr class='hr-table-divider' /><hr class='hr-table-divider2' />";
 						{
 							echo"<img src='../controllers/images/sensors/" . $sensors[$i]["SensorImgPath"] . "' width='40' height='40' /><br />
 							<b>Action Time</b>
-							<input type='time' name='ActionTime' value = '$row[ActionTime]' />";
+							<input type='time' name='ActionTime' value = '$row[ActionTime]' readonly/>";
 						}
 						else
 						{
@@ -175,7 +187,7 @@ echo "<br /><hr class='hr-table-divider' /><hr class='hr-table-divider2' />";
 					}
 				}
 				
-				echo "</td><td>";
+				echo "</td><td style='border-bottom: 2px solid black; border-top: 2px solid black;'>";
 				
 				for ($i = 0; $i < count($devices); $i++)
 				{
@@ -191,7 +203,7 @@ echo "<br /><hr class='hr-table-divider' /><hr class='hr-table-divider2' />";
 						
 						
 					echo"<table style='width:80px; margin:5; border:0; display:inline;'><tr>
-					<td style='border:0;'>
+					<td>
 					<img src='../controllers/images/devices/" . $devices[$i]["DeviceImgPath_on"] . "' width='40' height='40' />
 					</td></tr><tr><td style='border:0;'>
 					<img src='../controllers/images/$additional' height='20' />
@@ -201,7 +213,8 @@ echo "<br /><hr class='hr-table-divider' /><hr class='hr-table-divider2' />";
 					
 				
 						echo "</td>
-						<td><img src='../controllers/images/$isDisabledValue' width='40' height='40' /></td>
+						<td style='border-bottom: 2px solid black; border-top: 2px solid black;'>
+						<img src='../controllers/images/$isDisabledValue' width='40' height='40' /></td>
 						</tr>";
 			}
 			echo "</table>";

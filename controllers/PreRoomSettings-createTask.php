@@ -34,30 +34,97 @@
 		<input type='text' name='TaskName' placeholder='Simple Name for the Task'/>
 		</td><td rowspan='2'>";
 		
-		
+		$i = 0;
 		while($row = $Sensors->fetch_assoc()) 
 		{
-			echo"<a  href='#' onclick='HideUnhideActionTime(this.childNodes[0].childNodes[0]);' 
-			style='text-decoration:none; color:black' >";
-
-			if ($row["SensorTypeID"] == 20)
+			$sensorTypeID = $row["SensorTypeID"];
+			$sensorTypeIdArray[$i] =  $sensorTypeID;
+			/*
+			10 Motion Sensor		(the value of not detecting anything for a period of time)
+			11 Smoke Detector		(Does not Have a value)-----------------------------------
+			12 Temperature Sensor 	(Celsius)
+			13 Light Sensor			(Light intensity)
+			20 Clock				(It has its own veriable (Time: not a number))
+			*/
+			
+			if ($sensorTypeID == 10) //Motion
 			{
-				echo"<label><input type='radio' name='sensors' id='clockSensor' value='$row[SensorID]' checked='checked'/>
-				<img src='../controllers/images/sensors/$row[SensorImgPath]' width='60' height='60' /></label></a>
-				<div id='actionTime'>
-				<table style='border:0; width:85%'>
-				<tr><td>Action Time</td><td><input type='time' name='ActionTime'/></td></tr>
+				echo"<label><input type='radio' name='sensors' value='$row[SensorID]' onclick='HideAllButParameter(10);'/>
+				<img src='../controllers/images/sensors/$row[SensorImgPath]' width='60' height='60' /></label>
+				<table id='10' style='display:none;' class='SensorsValues'><tr><td>
+				<label><input type='radio' name='MotionSensorOption' value='onDetection' onclick='HideMotionSensorSecondaryOption();' checked/>
+				Action On Detection</label></td></tr><tr><td>
+				<label><input type='radio' name='MotionSensorOption' value='onNoDetection' onclick='UnhideMotionSensorSecondaryOption();'/>
+				Action after no detection for a period of time</label>
+				<table style='border:0; display:none;' id='MotionSensorDurationTable'>
+				<tr><td>Duration of No Detection</td><tr></tr><td><input type='number' name='MotionSensorValue' placeholder='(Minutes)'/></td></tr>
+				</table></td></tr>
+				</table><br />";
+			}
+			else if ($sensorTypeID == 11) //Smoke
+			{
+				echo"<label><input type='radio' name='sensors' value='$row[SensorID]' onclick='HideAllButParameter(11);'/>
+				<img src='../controllers/images/sensors/$row[SensorImgPath]' width='60' height='60' /></label><br />";
+			}
+			else if ($sensorTypeID == 12) //Temperature
+			{
+				echo"<label><input type='radio' name='sensors' value='$row[SensorID]' onclick='HideAllButParameter(12);'/>
+				<img src='../controllers/images/sensors/$row[SensorImgPath]' width='60' height='60' /></label>
+				<div id='12' style='display:none;'  class='SensorsValues'>
+				<table style='border:0; width:70%'>
+				<tr><td>Required Temperature</td><tr></tr><td>
+				<input type='number' name='TempSensorValue' placeholder='Temperature in Celsius'/>
+				</td></tr>
 				</table>
-				</div>";
+				</div><br />";
 			}
-			else
+			else if ($sensorTypeID == 13) //Light
 			{
-				echo"<label><input type='radio' name='sensors' value='$row[SensorID]'/>
-				<img src='../controllers/images/sensors/$row[SensorImgPath]' width='60' height='60' /></label>";
+				echo"<label><input type='radio' name='sensors'value='$row[SensorID]' onclick='HideAllButParameter(13);'/>
+				<img src='../controllers/images/sensors/$row[SensorImgPath]' width='60' height='60' /></label>
+				<div id='13' style='display:none;' class='SensorsValues'>
+				<table style='border:0; width:70%'>
+				<tr><td>Required Light Status</td><tr></tr><td>
+				<select name='LightSensorValue' >
+				 <option value='700'>Night</option>
+				 <option value='850'>Day</option>
+				</select>
+				</td></tr>
+				</table>
+				</div><br />";
 			}
-
-			echo "</a><br />";
+			else if ($sensorTypeID == 20) //Clock
+			{
+				echo"<label><input type='radio' name='sensors' value='$row[SensorID]' checked='checked' onclick='HideAllButParameter(20);'/>
+				<img src='../controllers/images/sensors/$row[SensorImgPath]' width='60' height='60' /></label>
+				<div id='20' class='SensorsValues'>
+				<table style='border:0; width:70%'>
+				<tr><td>Action Time</td><tr></tr><td><input type='time' name='ActionTime'/></td></tr>
+				</table>
+				</div><br />";
+			}
+			$i++;
 		}
+		
+				//-----to help when handling the sensors in the handling page-----//
+			/*
+			echo"<select name='SelectedSensor' id='SelectedSensor' style='display:none;'>";
+			for ($i = 0; $i < count($sensorTypeIdArray); $i++)
+			{
+				if($sensorTypeIdArray[$i] == 10)
+					echo "<option value='10'>Motion</option>";
+				if($sensorTypeIdArray[$i] == 11)
+					echo "<option value='11'>Smoke</option>";
+				if($sensorTypeIdArray[$i] == 12)
+					echo "<option value='12'>Temp</option>";
+				if($sensorTypeIdArray[$i] == 13)
+					echo "<option value='13'>Light</option>";
+				if($sensorTypeIdArray[$i] == 20)
+					echo "<option value='20'>Clock</option>";
+			}
+					echo "</select>";
+					*/
+				//----------------------------------------------------------------//	
 		
 		echo "</td><td rowspan='2'>";
 		
@@ -79,9 +146,9 @@
 				
 				<table style='border:0; padding:0; margin:0;'>
 				<tr><td>Duration</td>
-				<td><input type='number' name='AlarmDuration' placeholder='(Minutes)' style='width:120px;'/></td></tr>
+				<td><input type='number' name='AlarmDuration' placeholder='(Minutes)' value=0 style='width:120px;'/></td></tr>
 				<tr><td>Interval</td>
-				<td><input type='number' name='AlarmInterval' placeholder='(Minutes)' style='width:120px;'/></td></tr>
+				<td><input type='number' name='AlarmInterval' placeholder='(Minutes)' value=0  style='width:120px;'/></td></tr>
 				</table></td></tr>
 				</table>";
 			}

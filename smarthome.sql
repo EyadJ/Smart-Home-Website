@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 25, 2016 at 06:14 PM
+-- Generation Time: Oct 26, 2016 at 08:30 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -61,7 +61,7 @@ INSERT INTO `device` (`DeviceID`, `RoomID`, `DeviceName`, `DeviceState`, `GateNu
 (101, 101, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'1', '2016-10-24 17:54:18', NULL, 120),
 (102, 101, 'AC', b'1', 0, 'cooler_on.png', 'cooler_off.png', b'1', '2016-10-24 17:54:17', NULL, 1800),
 (103, 101, 'Curtains', b'1', 0, 'curtains_opened.png', 'curtains_closed.png', b'1', '2016-10-24 14:13:23', 0, 0),
-(104, 101, 'Alarm', b'0', 0, 'alarm.png', 'alarm_off.png', b'1', '2016-10-25 03:54:00', NULL, 0),
+(104, 101, 'Alarm', b'0', 0, 'alarm.png', 'alarm_off.png', b'1', '2016-10-26 19:01:12', NULL, 0),
 (201, 102, 'Roof Lamp', b'0', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-19 11:31:53', NULL, 60),
 (202, 102, 'AC', b'0', 0, 'cooler_on.png', 'cooler_off.png', b'1', '2016-10-19 11:31:18', NULL, 1200),
 (203, 102, 'Curtains', b'1', 0, 'curtains_opened.png', 'curtains_closed.png', b'1', '2016-10-24 17:13:14', 0, 0),
@@ -69,7 +69,7 @@ INSERT INTO `device` (`DeviceID`, `RoomID`, `DeviceName`, `DeviceState`, `GateNu
 (401, 104, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-20 13:07:24', NULL, 60),
 (402, 104, 'AC', b'0', 0, 'cooler_on.png', 'cooler_off.png', b'0', '2016-10-19 11:31:05', NULL, 1200),
 (403, 104, 'Curtains', b'1', 0, 'curtains_opened.png', 'curtains_closed.png', b'0', '2016-10-19 07:12:46', 0, 0),
-(404, 104, 'Alarm', b'0', 0, 'alarm.png', 'alarm_off.png', b'1', '2016-10-24 18:29:34', NULL, 0),
+(404, 104, 'Alarm', b'0', 0, 'alarm.png', 'alarm_off.png', b'1', '2016-10-25 19:36:22', NULL, 0),
 (501, 105, 'Roof Lamp', b'0', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-19 11:32:33', NULL, 180),
 (502, 105, 'AC', b'1', 0, 'cooler_on.png', 'cooler_off.png', b'0', '2016-10-19 11:32:38', NULL, 2400),
 (503, 105, 'Curtains', b'1', 0, 'curtains_opened.png', 'curtains_closed.png', b'1', '2016-10-20 13:06:50', 0, 0),
@@ -186,7 +186,7 @@ CREATE TABLE `sensor` (
 --
 
 INSERT INTO `sensor` (`SensorID`, `SensorTypeID`, `RoomID`, `SenesorState`, `GateNum`, `SensorValue`, `lastStatusChange`) VALUES
-(100, 20, 101, b'1', 0, 0, '2016-10-20 21:00:00'),
+(100, 20, 101, b'1', 0, 0, '2016-10-26 14:40:43'),
 (101, 10, 101, b'0', 0, 0, '2016-10-20 13:50:20'),
 (102, 12, 101, b'0', 0, 27, '2016-10-20 13:51:01'),
 (103, 13, 101, b'1', 0, 0, '2016-10-19 21:00:00'),
@@ -213,8 +213,8 @@ INSERT INTO `sensor` (`SensorID`, `SensorTypeID`, `RoomID`, `SenesorState`, `Gat
 (900, 20, 109, b'1', 0, 0, '2016-10-20 21:00:00'),
 (901, 10, 109, b'0', 0, 0, '2016-10-20 13:50:35'),
 (1000, 20, 110, b'1', 0, 0, '2016-10-20 21:00:00'),
-(1001, 10, 110, b'0', 0, 0, '2016-10-20 13:50:36'),
-(1002, 10, 110, b'0', 0, 0, '2016-10-20 13:50:37');
+(1001, 10, 110, b'0', 0, 0, '2016-10-26 14:43:20'),
+(1002, 10, 110, b'0', 0, 0, '2016-10-26 14:43:17');
 
 -- --------------------------------------------------------
 
@@ -258,19 +258,21 @@ CREATE TABLE `task` (
   `ActionDate` date DEFAULT NULL,
   `AlarmDuration` int(3) NOT NULL DEFAULT '0',
   `AlarmInterval` int(2) NOT NULL DEFAULT '0',
-  `SelectedSensorValue` int(3) NOT NULL DEFAULT '0'
+  `SelectedSensorValue` int(3) NOT NULL DEFAULT '0',
+  `DateCreated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `task`
 --
 
-INSERT INTO `task` (`TaskID`, `userID`, `RoomID`, `SensorID`, `isDisabled`, `isDefault`, `TaskName`, `ActionTime`, `repeatDaily`, `ActionDate`, `AlarmDuration`, `AlarmInterval`, `SelectedSensorValue`) VALUES
-(6, 1, 108, 801, b'0', b'1', 'open lights on motion sensor', NULL, b'1', NULL, 0, 0, 2),
-(18, 1, 101, 100, b'0', b'0', 'alarm', '05:20:00', b'0', '2016-10-23', 0, 0, 5),
-(19, 1, 101, 102, b'0', b'0', 'turn ac on', NULL, b'1', NULL, 0, 0, 30),
-(20, 1, 104, 403, b'0', b'0', 'morning routine', NULL, b'1', NULL, 0, 0, 30),
-(21, 1, 109, 900, b'1', b'0', 'Test', '20:07:00', b'0', '2016-10-23', 0, 0, 45);
+INSERT INTO `task` (`TaskID`, `userID`, `RoomID`, `SensorID`, `isDisabled`, `isDefault`, `TaskName`, `ActionTime`, `repeatDaily`, `ActionDate`, `AlarmDuration`, `AlarmInterval`, `SelectedSensorValue`, `DateCreated`) VALUES
+(6, 1, 108, 801, b'0', b'1', 'open lights on motion sensor', NULL, b'1', NULL, 0, 0, 2, '2016-10-26 18:50:03'),
+(18, 1, 101, 100, b'0', b'0', 'alarm', '05:20:00', b'0', '2016-10-23', 0, 0, 5, '2016-10-26 18:50:03'),
+(19, 1, 101, 102, b'0', b'0', 'turn ac on', NULL, b'1', NULL, 0, 0, 30, '2016-10-26 18:50:03'),
+(20, 1, 104, 403, b'0', b'0', 'morning routine', NULL, b'1', NULL, 0, 0, 30, '2016-10-26 18:50:03'),
+(21, 1, 109, 900, b'1', b'0', 'Test', '20:07:00', b'0', '2016-10-23', 0, 0, 45, '2016-10-26 18:50:03'),
+(22, 1, 102, 201, b'0', b'0', 'testAhmad', NULL, b'0', '2016-10-31', 0, 2, 23, '2016-10-26 18:50:03');
 
 -- --------------------------------------------------------
 
@@ -303,7 +305,11 @@ INSERT INTO `task_devices` (`TaskID`, `DeviceID`, `RequiredDeviceStatus`) VALUES
 (20, 403, b'1'),
 (20, 404, b'1'),
 (21, 901, b'0'),
-(21, 902, b'1');
+(21, 902, b'1'),
+(22, 201, b'0'),
+(22, 202, b'1'),
+(22, 203, b'1'),
+(22, 204, b'1');
 
 -- --------------------------------------------------------
 
@@ -452,7 +458,7 @@ ALTER TABLE `room_backgrounds`
 -- AUTO_INCREMENT for table `task`
 --
 ALTER TABLE `task`
-  MODIFY `TaskID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `TaskID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT for table `user`
 --
