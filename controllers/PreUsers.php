@@ -29,7 +29,7 @@
 			</td>
 			<td><B>".$row['UserName']."</B></td>
 			<td>
-			<a href='RoomsAuthorisation.php?var=$row[userID]'>
+			<a href='UserAuthorisedRooms.php?var=$row[userID]'>
 			<img src='../controllers/images/Add.ico' width='50' height='50'/>
 			</a></td>
 			<td>

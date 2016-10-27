@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 26, 2016 at 08:30 PM
+-- Generation Time: Oct 27, 2016 at 01:31 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -100,8 +100,8 @@ CREATE TABLE `room` (
 --
 
 INSERT INTO `room` (`RoomID`, `RoomName`, `RoomImgPath`) VALUES
-(101, 'Parents Room', 'bedroom-double1.png'),
-(102, 'Ahmad\'s Room', 'bedroom-male1.png'),
+(101, 'Parents Room', 'bedroom-double7'),
+(102, 'Ahmad\'s Room', 'bedroom-male2.png'),
 (104, 'Sarah\'s Room', 'bedroom-female1.png'),
 (105, 'Living Room', 'livingroom2.png'),
 (106, 'Kitchen', 'kitchen1.png'),
@@ -159,11 +159,11 @@ INSERT INTO `room_backgrounds` (`ImageID`, `RoomID`, `isDefault`, `ImgPath`) VAL
 (29, 104, b'1', 'bedroom-female2.png'),
 (30, 102, b'1', 'bedroom-male1.png'),
 (31, 102, b'1', 'bedroom-male2.png'),
-(32, 102, b'1', 'bedroom-male3.png'),
-(37, 106, b'1', 'kitchen4.png'),
-(38, 106, b'1', 'kitchen5.png'),
 (39, 101, b'1', 'bedroom-double2.png'),
-(40, 101, b'1', 'bedroom-double3.png');
+(40, 101, b'1', 'bedroom-double3.png'),
+(44, 101, b'1', 'bedroom-double7'),
+(46, 102, b'0', 'bedroom-male5.png'),
+(47, 101, b'0', 'bedroom-double5.jpg');
 
 -- --------------------------------------------------------
 
@@ -453,7 +453,7 @@ ALTER TABLE `camera_images`
 -- AUTO_INCREMENT for table `room_backgrounds`
 --
 ALTER TABLE `room_backgrounds`
-  MODIFY `ImageID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `ImageID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 --
 -- AUTO_INCREMENT for table `task`
 --

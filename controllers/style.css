@@ -723,6 +723,10 @@ tr {
 	border:3;
 }
 
+#roomDiv:hover{
+	background-color:#CCCCCC;
+}
+
 /*
 <div class="tooltip">Hover over me
   <span class="tooltiptext">Tooltip text</span>

@@ -52,7 +52,7 @@ class User
 
 		$email = $db->escape_string($email);
 		$pass = $db->escape_string($pass);
-		$sql = "SELECT userID FROM user WHERE Email = '$email' AND Password = '$pass';";
+		$sql = "SELECT UserID FROM user WHERE Email = '$email' AND Password = '$pass';";
 		//var_dump($sql);
 		
 		$result = $db->query($sql);
@@ -75,7 +75,7 @@ class User
 		}
 
 		$UserID = $db->escape_string($UserID);
-		$sql = "SELECT * FROM user WHERE userID = $UserID";
+		$sql = "SELECT * FROM user WHERE UserID = $UserID";
 
 		$result = $db->query($sql);
 	 
@@ -112,7 +112,7 @@ class User
 		}
 	}
 
-public static function deleteUser($userID) 
+public static function deleteUser($UserID) 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) 
@@ -120,19 +120,19 @@ public static function deleteUser($userID)
 			die('error: unable to connect to database');
 		}
 
-		$userID = $db->escape_string($userID);
+		$UserID = $db->escape_string($UserID);
 		
-		$sql = "DELETE FROM user WHERE userID = $userID;";
+		$sql = "DELETE FROM user WHERE UserID = $UserID;";
 		
 		$result = $db->query($sql);
 
 		if ($result) //is true 
 		{ 
-			return "Deleted Successfully";
+			return TRUE;
 		} 
 		else 
 		{
-			return "Problem Deleting User"; 
+			return FALSE; 
 		}
 	}
 
@@ -152,7 +152,7 @@ public static function getUserName($UserID)
 		{ 			
 			$row = $result->fetch_assoc();
 			$UserName  = $row['UserName'];
-			return $UserName	;
+			return $UserName;
 		}
 		else 
 		{
@@ -217,7 +217,7 @@ public static function getUserAutherisedRooms($UserID)
 		}
 
 		$UserID = $db->escape_string($UserID);
-		$sql = "SELECT * FROM room WHERE RoomID in 
+		$sql = "SELECT * FROM room WHERE RoomID IN 
 		(SELECT RoomID FROM user_authorized_rooms WHERE UserID = '$UserID')";
 
 		$result = $db->query($sql);
@@ -259,7 +259,7 @@ public static function isUserAutherisedForRoom($UserID, $RoomID)
 	}
 
 public static function modifyUserDetails 
-($userID, $UserName, $Email, $Description, $Password) 
+($UserID, $UserName, $Email, $Description, $Password) 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) 
@@ -267,7 +267,7 @@ public static function modifyUserDetails
 			die('error: unable to connect to database');
 		}
 		//in the following lines we escape quotation such as ' and "
-		$userID = $db->escape_string($userID);
+		$UserID = $db->escape_string($UserID);
 		$UserName = $db->escape_string($UserName);
 		$Email = $db->escape_string($Email);
 		$Description = $db->escape_string($Description);
@@ -278,7 +278,7 @@ public static function modifyUserDetails
 			. " ,Email = '$Email'" 
 			. " ,Description = '$Description'" 
 			. " ,Password = '$Password'" 
-			. " WHERE userID = $userID;";
+			. " WHERE UserID = $UserID;";
 
 		if ($db->query($sql)) //TRUE
 		{ 
@@ -290,18 +290,19 @@ public static function modifyUserDetails
 		}
 	}
 	
-	public static function modifyUserImagePath ($userID, $UserImagePath) 
+	public static function modifyUserImagePath ($UserID, $UserImagePath) 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) 
 		{
 			die('error: unable to connect to database');
 		}
+		$UserID = $db->escape_string($UserID);
 		$UserImagePath = $db->escape_string($UserImagePath);
 		
 		$sql = "UPDATE user SET"
 			. " UserImagePath = '$UserImagePath'" 
-			. " WHERE userID = $userID;";
+			. " WHERE UserID = $UserID;";
 
 		if ($db->query($sql)) //TRUE
 		{ 
@@ -314,8 +315,57 @@ public static function modifyUserDetails
 		}
 	}
 	
+	public static function AuthoriseRoom($UserID, $RoomID)
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) 
+		{
+			die('error: unable to connect to database');
+		}
+		$UserID = $db->escape_string($UserID);
+		$RoomID = $db->escape_string($RoomID);
+		
+		$sql = "INSERT INTO user_authorized_rooms (UserID, RoomID)
+		VALUES ($UserID, $RoomID);";
 
+		$db->query($sql);
 
+		if ($db->affected_rows == 1) 
+		{ 
+			return TRUE;
+		} 
+		else 
+		{
+			return FALSE;
+		}
+	}
+
+public static function unAuthoriseRoom($UserID, $RoomID)
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) 
+		{
+			die('error: unable to connect to database');
+		}
+
+		$UserID = $db->escape_string($UserID);
+		$RoomID = $db->escape_string($RoomID);
+		
+		$sql = "DELETE FROM user_authorized_rooms WHERE 
+		UserID = $UserID AND
+		RoomID = $RoomID;";
+		
+		$result = $db->query($sql);
+
+		if ($result) //is true 
+		{ 
+			return TRUE;
+		} 
+		else 
+		{
+			return FALSE; 
+		}
+	}
 
 
 
