@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 27, 2016 at 01:31 PM
+-- Generation Time: Oct 29, 2016 at 05:34 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -44,7 +44,7 @@ CREATE TABLE `device` (
   `RoomID` int(4) NOT NULL,
   `DeviceName` varchar(20) NOT NULL,
   `DeviceState` bit(1) NOT NULL,
-  `GateNum` int(3) NOT NULL,
+  `GateNum` int(3) DEFAULT NULL,
   `DeviceImgPath_on` varchar(50) NOT NULL,
   `DeviceImgPath_off` varchar(50) NOT NULL,
   `isStatusChanged` bit(1) NOT NULL DEFAULT b'0',
@@ -58,30 +58,76 @@ CREATE TABLE `device` (
 --
 
 INSERT INTO `device` (`DeviceID`, `RoomID`, `DeviceName`, `DeviceState`, `GateNum`, `DeviceImgPath_on`, `DeviceImgPath_off`, `isStatusChanged`, `lastStatusChange`, `StepperMotorMoves`, `Watts`) VALUES
-(101, 101, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'1', '2016-10-24 17:54:18', NULL, 120),
-(102, 101, 'AC', b'1', 0, 'cooler_on.png', 'cooler_off.png', b'1', '2016-10-24 17:54:17', NULL, 1800),
-(103, 101, 'Curtains', b'1', 0, 'curtains_opened.png', 'curtains_closed.png', b'1', '2016-10-24 14:13:23', 0, 0),
-(104, 101, 'Alarm', b'0', 0, 'alarm.png', 'alarm_off.png', b'1', '2016-10-26 19:01:12', NULL, 0),
-(201, 102, 'Roof Lamp', b'0', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-19 11:31:53', NULL, 60),
-(202, 102, 'AC', b'0', 0, 'cooler_on.png', 'cooler_off.png', b'1', '2016-10-19 11:31:18', NULL, 1200),
-(203, 102, 'Curtains', b'1', 0, 'curtains_opened.png', 'curtains_closed.png', b'1', '2016-10-24 17:13:14', 0, 0),
-(204, 102, 'Alarm', b'0', 0, 'alarm.png', 'alarm_off.png', b'1', '2016-10-24 18:29:43', NULL, 0),
+(101, 101, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'1', '2016-10-28 04:27:09', NULL, 120),
+(102, 101, 'AC', b'1', 0, 'cooler_on.png', 'cooler_off.png', b'1', '2016-10-28 04:27:14', NULL, 1800),
+(103, 101, 'Curtains', b'1', NULL, 'curtains_opened.png', 'curtains_closed.png', b'1', '2016-10-29 17:27:59', 0, 0),
+(104, 101, 'Alarm', b'0', 0, 'alarm.png', 'alarm_off.png', b'1', '2016-10-28 04:27:24', NULL, 0),
+(201, 102, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'1', '2016-10-28 06:46:43', NULL, 60),
+(202, 102, 'AC', b'1', 0, 'cooler_on.png', 'cooler_off.png', b'1', '2016-10-28 06:46:37', NULL, 1200),
+(203, 102, 'Curtains', b'1', NULL, 'curtains_opened.png', 'curtains_closed.png', b'1', '2016-10-29 17:28:04', 0, 0),
+(204, 102, 'Alarm', b'0', 0, 'alarm.png', 'alarm_off.png', b'1', '2016-10-28 06:46:26', NULL, 0),
 (401, 104, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-20 13:07:24', NULL, 60),
 (402, 104, 'AC', b'0', 0, 'cooler_on.png', 'cooler_off.png', b'0', '2016-10-19 11:31:05', NULL, 1200),
-(403, 104, 'Curtains', b'1', 0, 'curtains_opened.png', 'curtains_closed.png', b'0', '2016-10-19 07:12:46', 0, 0),
+(403, 104, 'Curtains', b'1', NULL, 'curtains_opened.png', 'curtains_closed.png', b'0', '2016-10-29 17:28:13', 0, 0),
 (404, 104, 'Alarm', b'0', 0, 'alarm.png', 'alarm_off.png', b'1', '2016-10-25 19:36:22', NULL, 0),
 (501, 105, 'Roof Lamp', b'0', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-19 11:32:33', NULL, 180),
 (502, 105, 'AC', b'1', 0, 'cooler_on.png', 'cooler_off.png', b'0', '2016-10-19 11:32:38', NULL, 2400),
-(503, 105, 'Curtains', b'1', 0, 'curtains_opened.png', 'curtains_closed.png', b'1', '2016-10-20 13:06:50', 0, 0),
+(503, 105, 'Curtains', b'1', NULL, 'curtains_opened.png', 'curtains_closed.png', b'1', '2016-10-29 17:28:19', 0, 0),
 (504, 105, 'Alarm', b'0', 0, 'alarm.png', 'alarm_off.png', b'0', '2016-10-24 17:14:33', NULL, 0),
 (601, 106, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-19 11:33:29', NULL, 120),
 (602, 106, 'AC', b'0', 0, 'cooler_on.png', 'cooler_off.png', b'1', '2016-10-20 13:07:01', NULL, 1800),
 (701, 107, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'1', '2016-10-23 17:01:17', NULL, 60),
 (801, 108, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-19 11:33:51', NULL, 60),
-(901, 109, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-20 13:07:17', NULL, 120),
-(902, 109, 'Garage Door', b'0', 0, 'Garage-door_open.png', 'Garage-door_closed.png', b'1', '2016-10-25 03:54:26', 0, 0),
+(901, 109, 'Roof Lamp', b'0', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'1', '2016-10-28 06:44:02', NULL, 120),
+(902, 109, 'Garage Door', b'0', NULL, 'Garage-door_open.png', 'Garage-door_closed.png', b'1', '2016-10-29 17:28:24', 0, 0),
 (1001, 110, 'Security Camera 1', b'0', 0, 'security-camera_on.png', 'security-camera_off.png', b'1', '2016-10-24 17:55:29', NULL, 0),
 (1002, 110, 'Security Camera 2', b'0', 0, 'security-camera_on.png', 'security-camera_off.png', b'0', '2016-10-05 12:11:53', NULL, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `device_stepper_motor`
+--
+
+CREATE TABLE `device_stepper_motor` (
+  `DeviceID` int(4) NOT NULL,
+  `GateNum1` int(3) NOT NULL DEFAULT '0',
+  `GateNum2` int(3) NOT NULL DEFAULT '0',
+  `GateNum3` int(3) NOT NULL DEFAULT '0',
+  `GateNum4` int(3) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `device_stepper_motor`
+--
+
+INSERT INTO `device_stepper_motor` (`DeviceID`, `GateNum1`, `GateNum2`, `GateNum3`, `GateNum4`) VALUES
+(103, 0, 0, 0, 0),
+(203, 0, 0, 0, 0),
+(403, 0, 0, 0, 0),
+(503, 0, 0, 0, 0),
+(902, 0, 0, 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ip_address`
+--
+
+CREATE TABLE `ip_address` (
+  `ID` int(2) NOT NULL,
+  `DeviceName` varchar(25) NOT NULL,
+  `IPaddress` varchar(15) CHARACTER SET utf8 NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ip_address`
+--
+
+INSERT INTO `ip_address` (`ID`, `DeviceName`, `IPaddress`) VALUES
+(1, 'Relay Switch', '192.168.1.x'),
+(2, 'Camera 1', '192.168.1.x'),
+(3, 'Camera 2', '192.168.1.x');
 
 -- --------------------------------------------------------
 
@@ -213,8 +259,7 @@ INSERT INTO `sensor` (`SensorID`, `SensorTypeID`, `RoomID`, `SenesorState`, `Gat
 (900, 20, 109, b'1', 0, 0, '2016-10-20 21:00:00'),
 (901, 10, 109, b'0', 0, 0, '2016-10-20 13:50:35'),
 (1000, 20, 110, b'1', 0, 0, '2016-10-20 21:00:00'),
-(1001, 10, 110, b'0', 0, 0, '2016-10-26 14:43:20'),
-(1002, 10, 110, b'0', 0, 0, '2016-10-26 14:43:17');
+(1001, 10, 110, b'0', 0, 0, '2016-10-26 14:43:20');
 
 -- --------------------------------------------------------
 
@@ -247,7 +292,7 @@ INSERT INTO `sensor_type` (`SensorTypeID`, `SensorName`, `SensorImgPath`) VALUES
 
 CREATE TABLE `task` (
   `TaskID` int(6) NOT NULL,
-  `userID` int(4) NOT NULL,
+  `UserID` int(4) NOT NULL,
   `RoomID` int(4) NOT NULL,
   `SensorID` int(4) NOT NULL,
   `isDisabled` bit(1) NOT NULL DEFAULT b'0',
@@ -266,7 +311,7 @@ CREATE TABLE `task` (
 -- Dumping data for table `task`
 --
 
-INSERT INTO `task` (`TaskID`, `userID`, `RoomID`, `SensorID`, `isDisabled`, `isDefault`, `TaskName`, `ActionTime`, `repeatDaily`, `ActionDate`, `AlarmDuration`, `AlarmInterval`, `SelectedSensorValue`, `DateCreated`) VALUES
+INSERT INTO `task` (`TaskID`, `UserID`, `RoomID`, `SensorID`, `isDisabled`, `isDefault`, `TaskName`, `ActionTime`, `repeatDaily`, `ActionDate`, `AlarmDuration`, `AlarmInterval`, `SelectedSensorValue`, `DateCreated`) VALUES
 (6, 1, 108, 801, b'0', b'1', 'open lights on motion sensor', NULL, b'1', NULL, 0, 0, 2, '2016-10-26 18:50:03'),
 (18, 1, 101, 100, b'0', b'0', 'alarm', '05:20:00', b'0', '2016-10-23', 0, 0, 5, '2016-10-26 18:50:03'),
 (19, 1, 101, 102, b'0', b'0', 'turn ac on', NULL, b'1', NULL, 0, 0, 30, '2016-10-26 18:50:03'),
@@ -318,7 +363,7 @@ INSERT INTO `task_devices` (`TaskID`, `DeviceID`, `RequiredDeviceStatus`) VALUES
 --
 
 CREATE TABLE `user` (
-  `userID` int(4) NOT NULL,
+  `UserID` int(4) NOT NULL,
   `Email` varchar(40) NOT NULL,
   `UserName` varchar(25) CHARACTER SET utf8 NOT NULL,
   `Description` varchar(15) NOT NULL,
@@ -332,9 +377,8 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`userID`, `Email`, `UserName`, `Description`, `Password`, `isAdmin`, `isDisabled`, `UserImagePath`) VALUES
-(1, 'eyad.jaamour@gmail.com', 'Eyad Jaamour', 'Admin', '1234', b'1', b'0', 'eyad.jpg'),
-(2, 'mkb_2011@hotmail.com', 'Mohsen Bakhashab', 'Admin', '1234', b'1', b'0', 'Mohsen.jpg'),
+INSERT INTO `user` (`UserID`, `Email`, `UserName`, `Description`, `Password`, `isAdmin`, `isDisabled`, `UserImagePath`) VALUES
+(1, 'super.admin@gmail.com', 'Super Admin', 'Admin', '1234', b'1', b'0', 'superAdmin.png'),
 (3, 'abdullah.alghamdi@gmail.com', 'Abdullah Alghamdi', 'Father', '123321', b'1', b'0', 'abdullah.jpg'),
 (4, 'Huda.Azzahrani@gmail.com', 'Huda Azzahrani', 'Mother', '12345', b'0', b'0', 'huda.png'),
 (5, 'Ahmad.alghamdi@hotmail.com', 'Ahmad alghamdi', 'Son', '123123', b'0', b'0', 'ahmad.jpg'),
@@ -382,6 +426,19 @@ ALTER TABLE `device`
   ADD KEY `RoomID` (`RoomID`);
 
 --
+-- Indexes for table `device_stepper_motor`
+--
+ALTER TABLE `device_stepper_motor`
+  ADD PRIMARY KEY (`DeviceID`),
+  ADD KEY `DeviceID` (`DeviceID`);
+
+--
+-- Indexes for table `ip_address`
+--
+ALTER TABLE `ip_address`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Indexes for table `room`
 --
 ALTER TABLE `room`
@@ -413,7 +470,7 @@ ALTER TABLE `sensor_type`
 --
 ALTER TABLE `task`
   ADD PRIMARY KEY (`TaskID`),
-  ADD KEY `userID` (`userID`),
+  ADD KEY `userID` (`UserID`),
   ADD KEY `RoomID` (`RoomID`),
   ADD KEY `SensorID` (`SensorID`);
 
@@ -428,7 +485,7 @@ ALTER TABLE `task_devices`
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`userID`),
+  ADD PRIMARY KEY (`UserID`),
   ADD UNIQUE KEY `UserName` (`UserName`),
   ADD UNIQUE KEY `Email` (`Email`);
 
@@ -450,6 +507,11 @@ ALTER TABLE `user_authorized_rooms`
 ALTER TABLE `camera_images`
   MODIFY `imgID` int(5) NOT NULL AUTO_INCREMENT;
 --
+-- AUTO_INCREMENT for table `ip_address`
+--
+ALTER TABLE `ip_address`
+  MODIFY `ID` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
 -- AUTO_INCREMENT for table `room_backgrounds`
 --
 ALTER TABLE `room_backgrounds`
@@ -458,12 +520,12 @@ ALTER TABLE `room_backgrounds`
 -- AUTO_INCREMENT for table `task`
 --
 ALTER TABLE `task`
-  MODIFY `TaskID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `TaskID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `userID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `UserID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- Constraints for dumped tables
 --
@@ -479,6 +541,12 @@ ALTER TABLE `camera_images`
 --
 ALTER TABLE `device`
   ADD CONSTRAINT `device_ibfk_1` FOREIGN KEY (`RoomID`) REFERENCES `room` (`RoomID`);
+
+--
+-- Constraints for table `device_stepper_motor`
+--
+ALTER TABLE `device_stepper_motor`
+  ADD CONSTRAINT `device_stepper_motor_ibfk_1` FOREIGN KEY (`DeviceID`) REFERENCES `device` (`DeviceID`);
 
 --
 -- Constraints for table `room_backgrounds`
@@ -497,7 +565,7 @@ ALTER TABLE `sensor`
 -- Constraints for table `task`
 --
 ALTER TABLE `task`
-  ADD CONSTRAINT `task_ibfk_1` FOREIGN KEY (`userID`) REFERENCES `user` (`userID`),
+  ADD CONSTRAINT `task_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`),
   ADD CONSTRAINT `task_ibfk_2` FOREIGN KEY (`RoomID`) REFERENCES `room` (`RoomID`),
   ADD CONSTRAINT `task_ibfk_3` FOREIGN KEY (`SensorID`) REFERENCES `sensor` (`SensorID`);
 
@@ -512,7 +580,7 @@ ALTER TABLE `task_devices`
 -- Constraints for table `user_authorized_rooms`
 --
 ALTER TABLE `user_authorized_rooms`
-  ADD CONSTRAINT `user_authorized_rooms_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `user` (`userID`),
+  ADD CONSTRAINT `user_authorized_rooms_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`),
   ADD CONSTRAINT `user_authorized_rooms_ibfk_2` FOREIGN KEY (`RoomID`) REFERENCES `room` (`RoomID`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

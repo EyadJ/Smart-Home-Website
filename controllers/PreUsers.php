@@ -29,15 +29,15 @@
 			</td>
 			<td><B>".$row['UserName']."</B></td>
 			<td>
-			<a href='UserAuthorisedRooms.php?var=$row[userID]'>
+			<a href='UserAuthorisedRooms.php?var=$row[UserID]'>
 			<img src='../controllers/images/Add.ico' width='50' height='50'/>
 			</a></td>
 			<td>
-			<a href='modifyUserSettings.php?var=$row[userID]'>
+			<a href='modifyUserSettings.php?var=$row[UserID]'>
 			<img src='../controllers/images/Modify.jpg' width='50' height='50'/>
 			</td></a>
 			<td>
-			<a href='#' onclick='deleteUserMsg($row[userID]);return false;' style='text-decoration:none;'>
+			<a href='#' onclick='deleteUserMsg($row[UserID]);return false;' style='text-decoration:none;'>
 			<img src='../controllers/images/Delete_Icon.png' width='50' height='50'/>
 			</a></td></tr>"  ;	
 			//$row[UserName]

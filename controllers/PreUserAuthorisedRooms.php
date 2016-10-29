@@ -27,7 +27,9 @@
 			style='
 			width:240px; 
 			height:305px; 
-			display:inline-block; 
+			display:inline-block;
+			padding-right:5px;
+			padding-left:5px;			
 			margin-right:2.5px; 
 			margin-left:2.5px;
 			margin-bottom:5px;
@@ -54,7 +56,9 @@
 			style='
 			width:240px; 
 			height:305px; 
-			display:inline-block; 
+			display:inline-block;
+			padding-right:5px;
+			padding-left:5px;
 			margin-right:2.5px; 
 			margin-left:2.5px;
 			margin-bottom:5px;

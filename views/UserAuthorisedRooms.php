@@ -4,7 +4,12 @@
 <head>
 <title>User Authorised Rooms</title>
   <link href="../controllers/style.css" rel="stylesheet"/>
-  
+
+<style>
+#roomDiv:hover{
+	background-color:#CCCCCC;
+}
+</style>  
    
   <script>
   
@@ -30,10 +35,8 @@ function HideUnhideDiv1()
 </head>
 <body>
  
-            <div class="allcontainer">
+      <div class="allcontainer">
 	 
-			 
-
 <?php
 include_once("../controllers/Header.php");
 ?> 

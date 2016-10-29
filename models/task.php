@@ -38,28 +38,28 @@ class Task
 		if($ActionDate != NULL && $ActionTime != NULL)
 		{
 			$sql = "INSERT INTO task 
-			(userID, RoomID, SensorID, TaskName, ActionTime, SelectedSensorValue, repeatDaily,
+			(UserID, RoomID, SensorID, TaskName, ActionTime, SelectedSensorValue, repeatDaily,
 			ActionDate, AlarmDuration, AlarmInterval) "
 		  . " VALUES ($UserID, $RoomID, $SensorID, '$TaskName', '$ActionTime', $SelectedSensorValue,
 		  $repeatDaily, '$ActionDate', $AlarmDuration, $AlarmInterval)";
 		}
 		else if ($ActionDate == NULL && $ActionTime != NULL)
 		{
-			$sql = "INSERT INTO task (userID, RoomID, SensorID, TaskName, ActionTime, SelectedSensorValue,
+			$sql = "INSERT INTO task (UserID, RoomID, SensorID, TaskName, ActionTime, SelectedSensorValue,
 			repeatDaily, AlarmDuration, AlarmInterval) "
 		  . " VALUES ($UserID, $RoomID, $SensorID, '$TaskName', '$ActionTime', $SelectedSensorValue, 
 		  $repeatDaily, $AlarmDuration, $AlarmInterval)";
 		}
 		else if ($ActionDate != NULL && $ActionTime == NULL)
 		{
-			$sql = "INSERT INTO task (userID, RoomID, SensorID, TaskName, SelectedSensorValue, repeatDaily,
+			$sql = "INSERT INTO task (UserID, RoomID, SensorID, TaskName, SelectedSensorValue, repeatDaily,
 			ActionDate, AlarmDuration, AlarmInterval) "
 		  . " VALUES ($UserID, $RoomID, $SensorID, '$TaskName', $SelectedSensorValue, $repeatDaily,
 		  '$ActionDate', $AlarmDuration, $AlarmInterval)";
 		}
 		else if ($ActionDate == NULL && $ActionTime == NULL)
 		{
-			$sql = "INSERT INTO task (userID, RoomID, SensorID, TaskName, SelectedSensorValue, repeatDaily,
+			$sql = "INSERT INTO task (UserID, RoomID, SensorID, TaskName, SelectedSensorValue, repeatDaily,
 			AlarmDuration, AlarmInterval) "
 		  . " VALUES ($UserID, $RoomID, $SensorID, '$TaskName', $SelectedSensorValue, $repeatDaily, 
 		  $AlarmDuration, $AlarmInterval)";
@@ -117,7 +117,7 @@ class Task
 		$UserID = $db->escape_string($UserID);
 		
 		$sql = "SELECT * FROM task WHERE 
-				userID = $UserID AND RoomID = $RoomID";
+				UserID = $UserID AND RoomID = $RoomID";
 				
 		$result = $db->query($sql);
 	 
@@ -131,7 +131,29 @@ class Task
 		}
 	}
 	
-			
+	
+	public static function getAllUsersTasksForOneRoom($RoomID) 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) {
+		  die('unable to connect to database [' . $db->connect_error .']');
+		}
+		
+		$RoomID = $db->escape_string($RoomID);
+		
+		$sql = "SELECT * FROM task WHERE RoomID = $RoomID";
+				
+		$result = $db->query($sql);
+	 
+		if ($result->num_rows >= 1)  
+		{ 			
+			return $result;
+		}
+		else 
+		{
+			return NULL;
+		}
+	}		
 
 	public static function getTaskDevices($TaskID) 
 	{
@@ -167,7 +189,7 @@ class Task
 		$UserID = $db->escape_string($UserID);
 		
 		$sql = "SELECT * FROM task t, task_devices td
-				WHERE userID = $UserID AND t.TaskID = td.TaskID";
+				WHERE UserID = $UserID AND t.TaskID = td.TaskID";
 				
 		$result = $db->query($sql);
 	 

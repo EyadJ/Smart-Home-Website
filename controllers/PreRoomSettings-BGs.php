@@ -53,7 +53,7 @@
 				else
 				{
 					echo"
-					<a style='text-decoration:none;' 
+					<a style='text-decoration:none;'
 					href='../controllers/ChangeRoomBackground.php?roomID=$RoomID&newBG=$row[ImgPath]' > 
 					<img src='../controllers/images/Select-hand3.png' 
 					width='50px' 
@@ -89,7 +89,7 @@
 				else
 				{
 					echo"
-					<div 
+					<div
 					style='
 					z-index:1;
 					position:relative;
@@ -99,12 +99,10 @@
 					class='tooltip'>
 					
 					<span class='tooltiptext'>Default (Undeletable)</span>
-					<img src='../controllers/images/Delete_Icon-unavailable2.png' 
+					<img src='../controllers/images/Delete_Icon-unavailable2.png'
 					width='50px' 
 					height='50px'
-					style=
-					opacity: 0.5;
-					'/>
+					/>
 					</div>";
 				}
 				

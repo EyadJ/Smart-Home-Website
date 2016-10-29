@@ -24,16 +24,47 @@ function HideUnhideDiv1()
 	}
 }
 
+function unHideFilters() 
+{
+	var x = document.getElementById("FiltersDiv").style.display;	
+		
+	if (x=="none")
+	{
+		document.getElementById("FiltersDiv").style.display ="block";	
+	}
+	else
+	{
+		document.getElementById("FiltersDiv").style.display ="none";
+	}
+}
+
+function roomsVisibility(RoomID) 
+{
+	alert(RoomID);
+	var displayText = "none";
+	
+	if(RoomID == 0)
+	{
+		displayText = "block";
+	}
+	var roomsArray = document.getElementsByClassName("roomDiv");
+		
+	for(var i = 0; i < roomsArray.length; i++)
+	{
+		roomsArray[i].style.display = displayText;
+	}	
+	
+	var x = document.getElementById(RoomID).style.display = "block";	
+}
+
   </script>
   
   
 </head>
 <body>
  
-            <div class="allcontainer">
+ <div class="allcontainer">
 	 
-			 
-
 <?php
 include_once("../controllers/Header.php");
 ?> 
@@ -49,8 +80,7 @@ include_once("../controllers/Header.php");
 				</ul>
 				</div>
 				
-				
-                <div class="right-div">
+       <div class="right-div">
 
 <div class="personal-bg-table">
             <span>Tasks</span>
@@ -100,6 +130,15 @@ include_once("../controllers/Header.php");
 		
             <div class="right-div-secondary-title" style="width:100px;"><b>Your Tasks</b></div>
             		
+					
+			<div style=" margin-left:auto; margin-right:auto; width:50px;">
+	
+			<a  href="#" onclick="unHideFilters();return false;" style="text-decoration:none; ">
+				<div class="tooltip"><span class="tooltiptext">Filter the Tasks</span>
+					<img align="center" id="abc" src="../controllers/images/filter.png" width="55" height="55" />
+				</div>
+			</a>
+		</div>	
 		
 	<table style="background-color:white; border:0px solid transparent;"> 
 			

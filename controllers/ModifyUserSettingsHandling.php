@@ -5,7 +5,7 @@
 	
 if(isset($_POST["Save"]))
 {
-	$userID = $_GET["var"];
+	$UserID = $_GET["var"];
 	$target_dir = "../controllers/images/Users/";
 	$basename = basename($_FILES["fileToUpload"]["name"]);
 
@@ -36,7 +36,7 @@ if(isset($_POST["Save"]))
 	{
 		if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) 
 		{
-			$uploadedSuccessfully = user::modifyUserImagePath($userID, $basename);
+			$uploadedSuccessfully = user::modifyUserImagePath($UserID, $basename);
 			
 			echo $uploadedSuccessfully;
 			if($uploadedSuccessfully)
@@ -51,7 +51,7 @@ if(isset($_POST["Save"]))
 	}
 	$modifiedSuccessfully = User::modifyUserDetails
 			(
-			$userID,
+			$UserID,
 			$_POST['UserName'],
 			$_POST['Email'],
 			$_POST['Description'],

@@ -87,12 +87,11 @@ class User
 		}
 		else 
 		{
-			return "couldn't find User ID";
+			return NULL;
 		}
 	}
 	
-	
-	public static function getUsersDetails() 
+	public static function getUsersDetails()
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) {
@@ -112,7 +111,7 @@ class User
 		}
 	}
 
-public static function deleteUser($UserID) 
+	public static function deleteUser($UserID) 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) 
@@ -136,7 +135,7 @@ public static function deleteUser($UserID)
 		}
 	}
 
-public static function getUserName($UserID) 
+	public static function getUserName($UserID) 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) {
@@ -156,11 +155,11 @@ public static function getUserName($UserID)
 		}
 		else 
 		{
-			return "couldn't find email";
+			return NULL;
 		}
 	}
 
-public static function getIdByEmail($email) 
+	public static function getIdByEmail($email) 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) {
@@ -180,11 +179,11 @@ public static function getIdByEmail($email)
 		}
 		else 
 		{
-			return "couldn't find email";
+			return NULL;
 		}
 	}
 	
-public static function isAdmin($UserID) 
+	public static function isAdmin($UserID) 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) {
@@ -204,12 +203,11 @@ public static function isAdmin($UserID)
 		}
 		else 
 		{
-			return "couldn't find email";
+			return NULL;
 		}
 	}
-
-
-public static function getUserAutherisedRooms($UserID) 
+	
+	public static function getUserAutherisedRooms($UserID) 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) {
@@ -232,7 +230,7 @@ public static function getUserAutherisedRooms($UserID)
 		}
 	}
 
-public static function isUserAutherisedForRoom($UserID, $RoomID) 
+	public static function isUserAutherisedForRoom($UserID, $RoomID) 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) {
@@ -258,8 +256,7 @@ public static function isUserAutherisedForRoom($UserID, $RoomID)
 		}
 	}
 
-public static function modifyUserDetails 
-($UserID, $UserName, $Email, $Description, $Password) 
+	public static function modifyUserDetails ($UserID, $UserName, $Email, $Description, $Password) 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) 
@@ -340,7 +337,7 @@ public static function modifyUserDetails
 		}
 	}
 
-public static function unAuthoriseRoom($UserID, $RoomID)
+	public static function unAuthoriseRoom($UserID, $RoomID)
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) 
@@ -367,6 +364,65 @@ public static function unAuthoriseRoom($UserID, $RoomID)
 		}
 	}
 
+	public static function getUsersWhoHasControlOfAllRoomsOfThisUser($UserID) 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) {
+		  die('unable to connect to database [' . $db->connect_error .']');
+		}
+
+		$UserID = $db->escape_string($UserID);
+		$sql = "";
+		
+		if(!user::isAdmin($UserID))
+		{
+			$sql = "SELECT * FROM user WHERE UserID IN
+			(SELECT UserID FROM user_authorized_rooms WHERE RoomID IN 
+			(SELECT RoomID FROM user_authorized_rooms WHERE UserID = $UserID))";
+		}
+		else	//isAdmin
+		{
+			$sql = "SELECT * FROM user WHERE UserID IN
+			(SELECT UserID FROM user_authorized_rooms)";
+		}
+		
+		$result = $db->query($sql);
+	 
+		if ($result->num_rows >= 1)  // id number exists
+		{ 			
+			return $result;
+		}
+		else 
+		{
+			return NULL;
+		}
+	}
+	
+	public static function getAdminUsers() 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) {
+		  die('error: unable to connect to database');
+		}
+
+		$sql = "SELECT * FROM user WHERE isAdmin = 1;";
+
+		$result = $db->query($sql);
+	 
+		if ($result->num_rows >= 1)  // id number exists
+		{ 			
+			return $result;
+		}
+		else 
+		{
+			return NULL;
+		}
+	}
+	
+	
+	
+	
+	
 
 
 

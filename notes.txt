@@ -1,0 +1,14 @@
+//-----------------------------------------------------------------------------------------------------------------------//
+
+Database > Task Table > SelectedSensorValue Column:
+
+instead of having 4 columns for each sensor's value, we will have only one column of the value of the selected sensor:
+
+	-Motion Sensor: the duration of which if the sensor didn't sense anything will take action (execute task)
+
+	-Temperature Sensor: the temp degree of which the task is required to execute
+
+	-Light sensor: the level of Light intensity
+
+//-----------------------------------------------------------------------------------------------------------------------//
+
