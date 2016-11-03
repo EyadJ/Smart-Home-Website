@@ -32,7 +32,7 @@ function HideUnhideNewUser()
 		
 	if (x=="none")
 	{
-		document.getElementById("AddNewUserTable").style.display ="block";	
+		document.getElementById("AddNewUserTable").style.display ="table";	
 	}
 	else
 	{
@@ -75,7 +75,7 @@ function hideDeleteUserMsg()
 <div class="dim" id="deleteMsgDim"></div>  
 		<table  class="dialog" id="deleteMsg" style="width:450px; height:146px;">
 			<tr><td>
-			<b><h3 id="message">Are you sure you want to delete This User ?</h3></b><br />
+			<b><h3 id="message">Are you sure you want to delete this User ?</h3></b><br />
 			&nbsp;<b>NOTE:</b> Make sure the user has no <u>Tasks</u> or <u>Rooms</u> under his name in order to delete him/her.
 			</td></tr>
 			<tr><th style="height:30px;">	
@@ -164,6 +164,7 @@ include_once("../controllers/Header.php");
 		<a  href="#" onclick="HideUnhideNewUser();return false;" style="text-decoration:none; ">
 			<div class="tooltip"><span class="tooltiptext">Add new user</span>
 				<img align="center" src="../controllers/images/addUser4.png" width="60" height="60" />
+				<img src='../controllers/images/info.png' style='width:12px; height:12px; position:absolute; top:1px; right:1px;'/>
 			</div>
 		</a>
 	</div>
@@ -171,14 +172,14 @@ include_once("../controllers/Header.php");
 	
 	<!----------------------------------------------------------------->
 <form name="formR" method="post" enctype="multipart/form-data" action="../controllers/addUserHandling.php">
-<table id='AddNewUserTable' style="width:58.5%; display:none;">
+<table id='AddNewUserTable' style="width:615px; display:none;">
 
 <tr><td>Username</td><td align="left">
 &nbsp;&nbsp;<input type="text" name="userName" maxlength="25" required/> &nbsp; (First & Last Names) 
     </td>
     </tr>
-	<tr><td>Description</td><td align="left">
-&nbsp;&nbsp;<input type="text" name="Description" maxlength="20" required/> &nbsp; (Ex: Father, Mother, Son, Daughter..)
+	<tr><td>Title</td><td align="left">
+&nbsp;&nbsp;<input type="text" name="Title" maxlength="20" required/> &nbsp; (Ex: Father, Mother, Son, Daughter..)
     </td>
     </tr>
 <tr><td>Email</td><td align="left">

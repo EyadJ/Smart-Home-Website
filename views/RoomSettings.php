@@ -30,7 +30,7 @@ function unHideNewTask()
 		
 	if (x=="none")
 	{
-		document.getElementById("CreateNewTaskTable").style.display ="block";	
+		document.getElementById("CreateNewTaskTable").style.display ="table";	
 	}
 	else
 	{
@@ -69,7 +69,11 @@ function HideUnhideDiv2()
 		document.getElementById("right-div2-hidden").style.display ="inline";
 	}
 }
- 
+
+//
+//CREATE-NEW-TASK FORM POPUPS - [START]
+//
+
 function HideAllButParameter(x) 
 {
 	var array = document.getElementsByClassName("SensorsValues");
@@ -77,11 +81,10 @@ function HideAllButParameter(x)
 	for(i = 0; i < array.length; i++)
 	{
 		if(array[i].id == x)
-			array[i].style.display = "block";
+			array[i].style.display = "inline-block";
 		else
 			array[i].style.display = "none";
 	}
-	//document.getElementById("SelectedSensor").value = 11;
 }
 
 function UnhideMotionSensorSecondaryOption() 
@@ -94,19 +97,17 @@ function HideMotionSensorSecondaryOption()
 	document.getElementById("MotionSensorDurationTable").style.display = "none";
 }
 
-function HideUnhideActionDate() 
+function HideUnhideActionDate(action) 
 {
 	var x = document.getElementById("actionDate").style.display;	
 	
-	if (x == "none")
+	if (action == 1)
 	{
-		document.getElementById("actionDate").style.display = "inline";
-		document.getElementById("repeatDaily").checked = false;
+		document.getElementById("actionDate").style.display = "inline-block";
 	}
-	else
+	else if (action == 0)
 	{
 		document.getElementById("actionDate").style.display = "none";
-		document.getElementById("repeatDaily").checked = true;
 	}
 }
 
@@ -117,9 +118,40 @@ function HideAlarmDetails()
 
 function UnhideAlarmDetails() 
 {
-	document.getElementById("alarmDetails").style.display ="inline";
+	document.getElementById("alarmDetails").style.display ="table-row";
 }
  
+function cameraSettings(x) 
+{
+	if(x.value === "1")
+	{
+		x.parentNode.parentNode.parentNode.parentNode.childNodes[6].style.display ="table-row";
+	}
+	else
+	{
+		x.parentNode.parentNode.parentNode.parentNode.childNodes[6].style.display ="none";
+	}	
+}
+ 
+//
+//CREATE-NEW-TASK FORM POPUPS - [END]
+//
+
+//
+//View Task - Alarm Details - [START]
+//
+function showAlarmDetails(x) 
+{
+	x.style.display = "inline";	
+}
+
+function hideAlarmDetails(x) 
+{
+	x.style.display = "none";	
+}
+//
+//View Task - Alarm Details - [END]
+//
   </script>
   
 </head>
@@ -199,6 +231,7 @@ include_once("../controllers/Header.php");
 					<a  href="#" onclick="unHideNewTask();return false;" style="text-decoration:none; ">
 						<div class="tooltip"><span class="tooltiptext">Create New Task</span>
 							<img align="center" id="abc" src="../controllers/images/task-add1.png" width="60" height="60" />
+							<img src='../controllers/images/info.png' style='width:12px; height:12px; position:absolute; top:1px; right:1px;'/>
 						</div>
 					</a>
 		</div>	
@@ -264,6 +297,7 @@ include_once("../controllers/Header.php");
 					<a  href="#" onclick="unHideUpload();return false;" style="text-decoration:none; ">
 						<div class="tooltip"><span class="tooltiptext">Upload image</span>
 							<img align="center" id="abc" src="../controllers/images/Upload3.png" width="60" height="60" />
+							<img src='../controllers/images/info.png' style='width:12px; height:12px; position:absolute; top:1px; right:1px;'/>
 						</div>
 					</a>
 				</div>

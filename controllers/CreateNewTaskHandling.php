@@ -22,6 +22,8 @@
 		$SelectedSensorValue = 0;
 		$devicesIDs; 				//(array)
 		$selectedDevicesStatus; 	//(array)
+		$NotifyByEmail = 0;
+		if(isset($_POST["NotifyByEmail"])) $NotifyByEmail = 1;
 
 		//-------------------------SELECTED SENSOR CODE----------------------------//
 		if($SelectedSensorTypeId == 10)		//Motion
@@ -49,6 +51,10 @@
 		{
 			$SelectedSensorValue = $_POST["LightSensorValue"];
 		}
+		else if($SelectedSensorTypeId == 14)	//UltraSonic
+		{
+			$SelectedSensorValue = $_POST["UltraSonicSensorValue"];
+		}
 		else if($SelectedSensorTypeId == 20)	//Clock
 		{
 			$ActionTime = $_POST["ActionTime"];
@@ -57,15 +63,22 @@
 		//-------------------------------------------------------------------------//
 		//
 		//
-		if (isset($_POST["repeatDaily"])) 
+		if ($_POST["TaskOccurrence"] == "repeat") 
 		{
 			$repeatDaily = 1;
 			$ActionDate = NULL; 
 		}
-		else 
+		else if ($_POST["TaskOccurrence"] == "oneTime") 
 		{
 			$repeatDaily = 0;
-			$ActionDate = $_POST["ActionDate"];	
+			if($_POST["OneTimeAction"] == "Today")
+			{
+				$ActionDate = $_POST["TodayActionDate"];
+			}
+			else if ($_POST["OneTimeAction"] == "otherDate") 
+			{
+				$ActionDate = $_POST["ActionDate"];
+			}
 		}
 		//
 		//
@@ -97,10 +110,12 @@
 			$AlarmDuration,
 			$AlarmInterval,
 			$devicesIDs,
-			$selectedDevicesStatus
+			$selectedDevicesStatus,
+			$NotifyByEmail
 			);
 		
 			header("Location: ../views/RoomSettings.php?var=$RoomID");
+			
 	}
 		
 		

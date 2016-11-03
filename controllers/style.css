@@ -111,12 +111,12 @@ table {
 
 .menu {
     
-    width: 190px;
+    width: 150px;
     //min-width: 120px;
     position: fixed;
     top: 90px;
     //left: 15%;
-	right:75%;
+	right:75.5%;
     z-index: 2;
 }
 

@@ -11,7 +11,7 @@ require_once("config.php");
 class User
 {
 	
-	public static function addNewUser($userName, $description, $email, $password, $imgPath) 
+	public static function addNewUser($userName, $Title, $email, $password, $imgPath) 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) 
@@ -23,13 +23,13 @@ class User
 		 * in the following lines we escape quotation such as ' and "
 		 */
 		$userName = $db->escape_string($userName);
-		$description = $db->escape_string($description);
+		$Title = $db->escape_string($Title);
 		$email = $db->escape_string($email);
 		$password = $db->escape_string($password);
 		$imgPath = $db->escape_string($imgPath);
 
-		$sql = "INSERT INTO user (UserName, Description, Email, Password, UserImagePath) "
-		  . " VALUES ('$userName', '$description', '$email', '$password', '$imgPath');";
+		$sql = "INSERT INTO user (UserName, Title, Email, Password, UserImagePath) "
+		  . " VALUES ('$userName', '$Title', '$email', '$password', '$imgPath');";
 
 		$db->query($sql);
 
@@ -255,8 +255,49 @@ class User
 			return FALSE;
 		}
 	}
+	
+	public static function isUserAutherisedToEditTask($UserID, $TaskID) 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) {
+		  die('unable to connect to database [' . $db->connect_error .']');
+		}
 
-	public static function modifyUserDetails ($UserID, $UserName, $Email, $Description, $Password) 
+		$UserID = $db->escape_string($UserID);
+		$TaskID = $db->escape_string($TaskID);
+		
+		if(!user::isAdmin($UserID))
+		{
+			$sql = "SELECT UserID FROM task 
+				WHERE TaskID = $TaskID";
+				
+			$result = $db->query($sql);
+			
+			if(!$result->num_rows >= 1)
+			{
+				return FALSE;
+			}
+			else
+			{
+				$row = $result->fetch_assoc();
+				
+				if($UserID == $row["UserID"])
+				{
+					return TRUE;
+				}
+				else 
+				{
+					return FALSE;
+				}
+			}
+		}
+		else //isAdmin = Autherized
+		{
+			return TRUE;
+		}
+	}
+
+	public static function modifyUserDetails ($UserID, $UserName, $Email, $Title, $Password) 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) 
@@ -267,13 +308,13 @@ class User
 		$UserID = $db->escape_string($UserID);
 		$UserName = $db->escape_string($UserName);
 		$Email = $db->escape_string($Email);
-		$Description = $db->escape_string($Description);
+		$Title = $db->escape_string($Title);
 		$Password = $db->escape_string($Password);
 
 		$sql = "UPDATE user "
 			. " SET UserName = '$UserName'" 
 			. " ,Email = '$Email'" 
-			. " ,Description = '$Description'" 
+			. " ,Title = '$Title'" 
 			. " ,Password = '$Password'" 
 			. " WHERE UserID = $UserID;";
 

@@ -35,8 +35,8 @@
 		</tr>
 	 
 
-	<tr><td>Description</td><td align="left" >
-	<input type="tel" id="tel" value="'.$row["Description"].'" name="Description" required/>
+	<tr><td>Title</td><td align="left" >
+	<input type="tel" id="tel" value="'.$row["Title"].'" name="Title" required/>
 		<font color="red"> <label id="telm" ></label></font>
 		</td>
 		</tr>

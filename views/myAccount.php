@@ -1,4 +1,4 @@
-<?php error_reporting(0); session_start();  if(!isset($_SESSION["Email"])){  header("Location: Homepage.php"); } ?>
+<?php /*error_reporting(0);*/ session_start();  if(!isset($_SESSION["Email"])){  header("Location: Homepage.php"); } ?>
 
 <html>
 <head>

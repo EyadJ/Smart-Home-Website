@@ -10,6 +10,7 @@
 	$UserID = $_SESSION["UserID"];
 	$roomsResult;
 	
+
 	if ($isAdmin == TRUE)
 	{
 		$roomsResult = Room::getAllRoomsDetails();
@@ -26,7 +27,7 @@
 	style='	
 	display:none;
 	background-color:#CCCCCC;
-	width:285px;
+	width:300px;
 	height:35px;
 	border: 2px solid black;
 	padding:20px;
@@ -37,33 +38,38 @@
 	margin:auto;
 	'>
 	<div style='display:inline-block; padding-right:20px;'>
-	&nbsp;Rooms to Display<br /><select onchange='roomsVisibility(this.selectedIndex.value);'>";
+	&nbsp;Rooms to Display<br /><select onchange='roomsVisibility(this.value);'>";
 	
-	$UsrAthrizdRoms = $roomsResult;
-	while($r_Row = $UsrAthrizdRoms->fetch_assoc()) 
+	$UsrAthrizdRums = $roomsResult;
+	
+	while($r_Row = $UsrAthrizdRums->fetch_assoc()) 
 	{
 		$RoomID = $r_Row['RoomID'];
-		echo "<option value='".$RoomID."'>"
+		$text = "Room" . $RoomID . "";
+		
+		echo "<option value='$text'>"
 		.$r_Row['RoomName']."</option>";
 	}
 	echo "<option value='0' selected>
 	Show All Rooms</option></select></div>";
 	
-	echo "<div style='display:inline-block;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tasks of User<br /><select>";
+	echo "<div style='display:inline-block;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tasks of User<br />
+		<select onchange='usersTasksVisibility(this.value);'>";
+		
 	$AdminUsers = user::getAdminUsers();
 	while($r_Row = $AdminUsers->fetch_assoc()) 
 	{
-		echo "<option value='".$r_Row['UserID']."'>".$r_Row['UserName']."</option>";
+		echo "<option value='TaskOfUser_".$r_Row['UserID']."'>".$r_Row['UserName']."</option>";
 	}
 	$UsrsWhoCntrlSameRooms = user::getUsersWhoHasControlOfAllRoomsOfThisUser($UserID);
 	while($r_Row = $UsrsWhoCntrlSameRooms->fetch_assoc()) 
 	{
-		echo "<option value='".$r_Row['UserID']."'>".$r_Row['UserName']."</option>";
+		echo "<option value='TaskOfUser_".$r_Row['UserID']."'>".$r_Row['UserName']."</option>";
 	}
 	
 	echo "<option value='0' selected>Show All Users</option></select>";	
 	//
-	echo "</div></div></b><br /><hr class='hr-table-divider' /><hr class='hr-table-divider2' />";
+	echo "</div></div></b><table></table>";
 
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------//
 			//GETTING DATA AGAIN FROM THE DATABASE
@@ -82,9 +88,11 @@
 	while($r_Row = $roomsResult->fetch_assoc()) 
 	{
 			$RoomID = $r_Row['RoomID'];
-
-			echo"<span id=$RoomID class='roomDiv'>
-			<table style='width:135px; margin-left:2.2%;  margin-bottom:-15px; display:inline-block;'>
+			$text = "Room" . $RoomID . "";
+			
+			echo
+			"<span id='$text' class='roomDiv'>
+			<table style='width:135px; margin-left:2.2%; margin-bottom:-15px; display:inline-block;'>
 			<tr align='center'><td>".
 			"<B>".$r_Row['RoomName']."</B>
 			<br />
@@ -121,6 +129,7 @@
 			while($row = $devices_Original->fetch_assoc()) 
 			{
 				$devices[$row["DeviceID"]]["DeviceImgPath_on"] = $row["DeviceImgPath_on"];
+				$devices[$row["DeviceID"]]["DeviceName"] = $row["DeviceName"];
 			}
 			//
 			//
@@ -154,18 +163,19 @@
 
 			echo"<table id='viewAllTasksTable' style=' border: none;'>
 				<tr style='line-height: 16px;'>
-				<th width='10%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Description</th>
+				<th width='10%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Task Name</th>
 				<th width='6.5%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Repeat Daily</th>
 				<th width='15%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Selected Sensor</th>
 				<th width='30%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Selected Device/s Action</th>
 				<th width='5%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Created By</th>
 				<th width='5%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Task Enabled</th>
+				<th width='3%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Edit Task</th>
 				</tr>";
 				
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------//			
 			
 			//
-			// BIG LOOP:
+			// INSIDE LOOP (TASKS LOOP):
 			//
 			while ($row = $Tasks->fetch_assoc())
 			{
@@ -174,10 +184,17 @@
 					$RepeatDailyValue = $row["repeatDaily"];
 					$isDisabledValue = "";
 					$TaskID = $row["TaskID"];
+					$SelectedSensorValue = $row["SelectedSensorValue"];
 					$UWCT_UID = $row["UserID"];		//UserWhoCreatedTask_UserID
 					$UWCT_UN = $AllUsersArray[$UWCT_UID]["UserName"];		//UserWhoCreatedTask_UserName
 					$UWCT_IP = $AllUsersArray[$UWCT_UID]["UserImagePath"];		//UserWhoCreatedTask_ImagePath
-
+					$UWCT_iA = $AllUsersArray[$UWCT_UID]["isAdmin"];		//UserWhoCreatedTask_isAdmin
+					
+					
+					$isAdminValue = "User";
+					if($UWCT_iA == 1)
+						$isAdminValue = "Admin";
+					
 					$selectedSensorID = $row["SensorID"];
 					
 					$taskDevices = task::getTaskDevices($TaskID);
@@ -192,19 +209,6 @@
 						$i++;
 					}
 
-					/*	(Apparently there was no need for those checks, just assign the value directly)
-					
-					if($row["ActionTime"] != NULL)
-					{
-						$actionTimeValue = " value = '$row[ActionTime]' ";
-					}
-					
-					if($row["ActionDate"] != NULL)
-					{
-						$actionDateValue = " value = '$row[ActionDate]' ";
-					}
-					*/
-					
 					if($row["isDisabled"] == 1)
 					{
 						$isDisabledValue = "x-red.png";
@@ -214,13 +218,13 @@
 						$isDisabledValue = "Checkmark1.png";
 					}
 
-			
-			echo "<tr style='border:0px; background-color:white; height:17px;'>
-				<td style='border:0px;'></td>
-				<td style='border:0px;'></td>
-				<td style='border:0px;'></td>
-				<td style='border:0px;'></td>
-				<td style='border:0px;'></td>
+				//this is a class name according to every user id so it would be ready in case a filter was used
+			$text = "TaskOfUser_" . $UWCT_UID . "";
+				
+			echo "
+				<tr style='border:0px; background-color:white; height:17px;' class='taskDiv $text'>
+				<td style='border:0px;'></td><td style='border:0px;'></td><td style='border:0px;'></td>
+				<td style='border:0px;'></td><td style='border:0px;'></td><td style='border:0px;'></td>
 				<td style='border:0px;'></td>
 				</tr>";
 			
@@ -228,8 +232,9 @@
 			//table body (one task) "ALL OF THE FOLLOWING"
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------//
 				//TASK NAME
-
-			echo"<tr><td style='border-bottom: 2px solid black; border-top: 2px solid black;'><b>$row[TaskName]</b></td>
+			
+			echo"<tr class='taskDiv $text'>
+				<td style='border-bottom: 2px solid black; border-top: 2px solid black;'><b>$row[TaskName]</b></td>
 			
 				<td style='border-bottom: 2px solid black; border-top: 2px solid black;'>";
 				
@@ -240,8 +245,13 @@
 				{
 					echo "<img src='../controllers/images/NoRepeatDaily.png' width='30' height='30' />
 					<div style='display:inline;'><br />
-					<b>Action Date </b><input type='date' name='ActionDate' value = '$row[ActionDate]' 
-					style='width:130px;' readonly/></div>";
+					<b>Action Date </b>";
+					
+					if ($row["ActionDate"] === date("Y-m-d"))
+						echo "<i>(Today)</i>";
+					
+					echo "<input type='text' name='ActionDate' value = '$row[ActionDate]' 
+					style='width:75px;' readonly/></div>";
 				}
 				else if ($RepeatDailyValue == 1)
 				{
@@ -253,15 +263,52 @@
 				
 				echo "</td><td style='border-bottom: 2px solid black; border-top: 2px solid black;'>";
 				
-				if ($sensors[$selectedSensorID]["SensorTypeID"] == 20)
+				$sensorTypeID = $sensors[$selectedSensorID]["SensorTypeID"];
+				$sensorImgPath = $sensors[$selectedSensorID]["SensorImgPath"];
+				
+				echo"<img src='../controllers/images/sensors/" . $sensorImgPath . "' width='40' height='40' />";
+				
+				if ($sensorTypeID == 10) //Motion
 				{
-					echo"<img src='../controllers/images/sensors/" . $sensors[$selectedSensorID]["SensorImgPath"] . "' width='40' height='40' /><br />
-					<b>Action Time</b>
-					<input type='time' name='ActionTime' value = '$row[ActionTime]' readonly/>";
+					if($SelectedSensorValue == 0) //Action on Detection
+					{
+						echo "<br /><b>Take Action<br />On Detection</b>";
+					}
+					else
+					{
+						echo"<br /><b>After no Detection</b><br />
+						<input type='number' name='MotionValue' value = '$SelectedSensorValue' style='width:50px;' readonly/> Minutes";
+					}
+					
 				}
-				else
+				else if ($sensorTypeID == 11) //Smoke
 				{
-					echo"<img src='../controllers/images/sensors/" . $sensors[$selectedSensorID]["SensorImgPath"] . "' width='40' height='40' />";
+					//nothing
+				}
+				else if ($sensorTypeID == 12) //Temperature
+				{
+					echo"<br /><b>Temperature</b><br />
+					<input type='number' name='TempValue' value = '$SelectedSensorValue' style='width:35px;' readonly/> Celsius";
+				}
+				else if ($sensorTypeID == 13) //Light
+				{
+					$lightSensorValue = $SelectedSensorValue;
+					
+					echo"<br /><b>Light Status</b><br />";
+					$textValue =  "";
+					
+					if ($lightSensorValue == 850)
+						$textValue = "On Sunrise";
+					
+					else if ($lightSensorValue == 700)
+						$textValue = "On Sunset";
+					
+					echo"<input type='text' name='LightValue' value = '$textValue' style='width:80px;' readonly/>";
+				}
+				else if ($sensorTypeID == 20) //Clock
+				{
+					echo"<br /><b>Action Time</b><br />
+					<input type='time' name='ActionTime' value = '$row[ActionTime]' style='width:100px;' readonly/>";
 				}
 				
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------//			
@@ -274,17 +321,57 @@
 					$CurrentDevID = $taskDevicesArray[$i]["DeviceID"];
 					$additional = "";
 					$ReqDevState = $taskDevicesArray[$i]["ReqDevState"];
+					$DeviceName = $devices[$CurrentDevID]["DeviceName"];
+					$DeviceImgPath = $devices[$CurrentDevID]["DeviceImgPath_on"];
 					
-					if($ReqDevState == NULL) $additional = "not-available.png";
+					if($ReqDevState == -1) $additional = "not-available.png";
 					else if($ReqDevState == 1) $additional = "on.png";
 					else if($ReqDevState == 0) $additional = "off.png";
+					
+					if($DeviceName === "Alarm" && $ReqDevState == 1)
+					{
+						echo"<table 
+						onmouseover='showAlarmDetails(this.nextSibling.nextSibling);' 
+						onmouseout='hideAlarmDetails(this.nextSibling.nextSibling);' 
+						style='width:80px; margin:5; border:0; display:inline;'>
+						<tr><td>
+						<img src='../controllers/images/devices/" . $DeviceImgPath . "' width='40' height='40' />
+						<img src='../controllers/images/info.png' style='width:12px; height:12px; position:absolute; top:1px; right:1px;'/>
+						</td></tr><tr><td style='border:0;'>
+						<img src='../controllers/images/$additional' height='20' />
+						</td></tr></table>";
 						
-					echo"<table style='width:80px; margin:5; border:0; display:inline;'><tr><td>
-					<img src='../controllers/images/devices/" . $devices[$CurrentDevID]["DeviceImgPath_on"] . "' width='40' height='40' />
-					</td></tr><tr><td style='border:0;'>
-					<img src='../controllers/images/$additional' height='20' />
-					</td></tr></table>";
+						echo"
+						<table
+						style='
+						width:110px; 
+						border:0; 
+						padding:0; 
+						margin:0; 
+						position:absolute; 
+						display:none;
+						background-color:#CCCCCC;
+						z-index:2;
+						font-size:11px;
+						'>
+						<tr><td>Duration
+						<input type='number' name='AlarmDuration' value='$row[AlarmDuration]' 
+						style='width:35px; height:17px;' readonly/> min</td></tr>
+						<tr><td>Interval
+						<input type='number' name='AlarmInterval' value='$row[AlarmInterval]' 
+						style='width:35px; height:17px;' readonly/> min</td></tr>
+						</table>";
+					}
+					else
+					{
+						echo"<table style='width:80px; margin:5; border:0; display:inline;'><tr><td>
+						<img src='../controllers/images/devices/" . $DeviceImgPath . "' width='40px' height='40px' />
+						</td></tr><tr><td style='border:0;'>
+						<img src='../controllers/images/$additional' height='20px' />
+						</td></tr></table>";
+					}
 				}
+				
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------//					
 					//CREATED BY USER
 					
@@ -292,17 +379,25 @@
 						<td style='border-bottom: 2px solid black; border-top: 2px solid black;'>
 						<div class='tooltip'>
 						<span class='tooltiptext'>
-						This Task was Created by: (User) <B><i>" . $UWCT_UN . "
-						</i></B></span>
+						This Task was Created by: <B><i>" . $UWCT_UN . " </i></B> [" . $isAdminValue . "] </span>
 						<img src='../controllers/images/users/" . $UWCT_IP . "' 
 						width='50' height='50' />
+						<img src='../controllers/images/info.png' style='width:12px; height:12px; position:absolute; top:1px; right:1px;'/>
 						</div></td>";
 						
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------//						
 					//IS DISABLED / ENABLED
 						
 						echo "<td style='border-bottom: 2px solid black; border-top: 2px solid black;'>
-						<img src='../controllers/images/$isDisabledValue' width='40' height='40' /></td>
+						<img src='../controllers/images/$isDisabledValue' width='35' height='35' /></td>";
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------//						
+					//EDIT TASK
+						
+						echo "<td style='border-bottom: 2px solid black; border-top: 2px solid black;'>
+						<a href='EditTask.php?var=$TaskID&referrer=Tasks.php' style='text-decoration:none;'>
+						<img src='../controllers/images/edit4.png' width='30' height='30' /></td>
+						</a>
 						</tr>";
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------//						
 			}

@@ -2,7 +2,7 @@
 
 <html>
 <head>
-<title>Rooms</title>
+<title>Tasks</title>
   <link href="../controllers/style.css" rel="stylesheet"/>
   
    
@@ -40,21 +40,58 @@ function unHideFilters()
 
 function roomsVisibility(RoomID) 
 {
-	alert(RoomID);
 	var displayText = "none";
-	
 	if(RoomID == 0)
 	{
 		displayText = "block";
 	}
 	var roomsArray = document.getElementsByClassName("roomDiv");
 		
+	
 	for(var i = 0; i < roomsArray.length; i++)
 	{
 		roomsArray[i].style.display = displayText;
 	}	
 	
-	var x = document.getElementById(RoomID).style.display = "block";	
+	if(RoomID != 0)
+	{
+		document.getElementById(RoomID).style.display = "block";	
+	}
+}
+
+function usersTasksVisibility(UserID) 
+{
+	var displayText = "none";
+	if(UserID == 0)
+	{
+		displayText = "table-row";
+	}
+	var roomsArray = document.getElementsByClassName("taskDiv");
+		
+	for(var i = 0; i < roomsArray.length; i++)
+	{
+		roomsArray[i].style.display = displayText;
+	}	
+	
+	if(UserID != 0)
+	{
+		var roomsArray = document.getElementsByClassName(UserID);
+			
+		for(var i = 0; i < roomsArray.length; i++)
+		{
+			roomsArray[i].style.display = "table-row";
+		}	
+	}
+}
+
+function showAlarmDetails(x) 
+{
+	x.style.display = "inline";	
+}
+
+function hideAlarmDetails(x) 
+{
+	x.style.display = "none";	
 }
 
   </script>
@@ -136,6 +173,7 @@ include_once("../controllers/Header.php");
 			<a  href="#" onclick="unHideFilters();return false;" style="text-decoration:none; ">
 				<div class="tooltip"><span class="tooltiptext">Filter the Tasks</span>
 					<img align="center" id="abc" src="../controllers/images/filter.png" width="55" height="55" />
+					<img src='../controllers/images/info.png' style='width:12px; height:12px; position:absolute; top:1px; right:1px;'/>
 				</div>
 			</a>
 		</div>	

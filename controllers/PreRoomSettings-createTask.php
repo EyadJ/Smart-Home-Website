@@ -25,15 +25,52 @@
 		<input type='hidden' name='UserID' value='$UserID'/>
 		<input type='hidden' name='RoomID' value='$RoomID'/>
 		
-		<table id='CreateNewTaskTable' style='display:none; margin-left:auto; margin-right:auto; width:80%;'>
-		<tr><th width='30%'>Settings</th>
-		<th width='35%'>Select one Sensor</th>
-		<th width='35%'>Select Device/s Required Action</th></tr>";
+		<table id='CreateNewTaskTable' style='display:none; margin-left:auto; margin-right:auto; width:90%;'>
+		<tr><th colspan='4'>Create New Task</th></tr>";
 		
-	echo"<tr><td height='33%'>Description 
-		<input type='text' name='TaskName' placeholder='Simple Name for the Task'/>
-		</td><td rowspan='2'>";
+
+	//--------------------------------------------------------------------------//
+		//SETTINGS
+	
+	echo"<tr><th width='10%'>Settings</th>	
+		<td width='150px;'>Task Name <br />
+		<input type='text' name='TaskName' placeholder='Simple Name for the Task' required/>
+		</td>";
 		
+		//	TaskOccurrence
+		echo"<td width='250px'>
+		<label style='float:left;' ><input type='radio' name='TaskOccurrence' value='repeat' checked 
+		onchange='HideUnhideActionDate(0);return false;'/> Repeat Daily</label>
+		
+		<label style='float:left;' ><input type='radio' name='TaskOccurrence' value='oneTime'
+		onchange='HideUnhideActionDate(1);return false;'/> One-Time Task</label>
+		
+		<div id='actionDate' 
+		style='	display:none; width:243px; height:50px; border: 2px solid black;
+		padding-top:2px; padding-right:3px; bottom:0; top:0; left:0; right:0; margin:auto;
+		'>
+		
+		<label style='float:left;'><input type='radio' name='OneTimeAction' value='Today' checked/> Today</label> 
+		
+		<input type='date' name='TodayActionDate' value='" . date("Y-m-d") . "' style='float:right; width:130px;' readonly/><br />
+		
+		<label style='float:left;'><input type='radio' name='OneTimeAction' value='otherDate'/> Another Date</label> 
+		
+		<input type='date' name='ActionDate' style='float:right; width:130px;'/>
+		
+		</div>
+		
+		</td><td width='110px'>
+		<label><input type='checkbox' name='NotifyByEmail'/> 
+		Notify me by Email</label>
+		
+		</td></tr>";
+		
+	//--------------------------------------------------------------------------//
+		//SENSORS
+		
+		echo "<tr><th width='10%'>Select one Sensor</th>
+				<td colspan='3'>";
 		$i = 0;
 		while($row = $Sensors->fetch_assoc()) 
 		{
@@ -47,143 +84,196 @@
 			20 Clock				(It has its own veriable (Time: not a number))
 			*/
 			
+			echo "<div style='display:inline-block; '>";
+		
 			if ($sensorTypeID == 10) //Motion
 			{
 				echo"<label><input type='radio' name='sensors' value='$row[SensorID]' onclick='HideAllButParameter(10);'/>
 				<img src='../controllers/images/sensors/$row[SensorImgPath]' width='60' height='60' /></label>
-				<table id='10' style='display:none;' class='SensorsValues'><tr><td>
+				
+				<div id='10' style='display:none; width:350px;' class='SensorsValues'>
+				<table style='border:0;'><tr><td>
 				<label><input type='radio' name='MotionSensorOption' value='onDetection' onclick='HideMotionSensorSecondaryOption();' checked/>
-				Action On Detection</label></td></tr><tr><td>
+				Action On Detection</label>
+				
+				</td></tr><tr><td>
+				
 				<label><input type='radio' name='MotionSensorOption' value='onNoDetection' onclick='UnhideMotionSensorSecondaryOption();'/>
 				Action after no detection for a period of time</label>
-				<table style='border:0; display:none;' id='MotionSensorDurationTable'>
-				<tr><td>Duration of No Detection</td><tr></tr><td><input type='number' name='MotionSensorValue' placeholder='(Minutes)'/></td></tr>
-				</table></td></tr>
-				</table><br />";
+				
+				<div style='display:none;' id='MotionSensorDurationTable'>
+				<input type='number' name='MotionSensorValue' placeholder='Duration of No Detection (Minutes)'
+						style='width:240px;'/>
+				
+				</div></td></tr></table></div>";
 			}
 			else if ($sensorTypeID == 11) //Smoke
 			{
 				echo"<label><input type='radio' name='sensors' value='$row[SensorID]' onclick='HideAllButParameter(11);'/>
-				<img src='../controllers/images/sensors/$row[SensorImgPath]' width='60' height='60' /></label><br />";
+				<img src='../controllers/images/sensors/$row[SensorImgPath]' width='60' height='60' /></label></div>";
 			}
 			else if ($sensorTypeID == 12) //Temperature
 			{
 				echo"<label><input type='radio' name='sensors' value='$row[SensorID]' onclick='HideAllButParameter(12);'/>
-				<img src='../controllers/images/sensors/$row[SensorImgPath]' width='60' height='60' /></label>
+				<img src='../controllers/images/sensors/$row[SensorImgPath]' width='60' height='60' /></label></div>
 				<div id='12' style='display:none;'  class='SensorsValues'>
-				<table style='border:0; width:70%'>
+				<table style='border:0;'>
 				<tr><td>Required Temperature</td><tr></tr><td>
 				<input type='number' name='TempSensorValue' placeholder='Temperature in Celsius'/>
 				</td></tr>
 				</table>
-				</div><br />";
+				</div>";
 			}
 			else if ($sensorTypeID == 13) //Light
 			{
 				echo"<label><input type='radio' name='sensors'value='$row[SensorID]' onclick='HideAllButParameter(13);'/>
-				<img src='../controllers/images/sensors/$row[SensorImgPath]' width='60' height='60' /></label>
-				<div id='13' style='display:none;' class='SensorsValues'>
-				<table style='border:0; width:70%'>
+				<img src='../controllers/images/sensors/$row[SensorImgPath]' width='60' height='60' /></label></div>
+				<div id='13' style='display:none; width:170px;' class='SensorsValues'>
+				<table style='border:0;'>
 				<tr><td>Required Light Status</td><tr></tr><td>
-				<select name='LightSensorValue' >
-				 <option value='700'>Night</option>
-				 <option value='850'>Day</option>
+				<select name='LightSensorValue'>
+				 <option value='1'>Sunrise</option>
+				 <option value='0'>Sunset</option>
 				</select>
 				</td></tr>
 				</table>
-				</div><br />";
+				</div>";
+			}
+			else if ($sensorTypeID == 14) //Ultrasonic (Water Tanks)
+			{
+				echo"<label><input type='radio' name='sensors' value='$row[SensorID]' onclick='HideAllButParameter(14);'/>
+				<img src='../controllers/images/sensors/$row[SensorImgPath]' width='60' height='60' /></label></div>
+				<div id='14' style='display:none; width:170px;' class='SensorsValues'>
+				<table style='border:0;'>
+				<tr><td>Action on water level</td><tr></tr><td>
+				<select name='UltraSonicSensorValue'>";
+				
+				for($i=10; $i<=100; $i=$i+10)
+				{
+					echo" <option value='$i'>$i%</option>";
+				}
+				 
+				echo"</select>
+				</td></tr>
+				</table>
+				</div>";
 			}
 			else if ($sensorTypeID == 20) //Clock
 			{
 				echo"<label><input type='radio' name='sensors' value='$row[SensorID]' checked='checked' onclick='HideAllButParameter(20);'/>
-				<img src='../controllers/images/sensors/$row[SensorImgPath]' width='60' height='60' /></label>
-				<div id='20' class='SensorsValues'>
-				<table style='border:0; width:70%'>
+				<img src='../controllers/images/sensors/$row[SensorImgPath]' width='60' height='60' /></label></div>
+				<div id='20' class='SensorsValues' style='display:inline-block;'>
+				<table style='border:0;'>
 				<tr><td>Action Time</td><tr></tr><td><input type='time' name='ActionTime'/></td></tr>
 				</table>
-				</div><br />";
+				</div>";
 			}
+			
+			echo "</div>";
+
 			$i++;
 		}
 		
-				//-----to help when handling the sensors in the handling page-----//
-			/*
-			echo"<select name='SelectedSensor' id='SelectedSensor' style='display:none;'>";
-			for ($i = 0; $i < count($sensorTypeIdArray); $i++)
-			{
-				if($sensorTypeIdArray[$i] == 10)
-					echo "<option value='10'>Motion</option>";
-				if($sensorTypeIdArray[$i] == 11)
-					echo "<option value='11'>Smoke</option>";
-				if($sensorTypeIdArray[$i] == 12)
-					echo "<option value='12'>Temp</option>";
-				if($sensorTypeIdArray[$i] == 13)
-					echo "<option value='13'>Light</option>";
-				if($sensorTypeIdArray[$i] == 20)
-					echo "<option value='20'>Clock</option>";
-			}
-					echo "</select>";
-					*/
-				//----------------------------------------------------------------//	
+	//--------------------------------------------------------------------------//
+		//DEVICES
 		
-		echo "</td><td rowspan='2'>";
+		echo "</tr><tr><th width='10%'>Select Device/s Required Action</th>
+				<td colspan='3'>";
 		
 		while($row = $Devices->fetch_assoc()) 
 		{
 			
 			if($row["DeviceName"] == "Alarm")
 			{
-				echo "<table>
-				<tr><td><label>Don't Change
-				<input type='radio' name='$row[DeviceID]' value='-1' onchange='HideAlarmDetails();' checked/></label></td>
-				<td rowspan='3'><img src='../controllers/images/devices/$row[DeviceImgPath_on]' width='60' height='60' /></td></tr>
-				<tr><td><label>ON 
-				<input type='radio' name='$row[DeviceID]' value='1' onchange='UnhideAlarmDetails();'/></label></td></tr>
+				echo "<div  style='
+				width:120px; max-width:180px; display:inline-block; 
+				margin-right:5px; margin-left:5px; margin-top:1px; margin-bottom:1px;
+				'><table>
+				<tr><td colspan='2'><img src='../controllers/images/devices/$row[DeviceImgPath_on]' width='60' height='60' /></td></tr>
+				
+				<tr><td colspan='2'><label>Don't Change
+				<input type='radio' name='$row[DeviceID]' value='-1' onchange='HideAlarmDetails();' checked/></label></td></tr>
+				
 				<tr><td><label>OFF 
-				<input type='radio' name='$row[DeviceID]' value='0' onchange='HideAlarmDetails();'/></label></td></tr>
+				<input type='radio' name='$row[DeviceID]' value='0' onchange='HideAlarmDetails();'/></label></td>
+				
+				<td><label>ON 
+				<input type='radio' name='$row[DeviceID]' value='1' onchange='UnhideAlarmDetails();'/></label></td></tr>
 				
 				<tr id='alarmDetails' style='display:none;'><td colspan='2'>
-				
 				<table style='border:0; padding:0; margin:0;'>
 				<tr><td>Duration</td>
-				<td><input type='number' name='AlarmDuration' placeholder='(Minutes)' value=0 style='width:120px;'/></td></tr>
+				<td><input type='number' name='AlarmDuration' placeholder='(Minutes)' value=0 style='width:35px;'/></td></tr>
 				<tr><td>Interval</td>
-				<td><input type='number' name='AlarmInterval' placeholder='(Minutes)' value=0  style='width:120px;'/></td></tr>
+				<td><input type='number' name='AlarmInterval' placeholder='(Minutes)' value=0  style='width:35px;'/></td></tr>
 				</table></td></tr>
-				</table>";
+				
+				</table></div>";
 			}
+			else if($row["DeviceName"] == "Security Camera")
+			{
+				
+				echo"<div  style='
+				width:120px; max-width:180px; display:inline-block; 
+				margin-right:5px; margin-left:5px; margin-top:1px; margin-bottom:1px;
+				'><table>
+				<tr><td colspan='2'><img src='../controllers/images/devices/$row[DeviceImgPath_on]' width='60' height='60' /></td></tr>
+				
+				<tr><td colspan='2'><label>Don't Change
+				<input type='radio' name='$row[DeviceID]' onchange='cameraSettings(this);' value='-1' checked/>
+				</label></td></tr>
+				
+				<tr><td><label>OFF 
+				<input type='radio' name='$row[DeviceID]' onchange='cameraSettings(this);' value='0'/>
+				</label></td>
+				
+				<td><label>ON 
+				<input type='radio' name='$row[DeviceID]' onchange='cameraSettings(this);' value='1'/>
+				</label></td></tr>	
+				
+				<tr style='display:none;'><td colspan='2'>
+				
+				<table style='width:220px;'><tr><td>	
+				
+					<label style='float:left; display:inline-block; ' >
+					<input type='radio' name='cam-$row[DeviceID]-takeImgOrVideo' value='Img' checked/> Take Image/s </label>
+					<span id=''><input type='number' name='cam-$row[DeviceID]-TakeImagesQty' placeholder='(Pic Number)' value=1  
+					style='width:35px;'/> Pictures</span>
+					
+					</td></tr><tr><td>
+					
+					<label style='float:left;'><input type='radio' name='cam-$row[DeviceID]-takeImgOrVideo' value='Vid'/> Take Video</label>
+					<span id=''><input type='number' name='cam-$row[DeviceID]-TakeVideoDuration' placeholder='(Seconds)' value=30
+					style='width:35px;'/> Seconds</span>
+					
+					</td></tr></table>
+					
+				</td></tr>	
+				</table></div>";
+				
+				echo "";
+			}	
 			else
 			{
-				echo"<table>
-				<tr><td><label>Don't Change<input type='radio' name='$row[DeviceID]' value='-1' checked/></label></td>
-				<td rowspan='3'><img src='../controllers/images/devices/$row[DeviceImgPath_on]' width='60' height='60' /></td></tr>
-				<tr><td><label>ON <input type='radio' name='$row[DeviceID]' value='1'/></label></td></tr>
-				<tr><td><label>OFF <input type='radio' name='$row[DeviceID]' value='0'/></label></td></tr>
+				echo"<table 
+				style='
+				width:120px; display:inline-block; 
+				margin-right:5px; margin-left:5px; margin-top:1px; margin-bottom:1px;
+				'>
+				<tr><td colspan='2'><img src='../controllers/images/devices/$row[DeviceImgPath_on]' width='60' height='60' /></td></tr>
+				<tr><td colspan='2'><label>Don't Change<input type='radio' name='$row[DeviceID]' value='-1' checked/></label></td></tr>
+				<tr><td><label>OFF <input type='radio' name='$row[DeviceID]' value='1'/></label></td>
+				<td><label>ON <input type='radio' name='$row[DeviceID]' value='0'/></label></td></tr>
 				</table>";
 			}
 		}
 			
 			
-			
-			
-		echo"</td></tr>
 		
 		
-		<tr><td height='34%'>
-		<label>Repeat Daily <input type='checkbox' name='repeatDaily' id='repeatDaily' checked 
-		onchange='HideUnhideActionDate();return false;'/></label>
-		<div id='actionDate' style='display:none;'><br />
-		<b>Action Date </b><input type='date' name='ActionDate' />
-		</div></td></tr>
-		";
-		
-			
-			
-		
-				echo "<tr><th colspan='3'><input type='submit' name='Create' value='Create' />
-				</th></tr></table>
-				</form>
-				";
+		echo "</tr><tr><th colspan='4'><input type='submit' name='Create' value='Create' />
+		</th></tr></table>
+		</form><br />";
 		
 		
 			

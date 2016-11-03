@@ -2,13 +2,17 @@
 
 
 	include_once("../models/task.php");
+	include_once("../models/user.php");
 
 	$TaskID = $_GET['var'];
-	$RoomID = $_GET['var2'];
+	$UserID = $_SESSION["UserID"];
+	$referrer =  $_GET['referrer'];
+	
 	if(isset($_POST))
 	{
-		$deletedSuccessfully = task::deleteTask($TaskID);
+		//CHECK if user is autherized to edit this task
+		if(user::isUserAutherisedToEditTask($UserID, $TaskID)) task::deleteTask($TaskID);
 		
-		header("Location: ../views/RoomSettings.php?var=$RoomID");
+		header("Location: ../views/$referrer");
 	}
 ?>

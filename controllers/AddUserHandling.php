@@ -43,7 +43,7 @@
 	{
 		if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) 
 		{
-			$insertedSuccessfully = user::addNewUser($_POST['userName'], $_POST['Description'],
+			$insertedSuccessfully = user::addNewUser($_POST['userName'], $_POST['Title'],
 			$_POST['email'], $_POST['Pass'], $basename);
 		
 			header("Location: ../views/Users.php");

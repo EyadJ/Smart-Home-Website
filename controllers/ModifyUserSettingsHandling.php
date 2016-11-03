@@ -54,7 +54,7 @@ if(isset($_POST["Save"]))
 			$UserID,
 			$_POST['UserName'],
 			$_POST['Email'],
-			$_POST['Description'],
+			$_POST['Title'],
 			$_POST['Password']
 			);
 			   
