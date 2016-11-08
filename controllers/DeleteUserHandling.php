@@ -5,7 +5,7 @@
 
 	if(isset($_POST))
 	{
-		$deletedSuccessfully = User::deleteUser($_GET['var']);
+		$deletedSuccessfully = user::deleteUser($_GET['var']);
 		
 		header("Location: ../views/Users.php");
 	}

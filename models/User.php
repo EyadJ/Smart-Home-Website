@@ -6,8 +6,6 @@
  */
 require_once("config.php");
 
-	//include_once("abc.php");
-
 class User
 {
 	
@@ -18,10 +16,8 @@ class User
 		{
 			die('unable to connect to database [' . $db->connect_error .']');
 		}
-
-		/**
-		 * in the following lines we escape quotation such as ' and "
-		 */
+		 //in the following lines we escape quotation such as ' and "
+		 
 		$userName = $db->escape_string($userName);
 		$Title = $db->escape_string($Title);
 		$email = $db->escape_string($email);
@@ -33,14 +29,10 @@ class User
 
 		$db->query($sql);
 
-		if ($db->affected_rows == 1) 
-		{ // one record has been inserted to database successfully
-		  return TRUE;
-		} 
+		if ($db->affected_rows == 1) // one record has been inserted to database successfully
+			return TRUE;
 		else 
-		{
-		  die('unable to insert a new user into the database');
-		}
+			return FALSE;
 	}
 
 	public static function logInAttempt($email, $pass) 
@@ -58,13 +50,9 @@ class User
 		$result = $db->query($sql);
 	 
 		if ($result->num_rows >= 1)  // id number exists
-		{ 						
 			return TRUE;
-		}
 		else 
-		{
 			return FALSE;
-		}
 	}
 
 	public static function getUserDetailsByID($UserID) 
@@ -82,13 +70,10 @@ class User
 		if ($result->num_rows >= 1)  // id number exists
 		{ 			
 			$row = $result->fetch_assoc();
-			
 			return $row;
 		}
 		else 
-		{
 			return NULL;
-		}
 	}
 	
 	public static function getUsersDetails()
@@ -102,13 +87,9 @@ class User
 		$result = $db->query($sql);
 	 
 		if ($result->num_rows >= 1)  
-		{ 			
 			return $result;
-		}
 		else 
-		{
 			return NULL;
-		}
 	}
 
 	public static function deleteUser($UserID) 
@@ -126,13 +107,9 @@ class User
 		$result = $db->query($sql);
 
 		if ($result) //is true 
-		{ 
 			return TRUE;
-		} 
 		else 
-		{
 			return FALSE; 
-		}
 	}
 
 	public static function getUserName($UserID) 
@@ -154,9 +131,7 @@ class User
 			return $UserName;
 		}
 		else 
-		{
 			return NULL;
-		}
 	}
 
 	public static function getIdByEmail($email) 
@@ -178,9 +153,7 @@ class User
 			return $UserID;
 		}
 		else 
-		{
 			return NULL;
-		}
 	}
 	
 	public static function isAdmin($UserID) 
@@ -189,10 +162,9 @@ class User
 		if ($db->connect_errno > 0) {
 		  die('error: unable to connect to database');
 		}
-
 		$UserID = $db->escape_string($UserID);
+		
 		$sql = "SELECT isAdmin FROM user WHERE UserID = '$UserID';";
-
 		$result = $db->query($sql);
 	 
 		if ($result->num_rows >= 1)  // id number exists
@@ -202,9 +174,7 @@ class User
 			return $isAdmin;
 		}
 		else 
-		{
 			return NULL;
-		}
 	}
 	
 	public static function getUserAutherisedRooms($UserID) 
@@ -221,13 +191,9 @@ class User
 		$result = $db->query($sql);
 	 
 		if ($result->num_rows >= 1)  // id number exists
-		{ 			
 			return $result;
-		}
 		else 
-		{
 			return NULL;
-		}
 	}
 
 	public static function isUserAutherisedForRoom($UserID, $RoomID) 
@@ -247,13 +213,9 @@ class User
 		$result = $db->query($sql);
 	 
 		if ($result->num_rows >= 1)  // id number exists
-		{ 			
 			return TRUE;
-		}
 		else 
-		{
 			return FALSE;
-		}
 	}
 	
 	public static function isUserAutherisedToEditTask($UserID, $TaskID) 
@@ -262,42 +224,32 @@ class User
 		if ($db->connect_errno > 0) {
 		  die('unable to connect to database [' . $db->connect_error .']');
 		}
-
 		$UserID = $db->escape_string($UserID);
 		$TaskID = $db->escape_string($TaskID);
 		
 		if(!user::isAdmin($UserID))
 		{
-			$sql = "SELECT UserID FROM task 
-				WHERE TaskID = $TaskID";
-				
+			$sql = "SELECT UserID FROM task WHERE TaskID = $TaskID";
+			
 			$result = $db->query($sql);
 			
 			if(!$result->num_rows >= 1)
-			{
 				return FALSE;
-			}
 			else
 			{
 				$row = $result->fetch_assoc();
 				
 				if($UserID == $row["UserID"])
-				{
 					return TRUE;
-				}
 				else 
-				{
 					return FALSE;
-				}
 			}
 		}
 		else //isAdmin = Autherized
-		{
 			return TRUE;
-		}
 	}
 
-	public static function modifyUserDetails ($UserID, $UserName, $Email, $Title, $Password) 
+	public static function modifyUserDetails ($UserID, $UserName, $Email, $Title, $Password, $isDisabled) 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) 
@@ -310,22 +262,20 @@ class User
 		$Email = $db->escape_string($Email);
 		$Title = $db->escape_string($Title);
 		$Password = $db->escape_string($Password);
+		$isDisabled = $db->escape_string($isDisabled);
 
 		$sql = "UPDATE user "
 			. " SET UserName = '$UserName'" 
 			. " ,Email = '$Email'" 
 			. " ,Title = '$Title'" 
 			. " ,Password = '$Password'" 
+			. " ,isDisabled = $isDisabled" 
 			. " WHERE UserID = $UserID;";
 
 		if ($db->query($sql)) //TRUE
-		{ 
 			return TRUE;
-		} 
 		else 
-		{
 			return FALSE;
-		}
 	}
 	
 	public static function modifyUserImagePath ($UserID, $UserImagePath) 
@@ -343,14 +293,9 @@ class User
 			. " WHERE UserID = $UserID;";
 
 		if ($db->query($sql)) //TRUE
-		{ 
-			
 			return TRUE;
-		} 
 		else 
-		{
 			return FALSE;
-		}
 	}
 	
 	public static function AuthoriseRoom($UserID, $RoomID)
@@ -369,13 +314,9 @@ class User
 		$db->query($sql);
 
 		if ($db->affected_rows == 1) 
-		{ 
 			return TRUE;
-		} 
 		else 
-		{
 			return FALSE;
-		}
 	}
 
 	public static function unAuthoriseRoom($UserID, $RoomID)
@@ -396,13 +337,9 @@ class User
 		$result = $db->query($sql);
 
 		if ($result) //is true 
-		{ 
 			return TRUE;
-		} 
 		else 
-		{
 			return FALSE; 
-		}
 	}
 
 	public static function getUsersWhoHasControlOfAllRoomsOfThisUser($UserID) 
@@ -430,13 +367,9 @@ class User
 		$result = $db->query($sql);
 	 
 		if ($result->num_rows >= 1)  // id number exists
-		{ 			
 			return $result;
-		}
 		else 
-		{
 			return NULL;
-		}
 	}
 	
 	public static function getAdminUsers() 
@@ -451,13 +384,9 @@ class User
 		$result = $db->query($sql);
 	 
 		if ($result->num_rows >= 1)  // id number exists
-		{ 			
 			return $result;
-		}
 		else 
-		{
 			return NULL;
-		}
 	}
 	
 	

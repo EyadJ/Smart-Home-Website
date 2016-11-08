@@ -10,11 +10,11 @@
 	
 	if ($isAdmin == TRUE)
 	{
-		$result = Room::getAllRoomsDetails();
+		$result = room::getAllRoomsDetails();
 	}
 	else	//$isAdmin == FALSE (print only rooms which are autherized to some user)
 	{
-		$result = User::getUserAutherisedRooms($UserID);	
+		$result = user::getUserAutherisedRooms($UserID);	
 	}
 
 	$counter=0;
@@ -30,7 +30,7 @@
 		
 			$RoomID = $row['RoomID'];
 			//	echo  $RoomID ; 
-			$Devices = Device::getDevicesDetailsByRoomID($RoomID);
+			$Devices = device::getDevicesDetailsByRoomID($RoomID);
 			
 			echo
 			"<td style=

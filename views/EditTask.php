@@ -77,6 +77,18 @@ function UnhideAlarmDetails()
 	document.getElementById("alarmDetails").style.display ="table-row";
 }
  
+function cameraSettings(x) 
+{
+	if(x.value === "1")
+	{
+		x.parentNode.parentNode.parentNode.parentNode.childNodes[5].style.display ="table-row";
+	}
+	else
+	{
+		x.parentNode.parentNode.parentNode.parentNode.childNodes[5].style.display ="none";
+	}	
+} 
+ 
 //
 //EDIT-TASK FORM POPUPS - [END]
 //

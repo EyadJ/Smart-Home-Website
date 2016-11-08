@@ -8,7 +8,7 @@ require_once("config.php");
 
 	//include_once("abc.php");
 
-class Sensor
+class sensor
 {
 	
 	public static function getSensorsDetailsByRoomID($RoomID) 

@@ -1,10 +1,14 @@
-<?php /*error_reporting(0);*/ session_start(); if(!isset($_SESSION["Email"])){ header("Location: LogIn.php"); } 
+<?php /*error_reporting(0);*/ 
 
 	include_once("../models/user.php");
 	session_start();
 	
 if(isset($_POST["Save"]))
 {
+	$isDisabled = FALSE;
+	if(isset($_POST['isDisabled']) && $_POST['isDisabled'] == "on")
+		$isDisabled = TRUE;
+				
 	$UserID = $_GET["var"];
 	$target_dir = "../controllers/images/Users/";
 	$basename = basename($_FILES["fileToUpload"]["name"]);
@@ -49,13 +53,14 @@ if(isset($_POST["Save"]))
 			echo "Sorry, there was an error uploading your file.";
 		}
 	}
-	$modifiedSuccessfully = User::modifyUserDetails
+	$modifiedSuccessfully = user::modifyUserDetails
 			(
 			$UserID,
 			$_POST['UserName'],
 			$_POST['Email'],
 			$_POST['Title'],
-			$_POST['Password']
+			$_POST['Password'],
+			$isDisabled
 			);
 			   
 			//echo $modifiedSuccessfully;

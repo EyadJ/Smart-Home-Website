@@ -3,7 +3,7 @@
 
 	$UserID = $_SESSION["UserID"];
 
-	$row = User::getUserDetailsByID($UserID);
+	$row = user::getUserDetailsByID($UserID);
 	
 	echo '
 	<form name="formR" method="post" 
@@ -44,7 +44,22 @@
 	<tr>
 	<td>Img</td>
 	<td  align="left"><input type="file" name="fileToUpload" /></td>
-	</tr>';
+	</tr>
+	
+	<tr><td align="center" colspan="2">
+	<input type="submit" value="Save" name="Save" style="font-weight:bold; margin-left:3px;" />
+
+	&nbsp;
+	<input type="reset" value="Reset" />
+
+	&nbsp;
+
+	<a href="HomePage.php">
+	<button type = "button" align="Right">Cancel</button></a>
+
+	</td></tr>
+		</table>
+	</form>';
 ?>
 
 

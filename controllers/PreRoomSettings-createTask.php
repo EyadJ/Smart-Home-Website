@@ -17,8 +17,8 @@
 	//-------------------------------------------	---------------------------------//
 	//
 	
-	$Devices = Device::getDevicesDetailsByRoomID($RoomID);
-	$Sensors = Sensor::getSensorsDetailsByRoomID($RoomID);
+	$Devices = device::getDevicesDetailsByRoomID($RoomID);
+	$Sensors = sensor::getSensorsDetailsByRoomID($RoomID);
 		
 		
 	echo"<form method='post' action='../controllers/CreateNewTaskHandling.php'>
@@ -185,10 +185,11 @@
 			
 			if($row["DeviceName"] == "Alarm")
 			{
-				echo "<div  style='
-				width:120px; max-width:180px; display:inline-block; 
+				echo "<table 
+				style='
+				width:130px; display:inline-table; 
 				margin-right:5px; margin-left:5px; margin-top:1px; margin-bottom:1px;
-				'><table>
+				'>
 				<tr><td colspan='2'><img src='../controllers/images/devices/$row[DeviceImgPath_on]' width='60' height='60' /></td></tr>
 				
 				<tr><td colspan='2'><label>Don't Change
@@ -208,15 +209,15 @@
 				<td><input type='number' name='AlarmInterval' placeholder='(Minutes)' value=0  style='width:35px;'/></td></tr>
 				</table></td></tr>
 				
-				</table></div>";
+				</table>";
 			}
 			else if($row["DeviceName"] == "Security Camera")
 			{
 				
-				echo"<div  style='
-				width:120px; max-width:180px; display:inline-block; 
+				echo"<table style='
+				width:130px; display:inline-table; 
 				margin-right:5px; margin-left:5px; margin-top:1px; margin-bottom:1px;
-				'><table>
+				'>
 				<tr><td colspan='2'><img src='../controllers/images/devices/$row[DeviceImgPath_on]' width='60' height='60' /></td></tr>
 				
 				<tr><td colspan='2'><label>Don't Change
@@ -233,7 +234,7 @@
 				
 				<tr style='display:none;'><td colspan='2'>
 				
-				<table style='width:220px;'><tr><td>	
+				<table style='width:220px; margin:1px;'><tr><td>	
 				
 					<label style='float:left; display:inline-block; ' >
 					<input type='radio' name='cam-$row[DeviceID]-takeImgOrVideo' value='Img' checked/> Take Image/s </label>
@@ -249,7 +250,7 @@
 					</td></tr></table>
 					
 				</td></tr>	
-				</table></div>";
+				</table>";
 				
 				echo "";
 			}	
@@ -257,7 +258,7 @@
 			{
 				echo"<table 
 				style='
-				width:120px; display:inline-block; 
+				width:130px; display:inline-table; 
 				margin-right:5px; margin-left:5px; margin-top:1px; margin-bottom:1px;
 				'>
 				<tr><td colspan='2'><img src='../controllers/images/devices/$row[DeviceImgPath_on]' width='60' height='60' /></td></tr>

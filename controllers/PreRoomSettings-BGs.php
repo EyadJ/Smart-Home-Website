@@ -23,8 +23,8 @@
 				</form>
 				';
 				
-		$result = Room::getAllRoomBackgrounds($RoomID);
-		$SelectedRoomImgPath = Room::getRoomSelectedBackground($RoomID);
+		$result = room::getAllRoomBackgrounds($RoomID);
+		$SelectedRoomImgPath = room::getRoomSelectedBackground($RoomID);
 		
 			while($row = $result->fetch_assoc()) 
 			{
@@ -67,7 +67,7 @@
 					</a>";
 				}
 				
-				if(!Room::IsBackgroundDefault($RoomID, $row['ImgPath']))
+				if(!room::IsBackgroundDefault($RoomID, $row['ImgPath']))
 				{
 					if($SelectedRoomImgPath != $row['ImgPath'])
 					{

@@ -1,7 +1,7 @@
 <?php
 	include_once("../models/user.php");
 
-	$result = User::getUsersDetails();
+	$result = user::getUsersDetails();
 	while($row = $result->fetch_assoc()) 
 	{
 		echo

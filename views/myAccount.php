@@ -103,23 +103,9 @@ include_once("../controllers/Header.php");
 	include_once("../controllers/PreMyAccount.php");
 ?>
 	
-    
-<tr><td align="center" colspan="2">
-<input type="submit" value="Save" name="Save" style="font-weight:bold; margin-left:3px;" />
 
-&nbsp;
-<input type="reset" value="Reset" />
 
-&nbsp;
-
-<a href="HomePage.php">
-<button type = "button" align="Right">Cancel</button></a>
-
-</td></tr>
-    </table>
-</form>
-
-	<br /><br /><br />
+	<br /><br />
 		</div>
 
 		   

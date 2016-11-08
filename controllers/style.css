@@ -20,6 +20,42 @@ table {
 	width:96%;
    
 }
+
+.website-logo {
+	position:absolute;
+	display:inline;
+	margin-top:5px; 
+	margin-left:10px;
+}
+
+.user-settings{
+	position:absolute;
+    display:inline;
+	float: right;
+	margin-top:7px; 
+	right:20px;; 
+}
+
+.emergancy-message {
+	//border-top: 1px solid black; 
+	//border-bottom: 1px solid black; 
+	border-left: 2px solid black; 
+	border-right: 2px solid black; 
+	z-index: 1000;
+	display:inline; 
+	position: absolute;
+	width:380px;
+	background-color:#FF8C8C;
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	top: 0;
+	left: 0; 
+	right: 0;
+	bottom: 0; 
+	margin: auto; 
+}
+
 .dim {
     height:100%;
     width:100%;
@@ -73,23 +109,15 @@ table {
     height: 92px;
     filter: none;
     background: #fff;
+	border-top: 1px solid #808080; 
+	border-bottom: 4px solid black; 
     z-index: 15;
-	border-bottom-color:blue;
     -webkit-box-shadow: 0 4px 2px -2px rgba(224,217,224,0.50);
     -moz-box-shadow: 0 4px 2px -2px rgba(224,217,224,0.50);
     box-shadow: 0 4px 2px -2px rgba(224,217,224,0.50);
 
 }
 
-.page-logo {
-    float: right;
-    margin: 7px 2% 0 0;
-}
-
-.page-logo2 {
-    padding: 5px 0 5px 2%;
-    float: left;
-}
 .icon-sub-btn-1{
 	background-position:3px;
 	background-image: url(images/icon-btn-sub.jpg);
@@ -723,6 +751,72 @@ tr {
 	border:3;
 }
 
+
+
+.blink {
+    animation-duration: 1s;
+    animation-name: blink;
+    animation-iteration-count: infinite;
+    animation-timing-function: steps(2, start);
+}
+@keyframes blink {
+    80% {
+        visibility: hidden;
+    }
+}
+
+/*
+.blink {
+    animation-duration: 1s;
+    animation-name: blink;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    animation-timing-function: ease-in-out;
+}
+@keyframes blink {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;                    
+    }
+}
+
+.blink {
+    -webkit-animation-name: blinker;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    
+    -moz-animation-name: blinker;
+    -moz-animation-duration: 1s;
+    -moz-animation-timing-function: linear;
+    -moz-animation-iteration-count: infinite;
+    
+    animation-name: blinker;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@-moz-keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+@-webkit-keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+@keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+*/
 
 /*
 <div class="tooltip">Hover over me

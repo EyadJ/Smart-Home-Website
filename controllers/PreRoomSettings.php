@@ -16,7 +16,7 @@
 	
 	if(!$isAdmin)
 	{
-		if(!User::isUserAutherisedForRoom($UserID, $RoomID))
+		if(!user::isUserAutherisedForRoom($UserID, $RoomID))
 		{
 			header("Location:../views/Rooms.php");
 		}

@@ -5,7 +5,7 @@
 	$RoomID = $_GET["roomID"];
 	$RoomName = $_GET["newBG"];
 
-	Room::deleteRoomBackground($RoomID, $RoomName);
+	room::deleteRoomBackground($RoomID, $RoomName);
 
 	header("Location: ../views/RoomSettings.php?var=$RoomID");
 

@@ -1,12 +1,10 @@
 <?php
 
-
 /**
  *
  */
 require_once("config.php");
-
-	//include_once("abc.php");
+require_once("critical.php");
 
 class Device
 {
@@ -65,22 +63,36 @@ public static function switchDeviceStatus($DeviceID, $newStatus)
 			die('error: unable to connect to database');
 		}
 		
-		$DeviceID = $db->escape_string($DeviceID);
-		$newStatus = $db->escape_string($newStatus);
-	
-		$sql = "UPDATE device SET "
-			. " DeviceState = $newStatus" 
-			. ",isStatusChanged = 1" 
-			. " WHERE DeviceID = $DeviceID;";
+		//------------//
+		//check for gas leaks before turning any device ON or OFF to not cause an explosion
+		$sql = "SELECT SenesorState FROM sensor where SensorTypeID = 11";		
+		$result = $db->query($sql);
 
-		if ($db->query($sql) == TRUE) 
-		{ 
-			return TRUE;
-		} 
-		else 
+		$row = $result->fetch_assoc();
+		$smokeDetectorState = $row["SenesorState"];
+		//------------//
+		
+		if(!$smokeDetectorState)
 		{
-			return FALSE;
+			$DeviceID = $db->escape_string($DeviceID);
+			$newStatus = $db->escape_string($newStatus);
+		
+			$sql = "UPDATE device SET "
+				. " DeviceState = $newStatus" 
+				. ",isStatusChanged = 1" 
+				. " WHERE DeviceID = $DeviceID;";
+
+			if ($db->query($sql) == TRUE) 
+			{ 
+				return TRUE;
+			} 
+			else 
+			{
+				return FALSE;
+			}
 		}
+		else
+			return FALSE;
 	}
 	
 

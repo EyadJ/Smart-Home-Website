@@ -73,6 +73,7 @@
 				<th width='6.5%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Repeat Daily</th>
 				<th width='15%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Selected Sensor</th>
 				<th width='30%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Selected Device/s Action</th>
+				<th width='3%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Notify By Email</th>
 				<th width='5%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Created By</th>
 				<th width='5%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Task Enabled</th>
 				<th width='3%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Edit Task</th>
@@ -88,6 +89,7 @@
 					//$actionDateValue = "";
 					$RepeatDailyValue = $row["repeatDaily"];
 					$isDisabledValue = "";
+					$NotifyByEmailValue = ""; $resul = "30";
 					$TaskID = $row["TaskID"];
 					$SelectedSensorValue = $row["SelectedSensorValue"];
 					$UWCT_UID = $row["UserID"];		//UserWhoCreatedTask_UserID
@@ -123,6 +125,17 @@
 						$isDisabledValue = "Checkmark1.png";
 					}
 					
+					if($row["NotifyByEmail"] == 1)
+					{
+						$NotifyByEmailValue = "mail-sent.png";
+						$resul = "40";
+					}
+					else // if($row["NotifyByEmail"] == 0)
+					{
+						$NotifyByEmailValue = "mail-not-sent.png";
+						$resul = "35";
+					}
+					
 				//this is a class name according to every user id so it would be ready in case a filter was used
 			$text = "TaskOfUser_" . $UWCT_UID . "";
 				
@@ -130,7 +143,7 @@
 				<tr style='border:0px; background-color:white; height:17px;' class='taskDiv $text'>
 				<td style='border:0px;'></td><td style='border:0px;'></td><td style='border:0px;'></td>
 				<td style='border:0px;'></td><td style='border:0px;'></td><td style='border:0px;'></td>
-				<td style='border:0px;'></td>
+				<td style='border:0px;'><td style='border:0px;'></td>
 				</tr>";
 			
 			
@@ -202,13 +215,18 @@
 					echo"<br /><b>Light Status</b><br />";
 					$textValue =  "";
 					
-					if ($lightSensorValue == 850)
+					if ($lightSensorValue == 1)
 						$textValue = "On Sunrise";
 					
-					else if ($lightSensorValue == 700)
+					else if ($lightSensorValue == 0)
 						$textValue = "On Sunset";
 					
 					echo"<input type='text' name='LightValue' value = '$textValue' style='width:80px;' readonly/>";
+				}
+				else if ($sensorTypeID == 14) //Ultrasonic
+				{
+					echo"<br /><b>Action on<br />
+					 Water Level </b><input type='text' name='UltrasonicValue' value = '$SelectedSensorValue%' style='width:45px;' readonly/>";
 				}
 				else if ($sensorTypeID == 20) //Clock
 				{
@@ -270,6 +288,12 @@
 					}
 				}
 				
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------//						
+					//NOTIFY BY EMAIL
+						
+						echo "<td style='border-bottom: 2px solid black; border-top: 2px solid black;'>
+						<img src='../controllers/images/$NotifyByEmailValue' width='$resul' height='$resul' /></td>";
+										
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------//					
 					//CREATED BY USER
 					

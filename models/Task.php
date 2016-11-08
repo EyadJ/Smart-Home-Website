@@ -39,33 +39,24 @@ class Task
 		if($ActionDate != NULL && $ActionTime != NULL)
 		{
 			$sql = "INSERT INTO task 
-			(UserID, RoomID, SensorID, TaskName, ActionTime, SelectedSensorValue, repeatDaily,
-			ActionDate, AlarmDuration, AlarmInterval, NotifyByEmail) "
-		  . " VALUES ($UserID, $RoomID, $SensorID, '$TaskName', '$ActionTime', $SelectedSensorValue,
-		  $repeatDaily, '$ActionDate', $AlarmDuration, $AlarmInterval, $NotifyByEmail)";
+			(UserID, RoomID, SensorID, TaskName, ActionTime, SelectedSensorValue, repeatDaily, ActionDate, AlarmDuration, AlarmInterval, NotifyByEmail) "
+		  . " VALUES ($UserID, $RoomID, $SensorID, '$TaskName', '$ActionTime', $SelectedSensorValue, $repeatDaily, '$ActionDate', $AlarmDuration, $AlarmInterval, $NotifyByEmail)";
 		}
 		else if ($ActionDate == NULL && $ActionTime != NULL)
 		{
-			$sql = "INSERT INTO task (UserID, RoomID, SensorID, TaskName, ActionTime, SelectedSensorValue,
-			repeatDaily, AlarmDuration, AlarmInterval, NotifyByEmail) "
-		  . " VALUES ($UserID, $RoomID, $SensorID, '$TaskName', '$ActionTime', $SelectedSensorValue, 
-		  $repeatDaily, $AlarmDuration, $AlarmInterval, $NotifyByEmail)";
+			$sql = "INSERT INTO task (UserID, RoomID, SensorID, TaskName, ActionTime, SelectedSensorValue, repeatDaily, AlarmDuration, AlarmInterval, NotifyByEmail) "
+		  . " VALUES ($UserID, $RoomID, $SensorID, '$TaskName', '$ActionTime', $SelectedSensorValue, $repeatDaily, $AlarmDuration, $AlarmInterval, $NotifyByEmail)";
 		}
 		else if ($ActionDate != NULL && $ActionTime == NULL)
 		{
-			$sql = "INSERT INTO task (UserID, RoomID, SensorID, TaskName, SelectedSensorValue, repeatDaily,
-			ActionDate, AlarmDuration, AlarmInterval, NotifyByEmail) "
-		  . " VALUES ($UserID, $RoomID, $SensorID, '$TaskName', $SelectedSensorValue, $repeatDaily,
-		  '$ActionDate', $AlarmDuration, $AlarmInterval, $NotifyByEmail)";
+			$sql = "INSERT INTO task (UserID, RoomID, SensorID, TaskName, SelectedSensorValue, repeatDaily, ActionDate, AlarmDuration, AlarmInterval, NotifyByEmail) "
+		  . " VALUES ($UserID, $RoomID, $SensorID, '$TaskName', $SelectedSensorValue, $repeatDaily, '$ActionDate', $AlarmDuration, $AlarmInterval, $NotifyByEmail)";
 		}
 		else if ($ActionDate == NULL && $ActionTime == NULL)
 		{
-			$sql = "INSERT INTO task (UserID, RoomID, SensorID, TaskName, SelectedSensorValue, repeatDaily,
-			AlarmDuration, AlarmInterval, NotifyByEmail) "
-		  . " VALUES ($UserID, $RoomID, $SensorID, '$TaskName', $SelectedSensorValue, $repeatDaily, 
-		  $AlarmDuration, $AlarmInterval, $NotifyByEmail)";
+			$sql = "INSERT INTO task (UserID, RoomID, SensorID, TaskName, SelectedSensorValue, repeatDaily,	AlarmDuration, AlarmInterval, NotifyByEmail) "
+		  . " VALUES ($UserID, $RoomID, $SensorID, '$TaskName', $SelectedSensorValue, $repeatDaily, $AlarmDuration, $AlarmInterval, $NotifyByEmail)";
 		}
-		
 		//
 		// NEXT INSERT (TABLE: task_devices) //
 		//
@@ -75,7 +66,6 @@ class Task
 			$DevID[$i] = $db->escape_string($DevicesID[$i]); 					//array
 			$ReqDevState[$i] = $db->escape_string($RequiredDevicesStatus[$i]); 	//array
 		}
-		
 		if ($db->query($sql))   
 		{
 			$newlyCreatedTaskID = $db->insert_id;
@@ -91,9 +81,7 @@ class Task
 			return TRUE;
 		}
 		else 
-		{
 			return FALSE;
-		}
 	}
 	
 	

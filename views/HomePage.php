@@ -3,15 +3,13 @@
 <html>
 <head>
 <title>Homepage</title>
-  <link href="../controllers/style.css" rel="stylesheet"/>
+  <link href="../controllers/style.css?d=<?php echo time(); ?>" rel="stylesheet"/>
   
 </head>
 <body>
  
-            <div class="allcontainer">
+   <div class="allcontainer">
 			 
-			 
-
 <?php
 include_once("../controllers/Header.php");
 ?> 
@@ -24,8 +22,8 @@ include_once("../controllers/Header.php");
 	
 	echo (PrintSideMenu::autoPrint(basename(__FILE__)));
 ?>
-				</ul>
-				</div>
+		</ul>
+		</div>
          
 	</div>
 

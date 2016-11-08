@@ -1,9 +1,7 @@
 <?php /*error_reporting(0);*/ session_start(); if(!isset($_SESSION["Email"])){ header("Location: LogIn.php"); }
   
-  
 	if (isset($_POST["Create"])) 
 	{
-			
 		include_once("../models/task.php");
 		include_once("../models/device.php");
 		include_once("../models/sensor.php");
@@ -24,7 +22,7 @@
 		$selectedDevicesStatus; 	//(array)
 		$NotifyByEmail = 0;
 		if(isset($_POST["NotifyByEmail"])) $NotifyByEmail = 1;
-
+		
 		//-------------------------SELECTED SENSOR CODE----------------------------//
 		if($SelectedSensorTypeId == 10)		//Motion
 		{
@@ -61,8 +59,7 @@
 			$SelectedSensorValue = 0;
 		}
 		//-------------------------------------------------------------------------//
-		//
-		//
+		
 		if ($_POST["TaskOccurrence"] == "repeat") 
 		{
 			$repeatDaily = 1;
@@ -80,17 +77,14 @@
 				$ActionDate = $_POST["ActionDate"];
 			}
 		}
-		//
-		//
-		
-		
 		$result = device::getDevicesIdsByRoomID($RoomID);
 		
 		$i = 0;
 		while ($row = $result->fetch_assoc())
 		{
-			$devicesIDs[$i] = $row["DeviceID"];
-			//var_dump($devicesIDs[$i]);
+			$currentDevID = $row["DeviceID"];
+			
+			$devicesIDs[$i] = $currentDevID;
 			
 			$selectedDevicesStatus[$i] = $_POST[$devicesIDs[$i]];
 			
@@ -98,39 +92,9 @@
 		}
 			
 			task::createNewTask
-			(
-			$UserID,
-			$RoomID,
-			$TaskName,
-			$ActionTime,
-			$SelectedSensorValue,
-			$repeatDaily,
-			$ActionDate,
-			$selectedSensorID,
-			$AlarmDuration,
-			$AlarmInterval,
-			$devicesIDs,
-			$selectedDevicesStatus,
-			$NotifyByEmail
-			);
+			($UserID, $RoomID, $TaskName, $ActionTime, $SelectedSensorValue, $repeatDaily, $ActionDate, $selectedSensorID, $AlarmDuration, $AlarmInterval, $devicesIDs, $selectedDevicesStatus, $NotifyByEmail);
 		
 			header("Location: ../views/RoomSettings.php?var=$RoomID");
-			
 	}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 ?>

@@ -13,7 +13,7 @@
 
 	if ($isAdmin == TRUE)
 	{
-		$roomsResult = Room::getAllRoomsDetails();
+		$roomsResult = room::getAllRoomsDetails();
 	}
 	else	//$isAdmin == FALSE (print only rooms which are autherized to some user)
 	{
@@ -25,18 +25,9 @@
 		
 	echo "<br /><b><div id='FiltersDiv' 
 	style='	
-	display:none;
-	background-color:#CCCCCC;
-	width:300px;
-	height:35px;
-	border: 2px solid black;
-	padding:20px;
-	bottom:0;
-	top:0;
-	left:0;
-	right:0;
-	margin:auto;
-	'>
+	display:none; background-color:#CCCCCC; width:300px; height:35px; border: 2px solid black;
+	padding:20px; bottom:0; top:0; left:0; right:0; margin:auto; '>
+	
 	<div style='display:inline-block; padding-right:20px;'>
 	&nbsp;Rooms to Display<br /><select onchange='roomsVisibility(this.value);'>";
 	
@@ -75,7 +66,7 @@
 			//GETTING DATA AGAIN FROM THE DATABASE
 	if ($isAdmin == TRUE)
 	{
-		$roomsResult = Room::getAllRoomsDetails();
+		$roomsResult = room::getAllRoomsDetails();
 	}
 	else	//$isAdmin == FALSE (print only rooms which are autherized to some user)
 	{
@@ -96,19 +87,14 @@
 			<tr align='center'><td>".
 			"<B>".$r_Row['RoomName']."</B>
 			<br />
+			
 			<img src='../controllers/images/rooms/".$r_Row['RoomImgPath'].
 			"' style='margin-right:auto; margin-left:auto; width:80px; '/>
 			</td></tr></table>
 			
 			<a href='RoomSettings.php?var=". $RoomID ."' style='text-decoration:none;'> 
-			<img src='../controllers/images/edit.png' 
-			width='30px' 
-			style=
-			'
-			z-index:0;
-			margin-bottom:-15px;
-			margin-right:20px;
-			'/>
+			<img src='../controllers/images/edit.png' width='30px' 
+			style='z-index:0; margin-bottom:-15px; margin-right:20px;'/>
 			</a>";
 			
 		//------------------------------------------------------------------------------------//	
@@ -124,7 +110,7 @@
 			$devices = NULL;
 			$sensors = NULL;
 			
-			$devices_Original = Device::getDevicesDetailsByRoomID($RoomID);
+			$devices_Original = device::getDevicesDetailsByRoomID($RoomID);
 
 			while($row = $devices_Original->fetch_assoc()) 
 			{
@@ -133,7 +119,7 @@
 			}
 			//
 			//
-			$sensors_Original = Sensor::getSensorsDetailsByRoomID($RoomID);
+			$sensors_Original = sensor::getSensorsDetailsByRoomID($RoomID);
 
 			while($row = $sensors_Original->fetch_assoc()) 
 			{
@@ -167,6 +153,7 @@
 				<th width='6.5%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Repeat Daily</th>
 				<th width='15%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Selected Sensor</th>
 				<th width='30%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Selected Device/s Action</th>
+				<th width='3%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Notify By Email</th>
 				<th width='5%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Created By</th>
 				<th width='5%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Task Enabled</th>
 				<th width='3%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Edit Task</th>
@@ -183,6 +170,7 @@
 					//$actionDateValue = "";
 					$RepeatDailyValue = $row["repeatDaily"];
 					$isDisabledValue = "";
+					$NotifyByEmailValue = ""; $resul = "30";
 					$TaskID = $row["TaskID"];
 					$SelectedSensorValue = $row["SelectedSensorValue"];
 					$UWCT_UID = $row["UserID"];		//UserWhoCreatedTask_UserID
@@ -217,7 +205,18 @@
 					{
 						$isDisabledValue = "Checkmark1.png";
 					}
-
+					
+					if($row["NotifyByEmail"] == 1)
+					{
+						$NotifyByEmailValue = "mail-sent.png";
+						$resul = "40";
+					}
+					else // if($row["NotifyByEmail"] == 0)
+					{
+						$NotifyByEmailValue = "mail-not-sent.png";
+						$resul = "35";
+					}
+					
 				//this is a class name according to every user id so it would be ready in case a filter was used
 			$text = "TaskOfUser_" . $UWCT_UID . "";
 				
@@ -225,10 +224,10 @@
 				<tr style='border:0px; background-color:white; height:17px;' class='taskDiv $text'>
 				<td style='border:0px;'></td><td style='border:0px;'></td><td style='border:0px;'></td>
 				<td style='border:0px;'></td><td style='border:0px;'></td><td style='border:0px;'></td>
-				<td style='border:0px;'></td>
+				<td style='border:0px;'><td style='border:0px;'></td>
 				</tr>";
-			
-			
+
+			//	
 			//table body (one task) "ALL OF THE FOLLOWING"
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------//
 				//TASK NAME
@@ -297,13 +296,18 @@
 					echo"<br /><b>Light Status</b><br />";
 					$textValue =  "";
 					
-					if ($lightSensorValue == 850)
+					if ($lightSensorValue == 1)
 						$textValue = "On Sunrise";
 					
-					else if ($lightSensorValue == 700)
+					else if ($lightSensorValue == 0)
 						$textValue = "On Sunset";
 					
 					echo"<input type='text' name='LightValue' value = '$textValue' style='width:80px;' readonly/>";
+				}
+				else if ($sensorTypeID == 14) //Ultrasonic
+				{
+					echo"<br /><b>Action on<br />
+					 Water Level </b><input type='text' name='UltrasonicValue' value = '$SelectedSensorValue%' style='width:45px;' readonly/>";
 				}
 				else if ($sensorTypeID == 20) //Clock
 				{
@@ -343,20 +347,13 @@
 						
 						echo"
 						<table
-						style='
-						width:110px; 
-						border:0; 
-						padding:0; 
-						margin:0; 
-						position:absolute; 
-						display:none;
-						background-color:#CCCCCC;
-						z-index:2;
-						font-size:11px;
-						'>
+						style='width:110px; border:0; padding:0; margin:0; position:absolute; display:none;
+						background-color:#CCCCCC; z-index:2; font-size:11px; '>
+						
 						<tr><td>Duration
 						<input type='number' name='AlarmDuration' value='$row[AlarmDuration]' 
 						style='width:35px; height:17px;' readonly/> min</td></tr>
+						
 						<tr><td>Interval
 						<input type='number' name='AlarmInterval' value='$row[AlarmInterval]' 
 						style='width:35px; height:17px;' readonly/> min</td></tr>
@@ -372,6 +369,12 @@
 					}
 				}
 				
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------//						
+					//NOTIFY BY EMAIL
+						
+						echo "<td style='border-bottom: 2px solid black; border-top: 2px solid black;'>
+						<img src='../controllers/images/$NotifyByEmailValue' width='$resul' height='$resul' /></td>";
+												
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------//					
 					//CREATED BY USER
 					
