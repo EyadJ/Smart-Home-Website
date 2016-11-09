@@ -24,14 +24,17 @@ table {
 		return decodeURIComponent(results[2].replace(/\+/g, " "));
 	}
 
-	var unSuccessfullLogIn = getParameterByName('InCorrectPassword');
+	var unSuccessfullLogIn = getParameterByName('message');
 	
 	function checkPass()
 	{
-		if(unSuccessfullLogIn)
+		if(unSuccessfullLogIn === "InCorrectPassword")
 		{
-			//alert(unSuccessfullLogIn);
-			document.getElementById("wrongPass").innerHTML = "<font color='red'><b>The Email or Password is Not Correct!</b></font>";
+			document.getElementById("logInProblem").innerHTML = "<font color='red'><b>The Email or Password is Not Correct!</b></font>";
+		}
+		else if(unSuccessfullLogIn === "AccountDisabled")
+		{
+			document.getElementById("logInProblem").innerHTML = "<font color='red'><b>Your Account is Disabled. Contact the Admin</b></font>";
 		}
 	}
 	</script>
@@ -61,7 +64,7 @@ table {
 	
 	echo $string;
 ?>
-	<div id="wrongPass"  align='center'></div>
+	<div id="logInProblem"  align='center'></div>
 	</td></tr>
     <tr><td colspan="2" align="center"><button style=" width:100px;" type="submit">log in</button></td></tr>
     </table>

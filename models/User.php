@@ -164,17 +164,40 @@ class User
 		}
 		$UserID = $db->escape_string($UserID);
 		
-		$sql = "SELECT isAdmin FROM user WHERE UserID = '$UserID';";
+		$sql = "SELECT isAdmin FROM user WHERE UserID = $UserID;";
 		$result = $db->query($sql);
 	 
 		if ($result->num_rows >= 1)  // id number exists
 		{ 			
 			$row = $result->fetch_assoc();
 			$isAdmin  = $row['isAdmin'];
+			
 			return $isAdmin;
 		}
 		else 
-			return NULL;
+			return FALSE;
+	}	
+	
+	public static function isDisabled($UserID) 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) {
+		  die('error: unable to connect to database');
+		}
+		$UserID = $db->escape_string($UserID);
+		
+		$sql = "SELECT isDisabled FROM user WHERE UserID = $UserID;";
+		$result = $db->query($sql);
+	 
+		if ($result->num_rows >= 1)  // id number exists
+		{
+			$row = $result->fetch_assoc();
+			$isDisabled  = $row['isDisabled'];
+			
+			return $isDisabled;
+		}
+		else 
+			return TRUE;
 	}
 	
 	public static function getUserAutherisedRooms($UserID) 
@@ -186,7 +209,7 @@ class User
 
 		$UserID = $db->escape_string($UserID);
 		$sql = "SELECT * FROM room WHERE RoomID IN 
-		(SELECT RoomID FROM user_authorized_rooms WHERE UserID = '$UserID')";
+		(SELECT RoomID FROM user_authorized_rooms WHERE UserID = $UserID)";
 
 		$result = $db->query($sql);
 	 

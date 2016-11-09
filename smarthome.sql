@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 08, 2016 at 05:40 AM
+-- Generation Time: Nov 09, 2016 at 12:19 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -80,9 +80,9 @@ INSERT INTO `device` (`DeviceID`, `RoomID`, `DeviceName`, `DeviceState`, `GateNu
 (801, 108, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-19 11:33:51', 60),
 (901, 109, 'Roof Lamp', b'0', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'1', '2016-10-31 21:50:22', 120),
 (902, 109, 'Garage Door', b'0', -1, 'Garage-door_open.png', 'Garage-door_closed.png', b'1', '2016-11-05 05:23:23', 0),
-(1001, 110, 'Security Camera', b'0', 0, 'security-camera_on.png', 'security-camera_off.png', b'1', '2016-11-01 04:52:35', 0),
+(1001, 110, 'Security Camera', b'1', 0, 'security-camera_on.png', 'security-camera_off.png', b'1', '2016-11-08 09:41:26', 0),
 (1002, 110, 'Security Camera', b'1', 0, 'security-camera_on.png', 'security-camera_off.png', b'1', '2016-11-05 05:22:23', 0),
-(1004, 110, 'Alarm', b'0', 0, 'alarm.png', 'alarm_off.png', b'1', '2016-11-03 17:35:58', 0);
+(1004, 110, 'Alarm', b'0', 0, 'alarm.png', 'alarm_off.png', b'1', '2016-11-08 09:49:43', 0);
 
 -- --------------------------------------------------------
 
@@ -243,8 +243,8 @@ INSERT INTO `ip_address` (`ID`, `DeviceName`, `IPaddress`) VALUES
 (1, 'Router', '192.168.1.1'),
 (2, 'Raspberry Pi', '192.168.1.x'),
 (3, 'Relay Switch', '192.168.1.x'),
-(4, 'Camera 1', '192.168.1.x'),
-(5, 'Camera 2', '192.168.1.x');
+(4, 'Security Camera 1', '192.168.1.100'),
+(5, 'Security Camera 2', '192.168.1.101');
 
 -- --------------------------------------------------------
 
@@ -566,7 +566,7 @@ INSERT INTO `user` (`UserID`, `Email`, `UserName`, `Title`, `Password`, `isAdmin
 (1, 'system.admin@gmail.com', 'System Admin', 'Admin', '1234', b'1', b'0', 'superAdmin.png'),
 (3, 'abdullah.alghamdi@gmail.com', 'Abdullah Alghamdi', 'Father', '123321', b'1', b'0', 'abdullah.jpg'),
 (4, 'Huda.Azzahrani@gmail.com', 'Huda Azzahrani', 'Mother', '12345', b'0', b'0', 'huda.png'),
-(5, 'Ahmad.alghamdi@hotmail.com', 'Ahmad alghamdi', 'Son', '123123', b'0', b'1', 'ahmad.jpg'),
+(5, 'Ahmad.alghamdi@hotmail.com', 'Ahmad alghamdi', 'Son', '123123', b'0', b'0', 'ahmad.jpg'),
 (7, 'Sarah.alghamdi@gmail.com', 'Sarah Alghamdi', 'Daughter', '44332211', b'0', b'0', 'sarah.png');
 
 -- --------------------------------------------------------

@@ -5,9 +5,9 @@
 	
 if(isset($_POST["Save"]))
 {
-	$isDisabled = FALSE;
+	$isDisabled = 0;
 	if(isset($_POST['isDisabled']) && $_POST['isDisabled'] == "on")
-		$isDisabled = TRUE;
+		$isDisabled = 1;
 				
 	$UserID = $_GET["var"];
 	$target_dir = "../controllers/images/Users/";

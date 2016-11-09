@@ -54,8 +54,9 @@
 	</tr>
 	
 	<tr style="background-color:#CCCCCC"><td>Disable Account</td>
-	<label><td align="center"><input type="checkbox" name="isDisabled" ' . $text . '/></td></label>
-	</tr> 
+	<td align="center">
+	<input type="checkbox" name="isDisabled" ' . $text . '/>
+	</td></tr> 
 	 
 	<tr><td align="center" colspan="2">
 	<input type="submit" value="Save" name="Save" style="font-weight:bold; margin-left:3px;" /> &nbsp;

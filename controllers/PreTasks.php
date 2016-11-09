@@ -312,7 +312,7 @@
 				else if ($sensorTypeID == 20) //Clock
 				{
 					echo"<br /><b>Action Time</b><br />
-					<input type='time' name='ActionTime' value = '$row[ActionTime]' style='width:100px;' readonly/>";
+					<input type='time' name='ActionTime' value = '$row[ActionTime]' style='width:96px;' readonly/>";
 				}
 				
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------//			

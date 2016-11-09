@@ -174,6 +174,8 @@ include_once("../controllers/Header.php");
 <form name="formR" method="post" enctype="multipart/form-data" action="../controllers/addUserHandling.php">
 <table id='AddNewUserTable' style="width:615px; display:none;">
 
+<th colspan="2" height="27px"><b> Add New User </b></th>
+
 <tr><td>Username</td><td align="left">
 &nbsp;&nbsp;<input type="text" name="userName" maxlength="25" required/> &nbsp; (First & Last Names) 
     </td>
@@ -199,8 +201,8 @@ include_once("../controllers/Header.php");
     
     </td>
     </tr>
-    <tr><td colspan="2"><b>Please add the required rooms for this user to control after the user is created</b></td></tr>
-<tr><td align="left" colspan="2">
+    <tr><td colspan="2" style="background-color:#CCCCCC;"><b>Please add the required rooms for this user to control after the user is created</b></td></tr>
+<tr><th align="left" colspan="2" height="27px">
 
 <div style="width:200px; margin-left:auto; margin-right:auto; ">
 <input type="submit" value="Save"/>&nbsp;
@@ -210,7 +212,7 @@ include_once("../controllers/Header.php");
 </a> 
 </div>
 
-</td></tr>
+</th></tr>
 
     </table>
 </form>
@@ -219,7 +221,7 @@ include_once("../controllers/Header.php");
 	
 	
 <form method="post">
-<table >
+<table style="width:80%;">
 	<thead><tr>
 	<th width="20%" >Img</th>
 	<th width="30%" >Name</th>
