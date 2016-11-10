@@ -4,7 +4,7 @@
 <head>
 <title>Security Cameras</title>
   <link href="../controllers/style.css" rel="stylesheet"/>
-  
+
 <script>
  
 function HideUnhideDiv1() 
@@ -129,13 +129,13 @@ include_once("../controllers/Header.php");
 				<br />
 					<a  href="#" onclick="reduceDivsSize();" style="text-decoration:none; ">
 						<div class="tooltip"><span class="tooltiptext">Cluster</span>
-							<img align="center" id="abc" src="../controllers/images/view-cluster.png" width="40"/>
+							<img align="center" id="abc" src="../controllers/images/view-cluster.png" width="40px"/>
 						</div>
 					</a>
 				
 					<a  href="#" onclick="increaseDivsSizeBackToNormal();return false;" style="text-decoration:none; ">
 						<div class="tooltip"><span class="tooltiptext">Blocks</span>
-							<img align="center" id="abc" src="../controllers/images/view-blocks.png" width="60"/>
+							<img align="center" id="abc" src="../controllers/images/view-blocks.png" width="60px"/>
 						</div>
 					</a>
 			</div>
@@ -165,7 +165,7 @@ include_once("../controllers/Header.php");
 	style="width:24%; min-width:325px; display :inline-block; position:absolute; left:0%; top:90px;">
 
 	<span id="right-div1-minus" style="visibility:hidden;">
-		<a  href="#" onclick="" style="text-decoration:none;">	
+		<a  href="#" onclick="HideUnhideDiv1();return false;" style="text-decoration:none;">	
 		<img src="../controllers/images/div-minus-red.png"
 				id="div-minus1"
 				width="40px" 
@@ -180,7 +180,15 @@ include_once("../controllers/Header.php");
 		
             <div class="right-div-secondary-title" style="width:166px;"><b>Security Camera 1</b></div>
             		
-		<img style="margin-left:5%; max-height:800px;" src="http://192.168.1.101/video.cgi" width ="90%" alt="Cannot Establish Connection with this Camera"/>
+		<img style="margin-left:5%; max-height:800px;" src="http://192.168.1.101/video.cgi" width ="90%" 
+		alt="Cannot Establish Connection with this Camera" 
+		onerror="this.onerror=null;this.src='../controllers/images/Camera-not-connected.jpg';"/>
+		
+		<a href="http://192.168.1.101" target="_blank"> 
+			<img src='../controllers/images/settings-icon (1).png' width='40px' height='40px'
+			
+			style=' z-index:0; position:absolute; bottom:8%; right:7%; '/>
+		</a>
 		
 		<br /><br />
        
@@ -211,7 +219,7 @@ include_once("../controllers/Header.php");
 		style="width:24%; min-width:325px; display :inline-block; position:absolute; left:26%; top:90px;">
 	
 		<span id="right-div2-minus" style="visibility:hidden;">
-		<a href="#" onclick="" style="text-decoration:none;">	
+		<a href="#" onclick="HideUnhideDiv2();return false;" style="text-decoration:none;">	
 			<img src="../controllers/images/div-minus-red.png"
 				id="div-minus1"
 				width="40px" 
@@ -224,8 +232,16 @@ include_once("../controllers/Header.php");
 
 		<div class="right-div-secondary-title" style="width:166px;"><b>Security Camera 2</b></div>
 	
-		<img style="margin-left:5%;" src="http://192.168.1.100/video.cgi" width ="90%" height="this.width" alt="Cannot Establish Connection with this Camera"/>
+		<img style="margin-left:5%;" src="http://192.168.1.100/video.cgi" width ="90%" height="this.width" 
+		alt="Cannot Establish Connection with this Camera" 
+		onerror="this.onerror=null;this.src='../controllers/images/Camera-not-connected.jpg';"/>
 		
+		<a href="http://192.168.1.100" target="_blank"> 
+			<img src='../controllers/images/settings-icon (1).png' width='40px' height='40px'
+			
+			style=' z-index:0; position:absolute; bottom:8%; right:7%; '/>
+		</a>
+			
 		<br /><br 	/>
 	</div>
 </div>

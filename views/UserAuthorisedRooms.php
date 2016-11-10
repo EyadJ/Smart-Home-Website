@@ -6,7 +6,7 @@
   <link href="../controllers/style.css" rel="stylesheet"/>
 
 <style>
-#roomDiv:hover{
+.roomDiv:hover{
 	background-color:#CCCCCC;
 }
 </style>  

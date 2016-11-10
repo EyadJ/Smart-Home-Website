@@ -1,10 +1,9 @@
 <?php
 
-		
+	/*	
 	//----------------------------------------------------------------------------//
+	//
 	include_once("../models/user.php");
-	include_once("../models/device.php");
-	include_once("../models/sensor.php");
 	include_once("../models/task.php");
 
 	$isAdmin = $_SESSION["Admin"];
@@ -18,6 +17,15 @@
 	
 	//CHECK
 	if($RoomID == NULL || !$isUsrAthrisd || $taskDetails == NULL) header("Location: ../views/$referrer"); //if user manipulated the task id (3 checks)
+	
+	//
+	//^^^^^ALREADY INCLUDED IN (PreEditTask-SecurityChecks.php)- LEFT FOR CONVENIENCE^^^^^^
+	//
+	//-------------------------------------------	---------------------------------//
+	*/
+	
+	include_once("../models/device.php");
+	include_once("../models/sensor.php");
 	
 	$Devices = device::getDevicesDetailsByRoomID($RoomID);
 	$Sensors = sensor::getSensorsDetailsByRoomID($RoomID);
@@ -66,7 +74,7 @@
 				//$text5 = "value='$ActionDate'"; 
 			}
 		}
-			
+
 		//	TaskOccurrence
 		echo"<td width='250px'>
 		<label style='float:left;' ><input type='radio' name='TaskOccurrence' value='repeat' $text1 
@@ -97,9 +105,7 @@
 		$NotifyByEmail = $taskDetails["NotifyByEmail"];
 		
 		if($NotifyByEmail == TRUE)
-		{
 			$text1 = "checked";
-		}
 		
 		echo"</td><td width='110px'>
 		<label><input type='checkbox' name='NotifyByEmail' $text1/> 
@@ -113,9 +119,7 @@
 		$isDisabled = $taskDetails["isDisabled"];
 		
 		if($isDisabled == TRUE)
-		{
 			$text1 = "checked";
-		}
 		
 		echo"<td colspan='3'>
 		<label><input type='checkbox' name='isDisabled' $text1/> 
@@ -278,9 +282,6 @@
 		echo "</tr><tr><th width='10%'>Select Device/s Required Action</th>
 				<td colspan='3'>";
 		
-		
-		
-		
 		$devices_Original = device::getDevicesDetailsByRoomID($RoomID);
 		$devicesArray;
 		
@@ -293,7 +294,6 @@
 			
 			$i++;
 		}
-		
 		
 		$taskDevices = task::getTaskDevices($TaskID);
 		$taskDevicesArray ;
@@ -337,8 +337,7 @@
 				$option3 = "checked";
 			}
 			
-			
-			
+			//
 			if($DeviceName == "Alarm")
 			{
 				echo "<table 
@@ -407,7 +406,6 @@
 			}
 			else if($row["DeviceName"] == "Security Camera")
 			{
-				
 				echo"<table style='
 				width:130px; display:inline-table; 
 				margin-right:5px; margin-left:5px; margin-top:1px; margin-bottom:1px;

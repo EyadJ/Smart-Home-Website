@@ -20,7 +20,7 @@ class Device
 		$sql = "SELECT * FROM device where RoomID = '$RoomID'";
 		$result = $db->query($sql);
 	 
-		if ($result->num_rows >= 1)  
+		if ($result != NULL && $result->num_rows >= 1)  
 			return $result;
 		else 
 			return NULL;
@@ -37,7 +37,7 @@ class Device
 		$sql = "SELECT DeviceID FROM device where RoomID = '$RoomID'";
 		$result = $db->query($sql);
 	 
-		if ($result->num_rows >= 1)  
+		if ($result != NULL && $result->num_rows >= 1)  
 			return $result;
 		else 
 			return NULL;
@@ -90,7 +90,7 @@ class Device
 		$sql = "SELECT DeviceName FROM device where DeviceID = $DeviceID";
 		$result = $db->query($sql);
 	 
-		if ($result->num_rows >= 1)  
+		if ($result != NULL && $result->num_rows >= 1)  
 		{
 			$row = $result -> fetch_assoc();
 			

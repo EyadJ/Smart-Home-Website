@@ -18,9 +18,6 @@
 			</td>
 			<td>
 			<img src='../controllers/images/Modify-unavailable.png' width='50' height='50'/>
-			</td>
-			<td>
-			<img src='../controllers/images/Delete_Icon-unavailable.png' width='50' height='50'/>
 			</td></tr>"  ;	
 		}
 		else
@@ -35,12 +32,8 @@
 			<td>
 			<a href='modifyUserSettings.php?var=$row[UserID]'>
 			<img src='../controllers/images/Modify.jpg' width='50' height='50'/>
-			</td></a>
-			<td>
-			<a href='#' onclick='deleteUserMsg($row[UserID]);return false;' style='text-decoration:none;'>
-			<img src='../controllers/images/Delete_Icon.png' width='50' height='50'/>
-			</a></td></tr>"  ;	
-			//$row[UserName]
+			</td></a></tr>"  ;	
+			
 		}		
     }
 ?>

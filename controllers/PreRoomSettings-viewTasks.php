@@ -91,12 +91,12 @@
 					$isDisabledValue = "";
 					$NotifyByEmailValue = ""; $resul = "30";
 					$TaskID = $row["TaskID"];
+					$TaskCreationDate = $row["DateCreated"];
 					$SelectedSensorValue = $row["SelectedSensorValue"];
 					$UWCT_UID = $row["UserID"];		//UserWhoCreatedTask_UserID
 					$UWCT_UN = $AllUsersArray[$UWCT_UID]["UserName"];		//UserWhoCreatedTask_UserName
 					$UWCT_IP = $AllUsersArray[$UWCT_UID]["UserImagePath"];		//UserWhoCreatedTask_ImagePath
 					$UWCT_iA = $AllUsersArray[$UWCT_UID]["isAdmin"];		//UserWhoCreatedTask_isAdmin
-					
 					
 					$isAdminValue = "User";
 					if($UWCT_iA == 1)
@@ -195,7 +195,8 @@
 					else
 					{
 						echo"<br /><b>After no Detection</b><br />
-						<input type='number' name='MotionValue' value = '$SelectedSensorValue' style='width:50px;' readonly/> Minutes";
+						<input type='text' name='MotionValue' value = '$SelectedSensorValue' 
+						style='width:30px;' readonly/> Minutes";
 					}
 					
 				}
@@ -301,7 +302,8 @@
 						<td style='border-bottom: 2px solid black; border-top: 2px solid black;'>
 						<div class='tooltip'>
 						<span class='tooltiptext'>
-						This Task was Created by: <B><i>" . $UWCT_UN . " </i></B> [" . $isAdminValue . "] </span>
+						This Task was Created by: <B><i>" . $UWCT_UN . " </i></B> [" . $isAdminValue . "] 
+						<br />Creation Date: <h5 style='display:inline;'><u>" . $TaskCreationDate . "</u></h5></span>	
 						<img src='../controllers/images/users/" . $UWCT_IP . "' 
 						width='50' height='50' />
 						<img src='../controllers/images/info.png' style='width:12px; height:12px; position:absolute; top:1px; right:1px;'/>
@@ -316,11 +318,16 @@
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------//						
 					//EDIT TASK
 						
-						echo "<td style='border-bottom: 2px solid black; border-top: 2px solid black;'>
-						<a href='EditTask.php?var=$TaskID&referrer=RoomSettings.php?var=$RoomID' style='text-decoration:none;'>
-						<img src='../controllers/images/edit4.png' width='30' height='30' /></td>
-						</a>
-						</tr>";
+						echo "<td style='border-bottom: 2px solid black; border-top: 2px solid black;'>";
+					
+						//if the current user is an admin or if he is the one who created the task
+						if($isAdmin || $UserID == $UWCT_UID)		
+							echo"<a href='EditTask.php?var=$TaskID&referrer=Tasks.php' style='text-decoration:none;'>
+							<img src='../controllers/images/edit4.png' width='30' height='30' /></a>";
+						else
+							echo"<img src='../controllers/images/edit-not-available.png' width='20' height='20' />";
+						
+						echo "</td></tr>";
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------//						
 			}
 			echo "</table>";

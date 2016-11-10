@@ -24,14 +24,54 @@ function HideUnhideDiv1()
 	}
 }
 
+function deleteUserMsg(id) 
+{
+	document.getElementById("deleteMsg").style.display ="inline";	
+	document.getElementById("deleteMsgDim").style.display ="inline";	
+	
+	document.getElementById("deleteUserForm").action="../controllers/DeleteUserHandling.php?var=" + id ;
+}
+
+function deleteUserSubmitClicked() 
+{
+	document.getElementById("deleteUserForm").submit();
+}
+
+function hideDeleteUserMsg() 
+{
+	document.getElementById("deleteMsg").style.display ="none";	
+	document.getElementById("deleteMsgDim").style.display ="none";	
+}
+
 </script>
 </head>
 <body>
      <div class="allcontainer">
 	 
 	 
+
+
+<form name="delete" method="post" id="deleteUserForm">
+
+<div class="dim" id="deleteMsgDim"></div>  
+		<table  class="dialog" id="deleteMsg" style="width:450px; height:146px;">
+			<tr><td>
+			<b><h3 id="message">Are you sure you want to delete this User ?</h3></b><br />
+			&nbsp;<b>NOTE:</b> Make sure the user has no <u>Tasks</u> or <u>Rooms</u> under his name in order to delete him/her.
+			</td></tr>
+			<tr><th style="height:30px;">	
+			<a href='#' onclick="deleteUserSubmitClicked();return false;" style="text-decoration:none; ">
+			<button type='button' style="color:red;">Delete</button>
+			</a>
+			<a href='#' onclick="hideDeleteUserMsg();return false;" style="text-decoration:none; ">
+			<button type='button'>Cancel</button>
+			</a>
+			</th></tr>
+		</table>
+		
+	</form>
 			 
-			
+
            
 <?php
 include_once("../controllers/Header.php");

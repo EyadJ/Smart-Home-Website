@@ -49,7 +49,7 @@ class User
 		
 		$result = $db->query($sql);
 	 
-		if ($result->num_rows >= 1)  // id number exists
+		if ($result != NULL && $result->num_rows >= 1)  // id number exists
 			return TRUE;
 		else 
 			return FALSE;
@@ -67,7 +67,7 @@ class User
 
 		$result = $db->query($sql);
 	 
-		if ($result->num_rows >= 1)  // id number exists
+		if ($result != NULL && $result->num_rows >= 1)  // id number exists
 		{ 			
 			$row = $result->fetch_assoc();
 			return $row;
@@ -86,7 +86,7 @@ class User
 		$sql = "SELECT * FROM user";
 		$result = $db->query($sql);
 	 
-		if ($result->num_rows >= 1)  
+		if ($result != NULL && $result->num_rows >= 1)  
 			return $result;
 		else 
 			return NULL;
@@ -124,7 +124,7 @@ class User
 
 		$result = $db->query($sql);
 	 
-		if ($result->num_rows >= 1)  // id number exists
+		if ($result != NULL && $result->num_rows >= 1)  // id number exists
 		{ 			
 			$row = $result->fetch_assoc();
 			$UserName  = $row['UserName'];
@@ -146,7 +146,7 @@ class User
 
 		$result = $db->query($sql);
 	 
-		if ($result->num_rows >= 1)  // id number exists
+		if ($result != NULL && $result->num_rows >= 1)  // id number exists
 		{ 			
 			$row = $result->fetch_assoc();
 			$UserID  = $row['UserID'];
@@ -167,7 +167,7 @@ class User
 		$sql = "SELECT isAdmin FROM user WHERE UserID = $UserID;";
 		$result = $db->query($sql);
 	 
-		if ($result->num_rows >= 1)  // id number exists
+		if ($result != NULL && $result->num_rows >= 1)  // id number exists
 		{ 			
 			$row = $result->fetch_assoc();
 			$isAdmin  = $row['isAdmin'];
@@ -189,7 +189,7 @@ class User
 		$sql = "SELECT isDisabled FROM user WHERE UserID = $UserID;";
 		$result = $db->query($sql);
 	 
-		if ($result->num_rows >= 1)  // id number exists
+		if ($result != NULL && $result->num_rows >= 1)  // id number exists
 		{
 			$row = $result->fetch_assoc();
 			$isDisabled  = $row['isDisabled'];
@@ -213,7 +213,7 @@ class User
 
 		$result = $db->query($sql);
 	 
-		if ($result->num_rows >= 1)  // id number exists
+		if ($result != NULL && $result->num_rows >= 1)  // id number exists
 			return $result;
 		else 
 			return NULL;
@@ -235,7 +235,7 @@ class User
 
 		$result = $db->query($sql);
 	 
-		if ($result->num_rows >= 1)  // id number exists
+		if ($result != NULL && $result->num_rows >= 1)  // id number exists
 			return TRUE;
 		else 
 			return FALSE;
@@ -250,15 +250,13 @@ class User
 		$UserID = $db->escape_string($UserID);
 		$TaskID = $db->escape_string($TaskID);
 		
-		if(!user::isAdmin($UserID))
+		if(!user::isAdmin($UserID))		//if he isn't admin go in & check if he created the task
 		{
 			$sql = "SELECT UserID FROM task WHERE TaskID = $TaskID";
 			
 			$result = $db->query($sql);
 			
-			if(!$result->num_rows >= 1)
-				return FALSE;
-			else
+			if($result != NULL && $result->num_rows >= 1)
 			{
 				$row = $result->fetch_assoc();
 				
@@ -267,6 +265,8 @@ class User
 				else 
 					return FALSE;
 			}
+			else
+				return FALSE;	
 		}
 		else //isAdmin = Autherized
 			return TRUE;
@@ -389,7 +389,7 @@ class User
 		
 		$result = $db->query($sql);
 	 
-		if ($result->num_rows >= 1)  // id number exists
+		if ($result != NULL && $result->num_rows >= 1)  // id number exists
 			return $result;
 		else 
 			return NULL;
@@ -406,7 +406,7 @@ class User
 
 		$result = $db->query($sql);
 	 
-		if ($result->num_rows >= 1)  // id number exists
+		if ($result != NULL && $result->num_rows >= 1)  // id number exists
 			return $result;
 		else 
 			return NULL;

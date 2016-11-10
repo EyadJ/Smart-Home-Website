@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 09, 2016 at 12:19 PM
+-- Generation Time: Nov 10, 2016 at 05:40 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -23,12 +23,13 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `camera_images`
+-- Table structure for table `camera_galary`
 --
 
-CREATE TABLE `camera_images` (
-  `imgID` int(5) NOT NULL,
+CREATE TABLE `camera_galary` (
+  `MultiMediaID` int(6) NOT NULL,
   `cameraID` int(4) NOT NULL,
+  `isImage` bit(1) NOT NULL DEFAULT b'1',
   `imgDate` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP,
   `imgPath` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -58,31 +59,31 @@ CREATE TABLE `device` (
 
 INSERT INTO `device` (`DeviceID`, `RoomID`, `DeviceName`, `DeviceState`, `GateNum`, `DeviceImgPath_on`, `DeviceImgPath_off`, `isStatusChanged`, `lastStatusChange`, `Watts`) VALUES
 (101, 101, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'1', '2016-11-07 08:21:50', 120),
-(102, 101, 'AC', b'1', 0, 'cooler_on.png', 'cooler_off.png', b'1', '2016-11-07 19:03:12', 1800),
-(103, 101, 'Curtains', b'1', -1, 'curtains_opened.png', 'curtains_closed.png', b'1', '2016-11-07 19:03:13', 0),
-(104, 101, 'Alarm', b'0', -1, 'alarm.png', 'alarm_off.png', b'1', '2016-11-02 17:03:58', 0),
+(102, 101, 'AC', b'1', 0, 'cooler_on.png', 'cooler_off.png', b'1', '2016-11-10 08:29:41', 1800),
+(103, 101, 'Curtains', b'1', -1, 'curtains_opened.png', 'curtains_closed.png', b'1', '2016-11-10 08:29:44', 0),
+(104, 101, 'Alarm', b'0', 0, 'alarm.png', 'alarm_off.png', b'1', '2016-11-10 09:54:48', 0),
 (201, 102, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'1', '2016-10-28 06:46:43', 60),
 (202, 102, 'AC', b'1', 0, 'cooler_on.png', 'cooler_off.png', b'1', '2016-10-28 06:46:37', 1200),
 (203, 102, 'Curtains', b'1', -1, 'curtains_opened.png', 'curtains_closed.png', b'1', '2016-11-02 17:04:01', 0),
-(204, 102, 'Alarm', b'0', -1, 'alarm.png', 'alarm_off.png', b'1', '2016-11-05 04:01:19', 0),
+(204, 102, 'Alarm', b'0', 0, 'alarm.png', 'alarm_off.png', b'1', '2016-11-10 09:54:44', 0),
 (401, 104, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-20 13:07:24', 60),
-(402, 104, 'AC', b'0', 0, 'cooler_on.png', 'cooler_off.png', b'0', '2016-10-19 11:31:05', 1200),
+(402, 104, 'AC', b'0', 0, 'cooler_on.png', 'cooler_off.png', b'1', '2016-11-10 08:36:10', 1200),
 (403, 104, 'Curtains', b'0', -1, 'curtains_opened.png', 'curtains_closed.png', b'1', '2016-11-02 17:04:07', 0),
-(404, 104, 'Alarm', b'0', -1, 'alarm.png', 'alarm_off.png', b'1', '2016-11-02 17:04:10', 0),
+(404, 104, 'Alarm', b'0', 0, 'alarm.png', 'alarm_off.png', b'1', '2016-11-10 09:54:52', 0),
 (501, 105, 'Roof Lamp', b'0', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-19 11:32:33', 180),
 (502, 105, 'AC', b'1', 0, 'cooler_on.png', 'cooler_off.png', b'0', '2016-10-19 11:32:38', 2400),
 (503, 105, 'Curtains', b'1', -1, 'curtains_opened.png', 'curtains_closed.png', b'1', '2016-11-02 17:04:12', 0),
-(504, 105, 'Alarm', b'0', -1, 'alarm.png', 'alarm_off.png', b'0', '2016-11-02 17:04:14', 0),
+(504, 105, 'Alarm', b'0', 0, 'alarm.png', 'alarm_off.png', b'0', '2016-11-10 09:54:53', 0),
 (601, 106, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-19 11:33:29', 120),
 (602, 106, 'AC', b'0', 0, 'cooler_on.png', 'cooler_off.png', b'1', '2016-10-20 13:07:01', 1800),
-(604, 106, 'Alarm', b'0', -1, 'alarm.png', 'alarm_off.png', b'0', '2016-11-02 17:04:16', 0),
-(701, 107, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'1', '2016-10-23 17:01:17', 60),
+(604, 106, 'Alarm', b'0', 0, 'alarm.png', 'alarm_off.png', b'0', '2016-11-10 09:54:59', 0),
+(701, 107, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'1', '2016-11-10 16:32:00', 60),
 (801, 108, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-19 11:33:51', 60),
 (901, 109, 'Roof Lamp', b'0', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'1', '2016-10-31 21:50:22', 120),
 (902, 109, 'Garage Door', b'0', -1, 'Garage-door_open.png', 'Garage-door_closed.png', b'1', '2016-11-05 05:23:23', 0),
 (1001, 110, 'Security Camera', b'1', 0, 'security-camera_on.png', 'security-camera_off.png', b'1', '2016-11-08 09:41:26', 0),
 (1002, 110, 'Security Camera', b'1', 0, 'security-camera_on.png', 'security-camera_off.png', b'1', '2016-11-05 05:22:23', 0),
-(1004, 110, 'Alarm', b'0', 0, 'alarm.png', 'alarm_off.png', b'1', '2016-11-08 09:49:43', 0);
+(1004, 110, 'Alarm', b'0', 0, 'alarm.png', 'alarm_off.png', b'1', '2016-11-09 12:59:13', 0);
 
 -- --------------------------------------------------------
 
@@ -232,19 +233,48 @@ INSERT INTO `gpio_pins` (`PinID`, `isPinInput`, `Type`, `PinNumber`, `PI4Jnumber
 CREATE TABLE `ip_address` (
   `ID` int(2) NOT NULL,
   `DeviceName` varchar(25) NOT NULL,
-  `IPaddress` varchar(15) CHARACTER SET utf8 NOT NULL
+  `IPaddress` varchar(15) CHARACTER SET utf8 NOT NULL,
+  `CameraID` int(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `ip_address`
 --
 
-INSERT INTO `ip_address` (`ID`, `DeviceName`, `IPaddress`) VALUES
-(1, 'Router', '192.168.1.1'),
-(2, 'Raspberry Pi', '192.168.1.x'),
-(3, 'Relay Switch', '192.168.1.x'),
-(4, 'Security Camera 1', '192.168.1.100'),
-(5, 'Security Camera 2', '192.168.1.101');
+INSERT INTO `ip_address` (`ID`, `DeviceName`, `IPaddress`, `CameraID`) VALUES
+(1, 'Router', '192.168.1.1', NULL),
+(2, 'Raspberry Pi', '192.168.1.x', NULL),
+(3, 'Relay Switch', '192.168.1.x', NULL),
+(4, 'Security Camera 1', '192.168.1.100', 1001),
+(5, 'Security Camera 2', '192.168.1.101', 1002);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log`
+--
+
+CREATE TABLE `log` (
+  `LogRecordID` int(7) NOT NULL,
+  `RecordCategoryID` int(2) NOT NULL,
+  `RoomID` int(4) NOT NULL,
+  `UserID` int(4) NOT NULL,
+  `EntryTime` time NOT NULL,
+  `EntryDate` date NOT NULL,
+  `Description` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `log_record_category`
+--
+
+CREATE TABLE `log_record_category` (
+  `RecordCategoryID` int(2) NOT NULL,
+  `Category` varchar(30) NOT NULL,
+  `isImportant` bit(1) NOT NULL DEFAULT b'0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -367,7 +397,7 @@ INSERT INTO `sensor` (`SensorID`, `SensorTypeID`, `RoomID`, `SenesorState`, `Gat
 (600, 20, 106, b'0', 0, '2016-11-06 17:40:08'),
 (601, 10, 106, b'0', 0, '2016-10-20 13:50:28'),
 (602, 12, 106, b'0', 0, '2016-10-20 13:50:52'),
-(604, 11, 106, b'0', 0, '2016-11-07 19:01:06'),
+(604, 11, 106, b'0', 0, '2016-11-09 12:58:21'),
 (700, 20, 107, b'0', 0, '2016-11-06 17:40:10'),
 (701, 10, 107, b'0', 0, '2016-10-20 13:50:30'),
 (800, 20, 108, b'0', 0, '2016-11-06 17:40:11'),
@@ -375,7 +405,7 @@ INSERT INTO `sensor` (`SensorID`, `SensorTypeID`, `RoomID`, `SenesorState`, `Gat
 (900, 20, 109, b'0', 0, '2016-11-06 17:40:12'),
 (901, 10, 109, b'0', 0, '2016-10-20 13:50:35'),
 (1000, 20, 110, b'0', 0, '2016-11-06 17:40:13'),
-(1001, 10, 110, b'0', 0, '2016-11-08 05:40:06'),
+(1001, 10, 110, b'0', 0, '2016-11-09 12:58:10'),
 (1002, 14, 110, b'0', -1, '2016-11-06 17:40:15');
 
 -- --------------------------------------------------------
@@ -597,10 +627,10 @@ INSERT INTO `user_authorized_rooms` (`UserID`, `RoomID`) VALUES
 --
 
 --
--- Indexes for table `camera_images`
+-- Indexes for table `camera_galary`
 --
-ALTER TABLE `camera_images`
-  ADD PRIMARY KEY (`imgID`),
+ALTER TABLE `camera_galary`
+  ADD PRIMARY KEY (`MultiMediaID`),
   ADD KEY `cameraID` (`cameraID`);
 
 --
@@ -632,7 +662,23 @@ ALTER TABLE `gpio_pins`
 -- Indexes for table `ip_address`
 --
 ALTER TABLE `ip_address`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `CameraID` (`CameraID`);
+
+--
+-- Indexes for table `log`
+--
+ALTER TABLE `log`
+  ADD PRIMARY KEY (`LogRecordID`),
+  ADD KEY `RecordCategoryID` (`RecordCategoryID`),
+  ADD KEY `RoomID` (`RoomID`),
+  ADD KEY `UserID` (`UserID`);
+
+--
+-- Indexes for table `log_record_category`
+--
+ALTER TABLE `log_record_category`
+  ADD PRIMARY KEY (`RecordCategoryID`);
 
 --
 -- Indexes for table `room`
@@ -719,20 +765,30 @@ ALTER TABLE `user_authorized_rooms`
 --
 
 --
--- AUTO_INCREMENT for table `camera_images`
+-- AUTO_INCREMENT for table `camera_galary`
 --
-ALTER TABLE `camera_images`
-  MODIFY `imgID` int(5) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `camera_galary`
+  MODIFY `MultiMediaID` int(6) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `gpio_pins`
 --
 ALTER TABLE `gpio_pins`
-  MODIFY `PinID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `PinID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 --
 -- AUTO_INCREMENT for table `ip_address`
 --
 ALTER TABLE `ip_address`
-  MODIFY `ID` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `ID` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `log`
+--
+ALTER TABLE `log`
+  MODIFY `LogRecordID` int(7) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `log_record_category`
+--
+ALTER TABLE `log_record_category`
+  MODIFY `RecordCategoryID` int(2) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `room_backgrounds`
 --
@@ -753,10 +809,10 @@ ALTER TABLE `user`
 --
 
 --
--- Constraints for table `camera_images`
+-- Constraints for table `camera_galary`
 --
-ALTER TABLE `camera_images`
-  ADD CONSTRAINT `camera_images_ibfk_1` FOREIGN KEY (`cameraID`) REFERENCES `device` (`DeviceID`);
+ALTER TABLE `camera_galary`
+  ADD CONSTRAINT `camera_galary_ibfk_1` FOREIGN KEY (`cameraID`) REFERENCES `device` (`DeviceID`);
 
 --
 -- Constraints for table `device`
@@ -770,6 +826,20 @@ ALTER TABLE `device`
 ALTER TABLE `device_stepper_motor`
   ADD CONSTRAINT `device_stepper_motor_ibfk_1` FOREIGN KEY (`DeviceID`) REFERENCES `device` (`DeviceID`),
   ADD CONSTRAINT `device_stepper_motor_ibfk_2` FOREIGN KEY (`GateNum1`) REFERENCES `gpio_pins` (`PinID`);
+
+--
+-- Constraints for table `ip_address`
+--
+ALTER TABLE `ip_address`
+  ADD CONSTRAINT `ip_address_ibfk_1` FOREIGN KEY (`CameraID`) REFERENCES `device` (`DeviceID`);
+
+--
+-- Constraints for table `log`
+--
+ALTER TABLE `log`
+  ADD CONSTRAINT `log_ibfk_1` FOREIGN KEY (`RecordCategoryID`) REFERENCES `log_record_category` (`RecordCategoryID`),
+  ADD CONSTRAINT `log_ibfk_2` FOREIGN KEY (`RoomID`) REFERENCES `room` (`RoomID`),
+  ADD CONSTRAINT `log_ibfk_3` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`);
 
 --
 -- Constraints for table `room_backgrounds`

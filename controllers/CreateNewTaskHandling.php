@@ -11,8 +11,13 @@
 		$RoomID = $_POST["RoomID"];
 		$TaskName = $_POST["TaskName"];
 		$selectedSensorID = $_POST["sensors"];
-		$AlarmDuration = $_POST["AlarmDuration"];
-		$AlarmInterval = $_POST["AlarmInterval"];
+		
+		$AlarmDuration = 0;
+		if(isset($_POST["AlarmDuration"]))	$AlarmDuration = $_POST["AlarmDuration"];
+		
+		$AlarmInterval = 0;
+		if(isset($_POST["AlarmInterval"]))	$AlarmInterval = $_POST["AlarmInterval"];
+		
 		$ActionTime = NULL;
 		$ActionDate = NULL;
 		$repeatDaily = 1;
@@ -92,7 +97,8 @@
 		}
 			
 			task::createNewTask
-			($UserID, $RoomID, $TaskName, $ActionTime, $SelectedSensorValue, $repeatDaily, $ActionDate, $selectedSensorID, $AlarmDuration, $AlarmInterval, $devicesIDs, $selectedDevicesStatus, $NotifyByEmail);
+			($UserID, $RoomID, $TaskName, $ActionTime, $SelectedSensorValue, $repeatDaily, $ActionDate, $selectedSensorID, 
+			$AlarmDuration, $AlarmInterval, $devicesIDs, $selectedDevicesStatus, $NotifyByEmail);
 		
 			header("Location: ../views/RoomSettings.php?var=$RoomID");
 	}

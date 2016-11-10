@@ -23,7 +23,7 @@
 		{
 			echo "<a style='text-decoration:none; color:black;' 
 			href='../controllers/UserAuthorisedRoomsHandling.php?var=" . $UserID . "&var2=" . $RoomID . "&var3=unAuthorise' />
-			<div id='roomDiv'
+			<div class='roomDiv'
 			style='
 			width:240px; height:305px; display:inline-block; padding-right:5px; padding-left:5px;			
 			margin-right:2.5px; margin-left:2.5px; margin-bottom:5px; margin-top:5px; border-left: 2px solid black; 
@@ -37,7 +37,7 @@
 		{
 			echo "<a style='text-decoration:none; color:black;' 
 			href='../controllers/UserAuthorisedRoomsHandling.php?var=" . $UserID . "&var2=" . $RoomID . "&var3=Authorise' >
-			<div id='roomDiv'
+			<div class='roomDiv'
 			style='width:240px; height:305px; display:inline-block; padding-right:5px; padding-left:5px;
 			margin-right:2.5px; margin-left:2.5px; margin-bottom:5px; margin-top:5px; border-left: 2px solid black; 
 			border-right: 2px solid black; border-bottom: 2px solid black; border-top: 2px solid black;

@@ -21,7 +21,7 @@ class Room
 		$sql = "SELECT * FROM room";
 		$result = $db->query($sql);
 	 
-		if ($result->num_rows >= 1)  
+		if ($result != NULL && $result->num_rows >= 1)  
 		{ 			
 			return $result;
 		}
@@ -44,7 +44,7 @@ public static function getRoomName($RoomID)
 
 		$result = $db->query($sql);
 	 
-		if ($result->num_rows >= 1)  // id number exists
+		if ($result != NULL && $result->num_rows >= 1)  // id number exists
 		{ 			
 			$row = $result->fetch_assoc();
 			$RoomID = $row['RoomID'];
@@ -69,7 +69,7 @@ public static function getAllRoomBackgrounds($RoomID)
 
 		$result = $db->query($sql);
 	 
-		if ($result->num_rows >= 1)  // id number exists
+		if ($result != NULL && $result->num_rows >= 1)  // id number exists
 		{ 			
 			return $result;
 		}
@@ -91,7 +91,7 @@ public static function getRoomSelectedBackground($RoomID)
 
 		$result = $db->query($sql);
 	 
-		if ($result->num_rows >= 1)  // id number exists
+		if ($result != NULL && $result->num_rows >= 1)  // id number exists
 		{ 			
 			$row = $result->fetch_assoc();
 			$RoomImgPath = $row['RoomImgPath'];

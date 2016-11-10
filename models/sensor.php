@@ -25,7 +25,7 @@ class sensor
 				s.SensorTypeID = st.SensorTypeID";
 		$result = $db->query($sql);
 	 
-		if ($result->num_rows >= 1)  
+		if ($result != NULL && $result->num_rows >= 1)  
 		{ 			
 			return $result;
 		}
@@ -48,7 +48,7 @@ public static function getSensorsTypeId($SensorID)
 				WHERE SensorID = $SensorID";
 		$result = $db->query($sql);
 	 
-		if ($result->num_rows >= 1)  
+		if ($result != NULL && $result->num_rows >= 1)  
 		{ 	
 			$row = $result->fetch_assoc();	
 			return $row["SensorTypeID"];

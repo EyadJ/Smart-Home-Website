@@ -1,5 +1,10 @@
 <?php /*error_reporting(0);*/ session_start(); if(!isset($_SESSION["Email"])){ header("Location: Homepage.php"); } ?>
 
+
+<?php 
+	include_once("../controllers/PreEditTask-SecurityChecks.php");
+?>
+
 <html>
 <head>
 <title>Edit Task</title>
@@ -124,8 +129,6 @@ function hideDeleteTaskMsg()
 	 
 	 
 	 
-	 
-	 
 <form name="delete" method="post" id="deleteTaskForm">
 
 <div class="dim" id="deleteMsgDim"></div>  
@@ -145,8 +148,6 @@ function hideDeleteTaskMsg()
 		
 	</form>
 
-	
-	
 	
 	 
 <?php

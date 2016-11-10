@@ -60,10 +60,17 @@
 	 
 	<tr><td align="center" colspan="2">
 	<input type="submit" value="Save" name="Save" style="font-weight:bold; margin-left:3px;" /> &nbsp;
+	
+	<a href="#" onclick="deleteUserMsg(' . $row["UserID"] . ');return false;" style="text-decoration:none;">
+			<button type = "button" style="color:red;">Delete</button>
+	</a>&nbsp;
+		
 	<input type="reset" value="Reset" /> &nbsp;
 
-	<a href="Users.php"> <button type = "button" align="Right">Cancel</button> </a>
-
+	<a href="Users.php" style="text-decoration:none;"> 
+	<button type = "button" align="Right">Cancel</button> 
+	</a>
+	
 	</td></tr></table>
 	</form>';
 ?>

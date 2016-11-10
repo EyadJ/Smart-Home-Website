@@ -30,19 +30,56 @@ table {
 	{
 		if(unSuccessfullLogIn === "InCorrectPassword")
 		{
-			document.getElementById("logInProblem").innerHTML = "<font color='red'><b>The Email or Password is Not Correct!</b></font>";
+			document.getElementById("logInProblemMessage").innerHTML = 
+			"<font color='red'><b>The Email or Password is Not Correct!</b></font>";
+			document.getElementById("logInProblemDialog").style.display ="block";	
+			document.getElementById("ProblemDialogMsgDim").style.display ="block";	
+			document.getElementById("OKbutton").focus();
 		}
 		else if(unSuccessfullLogIn === "AccountDisabled")
 		{
-			document.getElementById("logInProblem").innerHTML = "<font color='red'><b>Your Account is Disabled. Contact the Admin</b></font>";
+			document.getElementById("logInProblemMessage").innerHTML = 
+			"<font color='red'><b>Your Account is Disabled. Contact the Admin</b></font>";
+			document.getElementById("logInProblemDialog").style.display ="block";	
+			document.getElementById("ProblemDialogMsgDim").style.display ="block";	
+			document.getElementById("OKbutton").focus();
 		}
 	}
-	</script>
+
+function hideLogInProblemDialog() 
+{
+	document.getElementById("logInProblemDialog").style.display ="none";	
+	document.getElementById("ProblemDialogMsgDim").style.display ="none";	
+	document.getElementById("username").focus();
+}
+
+function LogInFormSubmit()
+{
+	document.getElementById("LogInForm").submit();	
+}
+
+</script>
 </head>
 <body onload="checkPass();">
 
 
  <div class="allcontainer">
+	 
+	 
+	 <div class="dim" id="ProblemDialogMsgDim"></div>  
+		<table class="dialog" id="logInProblemDialog" style="width:310px; height:110px; max-height:130px; border: 2px solid black;">
+			<tr><td style="padding-top:30px;">
+			<b><h3 id="logInProblemMessage"></h3></b>
+			</td></tr>
+			<tr><th style="height:30px;">	
+			
+			<a href='#' onclick="hideLogInProblemDialog();return false;" style="text-decoration:none; ">
+			<button type='button' style="width:70px;" id="OKbutton">Ok</button>
+			</a>
+			</th></tr>
+		</table>
+	 
+	 
 	 
 <div id="page-header">
 	<div class="page-logo2">
@@ -53,23 +90,31 @@ table {
 	<div style="width:50%;position: absolute; top: 15%; left: 0; right: 0; bottom: 50%; margin: auto; ">
 
 
-<form name="formR" method="post" action="../controllers/LogInHandling.php">
+<form name="LogInForm" id="LogInForm" method="post" action="../controllers/LogInHandling.php">
+
 <table align="center" style="top:100px; position:relative; width:420px; background-color:white;">
-<th colspan="2" ><h1 style="color:black;">Log in</h1></th>
+
+<th colspan="2" >
+<img align="center" src="../controllers/images/login-user.png" width="60px" style="display:inline;"/>
+<h1 style="color:black; display:inline;">Log in</h1>
+</th>
+
+<tr>
 
 <?php
 	include_once("../controllers/PreLogIn.php");
-	
-	$string = PreLogIn::logInTransactions();
-	
-	echo $string;
 ?>
-	<div id="logInProblem"  align='center'></div>
-	</td></tr>
-    <tr><td colspan="2" align="center"><button style=" width:100px;" type="submit">log in</button></td></tr>
+
+</tr>
+
+    <tr><th colspan="2" align="center" height="30px">
+	
+	<a href='#' onclick="LogInFormSubmit();return false;" style="text-decoration:none; ">
+	<img align="center" src="../controllers/images/login.png" height="45px"/>
+	</a>
+	</th></tr>
     </table>
 </form>
-     
 		
 		</div>
        

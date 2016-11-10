@@ -41,7 +41,8 @@
 			padding-bottom:50px;
 			padding-top:50px;
 			'>
-			<B>".$row['RoomName']."</B>
+			<B style='background-color:#E6E6E6; border-radius:6px; padding:3px;'>"
+			.$row['RoomName']."</B>
 			<br />
 			
 			<div style='width:240px; margin-right:auto; margin-left:auto;'>
@@ -77,17 +78,17 @@
 				echo "<a style='text-decoration:none;' href='../controllers/switchDeviceStatus.php?DeviceID=$row2[DeviceID]&";
 				if($row2['DeviceState'] == 1) // (on)
 				{
-					echo "newStatus=0'>
+					echo "newStatus=0'><div class='DeviceDiv' >
 							<img src='../controllers/images/devices/$row2[DeviceImgPath_on]'";
 				}
 				else // == 0 (off)
 				{
-					echo "newStatus=1'>
+					echo "newStatus=1'><div class='DeviceDiv' >
 							<img src='../controllers/images/devices/$row2[DeviceImgPath_off]'";
 				}
 				
 				echo" width='60' height='60' />
-				</a><br />";
+				</div></a><br />";
 			}
 				
 			echo"</td>"  ;		

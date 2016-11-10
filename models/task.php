@@ -100,7 +100,7 @@ class Task
 				
 		$result = $db->query($sql);
 	 
-		if ($result->num_rows >= 1)  
+		if ($result != NULL && $result->num_rows >= 1)  
 		{ 			
 			return $result;
 		}
@@ -124,7 +124,7 @@ class Task
 				
 		$result = $db->query($sql);
 	 
-		if ($result->num_rows >= 1)  
+		if ($result != NULL && $result->num_rows >= 1)  
 		{ 			
 			return $result;
 		}
@@ -148,7 +148,7 @@ class Task
 				
 		$result = $db->query($sql);
 	 
-		if ($result->num_rows >= 1)  
+		if ($result != NULL && $result->num_rows >= 1)  
 		{ 			
 			return $result;
 		}
@@ -172,7 +172,7 @@ class Task
 				
 		$result = $db->query($sql);
 	 
-		if ($result->num_rows >= 1)  
+		if ($result != NULL && $result->num_rows >= 1)  
 		{ 			
 			return $result;
 		}
@@ -194,7 +194,7 @@ class Task
 		$sql = "SELECT isDefault FROM task WHERE TaskID = $TaskID";
 		$result = $db->query($sql);
 	 
-		if ($result->num_rows >= 1)  
+		if ($result != NULL && $result->num_rows >= 1)  
 		{
 			$row = $result->fetch_assoc();	
 			
@@ -248,7 +248,7 @@ class Task
 				
 		$result = $db->query($sql);
 		
-		if ($result->num_rows >= 1)  
+		if ($result != NULL && $result->num_rows >= 1)  
 		{
 			$row = $result->fetch_assoc();
 			$RoomID = $row["RoomID"];
@@ -274,7 +274,7 @@ class Task
 				
 		$result = $db->query($sql);
 	 
-		if ($result->num_rows == 1)  
+		if ($result != NULL && $result->num_rows >= 1)  
 		{ 			
 			return $result;
 		}
