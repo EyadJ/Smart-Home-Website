@@ -23,7 +23,7 @@
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------//
 		//FILTERS
 		
-	echo "<b><div id='FiltersDiv' 
+	echo "<br /><b><div id='FiltersDiv' 
 	style='	
 	display:none; background-color:#CCCCCC; width:300px; height:35px; border: 2px solid black;
 	padding:20px; padding-right:2px; bottom:0; left:0; right:0; margin:auto; '>
@@ -112,10 +112,14 @@
 			
 			$devices_Original = device::getDevicesDetailsByRoomID($RoomID);
 
+			$i = 0;
 			while($row = $devices_Original->fetch_assoc()) 
 			{
-				$devices[$row["DeviceID"]]["DeviceImgPath_on"] = $row["DeviceImgPath_on"];
-				$devices[$row["DeviceID"]]["DeviceName"] = $row["DeviceName"];
+				$devices[$i]["DeviceID"] = $row["DeviceID"];
+				$devices[$i]["DeviceImgPath_on"] = $row["DeviceImgPath_on"];
+				$devices[$i]["DeviceName"] = $row["DeviceName"];
+				
+				$i++;
 			}
 			//
 			//
@@ -161,9 +165,8 @@
 				
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------//			
 			
-			//
-			// INSIDE LOOP (TASKS LOOP):
-			//
+			// (TASKS LOOP):
+			
 			while ($row = $Tasks->fetch_assoc())
 			{
 					//$actionTimeValue = "";
@@ -186,17 +189,31 @@
 					$selectedSensorID = $row["SensorID"];
 					
 					$taskDevices = task::getTaskDevices($TaskID);
-					
-					$taskDevicesArray ;
-					$i = 0;
-					
+					$taskDevicesArray;
+					//
 					while ($DeviceRow = $taskDevices->fetch_assoc())
 					{
-						$taskDevicesArray[$i]["DeviceID"] = $DeviceRow["DeviceID"];
-						$taskDevicesArray[$i]["ReqDevState"] = $DeviceRow["RequiredDeviceStatus"];
-						$i++;
+						$taskDevicesArray[$DeviceRow["DeviceID"]]["ReqDevState"] = $DeviceRow["RequiredDeviceStatus"];
 					}
-
+					//
+					//
+					$taskCameras = task::getTaskCameras($TaskID);
+					$taskCamerasArray;
+					//
+					if($taskCameras != NULL) 	//for device = camera
+					{
+						while ($CameraRow = $taskCameras->fetch_assoc())
+						{
+							$devID = $CameraRow["DeviceID"];
+							
+							$taskCamerasArray[$devID]["ReqDevState"] = $CameraRow["RequiredDeviceStatus"];
+							$taskCamerasArray[$devID]["TakeImage"] = $CameraRow["TakeImage"];
+							$taskCamerasArray[$devID]["TakeVideo"] = $CameraRow["TakeVideo"];
+							$taskCamerasArray[$devID]["Resolution"] = $CameraRow["Resolution"];
+						}
+					}
+					//
+					//
 					if($row["isDisabled"] == 1)
 					{
 						$isDisabledValue = "x-red.png";
@@ -226,8 +243,8 @@
 				<td style='border:0px;'></td><td style='border:0px;'></td><td style='border:0px;'></td>
 				<td style='border:0px;'><td style='border:0px;'></td>
 				</tr>";
-
-			//	
+			
+			
 			//table body (one task) "ALL OF THE FOLLOWING"
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------//
 				//TASK NAME
@@ -258,7 +275,7 @@
 				}
 				
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------//
-				//SENSOR
+				//SENSORS
 				
 				echo "</td><td style='border-bottom: 2px solid black; border-top: 2px solid black;'>";
 				
@@ -313,7 +330,7 @@
 				else if ($sensorTypeID == 20) //Clock
 				{
 					echo"<br /><b>Action Time</b><br />
-					<input type='time' name='ActionTime' value = '$row[ActionTime]' style='width:96px;' readonly/>";
+					<input type='time' name='ActionTime' value = '$row[ActionTime]' style='width:100px;' readonly/>";
 				}
 				
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------//			
@@ -323,17 +340,24 @@
 				
 				for ($i = 0; $i < count($devices); $i++)
 				{
-					$CurrentDevID = $taskDevicesArray[$i]["DeviceID"];
+					$ReqDevState = -1;
 					$additional = "";
-					$ReqDevState = $taskDevicesArray[$i]["ReqDevState"];
-					$DeviceName = $devices[$CurrentDevID]["DeviceName"];
-					$DeviceImgPath = $devices[$CurrentDevID]["DeviceImgPath_on"];
+					$CurrentDevID = $devices[$i]["DeviceID"];
+					$DeviceName = $devices[$i]["DeviceName"];
+					$DeviceImgPath = $devices[$i]["DeviceImgPath_on"];
+			
+					if($DeviceName === "Security Camera")
+						$ReqDevState = $taskCamerasArray[$CurrentDevID]["ReqDevState"];
+					else
+						$ReqDevState = $taskDevicesArray[$CurrentDevID]["ReqDevState"];
+					
 					
 					if($ReqDevState == -1) $additional = "not-available.png";
-					else if($ReqDevState == 1) $additional = "on.png";
 					else if($ReqDevState == 0) $additional = "off.png";
+					else if($ReqDevState == 1) $additional = "on.png";
 					
-					if($DeviceName === "Alarm" && $ReqDevState == 1)
+					
+					if($DeviceName === "Alarm" && $ReqDevState == 1)	//ALARM
 					{
 						echo"<table 
 						onmouseover='showAlarmDetails(this.nextSibling.nextSibling);' 
@@ -348,24 +372,61 @@
 						
 						echo"
 						<table
-						style='width:110px; border:0; padding:0; margin:0; position:absolute; display:none;
-						background-color:#CCCCCC; z-index:2; font-size:11px; '>
-						
+						style='
+						width:110px; border:0; padding:0; margin:0; position:absolute; 
+						display:none; background-color:#CCCCCC; z-index:2; font-size:11px;
+						'>
 						<tr><td>Duration
-						<input type='number' name='AlarmDuration' value='$row[AlarmDuration]' 
+						<input type='number' value='$row[AlarmDuration]' 
 						style='width:35px; height:17px;' readonly/> min</td></tr>
-						
 						<tr><td>Interval
-						<input type='number' name='AlarmInterval' value='$row[AlarmInterval]' 
+						<input type='number' value='$row[AlarmInterval]' 
 						style='width:35px; height:17px;' readonly/> min</td></tr>
+						</table>";
+					}
+					else if($DeviceName === "Security Camera" && $ReqDevState == 1)		//CAMERA
+					{
+						$Resolution = $taskCamerasArray[$CurrentDevID]["Resolution"];
+						
+						echo"<table 
+						onmouseover='showCameraDetails(this.nextSibling.nextSibling);' 
+						onmouseout='hideCameraDetails(this.nextSibling.nextSibling);' 
+						style='width:80px; margin:5; border:0; display:inline;'>
+						<tr><td>
+						<img src='../controllers/images/devices/" . $DeviceImgPath . "' width='40' height='40' />
+						<img src='../controllers/images/info.png' style='width:12px; height:12px; position:absolute; top:1px; right:1px;'/>
+						</td></tr><tr><td style='border:0;'>
+						<img src='../controllers/images/$additional' height='20' />
+						</td></tr></table>";
+						
+						echo"
+						<table
+						style='
+						width:155px; border:0; padding:0; margin:0; position:absolute; 
+						display:none; background-color:#CCCCCC; z-index:2; font-size:11px;
+						'>
+						<tr><td>";
+						
+						$TakeImage = $taskCamerasArray[$CurrentDevID]["TakeImage"];
+						$TakeVideo = $taskCamerasArray[$CurrentDevID]["TakeVideo"];
+						
+						if($TakeImage != -1)	//takeImage selected
+							echo "Take <input type='text' value='$TakeImage' style='width:30px; height:17px;' readonly/> Picture/s</td></tr>";
+						
+						else	//takeVideo selected
+							echo "Take Video <input type='text' value='$TakeVideo' style='width:40px; height:17px;' readonly/> Seconds</td></tr>";
+						
+						echo"<tr><td>Resolution
+						<input type='text' value='" . $Resolution . "p'
+						style='width:40px; height:17px;' readonly/></td></tr>
 						</table>";
 					}
 					else
 					{
 						echo"<table style='width:80px; margin:5; border:0; display:inline;'><tr><td>
-						<img src='../controllers/images/devices/" . $DeviceImgPath . "' width='40px' height='40px' />
+						<img src='../controllers/images/devices/" . $DeviceImgPath . "' width='40' height='40' />
 						</td></tr><tr><td style='border:0;'>
-						<img src='../controllers/images/$additional' height='20px' />
+						<img src='../controllers/images/$additional' height='20' />
 						</td></tr></table>";
 					}
 				}
@@ -375,7 +436,7 @@
 						
 						echo "<td style='border-bottom: 2px solid black; border-top: 2px solid black;'>
 						<img src='../controllers/images/$NotifyByEmailValue' width='$resul' height='$resul' /></td>";
-												
+										
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------//					
 					//CREATED BY USER
 					
@@ -384,7 +445,7 @@
 						<div class='tooltip'>
 						<span class='tooltiptext'>
 						This Task was Created by: <B><i>" . $UWCT_UN . " </i></B> [" . $isAdminValue . "] 
-						<br />Creation Date: <h5 style='display:inline;'><u>" . $TaskCreationDate . "</u></h5></span>
+						<br />Creation Date: <h5 style='display:inline;'><u>" . $TaskCreationDate . "</u></h5></span>	
 						<img src='../controllers/images/users/" . $UWCT_IP . "' 
 						width='50' height='50' />
 						<img src='../controllers/images/info.png' style='width:12px; height:12px; position:absolute; top:1px; right:1px;'/>
@@ -420,8 +481,11 @@
 			This Room has no Tasks to Display
 			</th>
 			</tr></table>";
-			
 		}
+		
+		
+		
+		
 		echo "<br /><hr class='hr-table-divider' /><hr class='hr-table-divider2' /></span>";
 	}
 

@@ -12,52 +12,57 @@
 		$TaskName = $_POST["TaskName"];
 		$selectedSensorID = $_POST["sensors"];
 		
-		$AlarmDuration = 0;
-		if(isset($_POST["AlarmDuration"]))	$AlarmDuration = $_POST["AlarmDuration"];
-		
-		$AlarmInterval = 0;
-		if(isset($_POST["AlarmInterval"]))	$AlarmInterval = $_POST["AlarmInterval"];
-		
-		$ActionTime = NULL;
+		$Devices; 				//(array)
+		$AlarmDuration = -1;
+		$AlarmInterval = -1;
 		$ActionDate = NULL;
+		$ActionTime = NULL;
+		$EnableTaskOnTime = NULL;
+		$DisableTaskOnTime = NULL;
 		$repeatDaily = 1;
 		$SelectedSensorTypeId = sensor::getSensorsTypeId($selectedSensorID);			// = $_POST["SelectedSensor"];
 		$SelectedSensorValue = 0;
-		$devicesIDs; 				//(array)
-		$selectedDevicesStatus; 	//(array)
 		$NotifyByEmail = 0;
-		if(isset($_POST["NotifyByEmail"])) $NotifyByEmail = 1;
 		
+		if(isset($_POST["AlarmDuration"]))	
+			$AlarmDuration = $_POST["AlarmDuration"];
+		
+		if(isset($_POST["AlarmInterval"]))	
+			$AlarmInterval = $_POST["AlarmInterval"];
+		
+		if(isset($_POST["NotifyByEmail"])) 
+			$NotifyByEmail = 1;
+		
+		if(isset($_POST["EnableTaskOnTime"]) && isset($_POST["EnableTaskOnTimeValue"])) 
+			$EnableTaskOnTime = $_POST["EnableTaskOnTimeValue"];
+		
+		if(isset($_POST["DisableTaskOnTime"]) && isset($_POST["DisableTaskOnTimeValue"])) 
+			$DisableTaskOnTime = $_POST["DisableTaskOnTimeValue"];
+			
+			
 		//-------------------------SELECTED SENSOR CODE----------------------------//
 		if($SelectedSensorTypeId == 10)		//Motion
 		{
 			$MotionSensorOption = $_POST["MotionSensorOption"];
 			
 			if($MotionSensorOption == "onDetection")	//onDetection
-			{
 				$SelectedSensorValue = 0;
-			}
+				
 			else if($MotionSensorOption == "onNoDetection")		//onNoDetection (after period of time)
-			{
 				$SelectedSensorValue = $_POST["MotionSensorValue"]; //(Action after no detection for a period of time (Minutes))
-			}
 		}
 		else if($SelectedSensorTypeId == 11)	//Smoke
-		{
 			$SelectedSensorValue = 0;
-		}
+
 		else if($SelectedSensorTypeId == 12)	//Temperature
-		{
 			$SelectedSensorValue = $_POST["TempSensorValue"];
-		}
+
 		else if($SelectedSensorTypeId == 13)	//Light
-		{
 			$SelectedSensorValue = $_POST["LightSensorValue"];
-		}
+
 		else if($SelectedSensorTypeId == 14)	//UltraSonic
-		{
 			$SelectedSensorValue = $_POST["UltraSonicSensorValue"];
-		}
+
 		else if($SelectedSensorTypeId == 20)	//Clock
 		{
 			$ActionTime = $_POST["ActionTime"];
@@ -82,25 +87,55 @@
 				$ActionDate = $_POST["ActionDate"];
 			}
 		}
-		$result = device::getDevicesIdsByRoomID($RoomID);
+		
+		//----------------------------DEVICES----------------------------------//
+		$result = device::getDevicesDetailsByRoomID($RoomID);
 		
 		$i = 0;
 		while ($row = $result->fetch_assoc())
 		{
 			$currentDevID = $row["DeviceID"];
+			$currentDevName = $row["DeviceName"];
+			$isDeviceCamera = FALSE; 
+			$TakeImagesQty = -1; 
+			$TakeVideoDuration = -1; 
+			$Resolution = -1; 
 			
-			$devicesIDs[$i] = $currentDevID;
+			$Devices[$i]["DevicesID"] = $currentDevID;
+			$Devices[$i]["selectedDevicesStatus"] = $_POST[$currentDevID];
 			
-			$selectedDevicesStatus[$i] = $_POST[$devicesIDs[$i]];
+			//If device == Camera
+			if($currentDevName === "Security Camera")
+			{
+				$isDeviceCamera = TRUE; 
+				
+				$takeImgOrVideo = $_POST["cam-$currentDevID-takeImgOrVideo"];
+				
+				if($takeImgOrVideo === "Img")
+					$TakeImagesQty = $_POST["cam-$currentDevID-TakeImagesQty"];
+				
+				else if($takeImgOrVideo === "Vid")
+					$TakeVideoDuration = $_POST["cam-$currentDevID-TakeVideoDuration"];
+				
+				$Resolution = $_POST["cam-$currentDevID-Resolution"];
+			}
+			
+			$Devices[$i]["isDeviceCamera"] = $isDeviceCamera;
+			$Devices[$i]["TakeImagesQty"] = $TakeImagesQty;
+			$Devices[$i]["TakeVideoDuration"] = $TakeVideoDuration;
+			$Devices[$i]["Resolution"] = $Resolution;
 			
 			$i++;
 		}
-			
-			task::createNewTask
-			($UserID, $RoomID, $TaskName, $ActionTime, $SelectedSensorValue, $repeatDaily, $ActionDate, $selectedSensorID, 
-			$AlarmDuration, $AlarmInterval, $devicesIDs, $selectedDevicesStatus, $NotifyByEmail);
+		//---------------------------------------------------------------------//
 		
-			header("Location: ../views/RoomSettings.php?var=$RoomID");
+		task::createNewTask
+		($UserID, $RoomID, $TaskName, $ActionTime, $SelectedSensorValue, $repeatDaily, $ActionDate, $selectedSensorID, 
+		$AlarmDuration, $AlarmInterval, $Devices, $NotifyByEmail, $EnableTaskOnTime, $DisableTaskOnTime);
+	
+		header("Location: ../views/RoomSettings.php?var=$RoomID");
 	}
+		
+		
 		
 ?>

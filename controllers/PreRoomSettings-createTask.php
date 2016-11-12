@@ -25,44 +25,62 @@
 		<input type='hidden' name='UserID' value='$UserID'/>
 		<input type='hidden' name='RoomID' value='$RoomID'/>
 		
-		<table id='CreateNewTaskTable' style='display:none; margin-left:auto; margin-right:auto; width:90%;'>
+		<table id='CreateNewTaskTable' style='display:none; margin-left:auto; margin-right:auto; width:96%;'>
 		<tr><th colspan='4'>Create New Task</th></tr>";
 		
-
 	//--------------------------------------------------------------------------//
 		//SETTINGS
 	
-	echo"<tr><th width='10%'>Settings</th>	
+		//------Task Name-----//
+		echo"<tr><th width='10%' rowspan='2'>Settings</th>	
 		<td width='150px;'>Task Name <br />
 		<input type='text' name='TaskName' placeholder='Simple Name for the Task' required/>
 		</td>";
 		
-		//	TaskOccurrence
+		//---Task Occurrence-----//	
 		echo"<td width='250px'>
 		<label style='float:left;' ><input type='radio' name='TaskOccurrence' value='repeat' checked 
-		onchange='HideUnhideActionDate(0);return false;'/> Repeat Daily</label>
+		onchange='HideUnhideActionDate(0);return false;'/>Repeat Daily</label>
 		
-		<label style='float:left;' ><input type='radio' name='TaskOccurrence' value='oneTime'
-		onchange='HideUnhideActionDate(1);return false;'/> One-Time Task</label>
+		
+		<label style='float:left;' id='OneTimeAction'><input type='radio' name='TaskOccurrence' value='oneTime'
+		onchange='HideUnhideActionDate(1);return false;'/>One-Time Task</label>
 		
 		<div id='actionDate' 
-		style='	display:none; width:243px; height:50px; border: 2px solid black;
-		padding-top:2px; padding-right:3px; bottom:0; top:0; left:0; right:0; margin:auto;
+		style='	display:none; width:243px; border: 1px solid black; background-color:#CCCCCC;
+		padding:5px; bottom:0; top:0; left:0; right:0; margin:auto;
 		'>
 		
-		<label style='float:left;'><input type='radio' name='OneTimeAction' value='Today' checked/> Today</label> 
+		<label style='float:left;'><input type='radio' name='OneTimeAction' value='Today' onchange='HideAnotherActionDate();' checked/>Today</label> 
 		
-		<input type='date' name='TodayActionDate' value='" . date("Y-m-d") . "' style='float:right; width:130px;' readonly/><br />
+		<input type='date' name='TodayActionDate' value='" . date("Y-m-d") . "' style='float:right; width:130px; display:none;' readonly/>
 		
-		<label style='float:left;'><input type='radio' name='OneTimeAction' value='otherDate'/> Another Date</label> 
+		<label style='float:left;'><input type='radio' name='OneTimeAction' value='otherDate' onchange='ShowAnotherActionDate();'/>Another Date</label> 
 		
-		<input type='date' name='ActionDate' style='float:right; width:130px;'/>
+		<input type='date' name='ActionDate' id='AnotherActionDate' style='float:right; display:none; width:130px;'/>
 		
-		</div>
+		</div>";
 		
-		</td><td width='110px'>
+		//------Notify By Email-----//
+		echo"</td><td width='110px'>
 		<label><input type='checkbox' name='NotifyByEmail'/> 
 		Notify me by Email</label>
+		
+		</td></tr>";
+		
+		
+		//--Enable/Disable Task on Time--//
+		echo"<tr><td colspan='3'>
+		
+		<label><input type='checkbox' name='EnableTaskOnTime' id='EnableTaskOnTime' onchange='EnableTaskOnTimeValueHandling();'/>
+		Enable Task on </label>
+		<input type='time' name='EnableTaskOnTimeValue' id='EnableTaskOnTimeValue' onchange='EnableTaskOnTimeHandling();'/>
+		
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		
+		<label><input type='checkbox' name='DisableTaskOnTime' id='DisableTaskOnTime' onchange='DisableTaskOnTimeValueHandling();'/>
+		Disable Task on </label>
+		<input type='time' name='DisableTaskOnTimeValue' id='DisableTaskOnTimeValue' onchange='DisableTaskOnTimeHandling();'/>
 		
 		</td></tr>";
 		
@@ -187,19 +205,19 @@
 			{
 				echo "<table 
 				style='
-				width:130px; display:inline-table; 
+				width:120px; display:inline-table; 
 				margin-right:5px; margin-left:5px; margin-top:1px; margin-bottom:1px;
 				'>
 				<tr><td colspan='2'><img src='../controllers/images/devices/$row[DeviceImgPath_on]' width='60' height='60' /></td></tr>
 				
-				<tr><td colspan='2'><label>Don't Change
-				<input type='radio' name='$row[DeviceID]' value='-1' onchange='HideAlarmDetails();' checked/></label></td></tr>
+				<tr><td colspan='2'><label>Don't Change<input type='radio' 
+				name='$row[DeviceID]' value='-1' onchange='HideAlarmDetails();' checked/></label></td></tr>
 				
-				<tr><td><label>OFF 
-				<input type='radio' name='$row[DeviceID]' value='0' onchange='HideAlarmDetails();'/></label></td>
+				<tr><td><label>OFF<input type='radio' 
+				name='$row[DeviceID]' value='0' onchange='HideAlarmDetails();'/></label></td>
 				
-				<td><label>ON 
-				<input type='radio' name='$row[DeviceID]' value='1' onchange='UnhideAlarmDetails();'/></label></td></tr>
+				<td><label>ON<input type='radio' 
+				name='$row[DeviceID]' value='1' onchange='UnhideAlarmDetails();'/></label></td></tr>
 				
 				<tr id='alarmDetails' style='display:none;'><td colspan='2'>
 				<table style='border:0; padding:0; margin:0;'>
@@ -215,39 +233,52 @@
 			{
 				
 				echo"<table style='
-				width:130px; display:inline-table; 
+				width:120px; display:inline-table; 
 				margin-right:5px; margin-left:5px; margin-top:1px; margin-bottom:1px;
 				'>
 				<tr><td colspan='2'><img src='../controllers/images/devices/$row[DeviceImgPath_on]' width='60' height='60' /></td></tr>
 				
-				<tr><td colspan='2'><label>Don't Change
-				<input type='radio' name='$row[DeviceID]' onchange='cameraSettings(this);' value='-1' checked/>
+				<tr><td colspan='2'><label>Don't Change<input type='radio' 
+				name='$row[DeviceID]' onchange='cameraSettings(this);' value='-1' checked/>
 				</label></td></tr>
 				
-				<tr><td><label>OFF 
-				<input type='radio' name='$row[DeviceID]' onchange='cameraSettings(this);' value='0'/>
+				<tr><td><label>OFF<input type='radio' 
+				name='$row[DeviceID]' onchange='cameraSettings(this);' value='0'/>
 				</label></td>
 				
-				<td><label>ON 
-				<input type='radio' name='$row[DeviceID]' onchange='cameraSettings(this);' value='1'/>
+				<td><label>ON<input type='radio' 
+				name='$row[DeviceID]' onchange='cameraSettings(this);' value='1'/>
 				</label></td></tr>	
 				
 				<tr style='display:none;'><td colspan='2'>
 				
-				<table style='width:220px; margin:1px;'><tr><td>	
+					<table style='width:220px; margin:1px;'>
+					
+						<tr><td>	
 				
-					<label style='float:left; display:inline-block; ' >
-					<input type='radio' name='cam-$row[DeviceID]-takeImgOrVideo' value='Img' checked/> Take Image/s </label>
-					<span id=''><input type='number' name='cam-$row[DeviceID]-TakeImagesQty' placeholder='(Pic Number)' value=1  
-					style='width:35px;'/> Pictures</span>
-					
-					</td></tr><tr><td>
-					
-					<label style='float:left;'><input type='radio' name='cam-$row[DeviceID]-takeImgOrVideo' value='Vid'/> Take Video</label>
-					<span id=''><input type='number' name='cam-$row[DeviceID]-TakeVideoDuration' placeholder='(Seconds)' value=30
-					style='width:35px;'/> Seconds</span>
-					
-					</td></tr></table>
+						<label style='float:left; display:inline-block; ' >
+						<input type='radio' name='cam-$row[DeviceID]-takeImgOrVideo' value='Img' checked/> Take </label>
+						<span id=''><input type='number' name='cam-$row[DeviceID]-TakeImagesQty' placeholder='(Pic Number)' value=1  
+						style='width:35px;'/> Picture/s</span>
+						
+						</td></tr><tr><td>
+						
+						<label style='float:left;'><input type='radio' name='cam-$row[DeviceID]-takeImgOrVideo' value='Vid'/> Take Video</label>
+						<span id=''><input type='number' name='cam-$row[DeviceID]-TakeVideoDuration' placeholder='(Seconds)' value=30
+						style='width:35px;'/> Seconds</span>
+						
+						</td></tr><tr><td>
+						
+						Resolution 
+						<select name='cam-$row[DeviceID]-Resolution'>
+							<option value='360'>360p</option>
+							<option value='480'>480p</option>
+							<option value='720'>720p</option>
+						</select>
+						
+						</td></tr>
+						
+					</table>
 					
 				</td></tr>	
 				</table>";
@@ -258,21 +289,18 @@
 			{
 				echo"<table 
 				style='
-				width:130px; display:inline-table; 
+				width:120px; display:inline-table; 
 				margin-right:5px; margin-left:5px; margin-top:1px; margin-bottom:1px;
 				'>
 				<tr><td colspan='2'><img src='../controllers/images/devices/$row[DeviceImgPath_on]' width='60' height='60' /></td></tr>
 				<tr><td colspan='2'><label>Don't Change<input type='radio' name='$row[DeviceID]' value='-1' checked/></label></td></tr>
-				<tr><td><label>OFF <input type='radio' name='$row[DeviceID]' value='1'/></label></td>
-				<td><label>ON <input type='radio' name='$row[DeviceID]' value='0'/></label></td></tr>
+				<tr><td><label>OFF<input type='radio' name='$row[DeviceID]' value='1'/></label></td>
+				<td><label>ON<input type='radio' name='$row[DeviceID]' value='0'/></label></td></tr>
 				</table>";
 			}
 		}
 			
-			
-		
-		
-		echo "</tr><tr><th colspan='4'><input type='submit' name='Create' value='Create' />
+		echo "</tr><tr><th colspan='4' style='height:28px;'><input type='submit' name='Create' value='Create' />
 		</th></tr></table>
 		</form><br />";
 		

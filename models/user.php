@@ -288,11 +288,11 @@ class User
 		$isDisabled = $db->escape_string($isDisabled);
 
 		$sql = "UPDATE user "
-			. " SET UserName = '$UserName'" 
-			. " ,Email = '$Email'" 
-			. " ,Title = '$Title'" 
-			. " ,Password = '$Password'" 
-			. " ,isDisabled = $isDisabled" 
+			. " SET UserName = '$UserName'," 
+			. " Email = '$Email'," 
+			. " Title = '$Title'," 
+			. " Password = '$Password'," 
+			. " isDisabled = $isDisabled" 
 			. " WHERE UserID = $UserID;";
 
 		if ($db->query($sql)) //TRUE

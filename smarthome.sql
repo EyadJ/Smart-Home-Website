@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 10, 2016 at 05:40 PM
+-- Generation Time: Nov 12, 2016 at 12:46 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -73,7 +73,7 @@ INSERT INTO `device` (`DeviceID`, `RoomID`, `DeviceName`, `DeviceState`, `GateNu
 (501, 105, 'Roof Lamp', b'0', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-19 11:32:33', 180),
 (502, 105, 'AC', b'1', 0, 'cooler_on.png', 'cooler_off.png', b'0', '2016-10-19 11:32:38', 2400),
 (503, 105, 'Curtains', b'1', -1, 'curtains_opened.png', 'curtains_closed.png', b'1', '2016-11-02 17:04:12', 0),
-(504, 105, 'Alarm', b'0', 0, 'alarm.png', 'alarm_off.png', b'0', '2016-11-10 09:54:53', 0),
+(504, 105, 'Alarm', b'0', 0, 'alarm.png', 'alarm_off.png', b'1', '2016-11-10 18:45:00', 0),
 (601, 106, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'0', '2016-10-19 11:33:29', 120),
 (602, 106, 'AC', b'0', 0, 'cooler_on.png', 'cooler_off.png', b'1', '2016-10-20 13:07:01', 1800),
 (604, 106, 'Alarm', b'0', 0, 'alarm.png', 'alarm_off.png', b'0', '2016-11-10 09:54:59', 0),
@@ -493,23 +493,25 @@ CREATE TABLE `task` (
   `AlarmInterval` int(2) NOT NULL DEFAULT '0',
   `SelectedSensorValue` int(3) NOT NULL DEFAULT '0',
   `DateCreated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `NotifyByEmail` bit(1) NOT NULL DEFAULT b'0'
+  `NotifyByEmail` bit(1) NOT NULL DEFAULT b'0',
+  `EnableTaskOnTime` time DEFAULT NULL,
+  `DisableTaskOnTime` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `task`
 --
 
-INSERT INTO `task` (`TaskID`, `UserID`, `RoomID`, `SensorID`, `isDisabled`, `isDefault`, `TaskName`, `ActionTime`, `repeatDaily`, `ActionDate`, `AlarmDuration`, `AlarmInterval`, `SelectedSensorValue`, `DateCreated`, `NotifyByEmail`) VALUES
-(6, 1, 108, 801, b'0', b'1', 'open lights on motion sensor', NULL, b'1', NULL, 0, 0, 0, '2016-10-26 18:50:03', b'0'),
-(18, 3, 101, 100, b'0', b'0', 'alarm', '05:20:00', b'0', '2016-10-23', 10, 1, 0, '2016-10-26 18:50:03', b'0'),
-(19, 4, 101, 102, b'0', b'0', 'turn ac on', NULL, b'1', NULL, 0, 0, 30, '2016-10-26 18:50:03', b'0'),
-(20, 7, 104, 403, b'0', b'0', 'morning routine', NULL, b'1', NULL, 15, 2, 1, '2016-10-26 18:50:03', b'0'),
-(21, 3, 109, 900, b'1', b'0', 'Test', '20:07:00', b'0', '2016-10-23', 0, 0, 45, '2016-10-26 18:50:03', b'0'),
-(22, 5, 102, 201, b'0', b'0', 'test Ahmad', NULL, b'0', '2016-10-31', 5, 2, 23, '2016-10-26 18:50:03', b'0'),
-(24, 4, 106, 600, b'0', b'0', 'remember to turn oven off', '10:45:00', b'0', '2016-10-30', 6, 1, 0, '2016-10-30 05:04:21', b'0'),
-(29, 1, 110, 1002, b'0', b'0', 'Notify me on low water level', NULL, b'1', NULL, 0, 0, 40, '2016-11-05 04:35:15', b'1'),
-(30, 1, 110, 1001, b'0', b'0', 'Parameter Security', NULL, b'1', NULL, 15, 0, 0, '2016-11-05 04:50:17', b'0');
+INSERT INTO `task` (`TaskID`, `UserID`, `RoomID`, `SensorID`, `isDisabled`, `isDefault`, `TaskName`, `ActionTime`, `repeatDaily`, `ActionDate`, `AlarmDuration`, `AlarmInterval`, `SelectedSensorValue`, `DateCreated`, `NotifyByEmail`, `EnableTaskOnTime`, `DisableTaskOnTime`) VALUES
+(6, 1, 108, 801, b'0', b'1', 'open lights on motion sensor', NULL, b'1', NULL, -1, -1, 0, '2016-10-26 18:50:03', b'0', NULL, NULL),
+(18, 3, 101, 100, b'0', b'0', 'alarm', '05:20:00', b'0', '2016-11-10', 10, 1, 0, '2016-10-26 18:50:03', b'0', NULL, NULL),
+(19, 4, 101, 102, b'0', b'0', 'turn ac on', NULL, b'1', NULL, -1, -1, 30, '2016-10-26 18:50:03', b'0', NULL, NULL),
+(20, 7, 104, 403, b'0', b'0', 'morning routine', NULL, b'1', NULL, 15, 2, 1, '2016-10-26 18:50:03', b'0', NULL, NULL),
+(21, 3, 109, 900, b'1', b'0', 'Test', '20:07:00', b'0', '2016-10-23', -1, -1, 45, '2016-10-26 18:50:03', b'0', NULL, NULL),
+(22, 5, 102, 201, b'0', b'0', 'test Ahmad', NULL, b'0', '2016-10-31', 5, 2, 23, '2016-10-26 18:50:03', b'0', NULL, NULL),
+(24, 4, 106, 600, b'0', b'0', 'remember to turn oven off', '10:45:00', b'0', '2016-10-30', 6, 1, 0, '2016-10-30 05:04:21', b'0', NULL, NULL),
+(52, 1, 110, 1001, b'0', b'0', 'Parameter Security', NULL, b'1', NULL, 10, 0, 0, '2016-11-12 08:33:53', b'1', '01:00:00', '05:30:00'),
+(54, 1, 110, 1002, b'0', b'0', 'Notify me on low water level', NULL, b'1', NULL, 0, 0, 40, '2016-11-12 12:29:50', b'1', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -520,10 +522,21 @@ INSERT INTO `task` (`TaskID`, `UserID`, `RoomID`, `SensorID`, `isDisabled`, `isD
 CREATE TABLE `task_camera` (
   `TaskID` int(4) NOT NULL,
   `DeviceID` int(4) NOT NULL,
+  `RequiredDeviceStatus` int(2) NOT NULL DEFAULT '-1',
   `TakeImage` int(3) DEFAULT '1',
   `TakeVideo` int(3) DEFAULT '0',
   `Resolution` int(4) NOT NULL DEFAULT '480'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `task_camera`
+--
+
+INSERT INTO `task_camera` (`TaskID`, `DeviceID`, `RequiredDeviceStatus`, `TakeImage`, `TakeVideo`, `Resolution`) VALUES
+(52, 1001, 1, 10, -1, 720),
+(52, 1002, 1, -1, 60, 360),
+(54, 1001, -1, -1, -1, -1),
+(54, 1002, -1, -1, -1, -1);
 
 -- --------------------------------------------------------
 
@@ -564,12 +577,8 @@ INSERT INTO `task_devices` (`TaskID`, `DeviceID`, `RequiredDeviceStatus`) VALUES
 (24, 601, -1),
 (24, 602, -1),
 (24, 604, 1),
-(29, 1001, -1),
-(29, 1002, -1),
-(29, 1004, -1),
-(30, 1001, 1),
-(30, 1002, 1),
-(30, 1004, 1);
+(52, 1004, 1),
+(54, 1004, -1);
 
 -- --------------------------------------------------------
 
@@ -798,7 +807,7 @@ ALTER TABLE `room_backgrounds`
 -- AUTO_INCREMENT for table `task`
 --
 ALTER TABLE `task`
-  MODIFY `TaskID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `TaskID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 --
 -- AUTO_INCREMENT for table `user`
 --

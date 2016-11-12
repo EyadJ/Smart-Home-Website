@@ -124,7 +124,7 @@ include_once("../controllers/Header.php");
 	
 	<!----------------------------------------------------------------->
 <form name="formR" method="post" enctype="multipart/form-data" action="../controllers/addUserHandling.php">
-<table id='AddNewUserTable' style="width:615px; display:none;">
+<table id='AddNewUserTable' style="width:80%; display:none; min-width:600px;">
 
 <th colspan="2" height="27px"><b> Add New User </b></th>
 

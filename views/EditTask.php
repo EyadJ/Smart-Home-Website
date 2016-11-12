@@ -65,10 +65,14 @@ function HideUnhideActionDate(action)
 	if (action == 1)
 	{
 		document.getElementById("actionDate").style.display = "inline-block";
+		document.getElementById("OneTimeAction").style.backgroundColor = "#CCCCCC";
+		document.getElementById("OneTimeAction").style.border = "1px solid black";
 	}
 	else if (action == 0)
 	{
 		document.getElementById("actionDate").style.display = "none";
+		document.getElementById("OneTimeAction").style.backgroundColor = "transparent";
+		document.getElementById("OneTimeAction").style.border = "0px";
 	}
 }
 
@@ -93,7 +97,45 @@ function cameraSettings(x)
 		x.parentNode.parentNode.parentNode.parentNode.childNodes[5].style.display ="none";
 	}	
 } 
+  
+function HideAnotherActionDate() 
+{
+	document.getElementById("AnotherActionDate").style.display ="none";
+}
  
+function ShowAnotherActionDate() 
+{
+	document.getElementById("AnotherActionDate").style.display ="inline";
+}
+
+function EnableTaskOnTimeHandling() 
+{
+	if(document.getElementById("EnableTaskOnTimeValue").value)
+		document.getElementById("EnableTaskOnTime").checked = true;
+	else
+		document.getElementById("EnableTaskOnTime").checked = false;
+}
+
+function EnableTaskOnTimeValueHandling() 
+{
+	if(!document.getElementById("EnableTaskOnTime").checked)
+		document.getElementById("EnableTaskOnTimeValue").value = null;
+}
+
+function DisableTaskOnTimeHandling() 
+{
+	if(document.getElementById("DisableTaskOnTimeValue").value)
+		document.getElementById("DisableTaskOnTime").checked = true;
+	else
+		document.getElementById("DisableTaskOnTime").checked = false;
+}
+
+function DisableTaskOnTimeValueHandling() 
+{
+	if(!document.getElementById("DisableTaskOnTime").checked)
+		document.getElementById("DisableTaskOnTimeValue").value = null;
+}
+
 //
 //EDIT-TASK FORM POPUPS - [END]
 //

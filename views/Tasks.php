@@ -3,7 +3,7 @@
 <html>
 <head>
 <title>Tasks</title>
-  <link href="../controllers/style.css?d=<?php echo time(); ?>" rel="stylesheet"/>
+  <link href="../controllers/style.css" rel="stylesheet"/>
   
    
   <script>
@@ -90,6 +90,16 @@ function showAlarmDetails(x)
 }
 
 function hideAlarmDetails(x) 
+{
+	x.style.display = "none";	
+}
+
+function showCameraDetails(x) 
+{
+	x.style.display = "inline-table";	
+}
+
+function hideCameraDetails(x) 
 {
 	x.style.display = "none";	
 }
