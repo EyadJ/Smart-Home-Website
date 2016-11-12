@@ -6,12 +6,12 @@ class PrintSideMenu
 	
 	public static function autoPrint($pageName)
 	{
-		if (isset($_SESSION["Email"]) && $_SESSION["Admin"] == TRUE) 
+		if (isset($_SESSION["Email"]) && $_SESSION["isAdmin"] == TRUE) 
 		{
 			$string = PrintSideMenu::printNormal($pageName);
 			$string .= PrintSideMenu::printAdmin($pageName);
 		} 
-		else if (isset($_SESSION["Email"]) && $_SESSION["Admin"] == FALSE) 
+		else if (isset($_SESSION["Email"]) && $_SESSION["isAdmin"] == FALSE) 
 		{
 			$string = PrintSideMenu::printNormal($pageName);
 		} 

@@ -1,4 +1,4 @@
-<?php /*error_reporting(0);*/ session_start();  if(!isset($_SESSION["Email"]) || $_SESSION["Admin"] == FALSE){  header("Location: HomePage.php"); }
+<?php /*error_reporting(0);*/ session_start();  if(!isset($_SESSION["Email"]) || $_SESSION["isAdmin"] == FALSE){  header("Location: HomePage.php"); }
 
 
 	include_once("../models/user.php");

@@ -5,16 +5,12 @@
 	
 if(isset($_POST["Save"]))
 {
-	$isDisabled = 0;
-	if(isset($_POST['isDisabled']) && $_POST['isDisabled'] == "on")
-		$isDisabled = 1;
 
 	$SendEmail = 0; $SendSMS = 0;
 	
 	if(isset($_POST['SendEmail']) && $_POST['SendEmail'] == "on") $SendEmail = 1;
 	
 	if(isset($_POST['SendSMS']) && $_POST['SendSMS'] == "on") $SendSMS = 1;
-	
 	
 	$UserID = $_GET["var"];
 	$target_dir = "../controllers/images/Users/";
@@ -60,18 +56,17 @@ if(isset($_POST["Save"]))
 			echo "Sorry, there was an error uploading your file.";
 		}
 	}
-
-	$modifiedSuccessfully = user::modifyUserDetails_AdminRights
+	$modifiedSuccessfully = user::modifyUserDetails
 			(
 			$UserID,
 			$_POST['UserName'],
 			$_POST['Email'],
 			$_POST['CellPhone'],
-			$_POST['Title'],
-			$isDisabled,
 			$SendEmail,
 			$SendSMS
 			);
+			   
+			//echo $modifiedSuccessfully;
 	 
 			header("Location: ../views/Users.php");
 }

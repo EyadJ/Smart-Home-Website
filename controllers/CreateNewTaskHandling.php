@@ -24,12 +24,6 @@
 		$SelectedSensorValue = 0;
 		$NotifyByEmail = 0;
 		
-		if(isset($_POST["AlarmDuration"]))	
-			$AlarmDuration = $_POST["AlarmDuration"];
-		
-		if(isset($_POST["AlarmInterval"]))	
-			$AlarmInterval = $_POST["AlarmInterval"];
-		
 		if(isset($_POST["NotifyByEmail"])) 
 			$NotifyByEmail = 1;
 		
@@ -104,8 +98,17 @@
 			$Devices[$i]["DevicesID"] = $currentDevID;
 			$Devices[$i]["selectedDevicesStatus"] = $_POST[$currentDevID];
 			
+			//If device == Alarm
+			if($currentDevName === "Alarm" && $Devices[$i]["selectedDevicesStatus"] == 1)
+			{
+				if(isset($_POST["AlarmDuration"]))	
+					$AlarmDuration = $_POST["AlarmDuration"];
+		
+				if(isset($_POST["AlarmInterval"]))	
+					$AlarmInterval = $_POST["AlarmInterval"];
+			}
 			//If device == Camera
-			if($currentDevName === "Security Camera")
+			else if($currentDevName === "Security Camera")
 			{
 				$isDeviceCamera = TRUE; 
 				

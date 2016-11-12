@@ -8,7 +8,7 @@
 <html>
 <head>
 <title>Edit Task</title>
-    <link href="../controllers/style.css" rel="stylesheet"/>
+    <link href="../controllers/style.css?d=<?php echo time(); ?>" rel="stylesheet"/>
 
 	
   <script>
@@ -180,10 +180,10 @@ function hideDeleteTaskMsg()
 			</td></tr>
 			<tr><th style="height:30px;">	
 			<a href='#' onclick="deleteTaskSubmitClicked();return false;" style="text-decoration:none; ">
-			<button type='button' style="color:red;">Delete</button>
+			<button class='button' type='button' style="color:red;">Delete</button>
 			</a>
 			<a href='#' onclick="hideDeleteTaskMsg();return false;" style="text-decoration:none; ">
-			<button type='button'>Cancel</button>
+			<button class='button' type='button'>Cancel</button>
 			</a>
 			</th></tr>
 		</table>

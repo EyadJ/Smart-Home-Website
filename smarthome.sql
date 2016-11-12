@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 12, 2016 at 12:46 PM
+-- Generation Time: Nov 12, 2016 at 09:01 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `camera_galary` (
-  `MultiMediaID` int(6) NOT NULL,
+  `MultimediaID` int(6) NOT NULL,
   `cameraID` int(4) NOT NULL,
   `isImage` bit(1) NOT NULL DEFAULT b'1',
   `imgDate` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP,
@@ -511,7 +511,8 @@ INSERT INTO `task` (`TaskID`, `UserID`, `RoomID`, `SensorID`, `isDisabled`, `isD
 (22, 5, 102, 201, b'0', b'0', 'test Ahmad', NULL, b'0', '2016-10-31', 5, 2, 23, '2016-10-26 18:50:03', b'0', NULL, NULL),
 (24, 4, 106, 600, b'0', b'0', 'remember to turn oven off', '10:45:00', b'0', '2016-10-30', 6, 1, 0, '2016-10-30 05:04:21', b'0', NULL, NULL),
 (52, 1, 110, 1001, b'0', b'0', 'Parameter Security', NULL, b'1', NULL, 10, 0, 0, '2016-11-12 08:33:53', b'1', '01:00:00', '05:30:00'),
-(54, 1, 110, 1002, b'0', b'0', 'Notify me on low water level', NULL, b'1', NULL, 0, 0, 40, '2016-11-12 12:29:50', b'1', NULL, NULL);
+(54, 1, 110, 1002, b'0', b'0', 'Notify me on low water level', NULL, b'1', NULL, -1, -1, 40, '2016-11-12 12:29:50', b'1', NULL, NULL),
+(57, 1, 110, 1002, b'0', b'0', 'low water level - danger', NULL, b'1', NULL, -1, -1, 10, '2016-11-12 19:36:00', b'1', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -533,10 +534,12 @@ CREATE TABLE `task_camera` (
 --
 
 INSERT INTO `task_camera` (`TaskID`, `DeviceID`, `RequiredDeviceStatus`, `TakeImage`, `TakeVideo`, `Resolution`) VALUES
-(52, 1001, 1, 10, -1, 720),
-(52, 1002, 1, -1, 60, 360),
+(52, 1001, 1, 10, -1, 480),
+(52, 1002, 1, -1, 120, 240),
 (54, 1001, -1, -1, -1, -1),
-(54, 1002, -1, -1, -1, -1);
+(54, 1002, -1, -1, -1, -1),
+(57, 1001, -1, -1, -1, -1),
+(57, 1002, -1, -1, -1, -1);
 
 -- --------------------------------------------------------
 
@@ -578,7 +581,8 @@ INSERT INTO `task_devices` (`TaskID`, `DeviceID`, `RequiredDeviceStatus`) VALUES
 (24, 602, -1),
 (24, 604, 1),
 (52, 1004, 1),
-(54, 1004, -1);
+(54, 1004, -1),
+(57, 1004, -1);
 
 -- --------------------------------------------------------
 
@@ -594,19 +598,22 @@ CREATE TABLE `user` (
   `Password` varchar(20) NOT NULL,
   `isAdmin` bit(1) NOT NULL DEFAULT b'0',
   `isDisabled` bit(1) NOT NULL DEFAULT b'0',
-  `UserImagePath` varchar(200) NOT NULL
+  `UserImagePath` varchar(200) NOT NULL,
+  `CellPhone` int(10) NOT NULL,
+  `SendEmail` bit(1) NOT NULL DEFAULT b'1',
+  `SendSMS` bit(1) NOT NULL DEFAULT b'1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`UserID`, `Email`, `UserName`, `Title`, `Password`, `isAdmin`, `isDisabled`, `UserImagePath`) VALUES
-(1, 'system.admin@gmail.com', 'System Admin', 'Admin', '1234', b'1', b'0', 'superAdmin.png'),
-(3, 'abdullah.alghamdi@gmail.com', 'Abdullah Alghamdi', 'Father', '123321', b'1', b'0', 'abdullah.jpg'),
-(4, 'Huda.Azzahrani@gmail.com', 'Huda Azzahrani', 'Mother', '12345', b'0', b'0', 'huda.png'),
-(5, 'Ahmad.alghamdi@hotmail.com', 'Ahmad alghamdi', 'Son', '123123', b'0', b'0', 'ahmad.jpg'),
-(7, 'Sarah.alghamdi@gmail.com', 'Sarah Alghamdi', 'Daughter', '44332211', b'0', b'0', 'sarah.png');
+INSERT INTO `user` (`UserID`, `Email`, `UserName`, `Title`, `Password`, `isAdmin`, `isDisabled`, `UserImagePath`, `CellPhone`, `SendEmail`, `SendSMS`) VALUES
+(1, 'system.admin@gmail.com', 'System Admin', 'Admin', '1234', b'1', b'0', 'superAdmin.png', 542991095, b'1', b'1'),
+(3, 'abdullah.alghamdi@gmail.com', 'Abdullah Alghamdi', 'Father', '123321', b'1', b'0', 'abdullah.jpg', 0, b'1', b'1'),
+(4, 'Huda.Azzahrani@gmail.com', 'Huda Azzahrani', 'Mother', '12345', b'0', b'0', 'huda.png', 548251871, b'1', b'1'),
+(5, 'Ahmad.alghamdi@hotmail.com', 'Ahmad alghamdi', 'Son', '', b'0', b'0', 'ahmad.jpg', 548922584, b'1', b'1'),
+(7, 'Sarah.alghamdi@gmail.com', 'Sarah Alghamdi', 'Daughter', '44332211', b'0', b'0', 'sarah.png', 584965482, b'1', b'1');
 
 -- --------------------------------------------------------
 
@@ -639,7 +646,7 @@ INSERT INTO `user_authorized_rooms` (`UserID`, `RoomID`) VALUES
 -- Indexes for table `camera_galary`
 --
 ALTER TABLE `camera_galary`
-  ADD PRIMARY KEY (`MultiMediaID`),
+  ADD PRIMARY KEY (`MultimediaID`),
   ADD KEY `cameraID` (`cameraID`);
 
 --
@@ -777,7 +784,7 @@ ALTER TABLE `user_authorized_rooms`
 -- AUTO_INCREMENT for table `camera_galary`
 --
 ALTER TABLE `camera_galary`
-  MODIFY `MultiMediaID` int(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `MultimediaID` int(6) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `gpio_pins`
 --
@@ -807,12 +814,12 @@ ALTER TABLE `room_backgrounds`
 -- AUTO_INCREMENT for table `task`
 --
 ALTER TABLE `task`
-  MODIFY `TaskID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `TaskID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `UserID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `UserID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- Constraints for dumped tables
 --

@@ -1,9 +1,9 @@
-<?php /*error_reporting(0);*/ session_start(); if(!isset($_SESSION["Email"]) || $_SESSION["Admin"] == FALSE){ header("Location: LogIn.php"); } ?>
+<?php /*error_reporting(0);*/ session_start(); if(!isset($_SESSION["Email"]) || $_SESSION["isAdmin"] == FALSE){ header("Location: LogIn.php"); } ?>
 
 <html>
 <head>
 <title>User Authorised Rooms</title>
-  <link href="../controllers/style.css" rel="stylesheet"/>
+  <link href="../controllers/style.css?d=<?php echo time(); ?>" rel="stylesheet"/>
 
 <style>
 .roomDiv:hover{

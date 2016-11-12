@@ -35,7 +35,7 @@
 				$_SESSION["UserName"] = $UserName;
 				$_SESSION["UserID"] = $UserID;
 				$_SESSION["Email"] = $email;
-				$_SESSION["Admin"] = $isAdmin;
+				$_SESSION["isAdmin"] = $isAdmin;
 
 				header("Location:../views/Rooms.php");
 			}

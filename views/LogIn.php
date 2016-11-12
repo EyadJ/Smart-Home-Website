@@ -4,7 +4,7 @@
 <html>
 <head>
 <title>Login page</title>
- <link href="../controllers/style.css" rel="stylesheet"/>
+ <link href="../controllers/style.css?d=<?php echo time(); ?>" rel="stylesheet"/>
 <style>
 table {
     width: 30%;
@@ -74,7 +74,7 @@ function LogInFormSubmit()
 			<tr><th style="height:30px;">	
 			
 			<a href='#' onclick="hideLogInProblemDialog();return false;" style="text-decoration:none; ">
-			<button type='button' style="width:70px;" id="OKbutton">Ok</button>
+			<button class='button'  type='button' style="width:70px;" id="OKbutton">Ok</button>
 			</a>
 			</th></tr>
 		</table>
@@ -96,7 +96,7 @@ function LogInFormSubmit()
 
 <th colspan="2" >
 <img align="center" src="../controllers/images/login-user.png" width="60px" style="display:inline;"/>
-<h1 style="color:black; display:inline;">Log in</h1>
+<h1 style="color:black; display:inline; text-shadow: 2px 2px white; ">Log in</h1>
 </th>
 
 <tr>

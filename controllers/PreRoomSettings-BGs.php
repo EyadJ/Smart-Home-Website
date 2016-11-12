@@ -7,7 +7,7 @@
 	//include_once("../models/sensor.php");
 	//include_once("../models/task.php");
 
-	//$isAdmin = $_SESSION["Admin"];
+	//$isAdmin = $_SESSION["isAdmin"];
 	//$UserID = $_SESSION["UserID"];
 	//$RoomID = $_GET["var"];
 	
@@ -16,12 +16,11 @@
 	//-------------------------------------------	---------------------------------//
 	// 
 		echo'<form method="post" action="../controllers/UploadNewRoomBgHandling.php?var=' . $RoomID . '" enctype="multipart/form-data">
-		<table id="uploadTable" style="display:none; margin-left:auto; margin-right:auto; width:303px;"><tr><th>
+		<table id="uploadTable" style="display:none; margin-left:auto; margin-right:auto; width:330px;"><tr><th>
 				<input type="file" name="fileToUpload" id="my_file" required />
-				<input type="submit" id="my_submit" value="Upload" />
+				<input type="submit" class="button"  id="my_submit" value="Upload" />
 				</th></tr></table>
-				</form>
-				';
+				</form>';
 				
 		$result = room::getAllRoomBackgrounds($RoomID);
 		$SelectedRoomImgPath = room::getRoomSelectedBackground($RoomID);

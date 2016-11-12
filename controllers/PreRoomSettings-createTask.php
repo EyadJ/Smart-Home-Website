@@ -8,7 +8,7 @@
 	//include_once("../models/sensor.php");
 	//include_once("../models/task.php");
 
-	//$isAdmin = $_SESSION["Admin"];
+	//$isAdmin = $_SESSION["isAdmin"];
 	//$UserID = $_SESSION["UserID"];
 	//$RoomID = $_GET["var"];
 	
@@ -62,9 +62,12 @@
 		</div>";
 		
 		//------Notify By Email-----//
-		echo"</td><td width='110px'>
-		<label><input type='checkbox' name='NotifyByEmail'/> 
-		Notify me by Email</label>
+		echo"</td><td width='130px'>
+		<div class='tooltip'><span class='tooltiptext' style='margin-left:90px; margin-top:-70px;'>You Can Find this Option in Your Account Settings</span>
+			<label><input type='checkbox' name='NotifyByEmail'/> 
+			Notify me by Email / SMS</label>
+			<img src='../controllers/images/info.png' style='width:12px; height:12px; position:absolute; top:-8px; right:0px;'/>
+		</div>
 		
 		</td></tr>";
 		
@@ -265,15 +268,14 @@
 						
 						<label style='float:left;'><input type='radio' name='cam-$row[DeviceID]-takeImgOrVideo' value='Vid'/> Take Video</label>
 						<span id=''><input type='number' name='cam-$row[DeviceID]-TakeVideoDuration' placeholder='(Seconds)' value=30
-						style='width:35px;'/> Seconds</span>
+						style='width:45px;'/> Seconds</span>
 						
 						</td></tr><tr><td>
 						
 						Resolution 
 						<select name='cam-$row[DeviceID]-Resolution'>
-							<option value='360'>360p</option>
+							<option value='240'>240p</option>
 							<option value='480'>480p</option>
-							<option value='720'>720p</option>
 						</select>
 						
 						</td></tr>
@@ -300,7 +302,7 @@
 			}
 		}
 			
-		echo "</tr><tr><th colspan='4' style='height:28px;'><input type='submit' name='Create' value='Create' />
+		echo "</tr><tr><th colspan='4' style='height:28px;'><input type='submit' class='button' name='Create' value='Create' />
 		</th></tr></table>
 		</form><br />";
 		

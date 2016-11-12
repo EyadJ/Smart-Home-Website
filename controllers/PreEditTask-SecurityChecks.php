@@ -3,7 +3,7 @@
 	include_once("../models/user.php");
 	include_once("../models/task.php");
 
-	$isAdmin = $_SESSION["Admin"];
+	$isAdmin = $_SESSION["isAdmin"];
 	$UserID = $_SESSION["UserID"];
 	$TaskID = $_GET["var"];
 	$referrer = $_GET["referrer"];

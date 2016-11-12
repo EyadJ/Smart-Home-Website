@@ -3,7 +3,7 @@
 <html>
 <head>
 <title>Security Cameras</title>
-  <link href="../controllers/style.css" rel="stylesheet"/>
+  <link href="../controllers/style.css?d=<?php echo time(); ?>" rel="stylesheet"/>
 
 <script>
  

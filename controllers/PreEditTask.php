@@ -6,7 +6,7 @@
 	include_once("../models/user.php");
 	include_once("../models/task.php");
 
-	$isAdmin = $_SESSION["Admin"];
+	$isAdmin = $_SESSION["isAdmin"];
 	$UserID = $_SESSION["UserID"];
 	$TaskID = $_GET["var"];
 	$referrer = $_GET["referrer"];
@@ -102,7 +102,7 @@
 		
 		</div>";
 		
-		//------------------NotifyByEmail----------------//
+		//------------------Notify By Email----------------//
 		$text1 = ""; 
 		
 		$NotifyByEmail = $taskDetails["NotifyByEmail"];
@@ -110,9 +110,12 @@
 		if($NotifyByEmail == TRUE)
 			$text1 = "checked";
 		
-		echo"</td><td width='110px'>
-		<label><input type='checkbox' name='NotifyByEmail' $text1/> 
-		Notify me by Email</label>
+		echo"</td><td width='130px'>
+		<div class='tooltip'><span class='tooltiptext' style='margin-left:90px; margin-top:-70px;'>You Can Find this Option in Your Account Settings</span>
+			<label><input type='checkbox' name='NotifyByEmail' $text1/> 
+			Notify me by Email / SMS</label>
+			<img src='../controllers/images/info.png' style='width:12px; height:12px; position:absolute; top:-8px; right:0px;'/>
+		</div>
 		
 		</td></tr>";
 		
@@ -396,7 +399,7 @@
 				<tr id='alarmDetails' style='display:$displayStatus1;'><td colspan='2'>
 				<table style='border:0; padding:0; margin:0;'>
 				<tr><td>Duration</td>
-				<td><input type='number' name='AlarmDuration' placeholder='(Minutes)' value=$AlarmDuration style='width:35px;'/></td></tr>
+				<td><input type='number' name='AlarmDuration' placeholder='(Minutes)' value=$AlarmDuration style='width:60px;'/></td></tr>
 				<tr><td>Interval</td>
 				<td><input type='number' name='AlarmInterval' placeholder='(Minutes)' value=$AlarmInterval  style='width:35px;'/></td></tr>
 				</table></td></tr>
@@ -407,8 +410,8 @@
 			{
 				
 				$option1 = ""; $option2 = ""; $option3 = ""; $option4 = ""; 
-				$option5 = ""; $option6 = ""; $option7 = ""; 
-				$displayStatus1 = "none"; $TakeImage = 1; $TakeVideo = 30;
+				$option5 = ""; $option6 = ""; $option7 = "";  $displayStatus1 = "none"; 
+				$TakeImage = 1; $TakeVideo = 30; $Resolution = 480;
 				
 				$ReqDevState = $taskCamerasArray[$currentDevID]["ReqDevState"];
 			
@@ -466,7 +469,7 @@
 					
 					<span id=''><input type='number' name='cam-$currentDevID-TakeVideoDuration' 
 					placeholder='(Seconds)' value=$TakeVideo 
-					style='width:35px;'/>Seconds</span>
+					style='width:45px;'/>Seconds</span>
 					
 					</td></tr><tr><td>
 						
@@ -475,7 +478,7 @@
 						
 						//$Resolution = $taskCamerasArray[$currentDevID]["Resolution"];		^^UP^^
 						
-						$ResolutionValues = array(360, 480, 720);
+						$ResolutionValues = array(240, 480);
 						
 						for($j = 0; $j < count($ResolutionValues); $j++)
 						{
@@ -533,15 +536,15 @@
 		
 		echo "<tr ><th colspan='4' style='height:28px;'>
 		
-		<input type='submit' value='Save' name='Save' style='font-weight:bold; margin-left:3px;' />&nbsp;
+		<input type='submit' class='button' value='Save' name='Save' style='font-weight:bold; margin-left:3px;' />&nbsp;
 		
-		<input type='reset' value='Reset' />&nbsp;";
+		<input type='reset' class='button'  value='Reset' />&nbsp;";
 		
 		$isDefault = $taskDetails["isDefault"];
 		
 		if(!$isDefault)
 			echo"<a href='#' onclick='deleteTaskMsg($TaskID);return false;' style='text-decoration:none;'>
-			<button type = 'button' style='color:red;'>Delete</button>	</a>";
+			<button class='button'  type = 'button' style='color:red;'>Delete</button>	</a>";
 		
 		else	//$isDefault == TRUE (Undeleteable)
 			echo"<div style=' margin-left:auto; margin-right:auto; width:50px; display:inline;'>
@@ -549,11 +552,11 @@
 						<span class='tooltiptext'>
 							This Task is a Default Task, Therefore it is Undeletable.<br /> But you can Disable it.
 						</span>
-						<button type = 'button' style='color:gray;' disabled>Delete</button>
+						<button class='button'  type = 'button' style='color:gray;' disabled>Delete</button>
 					</div>
 				</div>";
 			
-		echo"&nbsp;<a href='../views/$referrer'><button type = 'button'>Cancel</button></a>
+		echo"&nbsp;<a href='../views/$referrer'><button class='button'  type = 'button'>Cancel</button></a>
 		
 		</th></tr></table>
 		</form>

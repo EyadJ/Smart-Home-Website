@@ -6,7 +6,7 @@
 	include_once("../models/sensor.php");
 	include_once("../models/task.php");
 
-	$isAdmin = $_SESSION["Admin"];
+	$isAdmin = $_SESSION["isAdmin"];
 	$UserID = $_SESSION["UserID"];
 	$RoomID = $_GET["var"];
 	

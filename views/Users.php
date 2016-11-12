@@ -1,10 +1,10 @@
-<?php /*error_reporting(0);*/ session_start();  if(!isset($_SESSION["Email"]) || $_SESSION["Admin"] == FALSE){  header("Location: HomePage.php"); } ?>
+<?php /*error_reporting(0);*/ session_start();  if(!isset($_SESSION["Email"]) || $_SESSION["isAdmin"] == FALSE){  header("Location: HomePage.php"); } ?>
 
 <html >
 <head >
 <title>Users</title>
    
-    <link href="../controllers/style.css" rel="stylesheet"/>
+    <link href="../controllers/style.css?d=<?php echo time(); ?>" rel="stylesheet"/>
 
    
   <script>
@@ -140,11 +140,15 @@ include_once("../controllers/Header.php");
 &nbsp;&nbsp;<input type="text" name="email" maxlength="35" required/> &nbsp;
     </td>
     </tr>
-<tr><td>Password</td><td align=left>
+<tr><td>Cell Phone</td><td align=left>
+&nbsp;&nbsp;<input type="number" name="CellPhone" /> &nbsp; (Format: 0512345678)
+        </td>
+    </tr>
+	<tr><td>Password</td><td align=left>
 &nbsp;&nbsp;<input type="password" name="Pass" required/>
         </td>
     </tr>
-    <tr><td>ConfirmPassword</td><td align=left>
+    <tr><td>Confirm Password</td><td align=left>
 &nbsp;&nbsp;<input type="password" name="ConPass" required/>
         </td></tr>
 		
@@ -156,11 +160,14 @@ include_once("../controllers/Header.php");
     <tr><td colspan="2" style="background-color:#CCCCCC;"><b>Please add the required rooms for this user to control after the user is created</b></td></tr>
 <tr><th align="left" colspan="2" height="27px">
 
-<div style="width:200px; margin-left:auto; margin-right:auto; ">
-<input type="submit" value="Save"/>&nbsp;
-<input type="reset" value="Reset" />&nbsp;
+<div style="width:230px; margin-left:auto; margin-right:auto; ">
+
+<input type="submit" class="button"  name="AddUser" value="Create"/>&nbsp;
+
+<input type="reset" class="button"  value="Reset"/>&nbsp;
+
 <a href="#" onclick="HideUnhideNewUser();return false;" style="text-decoration:none;">
-<button type = "button" >Cancel</button>
+<button class='button' type = "button">Cancel</button>
 </a> 
 </div>
 

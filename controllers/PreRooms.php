@@ -5,7 +5,7 @@
 	include_once("../models/device.php");
 	//include_once("../models/sensor.php");
 
-	$isAdmin = $_SESSION["Admin"];
+	$isAdmin = $_SESSION["isAdmin"];
 	$UserID = $_SESSION["UserID"];
 	
 	if ($isAdmin == TRUE)

@@ -6,7 +6,7 @@
 
 <meta http-equiv="refresh" content="60" >
   
-  <link href="../controllers/style.css" rel="stylesheet"/>
+  <link href="../controllers/style.css?d=<?php echo time(); ?>" rel="stylesheet"/>
      
 <style>
 .DeviceDiv:hover{

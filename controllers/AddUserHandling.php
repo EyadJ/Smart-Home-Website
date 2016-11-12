@@ -1,4 +1,4 @@
-<?php /*error_reporting(0);*/ session_start();  if(!isset($_SESSION["Email"]) || $_SESSION["Admin"] == FALSE){  header("Location: HomePage.php"); } 
+<?php /*error_reporting(0);*/ session_start();  if(!isset($_SESSION["Email"]) || $_SESSION["isAdmin"] == FALSE){  header("Location: HomePage.php"); } 
 
 
 	include_once("../models/user.php");
@@ -44,7 +44,7 @@
 		if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) 
 		{
 			$insertedSuccessfully = user::addNewUser($_POST['userName'], $_POST['Title'],
-			$_POST['email'], $_POST['Pass'], $basename);
+			$_POST['email'], $_POST['CellPhone'], $_POST['Pass'], $basename);
 		
 			header("Location: ../views/Users.php");
 			//echo $addedSuccessfully;

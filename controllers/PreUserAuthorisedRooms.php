@@ -5,7 +5,7 @@
 	include_once("../models/device.php");
 
 	//
-	$isAdmin = $_SESSION["Admin"];
+	$isAdmin = $_SESSION["isAdmin"];
 	$UserID = $_GET["var"];
 	$AllRooms = room::getAllRoomsDetails();
 	//

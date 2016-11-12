@@ -6,7 +6,7 @@
 <html>
 <head>
 <title>Room Settings</title>
-  <link href="../controllers/style.css" rel="stylesheet"/>
+  <link href="../controllers/style.css?d=<?php echo time(); ?>" rel="stylesheet"/>
   
   <script>
   
@@ -14,35 +14,27 @@ function unHideUpload()
 {
 	var x = document.getElementById("uploadTable").style.display;	
 		
-	if (x=="none")
-	{
-		document.getElementById("uploadTable").style.display ="block";	
-	}
+	if (x == "none")
+		document.getElementById("uploadTable").style.display ="table";	
 	else
-	{
 		document.getElementById("uploadTable").style.display ="none";
-	}
 }
 
 function unHideNewTask() 
 {
 	var x = document.getElementById("CreateNewTaskTable").style.display;	
 		
-	if (x=="none")
-	{
+	if (x == "none")
 		document.getElementById("CreateNewTaskTable").style.display ="table";	
-	}
 	else
-	{
 		document.getElementById("CreateNewTaskTable").style.display ="none";
-	}
 }
 
 function HideUnhideDiv1() 
 {
 	var x = document.getElementById("right-div1").style.display;	
 	
-	if (x=="none")
+	if (x == "none")
 	{
 		document.getElementById("right-div1").style.display ="inline";
 		document.getElementById("right-div1-hidden").style.display ="none";
@@ -58,7 +50,7 @@ function HideUnhideDiv2()
 {
 	var x = document.getElementById("right-div2").style.display;	
 	
-	if (x=="none")
+	if (x == "none")
 	{
 		document.getElementById("right-div2").style.display ="inline";
 		document.getElementById("right-div2-hidden").style.display ="none";
@@ -128,13 +120,9 @@ function UnhideAlarmDetails()
 function cameraSettings(x) 
 {
 	if(x.value === "1")
-	{
 		x.parentNode.parentNode.parentNode.parentNode.childNodes[6].style.display ="table-row";
-	}
 	else
-	{
 		x.parentNode.parentNode.parentNode.parentNode.childNodes[6].style.display ="none";
-	}	
 }
  
 function HideAnotherActionDate() 

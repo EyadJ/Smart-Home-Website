@@ -437,12 +437,26 @@ table {
 }
 
 .button {
-    float: left;
-    font-size: 12pt;
-    width: 150px;
-    height: 100%;
-    border-color: #45c2c4;
-    background-color: #72d8d9;
+	margin-top:4px;
+	margin-bottom:3px;
+    width: 70px;
+    height: 27px;
+    border-color: #666666;
+    background-color: #D9D9D9;
+    color: #000000;
+    font-family: "Open Sans", sans-serif,Arial;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.button:hover {
+	margin-top:4px;
+	margin-bottom:3px;
+    width: 70px;
+    height: 27px;
+    border-color: #000000;
+    background-color: #B2B2B2;
     color: #000000;
     font-family: "Open Sans", sans-serif,Arial;
     -webkit-border-radius: 5px;
@@ -611,13 +625,12 @@ th {
 	border-right: 1px solid #787878;
 	border-top: 1px solid #787878;
 	border-bottom: 1px solid #787878;
-	color: #fff;
-  font-weight: 500;
+	height: 30px;
+	color: white;
+	text-shadow: 0 0 5px black;
+	font-weight: 700;
 	padding: 0px;
 	position: relative;
-
-		
-
 }
 
 td {

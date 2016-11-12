@@ -1,9 +1,9 @@
-<?php /*error_reporting(0);*/ session_start();  if(!isset($_SESSION["Email"]) || $_SESSION["Admin"] == FALSE){  header("Location: Homepage.php"); } ?>
+<?php /*error_reporting(0);*/ session_start();  if(!isset($_SESSION["Email"]) || $_SESSION["isAdmin"] == FALSE){  header("Location: Homepage.php"); } ?>
 
 <html>
 <head>
 <title>Modify User Settings</title>
-    <link href="../controllers/style.css" rel="stylesheet"/>
+    <link href="../controllers/style.css?d=<?php echo time(); ?>" rel="stylesheet"/>
 
 	   
   <script>
@@ -43,6 +43,16 @@ function hideDeleteUserMsg()
 	document.getElementById("deleteMsgDim").style.display ="none";	
 }
 
+function HideUnhideChangePW() 
+{
+	var x = document.getElementById("ChangePWtable").style.display;	
+		
+	if (x == "none")
+		document.getElementById("ChangePWtable").style.display ="table";	
+	else
+		document.getElementById("ChangePWtable").style.display ="none";
+}
+
 </script>
 </head>
 <body>
@@ -61,10 +71,10 @@ function hideDeleteUserMsg()
 			</td></tr>
 			<tr><th style="height:30px;">	
 			<a href='#' onclick="deleteUserSubmitClicked();return false;" style="text-decoration:none; ">
-			<button type='button' style="color:red;">Delete</button>
+			<button class='button'  type='button' style="color:red;">Delete</button>
 			</a>
 			<a href='#' onclick="hideDeleteUserMsg();return false;" style="text-decoration:none; ">
-			<button type='button'>Cancel</button>
+			<button class='button'  type='button'>Cancel</button>
 			</a>
 			</th></tr>
 		</table>
@@ -136,6 +146,17 @@ include_once("../controllers/Header.php");
 		
             <div class="right-div-secondary-title" style="width:123px;"><b>User Settings</b></div>
 
+			
+				<div style=" margin-left:auto; margin-right:auto; width:200px;">
+					<a  href="#" onclick="HideUnhideChangePW();return false;" style="text-decoration:none; ">
+						<div class="tooltip"><span class="tooltiptext">Change User's Password</span>
+							<img align="center" id="abc" src="../controllers/images/change-password.png" width="220px" />
+							<img src='../controllers/images/info.png' style='width:12px; height:12px; position:absolute; top:1px; right:1px;'/>
+						</div>
+					</a>
+				</div>
+				
+				
 <?php 
 	include_once("../controllers/PreModifyUserSettings.php");
 ?>

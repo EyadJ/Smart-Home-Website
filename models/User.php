@@ -9,7 +9,7 @@ require_once("config.php");
 class User
 {
 	
-	public static function addNewUser($userName, $Title, $email, $password, $imgPath) 
+	public static function addNewUser($userName, $Title, $email, $CellPhone, $password, $imgPath) 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) 
@@ -21,11 +21,12 @@ class User
 		$userName = $db->escape_string($userName);
 		$Title = $db->escape_string($Title);
 		$email = $db->escape_string($email);
+		$CellPhone = $db->escape_string($CellPhone);
 		$password = $db->escape_string($password);
 		$imgPath = $db->escape_string($imgPath);
 
-		$sql = "INSERT INTO user (UserName, Title, Email, Password, UserImagePath) "
-		  . " VALUES ('$userName', '$Title', '$email', '$password', '$imgPath');";
+		$sql = "INSERT INTO user (UserName, Title, Email, CellPhone, Password, UserImagePath) "
+		  . " VALUES ('$userName', '$Title', '$email', $CellPhone, '$password', '$imgPath');";
 
 		$db->query($sql);
 
@@ -272,7 +273,7 @@ class User
 			return TRUE;
 	}
 
-	public static function modifyUserDetails ($UserID, $UserName, $Email, $Title, $Password, $isDisabled) 
+	public static function modifyUserDetails ($UserID, $UserName, $Email, $CellPhone, $SendEmail, $SendSMS) 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) 
@@ -283,16 +284,49 @@ class User
 		$UserID = $db->escape_string($UserID);
 		$UserName = $db->escape_string($UserName);
 		$Email = $db->escape_string($Email);
-		$Title = $db->escape_string($Title);
-		$Password = $db->escape_string($Password);
-		$isDisabled = $db->escape_string($isDisabled);
+		$CellPhone = $db->escape_string($CellPhone);
+		$SendEmail = $db->escape_string($SendEmail);
+		$SendSMS = $db->escape_string($SendSMS);
 
 		$sql = "UPDATE user "
-			. " SET UserName = '$UserName'" 
-			. " ,Email = '$Email'" 
-			. " ,Title = '$Title'" 
-			. " ,Password = '$Password'" 
-			. " ,isDisabled = $isDisabled" 
+			. " SET UserName = '$UserName'," 
+			. " Email = '$Email'," 
+			. " CellPhone = $CellPhone," 
+			. " SendEmail = $SendEmail," 
+			. " SendSMS = $SendSMS" 
+			. " WHERE UserID = $UserID;";
+
+		if ($db->query($sql)) //TRUE
+			return TRUE;
+		else 
+			return FALSE;
+	}
+	
+	public static function modifyUserDetails_AdminRights ($UserID, $UserName, $Email, $CellPhone, $Title, $isDisabled, $SendEmail, $SendSMS) 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) 
+		{
+			die('error: unable to connect to database');
+		}
+		//in the following lines we escape quotation such as ' and "
+		$UserID = $db->escape_string($UserID);
+		$UserName = $db->escape_string($UserName);
+		$Email = $db->escape_string($Email);
+		$CellPhone = $db->escape_string($CellPhone);
+		$Title = $db->escape_string($Title);
+		$isDisabled = $db->escape_string($isDisabled);
+		$SendEmail = $db->escape_string($SendEmail);
+		$SendSMS = $db->escape_string($SendSMS);
+
+		$sql = "UPDATE user "
+			. " SET UserName = '$UserName'," 
+			. " Email = '$Email'," 
+			. " CellPhone = '$CellPhone'," 
+			. " Title = '$Title'," 
+			. " isDisabled = $isDisabled," 
+			. " SendEmail = $SendEmail," 
+			. " SendSMS = $SendSMS" 
 			. " WHERE UserID = $UserID;";
 
 		if ($db->query($sql)) //TRUE
@@ -412,7 +446,53 @@ class User
 			return NULL;
 	}
 	
+	public static function UpdatePassword($UserID, $OldPass, $NewPass) 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) 
+		{
+			die('error: unable to connect to database');
+		}
+		$UserID = $db->escape_string($UserID);
+		$OldPass = $db->escape_string($OldPass);
+		$NewPass = $db->escape_string($NewPass);
+
+		
+		$sql = "SELECT Password FROM user WHERE UserID = $UserID;";	
+		$result = $db->query($sql);
+		
+		$row = $result -> fetch_assoc();
+			
+		if($row["Password"] === $OldPass)	//Old Password is Correct
+		{
+			$sql = "UPDATE user SET Password = '$NewPass' WHERE UserID = $UserID;";	
+		
+			if ($db->query($sql)) //TRUE
+				return TRUE;
+			else 
+				return FALSE;
+		}
+		else					//Old Password is NOT Correct
+			return FALSE;
+	}
 	
+	public static function UpdatePassword_AdminRights($UserID, $NewPass) 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) 
+		{
+			die('error: unable to connect to database');
+		}
+		$UserID = $db->escape_string($UserID);
+		$NewPass = $db->escape_string($NewPass);
+
+		$sql = "UPDATE user SET Password = '$NewPass' WHERE UserID = $UserID;";	
+	
+		if ($db->query($sql)) //TRUE
+			return TRUE;
+		else 
+			return FALSE;
+	}
 	
 	
 	
