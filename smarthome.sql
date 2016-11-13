@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 12, 2016 at 09:01 PM
+-- Generation Time: Nov 13, 2016 at 09:06 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -58,7 +58,7 @@ CREATE TABLE `device` (
 --
 
 INSERT INTO `device` (`DeviceID`, `RoomID`, `DeviceName`, `DeviceState`, `GateNum`, `DeviceImgPath_on`, `DeviceImgPath_off`, `isStatusChanged`, `lastStatusChange`, `Watts`) VALUES
-(101, 101, 'Roof Lamp', b'1', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'1', '2016-11-07 08:21:50', 120),
+(101, 101, 'Roof Lamp', b'0', 0, 'Roof_Lamp_on.png', 'Roof_Lamp_off.png', b'1', '2016-11-13 15:12:26', 120),
 (102, 101, 'AC', b'1', 0, 'cooler_on.png', 'cooler_off.png', b'1', '2016-11-10 08:29:41', 1800),
 (103, 101, 'Curtains', b'1', -1, 'curtains_opened.png', 'curtains_closed.png', b'1', '2016-11-10 08:29:44', 0),
 (104, 101, 'Alarm', b'0', 0, 'alarm.png', 'alarm_off.png', b'1', '2016-11-10 09:54:48', 0),
@@ -120,9 +120,9 @@ INSERT INTO `device_stepper_motor` (`DeviceID`, `GateNum1`, `GateNum2`, `GateNum
 CREATE TABLE `gpio_pins` (
   `PinID` int(3) NOT NULL,
   `isPinInput` bit(1) DEFAULT NULL,
-  `Type` varchar(4) NOT NULL DEFAULT 'I2C',
+  `Type` varchar(6) NOT NULL DEFAULT 'I2C',
   `PinNumber` varchar(2) NOT NULL,
-  `PI4Jnumber` varchar(2) NOT NULL,
+  `PI4Jnumber` varchar(3) NOT NULL,
   `MCP23017` varchar(4) DEFAULT NULL,
   `Color` varchar(15) NOT NULL,
   `DeviceName` varchar(20) NOT NULL
@@ -159,14 +159,14 @@ INSERT INTO `gpio_pins` (`PinID`, `isPinInput`, `Type`, `PinNumber`, `PI4Jnumber
 (24, NULL, 'GPIO', '16', '27', NULL, 'Green', ''),
 (25, NULL, 'GPIO', '20', '28', NULL, 'Green', ''),
 (26, NULL, 'GPIO', '21', '29', NULL, 'Green', ''),
-(27, NULL, 'I2C', 'A0', 'A0', '0x20', 'Black', ''),
-(28, NULL, 'I2C', 'A1', 'A1', '0x20', 'Black', ''),
-(29, NULL, 'I2C', 'A2', 'A2', '0x20', 'Black', ''),
-(30, NULL, 'I2C', 'A3', 'A3', '0x20', 'Black', ''),
-(31, NULL, 'I2C', 'A4', 'A4', '0x20', 'Black', ''),
-(32, NULL, 'I2C', 'A5', 'A5', '0x20', 'Black', ''),
-(33, NULL, 'I2C', 'A6', 'A6', '0x20', 'Black', ''),
-(34, NULL, 'I2C', 'A7', 'A7', '0x20', 'Black', ''),
+(27, b'0', 'I2C', 'A0', 'A0', '0x20', 'Black', ''),
+(28, b'0', 'I2C', 'A1', 'A1', '0x20', 'Black', ''),
+(29, b'0', 'I2C', 'A2', 'A2', '0x20', 'Black', ''),
+(30, b'0', 'I2C', 'A3', 'A3', '0x20', 'Black', ''),
+(31, b'0', 'I2C', 'A4', 'A4', '0x20', 'Black', ''),
+(32, b'0', 'I2C', 'A5', 'A5', '0x20', 'Black', ''),
+(33, b'0', 'I2C', 'A6', 'A6', '0x20', 'Black', ''),
+(34, b'0', 'I2C', 'A7', 'A7', '0x20', 'Black', ''),
 (35, NULL, 'I2C', 'B0', 'B0', '0x20', 'yellow', ''),
 (36, NULL, 'I2C', 'B1', 'B1', '0x20', 'yellow', ''),
 (37, NULL, 'I2C', 'B2', 'B2', '0x20', 'yellow', ''),
@@ -191,38 +191,54 @@ INSERT INTO `gpio_pins` (`PinID`, `isPinInput`, `Type`, `PinNumber`, `PI4Jnumber
 (56, NULL, 'I2C', 'B5', 'B5', '0x21', 'White', ''),
 (57, NULL, 'I2C', 'B6', 'B6', '0x21', 'White', ''),
 (58, NULL, 'I2C', 'B7', 'B7', '0x21', 'White', ''),
-(59, NULL, 'I2C', 'A0', 'A0', '0x22', 'Black', ''),
-(60, NULL, 'I2C', 'A1', 'A1', '0x22', 'Black', ''),
-(61, NULL, 'I2C', 'A2', 'A2', '0x22', 'Black', ''),
-(62, NULL, 'I2C', 'A3', 'A3', '0x22', 'Black', ''),
-(63, NULL, 'I2C', 'A4', 'A4', '0x22', 'Black', ''),
-(64, NULL, 'I2C', 'A5', 'A5', '0x22', 'Black', ''),
-(65, NULL, 'I2C', 'A6', 'A6', '0x22', 'Black', ''),
-(66, NULL, 'I2C', 'A7', 'A7', '0x22', 'Black', ''),
-(67, NULL, 'I2C', 'B0', 'B0', '0x22', 'Yellow', ''),
-(68, NULL, 'I2C', 'B1', 'B1', '0x22', 'Yellow', ''),
-(69, NULL, 'I2C', 'B2', 'B2', '0x22', 'Yellow', ''),
-(70, NULL, 'I2C', 'B3', 'B3', '0x22', 'Yellow', ''),
-(71, NULL, 'I2C', 'B4', 'B4', '0x22', 'Yellow', ''),
-(72, NULL, 'I2C', 'B5', 'B5', '0x22', 'Yellow', ''),
-(73, NULL, 'I2C', 'B6', 'B6', '0x22', 'Yellow', ''),
-(74, NULL, 'I2C', 'B7', 'B7', '0x22', 'Yellow', ''),
-(75, NULL, 'I2C', 'A0', 'A0', '0x23', 'Blue', ''),
-(76, NULL, 'I2C', 'A1', 'A1', '0x23', 'Blue', ''),
-(77, NULL, 'I2C', 'A2', 'A2', '0x23', 'Blue', ''),
-(78, NULL, 'I2C', 'A3', 'A3', '0x23', 'Blue', ''),
-(79, NULL, 'I2C', 'A4', 'A4', '0x23', 'Blue', ''),
-(80, NULL, 'I2C', 'A5', 'A5', '0x23', 'Blue', ''),
-(81, NULL, 'I2C', 'A6', 'A6', '0x23', 'Blue', ''),
-(82, NULL, 'I2C', 'A7', 'A7', '0x23', 'Blue', ''),
-(83, NULL, 'I2C', 'B0', 'B0', '0x23', 'White', ''),
-(84, NULL, 'I2C', 'B1', 'B1', '0x23', 'White', ''),
-(85, NULL, 'I2C', 'B2', 'B2', '0x23', 'White', ''),
-(86, NULL, 'I2C', 'B3', 'B3', '0x23', 'White', ''),
-(87, NULL, 'I2C', 'B4', 'B4', '0x23', 'White', ''),
-(88, NULL, 'I2C', 'B5', 'B5', '0x23', 'White', ''),
-(89, NULL, 'I2C', 'B6', 'B6', '0x23', 'White', ''),
-(90, NULL, 'I2C', 'B7', 'B7', '0x23', 'White', '');
+(59, NULL, 'I2C', 'A0', 'A0', '0x24', 'Black', ''),
+(60, NULL, 'I2C', 'A1', 'A1', '0x24', 'Black', ''),
+(61, NULL, 'I2C', 'A2', 'A2', '0x24', 'Black', ''),
+(62, NULL, 'I2C', 'A3', 'A3', '0x24', 'Black', ''),
+(63, NULL, 'I2C', 'A4', 'A4', '0x24', 'Black', ''),
+(64, NULL, 'I2C', 'A5', 'A5', '0x24', 'Black', ''),
+(65, NULL, 'I2C', 'A6', 'A6', '0x24', 'Black', ''),
+(66, NULL, 'I2C', 'A7', 'A7', '0x24', 'Black', ''),
+(67, NULL, 'I2C', 'B0', 'B0', '0x24', 'Yellow', ''),
+(68, NULL, 'I2C', 'B1', 'B1', '0x24', 'Yellow', ''),
+(69, NULL, 'I2C', 'B2', 'B2', '0x24', 'Yellow', ''),
+(70, NULL, 'I2C', 'B3', 'B3', '0x24', 'Yellow', ''),
+(71, NULL, 'I2C', 'B4', 'B4', '0x24', 'Yellow', ''),
+(72, NULL, 'I2C', 'B5', 'B5', '0x24', 'Yellow', ''),
+(73, NULL, 'I2C', 'B6', 'B6', '0x24', 'Yellow', ''),
+(74, NULL, 'I2C', 'B7', 'B7', '0x24', 'Yellow', ''),
+(75, NULL, 'I2C', 'A0', 'A0', '0x25', 'Blue', ''),
+(76, NULL, 'I2C', 'A1', 'A1', '0x25', 'Blue', ''),
+(77, NULL, 'I2C', 'A2', 'A2', '0x25', 'Blue', ''),
+(78, NULL, 'I2C', 'A3', 'A3', '0x25', 'Blue', ''),
+(79, NULL, 'I2C', 'A4', 'A4', '0x25', 'Blue', ''),
+(80, NULL, 'I2C', 'A5', 'A5', '0x25', 'Blue', ''),
+(81, NULL, 'I2C', 'A6', 'A6', '0x25', 'Blue', ''),
+(82, NULL, 'I2C', 'A7', 'A7', '0x25', 'Blue', ''),
+(83, NULL, 'I2C', 'B0', 'B0', '0x25', 'White', ''),
+(84, NULL, 'I2C', 'B1', 'B1', '0x25', 'White', ''),
+(85, NULL, 'I2C', 'B2', 'B2', '0x25', 'White', ''),
+(86, NULL, 'I2C', 'B3', 'B3', '0x25', 'White', ''),
+(87, NULL, 'I2C', 'B4', 'B4', '0x25', 'White', ''),
+(88, NULL, 'I2C', 'B5', 'B5', '0x25', 'White', ''),
+(89, NULL, 'I2C', 'B6', 'B6', '0x25', 'White', ''),
+(90, NULL, 'I2C', 'B7', 'B7', '0x25', 'White', ''),
+(91, b'0', 'Relay', '1', '1.1', NULL, 'Green', ''),
+(92, b'0', 'Relay', '2', '1.2', NULL, 'Green', ''),
+(93, b'0', 'Relay', '3', '1.3', NULL, 'Green', ''),
+(94, b'0', 'Relay', '4', '1.4', NULL, 'Green', ''),
+(95, b'0', 'Relay', '5', '1.5', NULL, 'Green', ''),
+(96, b'0', 'Relay', '6', '1.6', NULL, 'Green', ''),
+(97, b'0', 'Relay', '7', '1.7', NULL, 'Green', ''),
+(98, b'0', 'Relay', '8', '1.8', NULL, 'Green', ''),
+(99, b'0', 'Relay', '9', '2.1', NULL, 'Green', ''),
+(100, b'0', 'Relay', '10', '2.2', NULL, 'Green', ''),
+(101, b'0', 'Relay', '11', '2.3', NULL, 'Green', ''),
+(102, b'0', 'Relay', '12', '2.4', NULL, 'Green', ''),
+(103, b'0', 'Relay', '13', '2.5', NULL, 'Green', ''),
+(104, b'0', 'Relay', '14', '2.6', NULL, 'Green', ''),
+(105, b'0', 'Relay', '15', '2.7', NULL, 'Green', ''),
+(106, b'0', 'Relay', '16', '2.8', NULL, 'Green', '');
 
 -- --------------------------------------------------------
 
@@ -469,8 +485,8 @@ CREATE TABLE `table_status` (
 --
 
 INSERT INTO `table_status` (`TableID`, `TableName`, `isTableUpdated`, `LastUpdated`) VALUES
-(1, 'Device', b'0', '2016-11-04 19:01:01'),
-(2, 'Task', b'0', '2016-11-04 19:02:53');
+(1, 'Device', b'1', '2016-11-13 15:12:26'),
+(2, 'Task', b'1', '2016-11-13 15:13:46');
 
 -- --------------------------------------------------------
 
@@ -504,7 +520,7 @@ CREATE TABLE `task` (
 
 INSERT INTO `task` (`TaskID`, `UserID`, `RoomID`, `SensorID`, `isDisabled`, `isDefault`, `TaskName`, `ActionTime`, `repeatDaily`, `ActionDate`, `AlarmDuration`, `AlarmInterval`, `SelectedSensorValue`, `DateCreated`, `NotifyByEmail`, `EnableTaskOnTime`, `DisableTaskOnTime`) VALUES
 (6, 1, 108, 801, b'0', b'1', 'open lights on motion sensor', NULL, b'1', NULL, -1, -1, 0, '2016-10-26 18:50:03', b'0', NULL, NULL),
-(18, 3, 101, 100, b'0', b'0', 'alarm', '05:20:00', b'0', '2016-11-10', 10, 1, 0, '2016-10-26 18:50:03', b'0', NULL, NULL),
+(18, 1, 101, 100, b'0', b'0', 'alarm', '05:30:00', b'0', '2016-11-10', 10, 1, 0, '2016-11-13 15:13:46', b'0', NULL, NULL),
 (19, 4, 101, 102, b'0', b'0', 'turn ac on', NULL, b'1', NULL, -1, -1, 30, '2016-10-26 18:50:03', b'0', NULL, NULL),
 (20, 7, 104, 403, b'0', b'0', 'morning routine', NULL, b'1', NULL, 15, 2, 1, '2016-10-26 18:50:03', b'0', NULL, NULL),
 (21, 3, 109, 900, b'1', b'0', 'Test', '20:07:00', b'0', '2016-10-23', -1, -1, 45, '2016-10-26 18:50:03', b'0', NULL, NULL),
@@ -512,7 +528,7 @@ INSERT INTO `task` (`TaskID`, `UserID`, `RoomID`, `SensorID`, `isDisabled`, `isD
 (24, 4, 106, 600, b'0', b'0', 'remember to turn oven off', '10:45:00', b'0', '2016-10-30', 6, 1, 0, '2016-10-30 05:04:21', b'0', NULL, NULL),
 (52, 1, 110, 1001, b'0', b'0', 'Parameter Security', NULL, b'1', NULL, 10, 0, 0, '2016-11-12 08:33:53', b'1', '01:00:00', '05:30:00'),
 (54, 1, 110, 1002, b'0', b'0', 'Notify me on low water level', NULL, b'1', NULL, -1, -1, 40, '2016-11-12 12:29:50', b'1', NULL, NULL),
-(57, 1, 110, 1002, b'0', b'0', 'low water level - danger', NULL, b'1', NULL, -1, -1, 10, '2016-11-12 19:36:00', b'1', NULL, NULL);
+(57, 1, 110, 1002, b'0', b'0', 'VERY low water level', NULL, b'1', NULL, -1, -1, 10, '2016-11-13 13:37:35', b'1', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -789,7 +805,7 @@ ALTER TABLE `camera_galary`
 -- AUTO_INCREMENT for table `gpio_pins`
 --
 ALTER TABLE `gpio_pins`
-  MODIFY `PinID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `PinID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
 --
 -- AUTO_INCREMENT for table `ip_address`
 --
@@ -814,7 +830,7 @@ ALTER TABLE `room_backgrounds`
 -- AUTO_INCREMENT for table `task`
 --
 ALTER TABLE `task`
-  MODIFY `TaskID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+  MODIFY `TaskID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 --
 -- AUTO_INCREMENT for table `user`
 --

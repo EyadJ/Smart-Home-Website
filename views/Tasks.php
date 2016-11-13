@@ -86,7 +86,7 @@ function usersTasksVisibility(UserID)
 
 function showAlarmDetails(x) 
 {
-	x.style.display = "inline";	
+	x.style.display = "inline-table";	
 }
 
 function hideAlarmDetails(x) 
@@ -100,6 +100,16 @@ function showCameraDetails(x)
 }
 
 function hideCameraDetails(x) 
+{
+	x.style.display = "none";	
+}
+
+function ShowEnableTaskOnTime(x) 
+{
+	x.style.display = "inline-table";	
+}
+
+function HideEnableTaskOnTime(x) 
 {
 	x.style.display = "none";	
 }

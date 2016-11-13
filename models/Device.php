@@ -54,7 +54,11 @@ class Device
 				. " WHERE DeviceID = $DeviceID;";
 
 			if ($db->query($sql) == TRUE) 
+			{
+				$db->query("UPDATE table_status SET isTableUpdated = 1 WHERE TableName = 'Device';");
+				
 				return TRUE;
+			}
 			else 
 				return FALSE;
 		}

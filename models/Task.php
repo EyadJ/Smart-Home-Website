@@ -36,7 +36,6 @@ class Task
 		if ($DisableTaskOnTime != NULL) $DisableTaskOnTime = $db->escape_string($DisableTaskOnTime);
 		
 		//
-
 		//Main insert
 		$sql = "INSERT INTO task (UserID, RoomID, SensorID, TaskName, SelectedSensorValue, repeatDaily,	AlarmDuration, AlarmInterval, NotifyByEmail) "
 			. " VALUES ($UserID, $RoomID, $SensorID, '$TaskName', $SelectedSensorValue, $repeatDaily, $AlarmDuration, $AlarmInterval, $NotifyByEmail)";
@@ -94,9 +93,107 @@ class Task
 					$db->query($sql);
 				}
 			}
+			$db->query("UPDATE table_status SET isTableUpdated = 1 WHERE TableName = 'Task';");
+			
 			return TRUE;
 		}
 		else 
+			return FALSE;
+	}
+	
+	public static function UpdateTaskSettings($TaskID, $UserID, $RoomID, $TaskName, $ActionTime, $SelectedSensorValue, $repeatDaily, $ActionDate, 
+						$SensorID, $AlarmDuration, $AlarmInterval, $Devices, $NotifyByEmail, $EnableTaskOnTime, $DisableTaskOnTime, $isDisabled) 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) {
+		  die('unable to connect to database [' . $db->connect_error .']');
+		}
+		//
+		// FIRST INSERT (TABLE: task) //
+		//
+		$TaskID = $db->escape_string($TaskID); 
+		$UserID = $db->escape_string($UserID); 
+		$RoomID = $db->escape_string($RoomID);
+		$SensorID = $db->escape_string($SensorID);
+		$TaskName = $db->escape_string($TaskName);
+		$SelectedSensorValue = $db->escape_string($SelectedSensorValue);
+		$repeatDaily = $db->escape_string($repeatDaily);
+		$AlarmDuration = $db->escape_string($AlarmDuration);
+		$AlarmInterval = $db->escape_string($AlarmInterval);
+		$NotifyByEmail = $db->escape_string($NotifyByEmail);
+		$isDisabled = $db->escape_string($isDisabled);
+		if ($ActionDate != NULL) $ActionDate = $db->escape_string($ActionDate);
+		if ($ActionTime != NULL) $ActionTime = $db->escape_string($ActionTime);
+		if ($EnableTaskOnTime != NULL) $EnableTaskOnTime = $db->escape_string($EnableTaskOnTime);
+		if ($DisableTaskOnTime != NULL) $DisableTaskOnTime = $db->escape_string($DisableTaskOnTime);
+		
+
+		$deleteSuccessful = task::deleteTask($TaskID);
+		
+		if($deleteSuccessful)
+		{
+		$sql = "INSERT INTO task (TaskID, UserID, RoomID, SensorID, TaskName, SelectedSensorValue, repeatDaily,	AlarmDuration, AlarmInterval, NotifyByEmail, isDisabled) "
+			. " VALUES ($TaskID, $UserID, $RoomID, $SensorID, '$TaskName', $SelectedSensorValue, $repeatDaily, $AlarmDuration, $AlarmInterval, $NotifyByEmail, $isDisabled)";
+		
+			if ($db->query($sql))   //if successfull, follow with multiple "optional" inserts
+			{
+				if (isset($ActionDate))
+					$db->query("UPDATE task SET ActionDate = '$ActionDate' WHERE TaskID = $TaskID");
+
+				if (isset($ActionTime))
+					$db->query("UPDATE task SET ActionTime = '$ActionTime' WHERE TaskID = $TaskID");
+				
+				if (isset($EnableTaskOnTime))
+					$db->query("UPDATE task SET EnableTaskOnTime = '$EnableTaskOnTime' WHERE TaskID = $TaskID");
+				
+				if (isset($DisableTaskOnTime))
+					$db->query("UPDATE task SET DisableTaskOnTime = '$DisableTaskOnTime' WHERE TaskID = $TaskID");
+				
+				//
+				// NEXT INSERT - TABLE: task_devices 	&	 TABLE: task_camera (if applicable) //
+				//
+				//escape_string for the entire array
+				$count = count($Devices);
+				
+				for ($i = 0; $i < $count; $i++) 
+				{
+					$Devices[$i]["DevicesID"] = $db->escape_string($Devices[$i]["DevicesID"]); 					
+					$Devices[$i]["selectedDevicesStatus"] = $db->escape_string($Devices[$i]["selectedDevicesStatus"]); 					
+					$Devices[$i]["isDeviceCamera"] = $db->escape_string($Devices[$i]["isDeviceCamera"]); 		
+					$Devices[$i]["TakeImagesQty"] = $db->escape_string($Devices[$i]["TakeImagesQty"]); 					
+					$Devices[$i]["TakeVideoDuration"] = $db->escape_string($Devices[$i]["TakeVideoDuration"]); 					
+					$Devices[$i]["Resolution"] = $db->escape_string($Devices[$i]["Resolution"]); 					
+				}
+				
+				for($i = 0; $i < $count; $i++) 
+				{
+					$DevID = $Devices[$i]["DevicesID"];
+					$ReqDevState = $Devices[$i]["selectedDevicesStatus"];
+					$TakeImagesQty = $Devices[$i]["TakeImagesQty"];
+					$TakeVideoDuration = $Devices[$i]["TakeVideoDuration"];
+					$Resolution = $Devices[$i]["Resolution"];
+					
+					if(!$Devices[$i]["isDeviceCamera"])
+					{
+						$sql = "INSERT INTO task_devices VALUES ($TaskID, $DevID, $ReqDevState)";
+						$db->query($sql);
+					}
+					else  //Device is Camera
+					{
+						if ($ReqDevState != 1){ $TakeImagesQty = -1; $TakeVideoDuration = -1; $Resolution = -1; }
+							
+						$sql = "INSERT INTO task_camera VALUES ($TaskID, $DevID, $ReqDevState, $TakeImagesQty, $TakeVideoDuration, $Resolution)";
+						$db->query($sql);
+					}
+				}
+				$db->query("UPDATE table_status SET isTableUpdated = 1 WHERE TableName = 'Task';");
+				
+				return TRUE;
+			}
+			else 
+				return FALSE;
+		}
+		else
 			return FALSE;
 	}
 	
@@ -243,7 +340,9 @@ class Task
 		{
 			$sql = "DELETE FROM task WHERE TaskID = $TaskID;";
 			$result = $db->query($sql);
-
+			
+			$db->query("UPDATE table_status SET isTableUpdated = 1 WHERE TableName = 'Task';");
+			
 			return TRUE;
 		} 
 		else 

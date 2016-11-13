@@ -225,9 +225,9 @@
 				<tr id='alarmDetails' style='display:none;'><td colspan='2'>
 				<table style='border:0; padding:0; margin:0;'>
 				<tr><td>Duration</td>
-				<td><input type='number' name='AlarmDuration' placeholder='(Minutes)' value=0 style='width:35px;'/></td></tr>
+				<td><input type='number' name='AlarmDuration' placeholder='(Min)' style='width:50px;' max='240'/></td></tr>
 				<tr><td>Interval</td>
-				<td><input type='number' name='AlarmInterval' placeholder='(Minutes)' value=0  style='width:35px;'/></td></tr>
+				<td><input type='number' name='AlarmInterval' placeholder='(Min)' style='width:50px;' max='60'/></td></tr>
 				</table></td></tr>
 				
 				</table>";

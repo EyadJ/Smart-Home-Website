@@ -64,8 +64,6 @@ include_once("../controllers/Header.php");
             <hr class="hr-table" />
         </div>
   	  </div>
-
-	
 	
 <div id="right-div1-hidden" class="right-div" style="display:none;">	
 
@@ -108,7 +106,8 @@ include_once("../controllers/Header.php");
 				
 				<div style=" margin-left:auto; margin-right:auto; width:200px;">
 					<a  href="#" onclick="HideUnhideChangePW();return false;" style="text-decoration:none; ">
-						<div class="tooltip"><span class="tooltiptext">Change Your Password</span>
+						<div class="tooltip">
+						<span class="tooltiptext" style="margin-left:200px; margin-top:-30px;">Change Your Password</span>
 							<img align="center" id="abc" src="../controllers/images/change-password.png" width="220px" />
 							<img src='../controllers/images/info.png' style='width:12px; height:12px; position:absolute; top:1px; right:1px;'/>
 						</div>

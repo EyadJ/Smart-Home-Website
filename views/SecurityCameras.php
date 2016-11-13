@@ -180,7 +180,7 @@ include_once("../controllers/Header.php");
 		
             <div class="right-div-secondary-title" style="width:166px;"><b>Security Camera 1</b></div>
             		
-		<img style="margin-left:5%;" src="http://192.168.1.101/video.cgi?user=admin&pwd=admin" width ="90%"
+		<img style="margin-left:5%;" src="http://admin:@192.168.1.101/video.cgi" width ="90%"
 		alt="Cannot Establish Connection with this Camera" 
 		onerror="this.onerror=null;this.src='../controllers/images/Camera-not-connected.jpg';"/>
 		
@@ -231,7 +231,7 @@ include_once("../controllers/Header.php");
 
 		<div class="right-div-secondary-title" style="width:166px;"><b>Security Camera 2</b></div>
 	
-		<img style="margin-left:5%;" src="http://192.168.1.100/video.cgi?user=admin&pwd=admin" width ="90%"
+		<img style="margin-left:5%;" src="http://admin:@192.168.1.100/video.cgi" width ="90%"
 		alt="Cannot Establish Connection with this Camera" 
 		onerror="this.onerror=null;this.src='../controllers/images/Camera-not-connected.jpg';"/>
 		

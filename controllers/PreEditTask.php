@@ -32,9 +32,10 @@
 	
 	$taskDetails = $taskDetails->fetch_assoc();
 	
-	echo"<form method='post' action='../controllers/EditTaskHandling.php'>
+	echo"<form method='post' action='../controllers/UpdateTaskSettingsHandling.php'>
 		<input type='hidden' name='UserID' value='$UserID'/>
 		<input type='hidden' name='RoomID' value='$RoomID'/>
+		<input type='hidden' name='TaskID' value='$TaskID'/>
 		<input type='hidden' name='referrer' id='referrer' value='$referrer'/>
 		
 		<table margin-left:auto; margin-right:auto; width:90%;'>
@@ -377,8 +378,16 @@
 			//
 			if($DeviceName == "Alarm")
 			{
+				$AlarmDurationValue = ""; $AlarmIntervalValue = "";
+				
 				$AlarmDuration = $taskDetails["AlarmDuration"];
 				$AlarmInterval = $taskDetails["AlarmInterval"];
+				
+				if($AlarmDuration != -1)
+					$AlarmDurationValue = "value='" . $AlarmDuration . "'";
+				
+				if($AlarmInterval != -1)
+					$AlarmIntervalValue = "value='" . $AlarmInterval . "'";
 				
 				echo "<table 
 				style='
@@ -399,9 +408,9 @@
 				<tr id='alarmDetails' style='display:$displayStatus1;'><td colspan='2'>
 				<table style='border:0; padding:0; margin:0;'>
 				<tr><td>Duration</td>
-				<td><input type='number' name='AlarmDuration' placeholder='(Minutes)' value=$AlarmDuration style='width:60px;'/></td></tr>
+				<td><input type='number' name='AlarmDuration' placeholder='(Min)' $AlarmDurationValue style='width:50px;' max='240'/></td></tr>
 				<tr><td>Interval</td>
-				<td><input type='number' name='AlarmInterval' placeholder='(Minutes)' value=$AlarmInterval  style='width:35px;'/></td></tr>
+				<td><input type='number' name='AlarmInterval' placeholder='(Min)' $AlarmIntervalValue style='width:50px;' max='60'/></td></tr>
 				</table></td></tr>
 				
 				</table>";

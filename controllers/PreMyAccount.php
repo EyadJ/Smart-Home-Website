@@ -55,9 +55,11 @@
 	
 	<tr><th align="center" colspan="2">Notification Settings (Linked with Tasks)</th></tr>
 	
-	<tr><td>Send Message to my Email</td><td><input type="checkbox" name="SendEmail" '. $SendEmailValue .'/></td>
+	<tr><td colspan="2"><label><b>
+	Send Message to my Email <input type="checkbox" name="SendEmail" '. $SendEmailValue .'/></b></label></td>
 	
-	<tr><td>Send SMS to my Cell Phone</td><td><input type="checkbox" name="SendSMS" '. $SendSMSvalue .'/></td>
+	<tr><td colspan="2"><label><b>
+	Send SMS to my Cell Phone <input type="checkbox" name="SendSMS" '. $SendSMSvalue .'/></b></label></td>
 
 	<tr><th align="center" colspan="3">
 	<input type="submit" class="button" value="Save" name="Save" style="font-weight:bold; margin-left:3px;" />

@@ -372,11 +372,39 @@
 						</div></td>";
 						
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------//						
-					//IS DISABLED / ENABLED
+						//IS DISABLED / ENABLED
 						
 						echo "<td style='border-bottom: 2px solid black; border-top: 2px solid black;'>
-						<img src='../controllers/images/$isDisabledValue' width='35' height='35' /></td>";
-
+						<img src='../controllers/images/$isDisabledValue' width='35' height='35' 
+						onmouseover='ShowEnableTaskOnTime(this.nextSibling);' 
+						onmouseout='HideEnableTaskOnTime(this.nextSibling);' />";
+						
+						$EnableTaskOnTime = $row["EnableTaskOnTime"];
+						$DisableTaskOnTime = $row["DisableTaskOnTime"];
+						
+						if($EnableTaskOnTime != NULL || $DisableTaskOnTime != NULL)
+						{
+							echo"<table style='
+							width:180px; border:0; padding:0; margin:0; position:absolute; 
+							background-color:#CCCCCC; z-index:2; font-size:11px; display:none;' >";
+							
+							if($EnableTaskOnTime != NULL)
+							{
+								echo "<tr><td>Enable Task on
+								<input type='time' value='$EnableTaskOnTime' 
+								style='width:80px; height:17px;' readonly/></td></tr>";
+								
+							}
+							if($DisableTaskOnTime != NULL)
+							{
+								echo "<tr><td>Disable Task on
+								<input type='time' value='$DisableTaskOnTime' 
+								style='width:80px; height:17px;' readonly/></td></tr>";
+							}
+							echo"</table>
+								<img src='../controllers/images/info.png' style='width:12px; height:12px; margin-bottom:25px; margin-left:-11px;'/>
+								</td>";
+						}
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------//						
 					//EDIT TASK
 						

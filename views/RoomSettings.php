@@ -167,7 +167,7 @@ function DisableTaskOnTimeValueHandling()
 //
 
 //
-//View Task - Alarm Details - [START]
+//View Task - [START]
 //
 function showAlarmDetails(x) 
 {
@@ -188,8 +188,19 @@ function hideCameraDetails(x)
 {
 	x.style.display = "none";	
 }
+
+function ShowEnableTaskOnTime(x) 
+{
+	x.style.display = "inline-table";	
+}
+
+function HideEnableTaskOnTime(x) 
+{
+	x.style.display = "none";	
+}
+
 //
-//View Task - Alarm Details - [END]
+//View Task - [END]
 //
   </script>
   
