@@ -22,7 +22,8 @@ class sensor
 
 		$sql = "SELECT * FROM sensor s, sensor_type st
 				WHERE RoomID = '$RoomID' AND
-				s.SensorTypeID = st.SensorTypeID";
+				s.SensorTypeID = st.SensorTypeID AND 
+				isVisible = 1";
 		$result = $db->query($sql);
 	 
 		if ($result != NULL && $result->num_rows >= 1)  
@@ -35,7 +36,7 @@ class sensor
 		}
 	}
 
-public static function getSensorsTypeId($SensorID) 
+	public static function getSensorsTypeId($SensorID) 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) {

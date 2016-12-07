@@ -118,6 +118,7 @@
 				$devices[$i]["DeviceID"] = $row["DeviceID"];
 				$devices[$i]["DeviceImgPath_on"] = $row["DeviceImgPath_on"];
 				$devices[$i]["DeviceName"] = $row["DeviceName"];
+				$devices[$i]["isVisible"] = $row["isVisible"];
 				
 				$i++;
 			}
@@ -157,7 +158,7 @@
 				<th width='6.5%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Repeat Daily</th>
 				<th width='15%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Selected Sensor</th>
 				<th width='30%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Selected Device/s Action</th>
-				<th width='3%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Notify By Email</th>
+				<th width='3%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Notify By Message</th>
 				<th width='5%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Created By</th>
 				<th width='5%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Task Enabled</th>
 				<th width='3%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Edit Task</th>
@@ -284,9 +285,9 @@
 				
 				echo"<img src='../controllers/images/sensors/" . $sensorImgPath . "' width='40' height='40' />";
 				
-				if ($sensorTypeID == 10) //Motion
+				if ($sensorTypeID == 10 || $sensorTypeID == 15) //Motion or IR
 				{
-					if($SelectedSensorValue == 0) //Action on Detection
+					if($SelectedSensorValue == -1) //Action on Detection
 					{
 						echo "<br /><b>Take Action<br />On Detection</b>";
 					}
@@ -345,6 +346,7 @@
 					$CurrentDevID = $devices[$i]["DeviceID"];
 					$DeviceName = $devices[$i]["DeviceName"];
 					$DeviceImgPath = $devices[$i]["DeviceImgPath_on"];
+					$isVisible = $devices[$i]["isVisible"];
 			
 					if($DeviceName === "Security Camera")
 						$ReqDevState = $taskCamerasArray[$CurrentDevID]["ReqDevState"];
@@ -356,78 +358,80 @@
 					else if($ReqDevState == 0) $additional = "off.png";
 					else if($ReqDevState == 1) $additional = "on.png";
 					
-					
-					if($DeviceName === "Alarm" && $ReqDevState == 1)	//ALARM
+					if($isVisible)
 					{
-						echo"<table 
-						onmouseover='showAlarmDetails(this.nextSibling.nextSibling);' 
-						onmouseout='hideAlarmDetails(this.nextSibling.nextSibling);' 
-						style='width:80px; margin:5; border:0; display:inline;'>
-						<tr><td>
-						<img src='../controllers/images/devices/" . $DeviceImgPath . "' width='40' height='40' />
-						<img src='../controllers/images/info.png' style='width:12px; height:12px; position:absolute; top:1px; right:1px;'/>
-						</td></tr><tr><td style='border:0;'>
-						<img src='../controllers/images/$additional' height='20' />
-						</td></tr></table>";
-						
-						echo"
-						<table
-						style='
-						width:110px; border:0; padding:0; margin:0; position:absolute; 
-						display:none; background-color:#CCCCCC; z-index:2; font-size:11px;
-						'>
-						<tr><td>Duration
-						<input type='number' value='$row[AlarmDuration]' 
-						style='width:35px; height:17px;' readonly/> min</td></tr>
-						<tr><td>Interval
-						<input type='number' value='$row[AlarmInterval]' 
-						style='width:35px; height:17px;' readonly/> min</td></tr>
-						</table>";
-					}
-					else if($DeviceName === "Security Camera" && $ReqDevState == 1)		//CAMERA
-					{
-						$Resolution = $taskCamerasArray[$CurrentDevID]["Resolution"];
-						
-						echo"<table 
-						onmouseover='showCameraDetails(this.nextSibling.nextSibling);' 
-						onmouseout='hideCameraDetails(this.nextSibling.nextSibling);' 
-						style='width:80px; margin:5; border:0; display:inline;'>
-						<tr><td>
-						<img src='../controllers/images/devices/" . $DeviceImgPath . "' width='40' height='40' />
-						<img src='../controllers/images/info.png' style='width:12px; height:12px; position:absolute; top:1px; right:1px;'/>
-						</td></tr><tr><td style='border:0;'>
-						<img src='../controllers/images/$additional' height='20' />
-						</td></tr></table>";
-						
-						echo"
-						<table
-						style='
-						width:155px; border:0; padding:0; margin:0; position:absolute; 
-						display:none; background-color:#CCCCCC; z-index:2; font-size:11px;
-						'>
-						<tr><td>";
-						
-						$TakeImage = $taskCamerasArray[$CurrentDevID]["TakeImage"];
-						$TakeVideo = $taskCamerasArray[$CurrentDevID]["TakeVideo"];
-						
-						if($TakeImage != -1)	//takeImage selected
-							echo "Take <input type='text' value='$TakeImage' style='width:30px; height:17px;' readonly/> Picture/s</td></tr>";
-						
-						else	//takeVideo selected
-							echo "Take Video <input type='text' value='$TakeVideo' style='width:40px; height:17px;' readonly/> Seconds</td></tr>";
-						
-						echo"<tr><td>Resolution
-						<input type='text' value='" . $Resolution . "p'
-						style='width:40px; height:17px;' readonly/></td></tr>
-						</table>";
-					}
-					else
-					{
-						echo"<table style='width:80px; margin:5; border:0; display:inline;'><tr><td>
-						<img src='../controllers/images/devices/" . $DeviceImgPath . "' width='40' height='40' />
-						</td></tr><tr><td style='border:0;'>
-						<img src='../controllers/images/$additional' height='20' />
-						</td></tr></table>";
+						if($DeviceName === "Alarm" && $ReqDevState == 1)	//ALARM
+						{
+							echo"<table 
+							onmouseover='showAlarmDetails(this.nextSibling.nextSibling);' 
+							onmouseout='hideAlarmDetails(this.nextSibling.nextSibling);' 
+							style='width:80px; margin:5; border:0; display:inline;'>
+							<tr><td>
+							<img src='../controllers/images/devices/" . $DeviceImgPath . "' width='40' height='40' />
+							<img src='../controllers/images/info.png' style='width:12px; height:12px; position:absolute; top:1px; right:1px;'/>
+							</td></tr><tr><td style='border:0;'>
+							<img src='../controllers/images/$additional' height='20' />
+							</td></tr></table>";
+							
+							echo"
+							<table
+							style='
+							width:110px; border:0; padding:0; margin:0; position:absolute; 
+							display:none; background-color:#CCCCCC; z-index:2; font-size:11px;
+							'>
+							<tr><td>Duration
+							<input type='number' value='$row[AlarmDuration]' 
+							style='width:35px; height:17px;' readonly/> min</td></tr>
+							<tr><td>Interval
+							<input type='number' value='$row[AlarmInterval]' 
+							style='width:35px; height:17px;' readonly/> min</td></tr>
+							</table>";
+						}
+						else if($DeviceName === "Security Camera" && $ReqDevState == 1)		//CAMERA
+						{
+							$Resolution = $taskCamerasArray[$CurrentDevID]["Resolution"];
+							
+							echo"<table 
+							onmouseover='showCameraDetails(this.nextSibling.nextSibling);' 
+							onmouseout='hideCameraDetails(this.nextSibling.nextSibling);' 
+							style='width:80px; margin:5; border:0; display:inline;'>
+							<tr><td>
+							<img src='../controllers/images/devices/" . $DeviceImgPath . "' width='40' height='40' />
+							<img src='../controllers/images/info.png' style='width:12px; height:12px; position:absolute; top:1px; right:1px;'/>
+							</td></tr><tr><td style='border:0;'>
+							<img src='../controllers/images/$additional' height='20' />
+							</td></tr></table>";
+							
+							echo"
+							<table
+							style='
+							width:155px; border:0; padding:0; margin:0; position:absolute; 
+							display:none; background-color:#CCCCCC; z-index:2; font-size:11px;
+							'>
+							<tr><td>";
+							
+							$TakeImage = $taskCamerasArray[$CurrentDevID]["TakeImage"];
+							$TakeVideo = $taskCamerasArray[$CurrentDevID]["TakeVideo"];
+							
+							if($TakeImage != -1)	//takeImage selected
+								echo "Take <input type='text' value='$TakeImage' style='width:30px; height:17px;' readonly/> Picture/s</td></tr>";
+							
+							else	//takeVideo selected
+								echo "Take Video <input type='text' value='$TakeVideo' style='width:40px; height:17px;' readonly/> Seconds</td></tr>";
+							
+							echo"<tr><td>Resolution
+							<input type='text' value='" . $Resolution . "p'
+							style='width:40px; height:17px;' readonly/></td></tr>
+							</table>";
+						}
+						else
+						{
+							echo"<table style='width:80px; margin:5; border:0; display:inline;'><tr><td>
+							<img src='../controllers/images/devices/" . $DeviceImgPath . "' width='40' height='40' />
+							</td></tr><tr><td style='border:0;'>
+							<img src='../controllers/images/$additional' height='20' />
+							</td></tr></table>";
+						}
 					}
 				}
 				

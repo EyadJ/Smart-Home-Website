@@ -114,7 +114,7 @@ include_once("../controllers/Header.php");
 					</a>
 				</div>
 				
-				<form method="post" action="../controllers/ChangePasswordHandling_AdminRights.php" >
+				<form method="post" action="../controllers/ChangePasswordHandling.php" >
 					<table id="ChangePWtable" style="display:none; margin-left:auto; margin-right:auto; width:350px;">
 					
 						<tr><th colspan="2">Change Password</th></tr>

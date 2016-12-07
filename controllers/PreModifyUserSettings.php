@@ -46,7 +46,7 @@
 	enctype="multipart/form-data">
 	<table style="width:90%;">	
 
-	<tr><th colspan="3">Modify Your Account Settings</th></tr>
+	<tr><th colspan="3">Modify <i style="color:#333333; text-shadow:none;">"'.$row["UserName"].'"</i> Settings</th></tr>
 	
 	<tr><td>Name</td><td align="left" align="center">
 	<input type="text"  id="name" value="'.$row["UserName"].'" name="UserName" maxlength="25" required />
@@ -80,16 +80,17 @@
 	<td  align="left"><input type="file" name="fileToUpload" /></td>
 	</tr>
 	
-	<tr style="background-color:#CCCCCC"><td>Disable Account</td>
-	<td align="center">
+	<tr style="background-color:#CCCCCC"><td colspan="2"><label><b>Disable Account
 	<input type="checkbox" name="isDisabled" ' . $text . '/>
-	</td></tr> 
+	</b></label></td></tr> 
 	 
 	<tr><th align="center" colspan="2">Notification Settings (Linked with Tasks)</th></tr>
 	
-	<tr><td>Send Message to Email</td><td><input type="checkbox" name="SendEmail" '. $SendEmailValue .'/></td>
+	<tr><td colspan="2"><label><b>
+	Send Message to Email <input type="checkbox" name="SendEmail" '. $SendEmailValue .'/></b></label></td>
 	
-	<tr><td>Send SMS to Cell Phone</td><td><input type="checkbox" name="SendSMS" '. $SendSMSvalue .'/></td>
+	<tr><td colspan="2"><label><b>
+	Send SMS to Cell Phone <input type="checkbox" name="SendSMS" '. $SendSMSvalue .'/></b></label></td>
 
 	<tr><th align="center" colspan="3">
 	<input type="submit" class="button"  value="Save" name="Save" style="font-weight:bold; margin-left:3px;" /> &nbsp;

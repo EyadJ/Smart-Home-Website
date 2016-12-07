@@ -11,7 +11,7 @@
 	if(isset($_POST))
 	{
 		//CHECK if user is autherized to edit this task
-		if(user::isUserAutherisedToEditTask($UserID, $TaskID)) task::deleteTask($TaskID);
+		if(user::isUserAutherisedToEditTask($UserID, $TaskID)) task::removeTask($TaskID);
 		
 		header("Location: ../views/$referrer");
 	}

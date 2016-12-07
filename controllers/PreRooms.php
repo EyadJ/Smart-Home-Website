@@ -66,20 +66,23 @@
 		
 			while($row2 = $Devices->fetch_assoc()) 
 			{
-				echo "<a style='text-decoration:none;' href='../controllers/switchDeviceStatus.php?DeviceID=$row2[DeviceID]&";
-				if($row2['DeviceState'] == 1) // (on)
+				if($row2["isVisible"])
 				{
-					echo "newStatus=0'><div class='DeviceDiv' >
-							<img src='../controllers/images/devices/$row2[DeviceImgPath_on]'";
+					echo "<a style='text-decoration:none;' href='../controllers/switchDeviceStatus.php?DeviceID=$row2[DeviceID]&";
+					if($row2['DeviceState'] == 1) // (on)
+					{
+						echo "newStatus=0'><div class='DeviceDiv' >
+								<img src='../controllers/images/devices/$row2[DeviceImgPath_on]'";
+					}
+					else // == 0 (off)
+					{
+						echo "newStatus=1'><div class='DeviceDiv' >
+								<img src='../controllers/images/devices/$row2[DeviceImgPath_off]'";
+					}
+					
+					echo" width='60' height='60' />
+					</div></a><br />";
 				}
-				else // == 0 (off)
-				{
-					echo "newStatus=1'><div class='DeviceDiv' >
-							<img src='../controllers/images/devices/$row2[DeviceImgPath_off]'";
-				}
-				
-				echo" width='60' height='60' />
-				</div></a><br />";
 			}
 				
 			echo"</td>"  ;		

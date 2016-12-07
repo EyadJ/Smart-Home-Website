@@ -8,7 +8,6 @@
 	
 	if(isset($_POST["UpdatePass"]) && $isAdmin)
 	{
-		echo "co";
 		$NewPass = $_POST["NewPass"];
 		$NewPassConf = $_POST["NewPassConf"];
 		

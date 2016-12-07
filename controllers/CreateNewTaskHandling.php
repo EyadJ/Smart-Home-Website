@@ -35,12 +35,12 @@
 			
 			
 		//-------------------------SELECTED SENSOR CODE----------------------------//
-		if($SelectedSensorTypeId == 10)		//Motion
+		if($SelectedSensorTypeId == 10 || $SelectedSensorTypeId == 15) //Motion or IR
 		{
 			$MotionSensorOption = $_POST["MotionSensorOption"];
 			
 			if($MotionSensorOption == "onDetection")	//onDetection
-				$SelectedSensorValue = 0;
+				$SelectedSensorValue = -1;
 				
 			else if($MotionSensorOption == "onNoDetection")		//onNoDetection (after period of time)
 				$SelectedSensorValue = $_POST["MotionSensorValue"]; //(Action after no detection for a period of time (Minutes))

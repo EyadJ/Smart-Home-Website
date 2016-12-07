@@ -184,11 +184,11 @@
 			echo "<div style='display:inline-block; '>";
 		
 		
-			if ($sensorTypeID == 10) //Motion
+			if ($sensorTypeID == 10 || $sensorTypeID == 15) //Motion or IR
 			{
 				$text1 = ""; $text2 = ""; $text3 = "";  $text4 = ""; 
 		
-				if($SelectedSensorValue == 0) //Action On Detection
+				if($SelectedSensorValue == -1) //Action On Detection
 				{
 					$text1 = "checked";
 					$text3 = "none";
@@ -420,7 +420,7 @@
 				
 				$option1 = ""; $option2 = ""; $option3 = ""; $option4 = ""; 
 				$option5 = ""; $option6 = ""; $option7 = "";  $displayStatus1 = "none"; 
-				$TakeImage = 1; $TakeVideo = 30; $Resolution = 480;
+				$TakeImage = 1; $TakeVideo = 1; $Resolution = 480;
 				
 				$ReqDevState = $taskCamerasArray[$currentDevID]["ReqDevState"];
 			
@@ -469,7 +469,7 @@
 					<label><input type='radio' name='cam-$currentDevID-takeImgOrVideo' value='Img' checked/> Take </label>
 					
 					<span id=''><input type='number' name='cam-$currentDevID-TakeImagesQty' 
-					placeholder='(Pic Number)' value=$TakeImage  
+					placeholder='(Pic Number)' value=$TakeImage
 					style='width:35px;' $option6/> Picture/s</span>
 					
 					</td></tr><tr><td>
@@ -477,15 +477,15 @@
 					<label><input type='radio' name='cam-$currentDevID-takeImgOrVideo' value='Vid' $option7/> Take Video</label>
 					
 					<span id=''><input type='number' name='cam-$currentDevID-TakeVideoDuration' 
-					placeholder='(Seconds)' value=$TakeVideo 
-					style='width:45px;'/>Seconds</span>
+					placeholder='(Min)' value=$TakeVideo 
+					style='width:45px;'/>Min</span>
 					
 					</td></tr><tr><td>
 						
 						Resolution
-							<select name='cam-$currentDevID-Resolution'>";
+							<select disabled='disabled'>";
 						
-						//$Resolution = $taskCamerasArray[$currentDevID]["Resolution"];		^^UP^^
+						/*$Resolution = $taskCamerasArray[$currentDevID]["Resolution"];		^^UP^^
 						
 						$ResolutionValues = array(240, 480);
 						
@@ -497,9 +497,15 @@
 							
 							echo"<option value='" . $ResValue . "' $isSelected>" . $ResValue . "p</option>";
 						}
+						echo "</select>";*/
 						
-						echo"
+						echo"<option value='480' selected>480p</option>
 							</select>
+							<select name='cam-$row[DeviceID]-Resolution' style='display:none;'>
+								<option value='240'>240p</option>
+								<option value='480' selected>480p</option>
+							</select>
+							
 						</td></tr>
 					</table>
 						
