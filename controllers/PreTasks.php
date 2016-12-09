@@ -417,7 +417,7 @@
 								echo "Take <input type='text' value='$TakeImage' style='width:30px; height:17px;' readonly/> Picture/s</td></tr>";
 							
 							else	//takeVideo selected
-								echo "Take Video <input type='text' value='$TakeVideo' style='width:40px; height:17px;' readonly/> Seconds</td></tr>";
+								echo "Take Video <input type='text' value='$TakeVideo' style='width:40px; height:17px;' readonly/> Minutes</td></tr>";
 							
 							echo"<tr><td>Resolution
 							<input type='text' value='" . $Resolution . "p'

@@ -68,7 +68,7 @@ if(isset($_POST["Save"]))
 			   
 			//echo $modifiedSuccessfully;
 	 
-			header("Location: ../views/Users.php");
+			header("Location: ../views/" . $_GET["referrer"] . "");
 }
 	
 ?>

@@ -4,6 +4,8 @@
 <head>
 <title>Rooms</title>
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <meta http-equiv="refresh" content="60" >
   
   <link href="../controllers/style.css?d=<?php echo time(); ?>" rel="stylesheet"/>

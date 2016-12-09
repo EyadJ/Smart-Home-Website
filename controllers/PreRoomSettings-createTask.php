@@ -303,8 +303,8 @@
 					'>
 					<tr><td colspan='2'><img src='../controllers/images/devices/$row[DeviceImgPath_on]' width='60' height='60' /></td></tr>
 					<tr><td colspan='2'><label>Don't Change<input type='radio' name='$row[DeviceID]' value='-1' checked/></label></td></tr>
-					<tr><td><label>OFF<input type='radio' name='$row[DeviceID]' value='1'/></label></td>
-					<td><label>ON<input type='radio' name='$row[DeviceID]' value='0'/></label></td></tr>
+					<tr><td><label>OFF<input type='radio' name='$row[DeviceID]' value='0'/></label></td>
+					<td><label>ON<input type='radio' name='$row[DeviceID]' value='1'/></label></td></tr>
 					</table>";
 				}
 			}	

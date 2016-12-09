@@ -3,6 +3,8 @@
 <html >
 <head >
 <title>Users</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
    
     <link href="../controllers/style.css?d=<?php echo time(); ?>" rel="stylesheet"/>
 

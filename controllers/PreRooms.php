@@ -3,7 +3,7 @@
 	include_once("../models/user.php");
 	include_once("../models/room.php");
 	include_once("../models/device.php");
-	//include_once("../models/sensor.php");
+	include_once("../models/sensor.php");
 
 	$isAdmin = $_SESSION["isAdmin"];
 	$UserID = $_SESSION["UserID"];
@@ -34,12 +34,12 @@
 			
 			echo
 			"<td style=
-			'width:80; 
+			'width:80px; 
+			height:250px; 
 			border-left: 2px solid black; 
 			border-bottom: 2px solid black; 
 			border-top: 2px solid black;
-			padding-bottom:50px;
-			padding-top:50px;
+			
 			'>
 			<B style='background-color:#E6E6E6; border-radius:6px; padding:3px;'>"
 			.$row['RoomName']."</B>
@@ -51,12 +51,28 @@
 			
 			<img src='../controllers/images/settings-icon (1).png' width='40px' height='40px'
 			
-			style=' z-index:0; position:absolute; margin-top:193px; right:63px;'/></a>
+			style=' z-index:0; position:absolute; margin-top:193px; right:18%;'/></a>
 			
 			<img src='../controllers/images/rooms/".$row['RoomImgPath']."' width='240px' height='240px'/>
-			</div>
+			</div>";
 			
-			</td><td style=
+			//--------------------------------------------Room Temperature--------------------------------------------------//
+			$TempSensorValue = sensor::getTempSensorByRoomID($RoomID);
+			
+			if($TempSensorValue != NULL)	//CHECK if there is a temperature sensor in this room or not
+			{
+				echo"<div style='width:40px; height:40px; position:absolute; top:40px; right:18%;'>
+				
+				<img src='../controllers/images/sensors/temperature-sensor4.png' width='40px' height='40px'/>
+				
+				<div style=' position:absolute; width:21px; height:18px; margin-top:-44px; left:25px; 
+				background-color:#FFB240; border-radius:25px; font-size:12px; font-weight:700;'>&deg;$TempSensorValue</div>
+				
+				</div>";
+			}
+			//--------------------------------------------------------------------------------------------------------------//
+			
+			echo"</td><td style=
 			'width:60px; 
 			border-right: 2px solid black;
 			border-bottom: 2px solid black; 
@@ -80,8 +96,8 @@
 								<img src='../controllers/images/devices/$row2[DeviceImgPath_off]'";
 					}
 					
-					echo" width='60' height='60' />
-					</div></a><br />";
+					echo" width='60' height='60' style='margin-bottom:5px;'/>
+					</div></a>";
 				}
 			}
 				

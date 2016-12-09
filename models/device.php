@@ -17,7 +17,7 @@ class Device
 		}
 		$RoomID = $db->escape_string($RoomID);
 
-		$sql = "SELECT * FROM device where RoomID = '$RoomID'";
+		$sql = "SELECT * FROM device WHERE RoomID = '$RoomID' AND isVisible = 1";
 		$result = $db->query($sql);
 	 
 		if ($result != NULL && $result->num_rows >= 1)  
@@ -89,9 +89,45 @@ class Device
 		else 
 			return FALSE;
 	}
+	
+	//WHERE timestampField >= TO_TIMESTAMP( '2013-03-04', 'yyyy-mm-dd' )
+	public static function getGalleryMultimediaForOneMonth() 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) {
+		  die('unable to connect to database [' . $db->connect_error .']');
+		}
+		$DeviceID = $db->escape_string($DeviceID);
+
+		$sql = "SELECT * FROM camera_gallery where DeviceID = $DeviceID";
+		$result = $db->query($sql);
+	 
+		if ($result != NULL && $result->num_rows >= 1)  
+		{
+			return TRUE;
+		}
+		else 
+			return FALSE;
+	}
+	
+	public static function getAllGalleryMultimedia() 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) {
+		  die('unable to connect to database [' . $db->connect_error .']');
+		}
+
+		$sql = "SELECT * FROM camera_gallery";
+		$result = $db->query($sql);
+	 
+		if ($result != NULL && $result->num_rows >= 1)  
+			return $result;
+		else 
+			return NULL;
+	}
 
 
-
+	
 
 
 

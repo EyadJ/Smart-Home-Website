@@ -28,15 +28,15 @@ class PrintSideMenu
 
 		if($pageNoSpace == $page)
 		{
-			$isOpen = "open-admin";
+			$isOpen = "open";
 		}
 		
-		$text = "<a style='text-decoration: none;' href=" . $pageNoSpace . ".php><li class='li-menu-admin "
+		$text = "<a style='text-decoration: none;' href=" . $pageNoSpace . ".php><li class='li-menu "
 		. $isOpen . "'>".
 		"Users" . 
 		"<img  style='position:absolute; right:10%; margin-top:2px; width:38px;' src='../controllers/images/Users.png' />".
-		/*"<img align='right' width='30px' src='../controllers/images/adminLogo.png' />".*/
-		"</li></a>" ;
+		"</li></a>".
+		"<img width='19px' style='position:absolute; right:100%;' src='../controllers/images/admin.png'/>";
 
 		return $text;
 	}

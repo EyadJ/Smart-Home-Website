@@ -501,7 +501,7 @@
 						
 						echo"<option value='480' selected>480p</option>
 							</select>
-							<select name='cam-$row[DeviceID]-Resolution' style='display:none;'>
+							<select name='cam-$currentDevID-Resolution' style='display:none;'>
 								<option value='240'>240p</option>
 								<option value='480' selected>480p</option>
 							</select>
@@ -567,7 +567,7 @@
 						<span class='tooltiptext'>
 							This Task is a Default Task, Therefore it is Undeletable.<br /> But you can Disable it.
 						</span>
-						<button class='button'  type = 'button' style='color:gray;' disabled>Delete</button>
+						<button class='button' type = 'button' style='color:gray;' disabled>Delete</button>
 					</div>
 				</div>";
 			

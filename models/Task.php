@@ -76,11 +76,12 @@ class Task
 			{
 				$DevID = $Devices[$i]["DevicesID"];
 				$ReqDevState = $Devices[$i]["selectedDevicesStatus"];
+				$isDeviceCamera = $Devices[$i]["isDeviceCamera"];
 				$TakeImagesQty = $Devices[$i]["TakeImagesQty"];
 				$TakeVideoDuration = $Devices[$i]["TakeVideoDuration"];
 				$Resolution = $Devices[$i]["Resolution"];
 				
-				if(!$Devices[$i]["isDeviceCamera"])
+				if(!$isDeviceCamera)
 				{
 					$sql = "INSERT INTO task_devices VALUES ($newlyCreatedTaskID, $DevID, $ReqDevState)";
 					$db->query($sql);
@@ -152,9 +153,10 @@ class Task
 				//
 				// NEXT INSERT - TABLE: task_devices 	&	 TABLE: task_camera (if applicable) //
 				//
-				//escape_string for the entire array
+				
 				$count = count($Devices);
 				
+				//escape_string for the entire array
 				for ($i = 0; $i < $count; $i++) 
 				{
 					$Devices[$i]["DevicesID"] = $db->escape_string($Devices[$i]["DevicesID"]); 					
@@ -169,11 +171,12 @@ class Task
 				{
 					$DevID = $Devices[$i]["DevicesID"];
 					$ReqDevState = $Devices[$i]["selectedDevicesStatus"];
+					$isDeviceCamera = $Devices[$i]["isDeviceCamera"];
 					$TakeImagesQty = $Devices[$i]["TakeImagesQty"];
 					$TakeVideoDuration = $Devices[$i]["TakeVideoDuration"];
 					$Resolution = $Devices[$i]["Resolution"];
 					
-					if(!$Devices[$i]["isDeviceCamera"])
+					if(!$isDeviceCamera)
 					{
 						$sql = "INSERT INTO task_devices VALUES ($TaskID, $DevID, $ReqDevState)";
 						$db->query($sql);
@@ -227,7 +230,7 @@ class Task
 		}
 		$RoomID = $db->escape_string($RoomID);
 		
-		$sql = "SELECT * FROM task WHERE RoomID = $RoomID";
+		$sql = "SELECT * FROM task WHERE RoomID = $RoomID AND isDeleted = 0";
 				
 		$result = $db->query($sql);
 	 
@@ -285,7 +288,7 @@ class Task
 		$UserID = $db->escape_string($UserID);
 		
 		$sql = "SELECT * FROM task t, task_devices td
-				WHERE UserID = $UserID AND t.TaskID = td.TaskID";
+				WHERE UserID = $UserID AND t.TaskID = td.TaskID AND isDeleted = 0";
 				
 		$result = $db->query($sql);
 	 
@@ -325,7 +328,6 @@ class Task
 		{
 			die('error: unable to connect to database');
 		}
-
 		$TaskID = $db->escape_string($TaskID);
 		
 		if(task::isDefault($TaskID)) return FALSE; //isDefault Task is not deletable (only disablable)
@@ -346,6 +348,34 @@ class Task
 			return TRUE;
 		} 
 		else 
+			return FALSE; 
+	}
+	
+	public static function removeTask($TaskID) 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) 
+		{
+			die('error: unable to connect to database');
+		}
+		$TaskID = $db->escape_string($TaskID);
+		
+		if(task::isDefault($TaskID)) return FALSE; //isDefault Task is not deletable (only disableble)
+	
+		$sql = "UPDATE task SET isDeleted = 1 WHERE TaskID = $TaskID;";
+		$result = $db->query($sql);
+		
+		if ($result)
+		{
+			$result = $db->query("UPDATE table_status SET isTableUpdated = 1 WHERE TableName = 'Task';");
+			
+			if ($result) //is true 
+				return TRUE;
+		
+			else 
+				return FALSE; 
+		}
+		else
 			return FALSE; 
 	}
 

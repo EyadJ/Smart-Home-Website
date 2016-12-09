@@ -4,6 +4,9 @@
 <html>
 <head>
 <title>Login page</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
  <link href="../controllers/style.css?d=<?php echo time(); ?>" rel="stylesheet"/>
 <style>
 table {
@@ -79,14 +82,16 @@ function LogInFormSubmit()
 			</th></tr>
 		</table>
 	 
-	 
+<!---------------------------------------------- HEADER---------------------------------------------->	 
 	 
 <div id="page-header">
 	<div class="page-logo2">
-	 <a href="HomePage.php"><img height="80px;" src="../controllers/images/Capture.PNG"/></a>
+	 <a href="HomePage.php"><img height="68px;" src="../controllers/images/Capture.PNG"/></a>
 	</div>
 </div>
-				
+		
+<!--------------------------------------------------------------------------------------------------->	 
+		
 	<div style="width:50%;position: absolute; top: 15%; left: 0; right: 0; bottom: 50%; margin: auto; ">
 
 

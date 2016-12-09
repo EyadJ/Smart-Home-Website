@@ -100,8 +100,8 @@
 			$TakeVideoDuration = -1; 
 			$Resolution = -1; 
 			
-			$Devices[$i]["DevicesID"] = $currentDevID;
-			$Devices[$i]["selectedDevicesStatus"] = $_POST[$currentDevID];
+			echo $Devices[$i]["DevicesID"] = $currentDevID;
+			echo $Devices[$i]["selectedDevicesStatus"] = $_POST[$currentDevID];
 			
 			//If device == Alarm
 			if($currentDevName === "Alarm" && $Devices[$i]["selectedDevicesStatus"] == 1)
@@ -128,10 +128,10 @@
 				$Resolution = $_POST["cam-$currentDevID-Resolution"];
 			}
 			
-			$Devices[$i]["isDeviceCamera"] = $isDeviceCamera;
-			$Devices[$i]["TakeImagesQty"] = $TakeImagesQty;
-			$Devices[$i]["TakeVideoDuration"] = $TakeVideoDuration;
-			$Devices[$i]["Resolution"] = $Resolution;
+			echo $Devices[$i]["isDeviceCamera"] = $isDeviceCamera;
+			echo $Devices[$i]["TakeImagesQty"] = $TakeImagesQty;
+			echo $Devices[$i]["TakeVideoDuration"] = $TakeVideoDuration;
+			echo $Devices[$i]["Resolution"] = $Resolution;
 			
 			$i++;
 		}
@@ -142,6 +142,7 @@
 		$AlarmDuration, $AlarmInterval, $Devices, $NotifyByEmail, $EnableTaskOnTime, $DisableTaskOnTime, $isDisabled);
 	
 		header("Location: ../views/$referrer");
+		
 	}
 		
 		

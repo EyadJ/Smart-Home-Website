@@ -106,7 +106,7 @@ table {
     margin: 0;
     border: 0px;
     box-shadow: none;
-    height: 92px;
+    height: 68px;
     filter: none;
     background: #fff;
 	border-top: 1px solid #808080; 
@@ -146,6 +146,17 @@ table {
     //left: 15%;
 	right:75.5%;
     z-index: 2;
+}
+
+@media (max-width:960px) {
+	.menu {   
+	width: 120px;
+    position: fixed;
+    top: 90px;
+    left: 5%;
+	//right:75.5%;
+    z-index: 2;
+	} 
 }
 
 .ui-menu {
@@ -217,51 +228,6 @@ table {
     width: 90%;
     line-height: 2;
 }
-
-	.li-menu-admin {
-    font-family: "Open Sans", sans-serif,Arial;
-    font-size: 16px;
-    font-weight: 500;
-    padding: 1px 0 10px 3%;
-    color: white;
-    display: inline-block;
-    width: 90%;
-    line-height: 2;
-    background-color: #808080;
-    border-left: 3px solid #e9ecf3;
-    -webkit-box-shadow: 1px 3px 1px 0px rgba(224,217,224,0.67);
-    -moz-box-shadow: 1px 3px 1px 0px rgba(224,217,224,0.67);
-    box-shadow: 1px 3px 1px 0px rgba(224,217,224,0.67);
-	}
-
-.open-admin{
-    font-family: "Open Sans", sans-serif,Arial;
-    font-size: 16px;
-    font-weight: 500;
-    padding: 1px 0 10px 3%;
-    color: black;
-    display: inline-block;
-    background-color:  #808080;
-    border-left: 3px solid black;
-    width: 90%;
-    line-height: 2;
-}
-
-	.li-menu-admin:hover {
-        font-family: "Open Sans", sans-serif,Arial;
-    font-size: 16px;
-    font-weight: 500;
-    padding: 1px 0 10px 7%;
-	border-top-right-radius: 15px;
-	border-bottom-right-radius: 15px;
-
-    color: black;
-    display: inline-block;
-    background-color: #808080;
-    border-left: 3px solid black;
-    width: 90%;
-    line-height: 2;
-    }
 
 .right-div {
 	border-radius :15px;
@@ -490,7 +456,7 @@ table {
     margin-top: 30%;
 }
 
-.welcom-name {
+.welcome-name {
     font-family: "Open Sans", sans-serif,Arial;
     font-size: 14px;
     font-weight: 500;
@@ -498,7 +464,7 @@ table {
     color: #bebebe;
     float: left;
     margin-left: 90px;
-    margin-top: 60px;
+    margin-top: 37px;
 }
 
 .logout {

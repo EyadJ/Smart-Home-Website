@@ -14,8 +14,8 @@
 		$SendSMSvalue = "checked";
 	
 	echo '
-	<form name="formR" method="post" 
-	action="../controllers/MyAccountSettingsHandling.php?var=' . $UserID . '" 
+	<form name="formR" method="post"
+	action="../controllers/MyAccountSettingsHandling.php?var=' . $UserID . "&referrer=" . $_GET["referrer"] . '" 
 	enctype="multipart/form-data">
 	<table style="width:90%;">	
 
@@ -68,7 +68,7 @@
 	<input type="reset" class="button" value="Reset" />
 
 	&nbsp;
-	<a href="HomePage.php">
+	<a href="' . $_GET["referrer"] . '">
 	<button class="button" type = "button" align="Right">Cancel</button></a>
 
 	</th></tr>

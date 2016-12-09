@@ -96,7 +96,7 @@
 			$Resolution = -1; 
 			
 			$Devices[$i]["DevicesID"] = $currentDevID;
-			$Devices[$i]["selectedDevicesStatus"] = $_POST[$currentDevID];
+			echo $Devices[$i]["selectedDevicesStatus"] = $_POST[$currentDevID];
 			
 			//If device == Alarm
 			if($currentDevName === "Alarm" && $Devices[$i]["selectedDevicesStatus"] == 1)
@@ -137,6 +137,7 @@
 		$AlarmDuration, $AlarmInterval, $Devices, $NotifyByEmail, $EnableTaskOnTime, $DisableTaskOnTime);
 	
 		header("Location: ../views/RoomSettings.php?var=$RoomID");
+	
 	}
 		
 		

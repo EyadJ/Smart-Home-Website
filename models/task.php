@@ -328,7 +328,6 @@ class Task
 		{
 			die('error: unable to connect to database');
 		}
-
 		$TaskID = $db->escape_string($TaskID);
 		
 		if(task::isDefault($TaskID)) return FALSE; //isDefault Task is not deletable (only disablable)
@@ -359,28 +358,24 @@ class Task
 		{
 			die('error: unable to connect to database');
 		}
-
 		$TaskID = $db->escape_string($TaskID);
 		
-		if(task::isDefault($TaskID)) return FALSE; //isDefault Task is not deletable (only disablable)
+		if(task::isDefault($TaskID)) return FALSE; //isDefault Task is not deletable (only disableble)
 	
-		//$sql = "DELETE FROM task_devices WHERE TaskID = $TaskID;";
-		//$result = $db->query($sql);
+		$sql = "UPDATE task SET isDeleted = 1 WHERE TaskID = $TaskID;";
+		$result = $db->query($sql);
 		
-		//$sql = "DELETE FROM task_camera WHERE TaskID = $TaskID;";
-		//$result = $db->query($sql);
-		
-		if (TRUE) //($result) //is true 
+		if ($result)
 		{
-			//$sql = "DELETE FROM task WHERE TaskID = $TaskID;";
-			$sql = "UPDATE task SET isDeleted = 1 WHERE TaskID = $TaskID;";
-			$result = $db->query($sql);
+			$result = $db->query("UPDATE table_status SET isTableUpdated = 1 WHERE TableName = 'Task';");
 			
-			$db->query("UPDATE table_status SET isTableUpdated = 1 WHERE TableName = 'Task';");
-			
-			return TRUE;
-		} 
-		else 
+			if ($result) //is true 
+				return TRUE;
+		
+			else 
+				return FALSE; 
+		}
+		else
 			return FALSE; 
 	}
 
