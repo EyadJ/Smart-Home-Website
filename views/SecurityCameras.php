@@ -56,16 +56,26 @@ function reduceDivsSize()
 	y.style.position ="absolute";
 	y.style.left ="26%";
 	y.style.top ="90px";
+	y.style.paddingTop = "-10px";
+	y.style.paddingBottom = "-10px";
+	
+	document.getElementById("camera2").style.marginTop = "-46px";
+	document.getElementById("camera2").style.marginBottom = "-60px";
 	
 	document.getElementById("right-div1-hidden").style.display ="none";
 	document.getElementById("right-div1-minus").style.visibility ="hidden";	
 	
 	document.getElementById("right-div2-hidden").style.display ="none";
-	document.getElementById("right-div2-minus").style.visibility ="hidden";	
+	document.getElementById("right-div2-minus").style.visibility ="hidden";
+	
+	setCamera2Dimensions();
 }
 
 function increaseDivsSizeBackToNormal() 
 {
+	document.getElementById("right-div1-hidden").style.display ="none";
+	document.getElementById("right-div2-hidden").style.display ="none";
+	
 	var x = document.getElementById("right-div1");
 	x.style.width ="50%";
 	x.style.minWidth ="650px";
@@ -84,14 +94,44 @@ function increaseDivsSizeBackToNormal()
 	y.style.left ="0px";
 	y.style.top ="0px";
 	
-	document.getElementById("right-div1-minus").style.visibility ="visible";	
+	document.getElementById("camera2").style.marginTop = "-80px";
+	document.getElementById("camera2").style.marginBottom = "-100px";
 	
+	document.getElementById("right-div1-minus").style.visibility ="visible";	
 	document.getElementById("right-div2-minus").style.visibility ="visible";	
+	
+	setCamera2Dimensions();
 }
+
+function setCamera2Dimensions() {
+
+	var camera1_width = document.getElementById("camera1").width;
+	var camera1_height = document.getElementById("camera1").height;
+
+	document.getElementById("camera2").width = camera1_height;
+	document.getElementById("camera2").height = camera1_width;
+	
+	document.getElementById("camera2").style.marginTop = "-46px";
+	document.getElementById("camera2").style.marginBottom = "-60px";
+	
+	document.getElementById("right-div2").style.height = document.getElementById("right-div1").style.height;
+}
+
+window.onresize = function() {
+
+	var camera1_width = document.getElementById("camera1").width;
+	var camera1_height = document.getElementById("camera1").height;
+
+	document.getElementById("camera2").width = camera1_height;
+	document.getElementById("camera2").height = camera1_width;
+	
+	document.getElementById("right-div2").style.height = document.getElementById("right-div1").style.height;
+}
+
 </script>
 
 </head>
-<body>
+<body onload="setCamera2Dimensions();">
  
 	<div class="allcontainer">
 
@@ -180,7 +220,7 @@ include_once("../controllers/Header.php");
 		
             <div class="right-div-secondary-title" style="width:166px;"><b>Security Camera 1</b></div>
             		
-		<img style="margin-left:5%;" src="http://admin:@192.168.1.101/video.cgi" width ="90%"
+		<img style="margin-left:5%;" src="http://admin:@192.168.1.101/video.cgi" width ="90%" id="camera1"
 		alt="Cannot Establish Connection with this Camera" 
 		onerror="this.onerror=null;this.src='../controllers/images/Camera-not-connected.jpg';"/>
 		
@@ -231,9 +271,9 @@ include_once("../controllers/Header.php");
 
 		<div class="right-div-secondary-title" style="width:166px;"><b>Security Camera 2</b></div>
 	
-		<img style="margin-left:14%;" src="http://admin:@192.168.1.100/video.cgi" width ="70%" height="290px"
+		<img style="margin-left:14%;" src="http://admin:@192.168.1.100/video.cgi" id="camera2"
 		alt="Cannot Establish Connection with this Camera" class="rotate270"
-		onerror="this.onerror=null;this.src='../controllers/images/Camera-not-connected.jpg';"/>
+		onerror="this.onerror=null;this.src='../controllers/images/Camera-not-connected-rotate270.png';"/>
 		
 		<a href="http://192.168.1.100" target="_blank"> 
 			<img src='../controllers/images/settings-icon (1).png' width='40px' height='40px'

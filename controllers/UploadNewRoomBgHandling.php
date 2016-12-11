@@ -5,10 +5,14 @@
 	$RoomID = $_GET["var"];
 	$target_dir = "../controllers/images/rooms/";
 	$basename = basename($_FILES["fileToUpload"]["name"]);
-	 
-	$target_file = $target_dir . $basename;
+
 	$uploadOk = 1;
-	$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
+	$imageFileType = pathinfo($basename, PATHINFO_EXTENSION);
+	
+	$basename = room::getRoomName($RoomID) . "_" . date('Y-m-d-H-i-s') . "." . $imageFileType . "";
+	
+	$target_file = $target_dir . $basename;
+	
 	// Check if image file is a actual image or fake image
 	if(isset($_POST["submit"])) {
 		$check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
@@ -44,11 +48,11 @@
 		if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) 
 		{
 			$insertedSuccessfully = room::modifyRoomImagePath($RoomID, $basename);
+			//echo $insertedSuccessfully;
 			$insertedSuccessfully = room::addNewImageToRoomBGs($RoomID, $basename);
-		
+			//echo $insertedSuccessfully;
+			
 			header("Location: ../views/RoomSettings.php?var=$RoomID");
-			//echo $addedSuccessfully;
-			//echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
 		}
 		else 
 		{

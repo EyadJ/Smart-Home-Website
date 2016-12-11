@@ -34,7 +34,7 @@
 		//------Task Name-----//
 		echo"<tr><th width='10%' rowspan='2'>Settings</th>	
 		<td width='150px;'>Task Name <br />
-		<input type='text' name='TaskName' placeholder='Simple Name for the Task' required/>
+		<input type='text' name='TaskName' maxlength='35' placeholder='Simple Name for the Task' required/>
 		</td>";
 		
 		//---Task Occurrence-----//	

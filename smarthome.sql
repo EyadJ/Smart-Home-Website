@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 07, 2016 at 03:28 PM
+-- Generation Time: Dec 11, 2016 at 04:48 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -34,6 +34,42 @@ CREATE TABLE `camera_gallery` (
   `imgPath` varchar(60) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `camera_gallery`
+--
+
+INSERT INTO `camera_gallery` (`MultimediaID`, `cameraID`, `isImage`, `imgDate`, `imgPath`) VALUES
+(201, 1002, b'1', '2016-12-09 23:26:12', 'Camera_1002_10-12-2016_02-26-12-69.jpg'),
+(202, 1002, b'1', '2016-12-09 23:26:12', 'Camera_1002_10-12-2016_02-26-12-270.jpg'),
+(203, 1002, b'1', '2016-12-09 23:26:12', 'Camera_1002_10-12-2016_02-26-12-536.jpg'),
+(204, 1002, b'1', '2016-12-09 23:26:12', 'Camera_1002_10-12-2016_02-26-12-801.jpg'),
+(205, 1002, b'1', '2016-12-09 23:26:13', 'Camera_1002_10-12-2016_02-26-13-14.jpg'),
+(206, 1001, b'1', '2016-12-09 23:26:12', 'Camera_1001_10-12-2016_02-26-12-68.jpg'),
+(207, 1001, b'1', '2016-12-09 23:26:12', 'Camera_1001_10-12-2016_02-26-12-762.jpg'),
+(208, 1001, b'1', '2016-12-09 23:26:13', 'Camera_1001_10-12-2016_02-26-13-624.jpg'),
+(209, 1001, b'1', '2016-12-09 23:26:14', 'Camera_1001_10-12-2016_02-26-14-575.jpg'),
+(210, 1001, b'1', '2016-12-09 23:26:15', 'Camera_1001_10-12-2016_02-26-15-193.jpg'),
+(211, 1002, b'1', '2016-12-09 23:27:05', 'Camera_1002_10-12-2016_02-27-05-687.jpg'),
+(212, 1002, b'1', '2016-12-09 23:27:05', 'Camera_1002_10-12-2016_02-27-05-991.jpg'),
+(213, 1002, b'1', '2016-12-09 23:27:06', 'Camera_1002_10-12-2016_02-27-06-488.jpg'),
+(214, 1002, b'1', '2016-12-09 23:27:06', 'Camera_1002_10-12-2016_02-27-06-687.jpg'),
+(215, 1002, b'1', '2016-12-09 23:27:07', 'Camera_1002_10-12-2016_02-27-07-198.jpg'),
+(216, 1002, b'1', '2016-12-09 23:27:05', 'Camera_1002_10-12-2016_02-27-05-696.jpg'),
+(217, 1002, b'1', '2016-12-09 23:27:06', 'Camera_1002_10-12-2016_02-27-06-15.jpg'),
+(218, 1002, b'1', '2016-12-09 23:27:06', 'Camera_1002_10-12-2016_02-27-06-274.jpg'),
+(219, 1002, b'1', '2016-12-09 23:27:06', 'Camera_1002_10-12-2016_02-27-06-840.jpg'),
+(220, 1002, b'1', '2016-12-09 23:27:07', 'Camera_1002_10-12-2016_02-27-07-317.jpg'),
+(221, 1001, b'1', '2016-12-09 23:27:05', 'Camera_1001_10-12-2016_02-27-05-630.jpg'),
+(222, 1001, b'1', '2016-12-09 23:27:07', 'Camera_1001_10-12-2016_02-27-07-176.jpg'),
+(223, 1001, b'1', '2016-12-09 23:27:08', 'Camera_1001_10-12-2016_02-27-08-211.jpg'),
+(224, 1001, b'1', '2016-12-09 23:27:09', 'Camera_1001_10-12-2016_02-27-09-113.jpg'),
+(225, 1001, b'1', '2016-12-09 23:27:10', 'Camera_1001_10-12-2016_02-27-10-113.jpg'),
+(226, 1001, b'1', '2016-12-09 23:27:05', 'Camera_1001_10-12-2016_02-27-05-648.jpg'),
+(227, 1001, b'1', '2016-12-09 23:27:07', 'Camera_1001_10-12-2016_02-27-07-325.jpg'),
+(228, 1001, b'1', '2016-12-09 23:27:08', 'Camera_1001_10-12-2016_02-27-08-271.jpg'),
+(229, 1001, b'1', '2016-12-09 23:27:09', 'Camera_1001_10-12-2016_02-27-09-456.jpg'),
+(230, 1001, b'1', '2016-12-09 23:27:10', 'Camera_1001_10-12-2016_02-27-10-650.jpg');
+
 -- --------------------------------------------------------
 
 --
@@ -49,7 +85,7 @@ CREATE TABLE `device` (
   `isStatusChanged` bit(1) NOT NULL,
   `GateNum` int(3) DEFAULT '0',
   `Watts` int(4) NOT NULL DEFAULT '0',
-  `lastStatusChange` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `lastStatusChange` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP,
   `DeviceImgPath_on` varchar(50) NOT NULL,
   `DeviceImgPath_off` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -59,25 +95,25 @@ CREATE TABLE `device` (
 --
 
 INSERT INTO `device` (`DeviceID`, `RoomID`, `DeviceName`, `DeviceState`, `isVisible`, `isStatusChanged`, `GateNum`, `Watts`, `lastStatusChange`, `DeviceImgPath_on`, `DeviceImgPath_off`) VALUES
-(101, 101, 'Roof Lamp', b'0', b'1', b'0', 91, 120, '2016-12-02 21:47:02', 'Roof_Lamp_on.png', 'Roof_Lamp_off.png'),
-(102, 101, 'AC', b'0', b'1', b'0', 103, 1800, '2016-12-02 21:46:50', 'cooler_on.png', 'cooler_off.png'),
-(103, 101, 'Curtains', b'0', b'1', b'0', -1, 0, '2016-12-02 21:41:20', 'curtains_opened.png', 'curtains_closed.png'),
+(101, 101, 'Roof Lamp', b'0', b'1', b'1', 91, 120, '2016-12-02 21:47:02', 'Roof_Lamp_on.png', 'Roof_Lamp_off.png'),
+(102, 101, 'AC', b'0', b'1', b'1', 103, 1800, '2016-12-11 16:12:35', 'cooler_on.png', 'cooler_off.png'),
+(103, 101, 'Curtains', b'0', b'1', b'1', -1, 0, '2016-12-02 21:41:20', 'curtains_opened.png', 'curtains_closed.png'),
 (104, 101, 'Alarm', b'0', b'1', b'0', 75, 0, '2016-12-02 21:41:20', 'alarm.png', 'alarm_off.png'),
-(201, 102, 'Roof Lamp', b'0', b'1', b'1', 92, 60, '2016-12-02 21:41:20', 'Roof_Lamp_on.png', 'Roof_Lamp_off.png'),
-(202, 102, 'AC', b'0', b'1', b'1', 101, 1200, '2016-12-02 21:41:20', 'cooler_on.png', 'cooler_off.png'),
+(201, 102, 'Roof Lamp', b'1', b'1', b'1', 92, 60, '2016-12-11 12:53:48', 'Roof_Lamp_on.png', 'Roof_Lamp_off.png'),
+(202, 102, 'AC', b'0', b'1', b'1', 101, 1200, '2016-12-11 16:12:39', 'cooler_on.png', 'cooler_off.png'),
 (203, 102, 'Curtains', b'0', b'1', b'1', -1, 0, '2016-12-02 21:41:20', 'curtains_opened.png', 'curtains_closed.png'),
 (204, 102, 'Alarm', b'0', b'1', b'1', 78, 0, '2016-12-02 21:41:20', 'alarm.png', 'alarm_off.png'),
-(401, 104, 'Roof Lamp', b'0', b'1', b'0', 93, 60, '2016-12-02 21:41:20', 'Roof_Lamp_on.png', 'Roof_Lamp_off.png'),
-(402, 104, 'AC', b'0', b'1', b'0', 102, 1200, '2016-12-02 21:41:20', 'cooler_on.png', 'cooler_off.png'),
-(403, 104, 'Curtains', b'0', b'1', b'0', -1, 0, '2016-12-02 21:41:20', 'curtains_opened.png', 'curtains_closed.png'),
-(404, 104, 'Alarm', b'0', b'1', b'0', 79, 0, '2016-12-02 21:41:20', 'alarm.png', 'alarm_off.png'),
-(501, 105, 'Roof Lamp', b'0', b'1', b'0', 94, 180, '2016-12-02 21:41:20', 'Roof_Lamp_on.png', 'Roof_Lamp_off.png'),
-(502, 105, 'AC', b'0', b'1', b'0', 100, 2400, '2016-12-02 21:41:20', 'cooler_on.png', 'cooler_off.png'),
-(503, 105, 'Curtains', b'0', b'1', b'0', -1, 0, '2016-12-02 21:41:20', 'curtains_opened.png', 'curtains_closed.png'),
+(401, 104, 'Roof Lamp', b'0', b'1', b'1', 93, 60, '2016-12-11 14:21:33', 'Roof_Lamp_on.png', 'Roof_Lamp_off.png'),
+(402, 104, 'AC', b'0', b'1', b'1', 102, 1200, '2016-12-11 16:12:35', 'cooler_on.png', 'cooler_off.png'),
+(403, 104, 'Curtains', b'0', b'1', b'1', -1, 0, '2016-12-11 12:35:39', 'curtains_opened.png', 'curtains_closed.png'),
+(404, 104, 'Alarm', b'0', b'1', b'1', 79, 0, '2016-12-02 21:41:20', 'alarm.png', 'alarm_off.png'),
+(501, 105, 'Roof Lamp', b'1', b'1', b'1', 94, 180, '2016-12-11 14:27:28', 'Roof_Lamp_on.png', 'Roof_Lamp_off.png'),
+(502, 105, 'AC', b'0', b'1', b'1', 100, 2400, '2016-12-11 16:12:43', 'cooler_on.png', 'cooler_off.png'),
+(503, 105, 'Curtains', b'1', b'1', b'1', -1, 0, '2016-12-02 21:41:20', 'curtains_opened.png', 'curtains_closed.png'),
 (504, 105, 'Alarm', b'0', b'1', b'0', 80, 0, '2016-12-02 21:41:20', 'alarm.png', 'alarm_off.png'),
 (601, 106, 'Roof Lamp', b'0', b'1', b'0', 95, 120, '2016-12-02 21:41:20', 'Roof_Lamp_on.png', 'Roof_Lamp_off.png'),
 (602, 106, 'AC', b'0', b'1', b'0', 99, 1800, '2016-12-02 21:41:20', 'cooler_on.png', 'cooler_off.png'),
-(604, 106, 'Alarm', b'0', b'1', b'0', 76, 0, '2016-12-02 21:41:20', 'alarm.png', 'alarm_off.png'),
+(604, 106, 'Alarm', b'0', b'1', b'1', 76, 0, '2016-12-02 21:41:20', 'alarm.png', 'alarm_off.png'),
 (801, 108, 'Roof Lamp', b'0', b'1', b'0', 96, 60, '2016-12-02 21:41:20', 'Roof_Lamp_on.png', 'Roof_Lamp_off.png'),
 (901, 109, 'Roof Lamp', b'0', b'1', b'0', 97, 120, '2016-12-02 21:41:21', 'Roof_Lamp_on.png', 'Roof_Lamp_off.png'),
 (902, 109, 'Garage Door', b'0', b'1', b'0', -1, 0, '2016-12-02 21:41:21', 'Garage-door_open.png', 'Garage-door_closed.png'),
@@ -267,10 +303,8 @@ INSERT INTO `ip_address` (`ID`, `DeviceName`, `IPaddress`, `CameraID`, `Rotation
 CREATE TABLE `log` (
   `LogRecordID` int(7) NOT NULL,
   `RecordCategoryID` int(2) NOT NULL,
-  `UserID` int(4) NOT NULL,
-  `EntryTime` time NOT NULL,
-  `EntryDate` date NOT NULL,
-  `Description` varchar(150) CHARACTER SET utf8 NOT NULL
+  `EntryDate` timestamp NOT NULL,
+  `Description` varchar(200) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -281,9 +315,35 @@ CREATE TABLE `log` (
 
 CREATE TABLE `log_record_category` (
   `RecordCategoryID` int(2) NOT NULL,
-  `Category` varchar(30) NOT NULL,
-  `isImportant` bit(1) NOT NULL DEFAULT b'0'
+  `CategoryName` varchar(40) CHARACTER SET utf8 NOT NULL,
+  `isImportant` bit(1) NOT NULL DEFAULT b'0',
+  `LogDescription` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `MessageDescription` varchar(200) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `log_record_category`
+--
+
+INSERT INTO `log_record_category` (`RecordCategoryID`, `CategoryName`, `isImportant`, `LogDescription`, `MessageDescription`) VALUES
+(11, 'task_executed', b'0', 'Task ($TaskName) excuted with ($selectedSensor) & turned ($device1) [ON/OFF], ($device2) [ON/OFF], …', ''),
+(12, 'smoke_sensor_on', b'1', 'Smoke sensor detected a fire or a gas leak, the system is in Freeze-Mode', 'Smoke sensor detected a fire or a gas leak, The System is in Freeze-Mode, Devices cant be Switched ON/OFF, the Tasks will be Disabled as well.'),
+(13, 'water_tank_level', b'1', 'Water level in the tank has reached ($UltraSonicSensor) %', 'Water level in the tank has reached ($UltraSonicSensor) %'),
+(14, 'parameters_breached', b'1', 'House parameters are breached, the Alarms turned ON, & the Cameras took imgs', 'House parameters were breached, the alarms turned on, & the Cameras took images, if this is a mistake, the alarms can be turned off through the website'),
+(15, 'admin_added_user', b'1', 'admin ($AdminUserName) added a new user ($UserName)', ''),
+(16, 'admin_deleted_user', b'1', 'admin ($AdminUserName) deleted user ($UserName)', ''),
+(17, 'admin_disabled_user_account', b'1', 'admin ($AdminUserName) disabled the account of user ($UserName) ', ''),
+(18, 'room_authorization_added', b'0', 'admin ($AdminUserName) authorized ($RoomName) to user ($UserName)', ''),
+(19, 'room_authorization_removed', b'0', 'admin ($AdminUserName) unauthorized ($RoomName) from user ($UserName)', ''),
+(20, 'failed_log_in', b'1', 'Failed log in attempt with Email ($Email) & Password ($Password)', ''),
+(21, 'user_loged_in', b'0', 'User ($UserName) has successfully logged in', ''),
+(22, 'user_changed_device_status', b'0', 'User ($UserName) turned the ($DeviceName) [ON/OFF] in ($RoomName)', ''),
+(23, 'user_changed_motor_status', b'0', 'User ($UserName) [Opened/Closed] the ($DeviceName) in ($RoomName)', ''),
+(24, 'user_created_task', b'0', 'User ($UserName) created task ($TaskName) in room ($RoomName)', ''),
+(25, 'user_edited_task', b'0', 'User ($UserName) edited task ($TaskName) in room ($RoomName)', ''),
+(26, 'user_deleted_task', b'0', 'User ($UserName) deleted task ($TaskName) from room ($RoomName)', ''),
+(27, 'user_changed_personal_info', b'0', 'User ($UserName) changed his/her personal information', ''),
+(28, 'user_uploaded_room_img', b'0', 'User ($UserName) uploaded a new background for room ($RoomName)', '');
 
 -- --------------------------------------------------------
 
@@ -302,14 +362,14 @@ CREATE TABLE `room` (
 --
 
 INSERT INTO `room` (`RoomID`, `RoomName`, `RoomImgPath`) VALUES
-(101, 'Parents Room', 'bedroom-double1.png'),
-(102, 'Ahmad\'s Room', 'bedroom-male2.png'),
-(104, 'Sarah\'s Room', 'bedroom-female1.png'),
-(105, 'Living Room', 'livingroom2.png'),
+(101, 'Parents_Room', 'bedroom-double1.png'),
+(102, 'Ahmad_Room', 'bedroom-male2.png'),
+(104, 'Sarah_Room', 'bedroom-female1.png'),
+(105, 'Living_Room', 'livingroom2.png'),
 (106, 'Kitchen', 'kitchen1.png'),
 (108, 'Bathroom', 'bathroom5.png'),
 (109, 'Garage', 'garage2.png'),
-(110, 'House Parameters', 'house-parameters2.png');
+(110, 'House_Parameters', 'house-parameters2.png');
 
 -- --------------------------------------------------------
 
@@ -357,7 +417,8 @@ INSERT INTO `room_backgrounds` (`ImageID`, `RoomID`, `isDefault`, `ImgPath`) VAL
 (40, 101, b'1', 'bedroom-double3.png'),
 (44, 101, b'1', 'bedroom-double7'),
 (46, 102, b'0', 'bedroom-male5.png'),
-(47, 101, b'0', 'bedroom-double5.jpg');
+(47, 101, b'0', 'bedroom-double5.jpg'),
+(52, 104, b'0', 'Sarah_Room_2016-12-10-06-36-51.jpg');
 
 -- --------------------------------------------------------
 
@@ -406,7 +467,7 @@ INSERT INTO `sensor` (`SensorID`, `SensorTypeID`, `RoomID`, `SenesorState`, `Sen
 (900, 20, 109, b'0', 0, b'1', -1, '2016-11-20 19:41:31'),
 (901, 10, 109, b'0', 0, b'1', 54, '2016-12-02 20:16:29'),
 (1000, 20, 110, b'0', 0, b'1', -1, '2016-11-20 19:43:22'),
-(1001, 15, 110, b'0', 0, b'1', 43, '2016-12-02 13:33:25'),
+(1001, 15, 110, b'0', 0, b'1', 43, '2016-12-09 14:48:03'),
 (1002, 14, 110, b'0', 23, b'1', -1, '2016-12-02 21:47:40'),
 (1003, 14, 110, b'0', 19, b'0', -1, '2016-12-02 21:47:42');
 
@@ -492,7 +553,7 @@ CREATE TABLE `task` (
   `isDeleted` bit(1) NOT NULL DEFAULT b'0',
   `isDisabled` bit(1) NOT NULL DEFAULT b'0',
   `isDefault` bit(1) NOT NULL DEFAULT b'0',
-  `TaskName` varchar(50) CHARACTER SET utf8 NOT NULL,
+  `TaskName` varchar(35) CHARACTER SET utf8 NOT NULL,
   `ActionTime` time DEFAULT NULL,
   `repeatDaily` bit(1) NOT NULL,
   `ActionDate` date DEFAULT NULL,
@@ -512,20 +573,24 @@ CREATE TABLE `task` (
 INSERT INTO `task` (`TaskID`, `UserID`, `RoomID`, `SensorID`, `isDeleted`, `isDisabled`, `isDefault`, `TaskName`, `ActionTime`, `repeatDaily`, `ActionDate`, `AlarmDuration`, `AlarmInterval`, `SelectedSensorValue`, `DateCreated`, `NotifyByEmail`, `EnableTaskOnTime`, `DisableTaskOnTime`) VALUES
 (6, 1, 108, 801, b'0', b'0', b'1', 'open lights on motion sensor', NULL, b'1', NULL, -1, -1, -1, '2016-10-26 18:50:03', b'0', NULL, NULL),
 (18, 1, 101, 100, b'0', b'1', b'0', 'alarm', '05:30:00', b'0', '2016-11-10', 10, 1, -1, '2016-11-13 15:13:46', b'0', NULL, NULL),
-(19, 1, 101, 102, b'0', b'1', b'0', 'turn ac on', NULL, b'1', NULL, -1, -1, 25, '2016-11-30 18:36:08', b'0', NULL, NULL),
+(19, 1, 101, 102, b'0', b'1', b'0', 'turn ac on', NULL, b'1', NULL, -1, -1, 25, '2016-12-09 12:31:14', b'1', NULL, NULL),
 (20, 1, 104, 403, b'0', b'0', b'0', 'morning routine', NULL, b'1', NULL, -1, -1, 1, '2016-11-30 20:18:36', b'0', NULL, NULL),
 (21, 3, 109, 900, b'0', b'1', b'0', 'Test', '20:07:00', b'0', '2016-10-23', -1, -1, 45, '2016-10-26 18:50:03', b'0', NULL, NULL),
 (22, 1, 102, 201, b'0', b'1', b'0', 'test Ahmad', NULL, b'0', '2016-10-31', 5, 2, 23, '2016-11-21 00:45:31', b'0', NULL, NULL),
 (24, 4, 106, 600, b'0', b'1', b'0', 'remember to turn oven off', '10:45:00', b'0', '2016-10-30', 6, 1, 0, '2016-10-30 05:04:21', b'0', NULL, NULL),
-(58, 1, 102, 200, b'0', b'1', b'0', 'mmm', '04:49:00', b'0', '2016-11-21', -1, -1, 0, '2016-11-21 01:48:33', b'0', NULL, NULL),
+(58, 1, 102, 200, b'0', b'1', b'0', 'mmm', '04:49:00', b'0', '2016-11-21', -1, -1, 0, '2016-12-09 13:11:47', b'0', NULL, NULL),
 (59, 1, 110, 1001, b'0', b'0', b'0', 'Parameter Security', NULL, b'1', NULL, 0, 0, -1, '2016-11-30 17:28:07', b'1', '01:00:00', '05:30:00'),
-(60, 1, 106, 604, b'0', b'0', b'0', 'Smoke', NULL, b'1', NULL, 0, 0, 0, '2016-11-30 17:32:05', b'0', NULL, NULL),
+(60, 1, 106, 604, b'0', b'0', b'0', 'Smoke', NULL, b'1', NULL, 10, 0, 0, '2016-12-07 21:17:54', b'1', NULL, NULL),
 (61, 1, 101, 101, b'0', b'0', b'0', 'My Room', NULL, b'1', NULL, -1, -1, -1, '2016-11-30 18:14:42', b'0', NULL, NULL),
 (62, 1, 101, 101, b'0', b'0', b'0', 'Motion', NULL, b'1', NULL, -1, -1, -1, '2016-11-30 20:03:14', b'0', NULL, NULL),
 (63, 1, 101, 103, b'0', b'1', b'0', 'hi', NULL, b'1', NULL, -1, -1, 1, '2016-11-30 20:02:32', b'0', NULL, NULL),
 (64, 1, 101, 103, b'0', b'1', b'0', '1', NULL, b'1', NULL, -1, -1, 0, '2016-11-30 20:02:26', b'0', NULL, NULL),
 (65, 1, 102, 201, b'0', b'0', b'0', 'My Room2', NULL, b'1', NULL, -1, -1, -1, '2016-11-30 18:44:35', b'0', NULL, NULL),
-(66, 1, 102, 201, b'0', b'0', b'0', '1', NULL, b'1', NULL, -1, -1, 1, '2016-11-30 18:43:05', b'0', NULL, NULL);
+(66, 1, 102, 201, b'0', b'0', b'0', '1', NULL, b'1', NULL, -1, -1, 1, '2016-11-30 18:43:05', b'0', NULL, NULL),
+(71, 1, 110, 1001, b'0', b'0', b'0', 'tesssss', NULL, b'1', NULL, -1, -1, -1, '2016-12-09 13:15:01', b'0', NULL, NULL),
+(72, 1, 105, 501, b'0', b'0', b'0', 'asd1', NULL, b'1', NULL, -1, -1, -1, '2016-12-08 09:16:12', b'0', NULL, NULL),
+(73, 1, 105, 501, b'0', b'0', b'0', '121', NULL, b'1', NULL, -1, -1, 4, '2016-12-08 09:18:06', b'0', NULL, NULL),
+(74, 1, 105, 502, b'0', b'0', b'0', 'qw', NULL, b'1', NULL, -1, -1, 30, '2016-12-08 09:18:36', b'0', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -548,7 +613,9 @@ CREATE TABLE `task_camera` (
 
 INSERT INTO `task_camera` (`TaskID`, `DeviceID`, `RequiredDeviceStatus`, `TakeImage`, `TakeVideo`, `Resolution`) VALUES
 (59, 1001, -1, -1, -1, 480),
-(59, 1002, -1, -1, -1, 480);
+(59, 1002, -1, -1, -1, 480),
+(71, 1001, 0, -1, -1, -1),
+(71, 1002, 1, 1, -1, 480);
 
 -- --------------------------------------------------------
 
@@ -621,7 +688,20 @@ INSERT INTO `task_devices` (`TaskID`, `DeviceID`, `RequiredDeviceStatus`) VALUES
 (66, 201, 0),
 (66, 202, 0),
 (66, 203, -1),
-(66, 204, -1);
+(66, 204, -1),
+(71, 1004, 0),
+(72, 501, 0),
+(72, 502, 1),
+(72, 503, 1),
+(72, 504, 0),
+(73, 501, 0),
+(73, 502, 1),
+(73, 503, 0),
+(73, 504, -1),
+(74, 501, 1),
+(74, 502, 0),
+(74, 503, 0),
+(74, 504, -1);
 
 -- --------------------------------------------------------
 
@@ -724,8 +804,7 @@ ALTER TABLE `ip_address`
 --
 ALTER TABLE `log`
   ADD PRIMARY KEY (`LogRecordID`),
-  ADD KEY `RecordCategoryID` (`RecordCategoryID`),
-  ADD KEY `UserID` (`UserID`);
+  ADD KEY `RecordCategoryID` (`RecordCategoryID`);
 
 --
 -- Indexes for table `log_record_category`
@@ -821,7 +900,7 @@ ALTER TABLE `user_authorized_rooms`
 -- AUTO_INCREMENT for table `camera_gallery`
 --
 ALTER TABLE `camera_gallery`
-  MODIFY `MultimediaID` int(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `MultimediaID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=231;
 --
 -- AUTO_INCREMENT for table `gpio_pins`
 --
@@ -841,17 +920,17 @@ ALTER TABLE `log`
 -- AUTO_INCREMENT for table `log_record_category`
 --
 ALTER TABLE `log_record_category`
-  MODIFY `RecordCategoryID` int(2) NOT NULL AUTO_INCREMENT;
+  MODIFY `RecordCategoryID` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 --
 -- AUTO_INCREMENT for table `room_backgrounds`
 --
 ALTER TABLE `room_backgrounds`
-  MODIFY `ImageID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `ImageID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 --
 -- AUTO_INCREMENT for table `task`
 --
 ALTER TABLE `task`
-  MODIFY `TaskID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `TaskID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 --
 -- AUTO_INCREMENT for table `user`
 --
@@ -890,8 +969,7 @@ ALTER TABLE `ip_address`
 -- Constraints for table `log`
 --
 ALTER TABLE `log`
-  ADD CONSTRAINT `log_ibfk_1` FOREIGN KEY (`RecordCategoryID`) REFERENCES `log_record_category` (`RecordCategoryID`),
-  ADD CONSTRAINT `log_ibfk_3` FOREIGN KEY (`UserID`) REFERENCES `user` (`UserID`);
+  ADD CONSTRAINT `log_ibfk_1` FOREIGN KEY (`RecordCategoryID`) REFERENCES `log_record_category` (`RecordCategoryID`);
 
 --
 -- Constraints for table `room_backgrounds`

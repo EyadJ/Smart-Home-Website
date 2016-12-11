@@ -31,8 +31,7 @@ class Room
 		}
 	}
 	
-
-public static function getRoomName($RoomID) 
+	public static function getRoomName($RoomID) 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) {
@@ -47,8 +46,8 @@ public static function getRoomName($RoomID)
 		if ($result != NULL && $result->num_rows >= 1)  // id number exists
 		{ 			
 			$row = $result->fetch_assoc();
-			$RoomID = $row['RoomID'];
-			return $RoomID;
+			$RoomName = $row["RoomName"];
+			return $RoomName;
 		}
 		else 
 		{

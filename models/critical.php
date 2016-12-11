@@ -27,13 +27,13 @@ class Critical
 		{
 		  die('unable to connect to database [' . $db->connect_error .']');
 		}
-		$sql = "SELECT SenesorState FROM sensor WHERE SensorTypeID = 10 AND RoomID = 110";		
+		$sql = "SELECT DeviceState FROM device WHERE DeviceName = 'Alarm' AND RoomID = 110";		
 		$result = $db->query($sql);
 
 		$row = $result->fetch_assoc();
-		$MotionSensorState = $row["SenesorState"];
+		$AlarmState = $row["DeviceState"];
 		 
-		return $MotionSensorState;		//TRUE OR FALSE
+		return $AlarmState;		//TRUE OR FALSE
 	}
 	
 	public static function houseParametersSetNoRisk() 
@@ -43,8 +43,8 @@ class Critical
 		{
 		  die('unable to connect to database [' . $db->connect_error .']');
 		}
-		$sql = "UPDATE sensor SET SenesorState = 0 WHERE SensorTypeID = 10 AND RoomID = 110";		
-	
+		$sql = "UPDATE device SET DeviceState = 0 WHERE DeviceName = 'Alarm' AND RoomID = 110";
+		
 		if ($db->query($sql) == TRUE) 
 			return TRUE;
 		else

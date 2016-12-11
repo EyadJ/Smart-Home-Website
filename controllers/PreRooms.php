@@ -82,26 +82,49 @@
 		
 			while($row2 = $Devices->fetch_assoc()) 
 			{
+				$DeviceName = $row2["DeviceName"];
+				$DeviceState = $row2["DeviceState"];
+				
 				if($row2["isVisible"])
 				{
-					echo "<a style='text-decoration:none;' href='../controllers/switchDeviceStatus.php?DeviceID=$row2[DeviceID]&";
-					if($row2['DeviceState'] == 1) // (on)
-					{
-						echo "newStatus=0'><div class='DeviceDiv' >
-								<img src='../controllers/images/devices/$row2[DeviceImgPath_on]'";
-					}
-					else // == 0 (off)
-					{
-						echo "newStatus=1'><div class='DeviceDiv' >
-								<img src='../controllers/images/devices/$row2[DeviceImgPath_off]'";
-					}
+					$RemainingSeconds = device::lastRunningTimeOfAC($row2["DeviceID"]);
 					
-					echo" width='60' height='60' style='margin-bottom:5px;'/>
-					</div></a>";
+					if(
+					($DeviceName != "AC") || 
+					($DeviceName === "AC" && $DeviceState == 1) || 
+					($DeviceName === "AC" && $DeviceState == 0 && $RemainingSeconds == 0)
+					)
+					{
+						echo "<a style='text-decoration:none;' href='../controllers/switchDeviceStatus.php?DeviceID=$row2[DeviceID]&";
+						
+						if($DeviceState == 1) // (on)
+						{
+							echo "newStatus=0'><div class='DeviceDiv' >
+									<img src='../controllers/images/devices/$row2[DeviceImgPath_on]'";
+						}
+						else // == 0 (off)
+						{
+							echo "newStatus=1'><div class='DeviceDiv' >
+									<img src='../controllers/images/devices/$row2[DeviceImgPath_off]'";
+						}
+						echo" width='60' height='60' style='margin-bottom:5px;'/>
+						</div></a>";
+					}
+					else	//Device == AC && $DeviceState == 0 && $RemainingSeconds > 0
+					{
+						echo "<div class='tooltip'>
+								<span class='tooltiptext' style='font-size:10px; visibility:visible; margin-top:-10px;'>
+								Please wait (<b><span id='AC_countDown_ID' class='AC_countDown'>" . $RemainingSeconds . 
+								"</span></b>) Seconds to Turn the (AC) ON
+								</span>
+								<img src='../controllers/images/devices/$row2[DeviceImgPath_off]' 
+								width='60' height='60' style='margin-bottom:5px;' />
+							</div>";
+					}
 				}
 			}
-				
 			echo"</td>"  ;		
+				
 	$counter++;
 	}
 	echo"</tr>";

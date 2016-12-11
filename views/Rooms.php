@@ -38,7 +38,7 @@ function HideUnhideDiv1()
   
   
 </head>
-<body>
+<body onload='AC_countDown_Update();'>
  
             <div class="allcontainer">
 	 
@@ -128,5 +128,43 @@ include_once("../controllers/Header.php");
 	</div>
 
 </body>
+<script>
+
+	var AC_countDown = document.getElementsByClassName("AC_countDown");
+	var AC_countDown_ID = document.getElementById("AC_countDown_ID"); // only for the folloing if statement
+	
+	if(AC_countDown_ID != null)
+	{
+		var countArray = new Array();
+		var count = 30;
+		
+		for(var i = 0; i < AC_countDown.length; i++)
+		{
+			countArray[i] = parseInt(AC_countDown[i].innerHTML);
+			if (count > countArray[i]) count = countArray[i];
+		}
+		
+		var counter=setInterval(timer, 1000);
+
+		function timer()
+		{
+		  count = count - 1;
+		  
+			for(var i = 0; i < AC_countDown.length; i++)
+				countArray[i] = countArray[i] - 1;
+	
+		  if (count <= 0)
+		  {
+			 clearInterval(counter);
+			 
+			 window.location.href = "Rooms.php";
+			 
+			 return;
+		  }
+			for(var i = 0; i < AC_countDown.length; i++)
+				AC_countDown[i].innerHTML = countArray[i];
+		}
+	}
+	</script>
 </html>
 

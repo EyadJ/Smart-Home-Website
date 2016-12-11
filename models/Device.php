@@ -126,7 +126,36 @@ class Device
 			return NULL;
 	}
 
+	//CHECK if the AC was turned OFF before a certin amount of time, 
+	//ex: less than 3 minutes, to prevent user from turning it ON so it won't damage the AC
+	public static function lastRunningTimeOfAC ($DeviceID) 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) {
+		  die('unable to connect to database [' . $db->connect_error .']');
+		}
+		$DeviceID = $db->escape_string($DeviceID);
 
+		$sql = "SELECT lastStatusChange FROM device WHERE DeviceName='AC' AND DeviceID = $DeviceID";
+		$result = $db->query($sql);
+		
+		if ($result != NULL && $result->num_rows >= 1)  
+		{
+			$row = $result -> fetch_assoc();
+			
+			$lastStatusChange = strtotime($row["lastStatusChange"]);
+			$now = time();
+			
+			$RemainingSeconds = $lastStatusChange - $now - 10800 + 30;
+			
+			if($RemainingSeconds > 30 || $RemainingSeconds < 0 )
+				return 0;
+			else
+				return intval($RemainingSeconds);
+		}
+		else 
+			return 0;
+	}
 	
 
 

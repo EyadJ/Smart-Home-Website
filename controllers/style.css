@@ -637,7 +637,7 @@ tr {
     /* Position the tooltip text - see examples below! */
     position: absolute;
 	margin-left:40px; 
-	margin-top:-20px; 
+	margin-top:-20px;
     z-index: 1;
 }
 
@@ -743,6 +743,7 @@ tr {
 }
 
 .rotate270 {
+	display:block;
     -webkit-transform: rotate(270deg);
     -moz-transform: rotate(270deg);
     -o-transform: rotate(270deg);
