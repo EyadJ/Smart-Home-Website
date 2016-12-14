@@ -135,7 +135,7 @@ include_once("../controllers/Header.php");
     </td>
     </tr>
 	<tr><td>Title</td><td align="left">
-&nbsp;&nbsp;<input type="text" name="Title" maxlength="20" required/> &nbsp; (Ex: Father, Mother, Son, Daughter..)
+&nbsp;&nbsp;<input type="text" name="Title" maxlength="20" /> &nbsp; (Ex: Father, Mother, Son, Daughter..)
     </td>
     </tr>
 <tr><td>Email</td><td align="left">
@@ -155,7 +155,7 @@ include_once("../controllers/Header.php");
         </td></tr>
 		
 <tr><td>Img</td><td  align="left">
-<input type="file" name="fileToUpload" id="fileToUpload" required/>
+<input type="file" name="fileToUpload" id="fileToUpload" />
     
     </td>
     </tr>

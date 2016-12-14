@@ -9,7 +9,20 @@
 	$UserID = $_GET["var"];
 	$AllRooms = room::getAllRoomsDetails();
 	//
-	echo "<tr><td>";
+	
+	//User Image Path
+	$UserImagePath = user::getUserImagePath($UserID);
+	$UserName = user::getUserName($UserID);
+	
+	echo "<span align='center'>
+			<img src='../controllers/images/users/$UserImagePath' 
+			style='width:110px; height:110px;display:block; left: 0; right: 0; margin: auto; border: 1px solid black;'/>
+			<p align='center' style='margin-top:2px;'>$UserName</p>
+			</span>";
+	//---------------
+	
+	echo "<table style='background-color:white; border:0px solid transparent;'> 
+			<tr><td>";
 
 	while($row = $AllRooms->fetch_assoc()) 
 	{
@@ -54,6 +67,6 @@
 			
 		echo"</div></a>"  ;		
 	}
-	echo"</td></tr>";
+	echo"</td></tr></table>";
 	
 ?>

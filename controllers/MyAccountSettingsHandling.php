@@ -1,11 +1,9 @@
-<?php /*error_reporting(0);*/ 
+<?php /*error_reporting(0);*/ session_start(); if(!isset($_SESSION["Email"])){ header("Location: LogIn.php"); }
 
 	include_once("../models/user.php");
-	session_start();
 	
 if(isset($_POST["Save"]))
 {
-
 	$SendEmail = 0; $SendSMS = 0;
 	
 	if(isset($_POST['SendEmail']) && $_POST['SendEmail'] == "on") $SendEmail = 1;
@@ -21,7 +19,7 @@ if(isset($_POST["Save"]))
 	$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 	
 	// Check file size
-	if ($_FILES["fileToUpload"]["size"] > 5000000) 
+	if ($_FILES["fileToUpload"]["size"] > 2500000) 
 	{
 		echo "Sorry, your file is too large.";
 		$uploadOk = 0;

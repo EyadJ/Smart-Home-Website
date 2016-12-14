@@ -92,12 +92,12 @@ function LogInFormSubmit()
 		
 <!--------------------------------------------------------------------------------------------------->	 
 		
-	<div style="width:50%;position: absolute; top: 15%; left: 0; right: 0; bottom: 50%; margin: auto; ">
+	<div style="width:25%; position:absolute; top:15%; bottom:50%; left: 0; right: 0; margin: auto; ">
 
 
 <form name="LogInForm" id="LogInForm" method="post" action="../controllers/LogInHandling.php">
 
-<table align="center" style="top:100px; position:relative; width:420px; background-color:white;">
+<table style="top:100px; position:relative; width:420px; background-color:white;">
 
 <th colspan="2" >
 <img align="center" src="../controllers/images/login-user.png" width="60px" style="display:inline;"/>

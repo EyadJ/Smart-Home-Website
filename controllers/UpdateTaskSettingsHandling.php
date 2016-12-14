@@ -5,14 +5,22 @@
 		include_once("../models/task.php");
 		include_once("../models/device.php");
 		include_once("../models/sensor.php");
+		include_once("../models/user.php");
+		
 		
 		//----------------------------initialization-------------------------------//
+		$UserName = $_SESSION["UserName"]; 
+		$isAdmin = $_SESSION["isAdmin"];
+		
 		$TaskID = $_POST["TaskID"];
 		$UserID = $_POST["UserID"];
 		$RoomID = $_POST["RoomID"];
 		$TaskName = $_POST["TaskName"];
 		$selectedSensorID = $_POST["sensors"];
 		$referrer = $_POST["referrer"];
+		
+		//CHECK if user is autherized to edit this task
+		if(!user::isUserAutherisedToEditTask($UserID, $TaskID)) header("Location:../views/$referrer");
 		
 		$Devices; 				//(array)
 		$AlarmDuration = -1;
@@ -139,7 +147,7 @@
 		
 		task::UpdateTaskSettings
 		($TaskID, $UserID, $RoomID, $TaskName, $ActionTime, $SelectedSensorValue, $repeatDaily, $ActionDate, $selectedSensorID, 
-		$AlarmDuration, $AlarmInterval, $Devices, $NotifyByEmail, $EnableTaskOnTime, $DisableTaskOnTime, $isDisabled);
+		$AlarmDuration, $AlarmInterval, $Devices, $NotifyByEmail, $EnableTaskOnTime, $DisableTaskOnTime, $isDisabled, $UserName, $isAdmin);
 	
 		header("Location: ../views/$referrer");
 		

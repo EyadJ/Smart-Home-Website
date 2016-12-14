@@ -1,7 +1,8 @@
-<?php /*error_reporting(0);*/ 
+<?php /*error_reporting(0);*/ session_start();  if(!isset($_SESSION["Email"]) || !$_SESSION["isAdmin"]){  header("Location: HomePage.php"); } 
 
 	include_once("../models/user.php");
-	session_start();
+	
+	$AdminUserName = $_SESSION["UserName"];
 	
 if(isset($_POST["Save"]))
 {
@@ -70,7 +71,8 @@ if(isset($_POST["Save"]))
 			$_POST['Title'],
 			$isDisabled,
 			$SendEmail,
-			$SendSMS
+			$SendSMS,
+			$AdminUserName
 			);
 	 
 			header("Location: ../views/Users.php");

@@ -107,16 +107,11 @@ include_once("../controllers/Header.php");
             <div class="right-div-secondary-title" style="width:308px;"><b>Manage User's Authorized Rooms</b></div>
             		
 		
-	<table style="background-color:white; border:0px solid transparent;"> 
-			
 		<?php
 		include_once("../controllers/PreUserAuthorisedRooms.php");
 		?>
 		
-	</table>
 	
-	
-       	<br /><br /><br />
 		</div>
 
 	 

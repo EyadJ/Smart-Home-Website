@@ -43,27 +43,32 @@
 
 				if($_SESSION["isAdmin"] || user::isUserAutherisedForRoom($_SESSION["UserID"], 110))
 				{
-					echo"<a href='../views/SecurityCameras.php' style='text-decoration:none;'>
-					<img style='margin-top:35px;' width='20px' src='../controllers/images/security-camera9.png' />
+					echo"<a class='tooltip' href='../views/SecurityCameras.php' style='text-decoration:none;'>
+					<span style='right:17px; margin-top:10px;' class='tooltiptext'>Security Cameras</span>
+					<img style='margin-top:35px; padding-right:4px;' width='20px' src='../controllers/images/security-camera9.png' />
 					</a>";
 					
-					echo"<a href='../views/CameraGallery.php' style='text-decoration:none;'>
-					<img style='margin-top:35px;' width='20px' src='../controllers/images/gallery6.png' />
+					echo"<a class='tooltip' href='../views/CameraGallery.php' style='text-decoration:none;'>
+					<span style='right:17px; margin-top:10px;' class='tooltiptext'>Camera Gallery</span>
+					<img style='margin-top:35px; padding-right:3px;' width='20px' src='../controllers/images/gallery6.png' />
 					</a>";
 				}
 				
 				if($_SESSION["isAdmin"])
 				{
-					echo"<a href='notificationCenter.php' style='text-decoration:none;'>
-					<img style='margin-top:35px;' width='20px' src='../controllers/images/notification.png' />
+					echo"<a class='tooltip' href='notificationCenter.php' style='text-decoration:none;'>
+					<span style='right:17px; margin-top:10px; width:140px;' class='tooltiptext'>Notification Center</span>
+					<img style='margin-top:35px; padding-right:3px;' width='20px' src='../controllers/images/notification.png' />
 					</a>";
 				}			
 				
-				echo"<a href='myAccount.php?referrer=" . $url . "' style='text-decoration:none;'>
-				<img style='margin-top:35px;' width='20px' src='../controllers/images/my-account.png' />
+				echo"<a class='tooltip' href='myAccount.php?referrer=" . $url . "' style='text-decoration:none;'>
+				<span style='right:17px; margin-top:10px; width:90px;' class='tooltiptext'>My Account</span>
+				<img style='margin-top:35px; padding-right:2px;' width='20px' src='../controllers/images/my-account.png' />
 				</a>
 
-				<a href='Logout.php' style='text-decoration:none;'>
+				<a class='tooltip' href='Logout.php' style='text-decoration:none;'>
+				<span style='right:17px; margin-top:10px; width:60px;' class='tooltiptext'>Logout</span>
 				<img style='margin-top:35px;' width='20px' src='../controllers/images/logout.png' />
 				</a>
 			</div>

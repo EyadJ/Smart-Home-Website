@@ -1,4 +1,4 @@
-<?php
+<?php /*error_reporting(0);*/ session_start(); if(!isset($_SESSION["Email"])){ header("Location: LogIn.php"); }
    
 	include_once("../models/room.php");
 	
@@ -6,6 +6,9 @@
 	$target_dir = "../controllers/images/rooms/";
 	$basename = basename($_FILES["fileToUpload"]["name"]);
 
+	$UserName = $_SESSION["UserName"];
+	$isAdmin = $_SESSION["isAdmin"];
+	
 	$uploadOk = 1;
 	$imageFileType = pathinfo($basename, PATHINFO_EXTENSION);
 	
@@ -26,7 +29,7 @@
 	}
 	
 	// Check file size
-	if ($_FILES["fileToUpload"]["size"] > 5000000) {
+	if ($_FILES["fileToUpload"]["size"] > 2500000) {
 		echo "Sorry, your file is too large.";
 		$uploadOk = 0;
 	}
@@ -49,7 +52,7 @@
 		{
 			$insertedSuccessfully = room::modifyRoomImagePath($RoomID, $basename);
 			//echo $insertedSuccessfully;
-			$insertedSuccessfully = room::addNewImageToRoomBGs($RoomID, $basename);
+			$insertedSuccessfully = room::addNewImageToRoomBGs($RoomID, $basename, $UserName, $isAdmin);
 			//echo $insertedSuccessfully;
 			
 			header("Location: ../views/RoomSettings.php?var=$RoomID");

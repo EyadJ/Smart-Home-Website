@@ -4,15 +4,22 @@
 	include_once("../models/task.php");
 	include_once("../models/user.php");
 
-	$TaskID = $_GET['var'];
 	$UserID = $_SESSION["UserID"];
+	$UserName = $_SESSION["UserName"];
+	$isAdmin = $_SESSION["isAdmin"];
+	
+	$TaskID = $_GET['var'];
+	$action = $_GET['action'];
 	$referrer =  $_GET['referrer'];
 	
-	if(isset($_POST))
+	//CHECK if user is autherized to edit this task
+	if(isset($_POST) && user::isUserAutherisedToEditTask($UserID, $TaskID))
 	{
-		//CHECK if user is autherized to edit this task
-		if(user::isUserAutherisedToEditTask($UserID, $TaskID)) task::removeTask($TaskID);
+		if($action === 'remove')
+			task::removeTask($TaskID, $UserName, $isAdmin);
 		
-		header("Location: ../views/$referrer");
+		else if($action === 'delete')
+			task::deleteTask($TaskID, $UserName, $isAdmin);
 	}
+	header("Location: ../views/$referrer");
 ?>

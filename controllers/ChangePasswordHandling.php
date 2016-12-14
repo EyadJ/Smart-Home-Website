@@ -1,7 +1,6 @@
-<?php
+<?php /*error_reporting(0);*/ session_start(); if(!isset($_SESSION["Email"])){ header("Location: LogIn.php"); }
 
 	include_once("../models/user.php");
-	session_start();
 
 	$UserID = $_SESSION["UserID"];
 	

@@ -199,7 +199,15 @@
 					$text3 = "inline-block";
 					$text4 = "value='$SelectedSensorValue'";
 				}
-		
+				
+				$colorOfMotionText = "";
+					
+				if($sensorTypeID == 15)
+				{
+					$text2 = "disabled";
+					$colorOfMotionText = "style='color:#666666;'";
+				}
+					
 				echo"<label><input type='radio' name='sensors' value='$row[SensorID]' onclick='HideAllButParameter(10);' $checkSelectedSensor/>
 				<img src='../controllers/images/sensors/$row[SensorImgPath]' width='60' height='60'/></label>
 				
@@ -210,7 +218,7 @@
 				
 				</td></tr><tr><td>
 				
-				<label><input type='radio' name='MotionSensorOption' value='onNoDetection' onclick='UnhideMotionSensorSecondaryOption();' $text2/>
+				<label $colorOfMotionText><input type='radio' name='MotionSensorOption' value='onNoDetection' onclick='UnhideMotionSensorSecondaryOption();' $text2/>
 				Action after no detection for a period of time</label>
 				
 				<div style='display:$text3;' id='MotionSensorDurationTable'>
@@ -419,7 +427,7 @@
 			{
 				
 				$option1 = ""; $option2 = ""; $option3 = ""; $option4 = ""; 
-				$option5 = ""; $option6 = ""; $option7 = "";  $displayStatus1 = "none"; 
+				$option5 = ""; $option6 = ""; $option7 = "disabled";  $displayStatus1 = "none"; 
 				$TakeImage = 1; $TakeVideo = 1; $Resolution = 480;
 				
 				$ReqDevState = $taskCamerasArray[$currentDevID]["ReqDevState"];
@@ -443,7 +451,7 @@
 					else														//takeVideo selected
 					{
 						$TakeVideo = $taskCamerasArray[$currentDevID]["TakeVideo"];
-						$option7 = "checked";
+						//$option7 = "checked";
 					}
 					
 					$Resolution = $taskCamerasArray[$currentDevID]["Resolution"];
@@ -469,16 +477,14 @@
 					<label><input type='radio' name='cam-$currentDevID-takeImgOrVideo' value='Img' checked/> Take </label>
 					
 					<span id=''><input type='number' name='cam-$currentDevID-TakeImagesQty' 
-					placeholder='(Pic Number)' value=$TakeImage
-					style='width:35px;' $option6/> Picture/s</span>
+					placeholder='(Pic Number)' value=$TakeImage style='width:35px;' $option6/> Picture/s</span>
 					
 					</td></tr><tr><td>
 					
-					<label><input type='radio' name='cam-$currentDevID-takeImgOrVideo' value='Vid' $option7/> Take Video</label>
+					<label><input type='radio' name='cam-$currentDevID-takeImgOrVideo' value='Vid' $option7 /> Take Video</label>
 					
 					<span id=''><input type='number' name='cam-$currentDevID-TakeVideoDuration' 
-					placeholder='(Min)' value=$TakeVideo 
-					style='width:45px;'/>Min</span>
+					placeholder='(Min)' value=$TakeVideo style='width:45px;' disabled/>Min</span>
 					
 					</td></tr><tr><td>
 						
@@ -558,9 +564,12 @@
 		$isDefault = $taskDetails["isDefault"];
 		
 		if(!$isDefault)
-			echo"<a href='#' onclick='deleteTaskMsg($TaskID);return false;' style='text-decoration:none;'>
+		{	
+			echo"<a href='#' onclick='deleteTaskMsg($TaskID,";
+			echo '"remove"';
+			echo");return false;' style='text-decoration:none;'>
 			<button class='button'  type = 'button' style='color:red;'>Delete</button>	</a>";
-		
+		}
 		else	//$isDefault == TRUE (Undeleteable)
 			echo"<div style=' margin-left:auto; margin-right:auto; width:50px; display:inline;'>
 					<div class='tooltip'>
@@ -570,12 +579,14 @@
 						<button class='button' type = 'button' style='color:gray;' disabled>Delete</button>
 					</div>
 				</div>";
-			
-		echo"&nbsp;<a href='../views/$referrer'><button class='button'  type = 'button'>Cancel</button></a>
 		
-		</th></tr></table>
-		</form>
-		";
+		echo"&nbsp;<a href='../views/$referrer'><button class='button' type = 'button'>Cancel</button></a>
+		
+		</th></tr></table></form>";
+		
+		echo"<a href='#' onclick='deleteTaskMsg($TaskID,";
+		echo '"delete"';
+		echo");return false;' style='text-decoration:none;'>.</a>";
 	
 		
 			

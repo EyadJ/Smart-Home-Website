@@ -22,13 +22,9 @@ class Room
 		$result = $db->query($sql);
 	 
 		if ($result != NULL && $result->num_rows >= 1)  
-		{ 			
 			return $result;
-		}
 		else 
-		{
 			return NULL;
-		}
 	}
 	
 	public static function getRoomName($RoomID) 
@@ -50,9 +46,7 @@ class Room
 			return $RoomName;
 		}
 		else 
-		{
 			return "couldn't find room";
-		}
 	}
 
 
@@ -69,13 +63,9 @@ public static function getAllRoomBackgrounds($RoomID)
 		$result = $db->query($sql);
 	 
 		if ($result != NULL && $result->num_rows >= 1)  // id number exists
-		{ 			
 			return $result;
-		}
 		else 
-		{
 			return "couldn't find room";
-		}
 	}
 
 public static function getRoomSelectedBackground($RoomID) 
@@ -97,9 +87,7 @@ public static function getRoomSelectedBackground($RoomID)
 			return $RoomImgPath;
 		}
 		else 
-		{
 			return "couldn't find room";
-		}
 	}
 	
 	public static function modifyRoomImagePath ($RoomID, $RoomImgPath) 
@@ -117,16 +105,12 @@ public static function getRoomSelectedBackground($RoomID)
 			. " WHERE RoomID = $RoomID;";
 
 		if ($db->query($sql)) //TRUE
-		{ 
 			return TRUE;
-		} 
 		else 
-		{
 			return FALSE;
-		}
 	}
 	
-	public static function addNewImageToRoomBGs ($RoomID, $RoomImgPath) 
+	public static function addNewImageToRoomBGs ($RoomID, $RoomImgPath, $UserName, $isAdmin) 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) 
@@ -136,18 +120,25 @@ public static function getRoomSelectedBackground($RoomID)
 		$RoomID = $db->escape_string($RoomID);
 		$RoomImgPath = $db->escape_string($RoomImgPath);
 		
+		$RoomName = room::getRoomName($RoomID);
+		
 		$sql = "INSERT INTO room_backgrounds "
 		  . "(RoomID, ImgPath) "
 		  . " VALUES ($RoomID, '$RoomImgPath')";
 		
 		if ($db->query($sql)) //TRUE
-		{ 
-			return TRUE;
-		} 
-		else 
 		{
-			return FALSE;
+			$AdminOrUser = "User"; if($isAdmin) $AdminOrUser = "Admin"; 
+			
+			//-----------------------------------LOG START-----------------------------------//
+			$db->query("INSERT INTO log (RecordCategoryID, Description) "
+					. " VALUES (29, '$AdminOrUser ($UserName) uploaded a new background for room ($RoomName)')");
+			//------------------------------------LOG END------------------------------------//
+			
+			return TRUE;
 		}
+		else 
+			return FALSE;
 	}
 	
 	public static function IsBackgroundDefault($RoomID, $ImgPath) 
@@ -168,13 +159,9 @@ public static function getRoomSelectedBackground($RoomID)
 		$isDefault = $row['isDefault'];
 		
 		if ($isDefault == 1)  // id number exists
-		{ 			
 			return TRUE;
-		}
 		else if ($isDefault == 0)
-		{
 			return FALSE;
-		}
 	}
 	
 	public static function deleteRoomBackground($RoomID, $ImgPath) 
@@ -184,26 +171,20 @@ public static function getRoomSelectedBackground($RoomID)
 		{
 			die('error: unable to connect to database');
 		}
-
 		$RoomID = $db->escape_string($RoomID);
 		$ImgPath = $db->escape_string($ImgPath);
 		
-		$sql = "DELETE FROM room_backgrounds"
-			. " WHERE roomID = $RoomID AND ImgPath = '$ImgPath';";
-
-			
-		unlink(('../controllers/images/rooms/' . $ImgPath));
+		$sql = "DELETE FROM room_backgrounds WHERE roomID = $RoomID AND ImgPath = '$ImgPath';";
 
 		$result = $db->query($sql);
 
-		/*if ($result) //is true 
-		{ 
-			return TRUE //Deleted Successfully
+		if ($result)
+		{
+			unlink(('../controllers/images/rooms/' . $ImgPath));
+			return TRUE;
 		}
 		else 
-		{
-			return  FALSE //Problem Deleting User
-		}*/
+			return  FALSE;
 	}
 	
 

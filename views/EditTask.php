@@ -143,14 +143,14 @@ function DisableTaskOnTimeValueHandling()
 //EDIT-TASK FORM POPUPS - [END]
 //
 
-function deleteTaskMsg(TaskID) 
+function deleteTaskMsg(TaskID, action) 
 {
 	document.getElementById("deleteMsg").style.display ="inline";	
 	document.getElementById("deleteMsgDim").style.display ="inline";	
 	
 	var referrer = document.getElementById("referrer").value;	
 	
-	document.getElementById("deleteTaskForm").action="../controllers/DeleteTaskHandling.php?var=" + TaskID + "&referrer="+ referrer + "";
+	document.getElementById("deleteTaskForm").action="../controllers/DeleteTaskHandling.php?var=" + TaskID + "&action=" + action + "&referrer="+ referrer + "";
 }
 
 function deleteTaskSubmitClicked() 
@@ -262,7 +262,6 @@ include_once("../controllers/Header.php");
 	
 	<br /><br /><br />
 		</div>
-
-		   
+	
 </body>
 </html>

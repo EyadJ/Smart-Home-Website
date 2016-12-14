@@ -7,6 +7,9 @@
 		include_once("../models/sensor.php");
 		
 		//----------------------------initialization-------------------------------//
+		$UserName = $_SESSION["UserName"]; 
+		$isAdmin = $_SESSION["isAdmin"];
+		
 		$UserID = $_POST["UserID"];
 		$RoomID = $_POST["RoomID"];
 		$TaskName = $_POST["TaskName"];
@@ -134,7 +137,7 @@
 		
 		task::createNewTask
 		($UserID, $RoomID, $TaskName, $ActionTime, $SelectedSensorValue, $repeatDaily, $ActionDate, $selectedSensorID, 
-		$AlarmDuration, $AlarmInterval, $Devices, $NotifyByEmail, $EnableTaskOnTime, $DisableTaskOnTime);
+		$AlarmDuration, $AlarmInterval, $Devices, $NotifyByEmail, $EnableTaskOnTime, $DisableTaskOnTime, $UserName, $isAdmin);
 	
 		header("Location: ../views/RoomSettings.php?var=$RoomID");
 	

@@ -111,6 +111,14 @@
 			{
 				if ($sensorTypeID == 10 || $sensorTypeID == 15) //Motion or IR
 				{
+					$textOfMotion = ""; $colorOfMotionText = "";
+					
+					if($sensorTypeID == 15)
+					{
+						$textOfMotion = "disabled";
+						$colorOfMotionText = "style='color:#666666;'";
+					}
+					
 					echo"<label><input type='radio' name='sensors' value='$row[SensorID]' onclick='HideAllButParameter(10);'/>
 					<img src='../controllers/images/sensors/$row[SensorImgPath]' width='60' height='60' /></label>
 					
@@ -121,7 +129,7 @@
 					
 					</td></tr><tr><td>
 					
-					<label><input type='radio' name='MotionSensorOption' value='onNoDetection' onclick='UnhideMotionSensorSecondaryOption();'/>
+					<label $colorOfMotionText><input type='radio' name='MotionSensorOption' value='onNoDetection' onclick='UnhideMotionSensorSecondaryOption();' $textOfMotion/>
 					Action after no detection for a period of time</label>
 					
 					<div style='display:none;' id='MotionSensorDurationTable'>
@@ -269,9 +277,9 @@
 							
 							</td></tr><tr><td>
 							
-							<label style='float:left;'><input type='radio' name='cam-$row[DeviceID]-takeImgOrVideo' value='Vid'/> Take Video</label>
+							<label style='float:left;'><input type='radio' name='cam-$row[DeviceID]-takeImgOrVideo' value='Vid' disabled/> Take Video</label>
 							<span id=''><input type='number' name='cam-$row[DeviceID]-TakeVideoDuration' placeholder='(Min)' value=1
-							style='width:45px;'/> Min</span>
+							style='width:45px;' disabled/> Min</span>
 							
 							</td></tr><tr><td>
 							

@@ -23,20 +23,32 @@ class PrintSideMenu
 		$page = str_replace('.php', '', $page);
 		
 		$isOpen = "";
-
 		$pageNoSpace = str_replace(' ', '', "Users");
 
 		if($pageNoSpace == $page)
-		{
 			$isOpen = "open";
-		}
 		
 		$text = "<a style='text-decoration: none;' href=" . $pageNoSpace . ".php><li class='li-menu "
 		. $isOpen . "'>".
 		"Users" . 
 		"<img  style='position:absolute; right:10%; margin-top:2px; width:38px;' src='../controllers/images/Users.png' />".
-		"</li></a>".
-		"<img width='19px' style='position:absolute; right:100%;' src='../controllers/images/admin.png'/>";
+		"</li></a>";
+		
+		$text .= "<img width='23px' height='86px;' style='position:absolute; right:100%;' src='../controllers/images/admin.png'/>";
+		
+		$isOpen = "";
+		$pageNoSpace = str_replace(' ', '', "Log");
+
+		if($pageNoSpace == $page)
+			$isOpen = "open";
+		
+		$text .= "<a style='text-decoration: none;' href=" . $pageNoSpace . ".php><li class='li-menu "
+		. $isOpen . "'>".
+		"Log" . 
+		"<img  style='position:absolute; right:10%; margin-top:2px; width:38px;' src='../controllers/images/Log.png' />".
+		"</li></a>";
+		
+		
 
 		return $text;
 	}
