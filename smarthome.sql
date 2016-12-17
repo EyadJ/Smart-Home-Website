@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2016 at 12:38 AM
+-- Generation Time: Dec 17, 2016 at 10:03 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -303,7 +303,7 @@ INSERT INTO `ip_address` (`ID`, `DeviceName`, `IPaddress`, `CameraID`, `Rotation
 CREATE TABLE `log` (
   `LogRecordID` int(7) NOT NULL,
   `RecordCategoryID` int(2) NOT NULL,
-  `Description` varchar(200) CHARACTER SET utf8 NOT NULL,
+  `Description` varchar(250) CHARACTER SET utf8 NOT NULL,
   `EntryDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -370,43 +370,40 @@ INSERT INTO `log` (`LogRecordID`, `RecordCategoryID`, `Description`, `EntryDate`
 (83, 17, 'Admin (System Admin) Enabled the account of user (Huda Azzahrani)', '2016-12-15 18:11:33'),
 (84, 19, 'Admin (System Admin) authorized (House_Parameters) to user (Ahmad alghamdi)', '2016-12-15 18:11:40'),
 (85, 20, 'Admin (System Admin) unauthorized (House_Parameters) from user (Ahmad alghamdi)', '2016-12-15 18:11:41'),
-(86, 15, 'Admin (System Admin) added a new user (Riyad Jaamour)', '2016-12-16 06:04:15'),
 (87, 15, 'Admin (System Admin) added a new user (test)', '2016-12-16 06:10:46'),
 (88, 16, 'Admin (System Admin) deleted user (test)', '2016-12-16 06:10:54'),
-(89, 22, 'User (Riyad Jaamour) has successfully logged in', '2016-12-16 06:11:48'),
-(90, 19, 'Admin (System Admin) authorized (Parents_Room) to user (Riyad Jaamour)', '2016-12-16 06:22:08'),
-(91, 19, 'Admin (System Admin) authorized (House_Parameters) to user (Riyad Jaamour)', '2016-12-16 06:26:21'),
-(92, 26, 'Admin (System Admin) edited task (Camera) in room (House_Parameters)', '2016-12-16 08:02:14'),
-(93, 20, 'Admin (System Admin) unauthorized (Parents_Room) from user (Riyad Jaamour)', '2016-12-16 08:59:33'),
-(94, 20, 'Admin (System Admin) unauthorized (House_Parameters) from user (Riyad Jaamour)', '2016-12-16 09:08:26'),
-(95, 16, 'Admin (System Admin) deleted user (Riyad Jaamour)', '2016-12-16 09:08:30'),
 (96, 24, 'Admin (System Admin) [Opened] the (Curtains) in (Parents_Room)', '2016-12-16 11:19:10'),
 (97, 24, 'Admin (System Admin) [Closed] the (Curtains) in (Parents_Room)', '2016-12-16 11:19:11'),
 (98, 26, 'Admin (System Admin) edited task (Parents Room Motion) in room (Parents_Room)', '2016-12-16 20:39:29'),
-(99, 11, 'Task Boy Room Motion in Ahmad_Room Excuted with Motion Sensor and Turned ( Roof Lamp [true] ), ( AC [true] ), ( Curtains [true] )', '2016-12-14 17:07:39'),
-(100, 11, 'Task Parents Room after no Motion in Parents_Room Excuted with Motion Sensor and Turned ( Roof Lamp [false] ), ( Curtains [false] )', '2016-12-14 17:08:05'),
-(101, 11, 'Task Boy Room after no Motion in Ahmad_Room Excuted with Motion Sensor and Turned ( Roof Lamp [false] ), ( AC [false] ), ( Curtains [false] )', '2016-12-14 17:08:43'),
-(102, 11, 'Task Parents Room Motion in Parents_Room Excuted with Motion Sensor and Turned ( Roof Lamp [true] ), ( AC [true] ), ( Curtains [true] )', '2016-12-14 17:09:48'),
-(103, 11, 'Task Parents Room after no Motion in Parents_Room Excuted with Motion Sensor and Turned ( Roof Lamp [false] ), ( Curtains [false] )', '2016-12-14 17:10:51'),
-(104, 11, 'Task Parents Room Motion in Parents_Room Excuted with Motion Sensor and Turned ( Roof Lamp [true] ), ( AC [true] ), ( Curtains [true] )', '2016-12-14 17:18:24'),
-(105, 11, 'Task Parents Room after no Motion in Parents_Room Excuted with Motion Sensor and Turned ( Roof Lamp [false] ), ( Curtains [false] )', '2016-12-14 17:19:26'),
-(106, 11, 'Task Parents Room Motion in Parents_Room Excuted with Motion Sensor and Turned ( Roof Lamp [true] ), ( AC [true] ), ( Curtains [true] )', '2016-12-14 17:21:44'),
-(107, 11, 'Task Parents Room after no Motion in Parents_Room Excuted with Motion Sensor and Turned ( Roof Lamp [false] ), ( Curtains [false] )', '2016-12-14 17:22:46'),
-(108, 11, 'Task (Boy Room after no Motion) in Ahmad_Room Executed with (Motion Sensor) and Turned ( Roof Lamp [false] ), ( AC [false] ), ( Curtains [false] )', '2016-12-15 07:03:02'),
+(99, 11, 'Task (Boy Room Motion) in Ahmad_Room Excuted with Motion Sensor and Turned ( Roof Lamp [true] ), ( AC [true] ), ( Curtains [true] )', '2016-12-14 17:07:39'),
+(100, 11, 'Task (Parents Room after no Motion) in Parents_Room Excuted with Motion Sensor and Turned ( Roof Lamp [false] ), ( Curtains [false] )', '2016-12-14 17:08:05'),
+(101, 11, 'Task (Boy Room after no Motion) in Ahmad_Room Excuted with Motion Sensor and Turned ( Roof Lamp [false] ), ( AC [false] ), ( Curtains [false] )', '2016-12-14 17:08:43'),
+(102, 11, 'Task (Parents Room Motion) in Parents_Room Excuted with Motion Sensor and Turned ( Roof Lamp [true] ), ( AC [true] ), ( Curtains [true] )', '2016-12-14 17:09:48'),
+(103, 11, 'Task (Parents Room after no Motion) in Parents_Room Excuted with Motion Sensor and Turned ( Roof Lamp [false] ), ( Curtains [false] )', '2016-12-14 17:10:51'),
+(104, 11, 'Task (Parents Room Motion) in Parents_Room Excuted with Motion Sensor and Turned ( Roof Lamp [true] ), ( AC [true] ), ( Curtains [true] )', '2016-12-14 17:18:24'),
+(105, 11, 'Task (Parents Room after no Motion) in Parents_Room Excuted with Motion Sensor and Turned ( Roof Lamp [false] ), ( Curtains [false] )', '2016-12-14 17:19:26'),
+(106, 11, 'Task (Parents Room Motion) in Parents_Room Excuted with Motion Sensor and Turned ( Roof Lamp [true] ), ( AC [true] ), ( Curtains [true] )', '2016-12-14 17:21:44'),
+(107, 11, 'Task (Parents Room after no Motion) in Parents_Room Excuted with Motion Sensor and Turned ( Roof Lamp [false] ), ( Curtains [false] )', '2016-12-14 17:22:46'),
+(108, 11, 'Task (Boy Room after no Motion) in Ahmad_Room Executed with (Motion Sensor) and Turned ( Roof Lamp [false] ), ( AC [false] ), ( Curtains [false] ) (One-Time Task --> [<u>Disabled</u>])', '2016-12-15 07:03:02'),
 (109, 11, 'Task (Parents Room Motion) in Parents_Room Executed with (Motion Sensor) and Turned ( Roof Lamp [true] ), ( AC [true] ), ( Curtains [true] )', '2016-12-15 07:03:35'),
 (110, 11, 'Task (Parents Room after no Motion) in Parents_Room Executed with (Motion Sensor) and Turned ( Roof Lamp [false] ), ( Curtains [false] )', '2016-12-15 07:06:21'),
 (111, 13, 'Task (Water) in House_Parameters Executed with (Ultrasonic) The Water level in the tank has reached 40%.', '2016-12-15 07:07:10'),
-(112, 13, 'Task (Water) in House_Parameters Executed with (Ultrasonic) The Water level in the tank has reached 40%.', '2016-12-15 07:07:14'),
-(113, 13, 'Task (Water) in House_Parameters Executed with (Ultrasonic) The Water level in the tank has reached 40%.', '2016-12-15 07:07:20'),
-(114, 13, 'Task (Water) in House_Parameters Executed with (Ultrasonic) The Water level in the tank has reached 40%.', '2016-12-15 07:07:25'),
-(115, 13, 'Task (Water) in House_Parameters Executed with (Ultrasonic) The Water level in the tank has reached 40%.', '2016-12-15 07:07:29'),
 (116, 11, 'Task (Parents Room Motion) in Parents_Room Executed with (Motion Sensor) and Turned ( Roof Lamp [true] ), ( AC [true] ), ( Curtains [true] )', '2016-12-15 07:08:57'),
 (117, 11, 'Task (Parents Room after no Motion) in Parents_Room Executed with (Motion Sensor) and Turned ( Roof Lamp [false] ), ( Curtains [false] )', '2016-12-15 07:09:59'),
 (118, 11, 'Task (Boy Room after no Motion) in Ahmad_Room Executed with (Motion Sensor) and Turned ( Roof Lamp [false] ), ( AC [false] ), ( Curtains [false] )', '2016-12-15 07:11:27'),
 (119, 11, 'Task (AC ON) in Parents_Room Executed with (Temperature Sensor) and Turned ( AC [true] )', '2016-12-16 15:50:59'),
 (132, 25, 'Admin (System Admin) created a task with name (testin) in room (Garage)', '2016-12-16 21:24:31'),
 (133, 27, 'Admin (System Admin) deleted task (testin) from room (Garage)', '2016-12-16 21:24:36'),
-(134, 27, 'Admin (System Admin) deleted task (testin) from room (Garage)', '2016-12-16 21:24:54');
+(134, 27, 'Admin (System Admin) deleted task (testin) from room (Garage)', '2016-12-16 21:24:54'),
+(135, 28, 'Admin (System Admin) changed his/her personal settings', '2016-12-17 12:01:33'),
+(136, 28, 'Admin (System Admin) changed his/her personal settings', '2016-12-17 12:02:25'),
+(137, 28, 'Admin (System Admin) changed his/her personal settings', '2016-12-17 12:03:53'),
+(138, 28, 'Admin (System Admin) changed his/her personal settings', '2016-12-17 12:04:04'),
+(139, 28, 'Admin (System Admin) changed his/her personal settings', '2016-12-17 12:05:46'),
+(140, 28, 'Admin (System Admin) changed his/her personal settings', '2016-12-17 12:06:00'),
+(141, 28, 'Admin (System Admin) changed his/her personal settings', '2016-12-17 12:06:08'),
+(142, 28, 'Admin (System Admin) changed his/her personal settings', '2016-12-17 12:06:16'),
+(143, 22, 'Admin (System Admin) has successfully logged in', '2016-12-17 19:23:05');
 
 -- --------------------------------------------------------
 
@@ -1001,7 +998,7 @@ ALTER TABLE `ip_address`
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `LogRecordID` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=135;
+  MODIFY `LogRecordID` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
 --
 -- AUTO_INCREMENT for table `log_category`
 --
@@ -1016,7 +1013,7 @@ ALTER TABLE `room_backgrounds`
 -- AUTO_INCREMENT for table `task`
 --
 ALTER TABLE `task`
-  MODIFY `TaskID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+  MODIFY `TaskID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 --
 -- AUTO_INCREMENT for table `user`
 --

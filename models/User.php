@@ -327,8 +327,7 @@ class User
 		$SendSMS = $db->escape_string($SendSMS);
 
 		$sql = "UPDATE user "
-			. " SET UserName = '$UserName'," 
-			. " Email = '$Email'," 
+			. " SET Email = '$Email'," 
 			. " CellPhone = $CellPhone," 
 			. " SendEmail = $SendEmail," 
 			. " SendSMS = $SendSMS" 
@@ -413,7 +412,17 @@ class User
 			. " WHERE UserID = $UserID;";
 
 		if ($db->query($sql)) //TRUE
+		{
+			//-----------------------------------LOG START-----------------------------------//
+			$AdminOrUser = "User"; if(user::isAdmin($UserID)) $AdminOrUser = "Admin"; 
+			$UserName = user::getUserName($UserID);
+			
+			$db->query("INSERT INTO log (RecordCategoryID, Description) "
+					. " VALUES (28, '$AdminOrUser ($UserName) changed his/her personal Image')");
+			//------------------------------------LOG END------------------------------------//
+			
 			return TRUE;
+		}
 		else 
 			return FALSE;
 	}
@@ -556,18 +565,27 @@ class User
 		$OldPass = $db->escape_string($OldPass);
 		$NewPass = $db->escape_string($NewPass);
 
-		
 		$sql = "SELECT Password FROM user WHERE UserID = $UserID;";	
 		$result = $db->query($sql);
 		
 		$row = $result -> fetch_assoc();
 			
-		if($row["Password"] === $OldPass)	//Old Password is Correct
+		if($row["Password"] == $OldPass)	//Old Password is Correct
 		{
 			$sql = "UPDATE user SET Password = '$NewPass' WHERE UserID = $UserID;";	
 		
 			if ($db->query($sql)) //TRUE
+			{
+				//-----------------------------------LOG START-----------------------------------//
+				$AdminOrUser = "User"; if(user::isAdmin($UserID)) $AdminOrUser = "Admin"; 
+				$UserName = user::getUserName($UserID);
+				
+				$db->query("INSERT INTO log (RecordCategoryID, Description) "
+						. " VALUES (28, '$AdminOrUser ($UserName) changed his/her PASSWORD')");
+				//------------------------------------LOG END------------------------------------//
+				
 				return TRUE;
+			}
 			else 
 				return FALSE;
 		}
