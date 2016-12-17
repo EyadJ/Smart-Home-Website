@@ -15,14 +15,14 @@
 	
 	echo '
 	<form name="formR" method="post"
-	action="../controllers/MyAccountSettingsHandling.php?var=' . $UserID . "&referrer=" . $_GET["referrer"] . '" 
+	action="../controllers/MyAccountSettingsHandling.php?referrer=' . $_GET["referrer"] . '" 
 	enctype="multipart/form-data">
 	<table style="width:90%;">	
 
 	<tr><th colspan="3">Modify Your Account Settings</th></tr>
 	
 	<tr><td>Name</td><td align="left" align="center">
-	<input type="text"  id="name" value="'.$row["UserName"].'" name="UserName" maxlength="25" required />
+	<input type="text"  id="name" value="'.$row["UserName"].'" name="UserName" maxlength="25" readonly/> Unchangeable
 		<font color="red"><label ></label></font>
 		</td>
 		
@@ -38,7 +38,7 @@
 		</tr>
 	 
 	<tr><td>Title</td><td align="left" >
-	<input type="tel" id="tel" value="'.$row["Title"].'" name="Title" style="width:110px;" readonly/>
+	<input type="tel" id="tel" value="'.$row["Title"].'" name="Title" style="width:110px;" readonly/> Unchangeable
 		<font color="red"> <label ></label></font>
 		</td>
 		</tr>

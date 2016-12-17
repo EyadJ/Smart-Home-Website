@@ -68,7 +68,10 @@ function showAllLogRecords(x)
 	{
 		displayText = "table-row";
 		displayText2 = true;
+		x.checked = false;
 	}
+	else
+		x.checked = true;			
 	
 	//-----------------//
 	var logRecordsArray = document.getElementsByClassName("logRecord");

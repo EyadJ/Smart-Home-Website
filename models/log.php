@@ -16,6 +16,9 @@ class Log
 
 		$sqlOrderBy = $db->escape_string($sqlOrderBy); 
 		
+		//CHECK if user manuplated the GET veriable "Order"
+		if($sqlOrderBy !== "ASC" && $sqlOrderBy !== "DESC") return NULL;
+		
 		$sql = "SELECT * FROM log l, log_category lc 
 				WHERE l.RecordCategoryID = lc.RecordCategoryID 
 				ORDER BY EntryDate $sqlOrderBy";

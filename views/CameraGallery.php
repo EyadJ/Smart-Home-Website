@@ -1,4 +1,4 @@
-<?php /*error_reporting(0);*/ session_start(); if(!isset($_SESSION["Email"]) || $_SESSION["isAdmin"] == FALSE){ header("Location: LogIn.php"); } ?>
+<?php /*error_reporting(0);*/ session_start(); if(!isset($_SESSION["Email"])){ header("Location: LogIn.php"); } ?>
 
 
 <?php
@@ -38,13 +38,108 @@ function HideUnhideDiv1()
 	}
 }
 
+var lastImgID = 0;
+
+function displayPreview(imgSrc, imgID, width) 
+{
+	document.getElementById("preview").src = imgSrc;
+	
+	lastImgID = imgID;
+	
+	x = document.getElementById("preview");
+	
+	if(width === (480/3.2))
+	{
+		x.style.marginLeft = "80px";
+		x.style.marginTop = "0px";
+	}
+	else if(width === (640/3.2))
+	{
+		x.style.marginTop = "80px";
+		x.style.marginLeft = "0px";
+	}
+	
+	document.getElementById("previewDiv").style.display = "inline";	
+	document.getElementById("previewDim").style.display = "inline";
+}
+
+function hidePreview() 
+{
+	document.getElementById("previewDiv").style.display = "none";	
+	document.getElementById("previewDim").style.display = "none";	
+}
+
+function nextImg(y) 
+{
+	lastImgID = lastImgID + y;
+	ImgID = "imgID_" + lastImgID + "";
+	
+	var z = document.getElementById(ImgID);
+	
+	if(z != null)
+	{
+		document.getElementById("arrow_right").style.display = "inline";
+		document.getElementById("arrow_left").style.display = "inline";
+		
+		document.getElementById("preview").src = z.src;
+		
+		//----------------------------------------------//
+		x = document.getElementById("preview");
+		var width = z.width;
+		
+		if(width === (480/3.2))
+		{
+			x.style.marginLeft = "80px";
+			x.style.marginTop = "0px";
+		}
+		else if(width === (640/3.2))
+		{
+			x.style.marginTop = "80px";
+			x.style.marginLeft = "0px";
+		}
+	}
+	else
+	{
+		lastImgID = lastImgID - y;
+		
+		if(y == 1)
+			document.getElementById("arrow_right").style.display = "none";
+		else if(y == -1)
+			document.getElementById("arrow_left").style.display = "none";
+	}
+}
+
+window.onkeydown = function(event){ if ( event.keyCode == 27 ) hidePreview(); };
+
   </script>
   
-  
 </head>
+
 <body>
  
       <div class="allcontainer">
+	 
+	 
+	<div class="dim" id="previewDim"></div>
+		<div class="dialog" id="previewDiv" style="width:640px; height:640px; background-color:#CCCCCC;">
+			
+			<div style="position:absolute; right:15px; top:15px;">
+			<a href='#' onclick="hidePreview();return false;" style="text-decoration:none; ">
+			<img src="../controllers/images/Red_X.png" width="30px" height="30px"/>
+			</a></div>
+			
+			<img src="../controllers/images/arrow-left.png" width="50px" height="50px" 
+			onclick='nextImg(-1);return false;' id="arrow_left"
+			style="position:absolute; left:-5px; top:0; bottom:0; margin:auto;"/>
+			
+			<img src="../controllers/images/arrow-right.png" width="50px" height="50px"
+			onclick='nextImg(1);return false;' id="arrow_right"
+			style="position:absolute; right:-5px; top:0; bottom:0; margin:auto;"/>
+			
+			<img src="../controllers/images/default-thumbnail.jpg" id="preview"/>
+			
+		</div>
+		
 	 
 <?php
 include_once("../controllers/Header.php");
@@ -87,14 +182,11 @@ include_once("../controllers/Header.php");
 				" />
 	</a>
 	
-<div class="hidden-right-div-secondary-title" style="width:308px;"><b>View Camera Gallery</b></div>
+<div class="hidden-right-div-secondary-title" style="width:188px;"><b>View Camera Gallery</b></div>
 
-	
 </div>
 
 
-
-	
 	<div id="right-div1" class="right-div">
 
 		<a  href="#" onclick="HideUnhideDiv1();return false;" style="text-decoration:none; ">	
@@ -110,7 +202,7 @@ include_once("../controllers/Header.php");
 		<br />
 		
 		
-            <div class="right-div-secondary-title" style="width:308px;"><b>View Camera Gallery</b></div>
+            <div class="right-div-secondary-title" style="width:188px;"><b>View Camera Gallery</b></div>
             		
 		
 	<table style="background-color:white; border:0px solid transparent;"> 

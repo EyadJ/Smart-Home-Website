@@ -56,6 +56,8 @@ function HideUnhideChangePW()
 		document.getElementById("ChangePWtable").style.display ="none";
 }
 
+window.onkeydown = function( event ){ if ( event.keyCode == 27 ) hideDeleteUserMsg(); };
+
 </script>
 </head>
 <body>

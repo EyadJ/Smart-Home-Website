@@ -10,7 +10,9 @@ if(isset($_POST["Save"]))
 	
 	if(isset($_POST['SendSMS']) && $_POST['SendSMS'] == "on") $SendSMS = 1;
 	
-	$UserID = $_GET["var"];
+	$UserID = $_SESSION["UserID"];
+	$UserName = $_SESSION["UserName"];
+	
 	$target_dir = "../controllers/images/Users/";
 	$basename = basename($_FILES["fileToUpload"]["name"]);
 
@@ -43,28 +45,17 @@ if(isset($_POST["Save"]))
 		{
 			$uploadedSuccessfully = user::modifyUserImagePath($UserID, $basename);
 			
-			echo $uploadedSuccessfully;
 			if($uploadedSuccessfully)
-			{
 				echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-			}
 		}
 		else 
 		{
 			echo "Sorry, there was an error uploading your file.";
 		}
 	}
-	$modifiedSuccessfully = user::modifyUserDetails
-			(
-			$UserID,
-			$_POST['UserName'],
-			$_POST['Email'],
-			$_POST['CellPhone'],
-			$SendEmail,
-			$SendSMS
-			);
+	$modifiedSuccessfully = user::modifyUserDetails($UserID, $UserName, $_POST["Email"], $_POST["CellPhone"], $SendEmail, $SendSMS);
 			   
-			//echo $modifiedSuccessfully;
+			echo $modifiedSuccessfully;
 	 
 			header("Location: ../views/" . $_GET["referrer"] . "");
 }

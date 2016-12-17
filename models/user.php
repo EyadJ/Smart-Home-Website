@@ -25,7 +25,7 @@ class User
 		$AdminUserName = $db->escape_string($AdminUserName);
 
 		$sql = "INSERT INTO user (UserName, Title, Email, CellPhone, Password) "
-		  . " VALUES ('$userName', '$Title', '$email', $CellPhone, '$password');";
+		  . " VALUES ('$userName', '$Title', '$email', $CellPhone, '$password')";
 
 		$db->query($sql);
 		
@@ -80,7 +80,7 @@ class User
 			
 			$db->query("INSERT INTO log (RecordCategoryID, Description) "
 					. " VALUES (21, 'Failed log in attempt with Email ($email) & Password ($pass)')");
-					
+			
 			//------------------------------------LOG END------------------------------------//
 			return FALSE;
 		}
@@ -327,8 +327,7 @@ class User
 		$SendSMS = $db->escape_string($SendSMS);
 
 		$sql = "UPDATE user "
-			. " SET UserName = '$UserName'," 
-			. " Email = '$Email'," 
+			. " SET Email = '$Email'," 
 			. " CellPhone = $CellPhone," 
 			. " SendEmail = $SendEmail," 
 			. " SendSMS = $SendSMS" 
@@ -389,7 +388,7 @@ class User
 			else if($isDisabled_DB && !$isDisabled)	//Admin Enabled User Account
 	
 				$db->query("INSERT INTO log (RecordCategoryID, Description)
-				VALUES (17, 'Admin ($AdminUserName) Enabled the account of user ($UserName)')");
+				VALUES (18, 'Admin ($AdminUserName) Enabled the account of user ($UserName)')");
 			//------------------------------------LOG END------------------------------------//
 
 			return TRUE;
@@ -413,7 +412,17 @@ class User
 			. " WHERE UserID = $UserID;";
 
 		if ($db->query($sql)) //TRUE
+		{
+			//-----------------------------------LOG START-----------------------------------//
+			$AdminOrUser = "User"; if(user::isAdmin($UserID)) $AdminOrUser = "Admin"; 
+			$UserName = user::getUserName($UserID);
+			
+			$db->query("INSERT INTO log (RecordCategoryID, Description) "
+					. " VALUES (28, '$AdminOrUser ($UserName) changed his/her personal Image')");
+			//------------------------------------LOG END------------------------------------//
+			
 			return TRUE;
+		}
 		else 
 			return FALSE;
 	}
@@ -447,7 +456,7 @@ class User
 			//-----------------------------------LOG START-----------------------------------//
 				
 				$db->query("INSERT INTO log (RecordCategoryID, Description)
-				VALUES (18, 'Admin ($AdminUserName) authorized ($RoomName) to user ($UserName)')");
+				VALUES (19, 'Admin ($AdminUserName) authorized ($RoomName) to user ($UserName)')");
 			
 			//------------------------------------LOG END------------------------------------//
 			
@@ -488,7 +497,7 @@ class User
 			//-----------------------------------LOG START-----------------------------------//
 				
 				$db->query("INSERT INTO log (RecordCategoryID, Description)
-				VALUES (18, 'Admin ($AdminUserName) unauthorized ($RoomName) from user ($UserName)')");
+				VALUES (20, 'Admin ($AdminUserName) unauthorized ($RoomName) from user ($UserName)')");
 			
 			//------------------------------------LOG END------------------------------------//
 			
@@ -556,18 +565,27 @@ class User
 		$OldPass = $db->escape_string($OldPass);
 		$NewPass = $db->escape_string($NewPass);
 
-		
 		$sql = "SELECT Password FROM user WHERE UserID = $UserID;";	
 		$result = $db->query($sql);
 		
 		$row = $result -> fetch_assoc();
 			
-		if($row["Password"] === $OldPass)	//Old Password is Correct
+		if($row["Password"] == $OldPass)	//Old Password is Correct
 		{
 			$sql = "UPDATE user SET Password = '$NewPass' WHERE UserID = $UserID;";	
 		
 			if ($db->query($sql)) //TRUE
+			{
+				//-----------------------------------LOG START-----------------------------------//
+				$AdminOrUser = "User"; if(user::isAdmin($UserID)) $AdminOrUser = "Admin"; 
+				$UserName = user::getUserName($UserID);
+				
+				$db->query("INSERT INTO log (RecordCategoryID, Description) "
+						. " VALUES (28, '$AdminOrUser ($UserName) changed his/her PASSWORD')");
+				//------------------------------------LOG END------------------------------------//
+				
 				return TRUE;
+			}
 			else 
 				return FALSE;
 		}
@@ -615,7 +633,23 @@ class User
 			return NULL;
 	}
 	
+	public static function isUserExists($UserID) 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) {
+		  die('error: unable to connect to database');
+		}
+		$UserID = $db->escape_string($UserID);
 
+		if(!is_numeric($UserID)) return FALSE;
+		
+		$result = $db->query("SELECT UserName FROM user WHERE UserID = '$UserID';");
+	 
+		if ($result != NULL && $result->num_rows >= 1)  // id number exists
+			return TRUE;
+		else 
+			return FALSE;
+	}
 
 
 

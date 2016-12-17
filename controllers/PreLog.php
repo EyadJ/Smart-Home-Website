@@ -43,16 +43,17 @@
 	"<td align='left' rowspan='2'>" . $strings[3] . "</td></tr>" .
 	"<tr><td align='left'>" . $strings[2] . "</td></tr>";
 	
-	echo "<tr><td colspan='3' style='background-color:#CCCCCC;'><label>
-	<input type='checkbox' onclick='showAllLogRecords(this);'/><u><b>Show All</b></u>
-	</label></td></tr>";
+	echo "<tr><td colspan='3' style='background-color:#CCCCCC; padding:0px;'><label>
+	<a href='#' onclick='showAllLogRecords(this.firstChild);return false;' style='text-decoration:none; display:block; width:100%;'>	
+	<input type='checkbox' style='display:none;'/><u><b>Show All</b></u>
+	</label></a></td></tr>";
 	
 	
 	$selectedText = ""; if($sqlOrderBy === "ASC" ) $selectedText = "selected";
 	
 	echo"<tr><th colspan='3'>Order Log Records <select onchange='updateSqlOrderBy(this.value);'>
-	<option value='DESC'>Descendingly</option>
-	<option value='ASC' $selectedText>Ascendingly</option>
+	<option value='DESC'>Newest First</option>
+	<option value='ASC' $selectedText>Oldest First</option>
 	</select>";
 	
 	echo"</th></tr></table>
@@ -67,8 +68,8 @@
 		//table header
 		echo"<table id='viewAllTasksTable' style=' border: none;'>
 			<tr style='line-height: 16px;'>
-			<th width='13%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Entry Date</th>
-			<th width='70%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Description</th>
+			<th width='14%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Entry Date</th>
+			<th width='69%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Description</th>
 			<th width='17%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Category</th>
 			</tr>";
 

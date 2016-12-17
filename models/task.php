@@ -12,7 +12,7 @@ class Task
 {
 	
 	public static function createNewTask($UserID, $RoomID, $TaskName, $ActionTime, $SelectedSensorValue, $repeatDaily, $ActionDate, 
-							$SensorID, $AlarmDuration, $AlarmInterval, $Devices, $NotifyByEmail, $EnableTaskOnTime, $DisableTaskOnTime) 
+		$SensorID, $AlarmDuration, $AlarmInterval, $Devices, $NotifyByEmail, $EnableTaskOnTime, $DisableTaskOnTime, $UserName, $isAdmin) 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) {
@@ -94,7 +94,25 @@ class Task
 					$db->query($sql);
 				}
 			}
+			//this table: (table_status) is updated to tell the Java system a change has occured, in order to increase performance
+			//
 			$db->query("UPDATE table_status SET isTableUpdated = 1 WHERE TableName = 'Task';");
+			//--------------------------------------------------------------------------------------------------------------------
+			
+			
+			//-------------------------------------------------LOG START-------------------------------------------------//
+			$AdminOrUser = "User"; if($isAdmin) $AdminOrUser = "Admin"; 
+			
+			//-----------------------Get Room Name---------------------------------//
+			$result = $db->query("SELECT RoomName FROM room WHERE RoomID = $RoomID");
+			$row = $result -> fetch_assoc();
+		
+			$RoomName = $row["RoomName"];
+			//---------------------------------------------------------------------//
+		
+			$db->query("INSERT INTO log (RecordCategoryID, Description) "
+					. " VALUES (25, '$AdminOrUser ($UserName) created a task with name ($TaskName) in room ($RoomName)')");
+			//-------------------------------------------------LOG END-------------------------------------------------//
 			
 			return TRUE;
 		}
@@ -103,7 +121,7 @@ class Task
 	}
 	
 	public static function UpdateTaskSettings($TaskID, $UserID, $RoomID, $TaskName, $ActionTime, $SelectedSensorValue, $repeatDaily, $ActionDate, 
-						$SensorID, $AlarmDuration, $AlarmInterval, $Devices, $NotifyByEmail, $EnableTaskOnTime, $DisableTaskOnTime, $isDisabled) 
+		$SensorID, $AlarmDuration, $AlarmInterval, $Devices, $NotifyByEmail, $EnableTaskOnTime, $DisableTaskOnTime, $isDisabled, $UserName, $isAdmin) 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) {
@@ -129,7 +147,7 @@ class Task
 		if ($DisableTaskOnTime != NULL) $DisableTaskOnTime = $db->escape_string($DisableTaskOnTime);
 		
 
-		$deleteSuccessful = task::deleteTask($TaskID);
+		$deleteSuccessful = task::deleteTaskBeforeUpdate($TaskID);
 		
 		if($deleteSuccessful)
 		{
@@ -189,7 +207,25 @@ class Task
 						$db->query($sql);
 					}
 				}
+				//this table: (table_status) is updated to tell the Java system a change has occured, in order to increase performance
+				//
 				$db->query("UPDATE table_status SET isTableUpdated = 1 WHERE TableName = 'Task';");
+				//--------------------------------------------------------------------------------------------------------------------
+				
+				
+				//-------------------------------------------------LOG START-------------------------------------------------//
+				$AdminOrUser = "User"; if($isAdmin) $AdminOrUser = "Admin"; 
+				
+				//-----------------------Get Room Name---------------------------------//
+				$result = $db->query("SELECT RoomName FROM room WHERE RoomID = $RoomID");
+				$row = $result -> fetch_assoc();
+			
+				$RoomName = $row["RoomName"];
+				//---------------------------------------------------------------------//
+			
+				$db->query("INSERT INTO log (RecordCategoryID, Description) "
+						. " VALUES (26, '$AdminOrUser ($UserName) edited task ($TaskName) in room ($RoomName)')");
+				//-------------------------------------------------LOG END-------------------------------------------------//
 				
 				return TRUE;
 			}
@@ -231,6 +267,24 @@ class Task
 		$RoomID = $db->escape_string($RoomID);
 		
 		$sql = "SELECT * FROM task WHERE RoomID = $RoomID AND isDeleted = 0";
+				
+		$result = $db->query($sql);
+	 
+		if ($result != NULL && $result->num_rows >= 1)  
+			return $result;
+		else 
+			return NULL;
+	}
+	
+	public static function getAllUsersEnabledTasksForOneRoom($RoomID) 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) {
+		  die('unable to connect to database [' . $db->connect_error .']');
+		}
+		$RoomID = $db->escape_string($RoomID);
+		
+		$sql = "SELECT * FROM task WHERE RoomID = $RoomID AND isDeleted = 0 AND isDisabled = 0";
 				
 		$result = $db->query($sql);
 	 
@@ -321,7 +375,7 @@ class Task
 			return FALSE;
 	}
 	
-	public static function deleteTask($TaskID) 
+	public static function deleteTask($TaskID, $UserName, $isAdmin) 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) 
@@ -330,20 +384,41 @@ class Task
 		}
 		$TaskID = $db->escape_string($TaskID);
 		
+		$TaskName = task::getTaskName($TaskID);
+		$RoomID = task::getRoomIdByTaskId($TaskID);
+		
 		if(task::isDefault($TaskID)) return FALSE; //isDefault Task is not deletable (only disablable)
 	
 		$sql = "DELETE FROM task_devices WHERE TaskID = $TaskID;";
 		$result = $db->query($sql);
 		
 		$sql = "DELETE FROM task_camera WHERE TaskID = $TaskID;";
-		$result = $db->query($sql);
+		$result2 = $db->query($sql);
 		
-		if ($result) //is true 
+		if ($result && $result2) //is true 
 		{
 			$sql = "DELETE FROM task WHERE TaskID = $TaskID;";
-			$result = $db->query($sql);
+			$result3 = $db->query($sql);
 			
+			//this table: (table_status) is updated to tell the Java system a change has occured, in order to increase performance
+			//
 			$db->query("UPDATE table_status SET isTableUpdated = 1 WHERE TableName = 'Task';");
+			//--------------------------------------------------------------------------------------------------------------------
+			
+			
+			//-------------------------------------------------LOG START-------------------------------------------------//
+			$AdminOrUser = "User"; if($isAdmin) $AdminOrUser = "Admin"; 
+			
+			//-----------------------Get Room Name---------------------------------//
+			$result4 = $db->query("SELECT RoomName FROM room WHERE RoomID = $RoomID");
+			$row = $result4 -> fetch_assoc();
+		
+			$RoomName = $row["RoomName"];
+			//---------------------------------------------------------------------//
+		
+			$db->query("INSERT INTO log (RecordCategoryID, Description) "
+					. " VALUES (27, '$AdminOrUser ($UserName) deleted task ($TaskName) from room ($RoomName)')");
+			//-------------------------------------------------LOG END-------------------------------------------------//
 			
 			return TRUE;
 		} 
@@ -351,7 +426,7 @@ class Task
 			return FALSE; 
 	}
 	
-	public static function removeTask($TaskID) 
+	public static function removeTask($TaskID, $UserName, $isAdmin) 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) 
@@ -367,18 +442,57 @@ class Task
 		
 		if ($result)
 		{
-			$result = $db->query("UPDATE table_status SET isTableUpdated = 1 WHERE TableName = 'Task';");
+			//this table: (table_status) is updated to tell the Java system a change has occured, in order to increase performance
+			//
+			$db->query("UPDATE table_status SET isTableUpdated = 1 WHERE TableName = 'Task';");
+			//--------------------------------------------------------------------------------------------------------------------
 			
-			if ($result) //is true 
-				return TRUE;
+			
+			//-------------------------------------------------LOG START-------------------------------------------------//
+			$AdminOrUser = "User"; if($isAdmin) $AdminOrUser = "Admin"; 
+			$TaskName = task::getTaskName($TaskID);
+			$RoomID = task::getRoomIdByTaskId($TaskID);
+			
+			//-----------------------Get Room Name---------------------------------//
+			$result2 = $db->query("SELECT RoomName FROM room WHERE RoomID = $RoomID");
+			$row = $result2 -> fetch_assoc();
 		
-			else 
-				return FALSE; 
+			$RoomName = $row["RoomName"];
+			//---------------------------------------------------------------------//
+		
+			$db->query("INSERT INTO log (RecordCategoryID, Description) "
+					. " VALUES (27, '$AdminOrUser ($UserName) deleted task ($TaskName) from room ($RoomName)')");
+			//-------------------------------------------------LOG END-------------------------------------------------//
+			
+			return TRUE;
 		}
 		else
 			return FALSE; 
 	}
 
+	public static function deleteTaskBeforeUpdate($TaskID) 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) 
+		{
+			die('error: unable to connect to database');
+		}
+		$TaskID = $db->escape_string($TaskID);
+	
+		$result = $db->query("DELETE FROM task_devices WHERE TaskID = $TaskID;");
+		
+		$result2 = $db->query("DELETE FROM task_camera WHERE TaskID = $TaskID;");
+		
+		if ($result && $result2) //is true 
+		{
+			$db->query("DELETE FROM task WHERE TaskID = $TaskID;");
+			
+			return TRUE;
+		} 
+		else 
+			return FALSE; 
+	}
+	
 	public static function getRoomIdByTaskId($TaskID) 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
@@ -395,9 +509,8 @@ class Task
 		if ($result != NULL && $result->num_rows >= 1)  
 		{
 			$row = $result->fetch_assoc();
-			$RoomID = $row["RoomID"];
-		
-			return $RoomID;
+			
+			return $row["RoomID"];
 		}
 		else 
 			return NULL;
@@ -422,7 +535,27 @@ class Task
 			return NULL;
 	}
 	
+	public static function getTaskName($TaskID) 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) {
+		  die('unable to connect to database [' . $db->connect_error .']');
+		}
 
+		$TaskID = $db->escape_string($TaskID);
+
+		$sql = "SELECT TaskName FROM task WHERE TaskID = $TaskID";
+		$result = $db->query($sql);
+	 
+		if ($result != NULL && $result->num_rows >= 1)  
+		{
+			$row = $result->fetch_assoc();	
+			
+			return $row["TaskName"];
+		}
+		else 
+			return FALSE;
+	}
 
 
 

@@ -211,6 +211,8 @@ function hideDeleteTaskMsg()
 	document.getElementById("deleteMsgDim").style.display ="none";	
 }
 
+window.onkeydown = function( event ){ if ( event.keyCode == 27 ) hideDeleteTaskMsg(); };
+
   </script>
   
   

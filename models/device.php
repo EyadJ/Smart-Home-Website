@@ -131,9 +131,7 @@ class Device
 		$result = $db->query($sql);
 	 
 		if ($result != NULL && $result->num_rows >= 1)  
-		{
 			return TRUE;
-		}
 		else 
 			return FALSE;
 	}
@@ -144,7 +142,6 @@ class Device
 		if ($db->connect_errno > 0) {
 		  die('unable to connect to database [' . $db->connect_error .']');
 		}
-
 		$sql = "SELECT * FROM camera_gallery";
 		$result = $db->query($sql);
 	 
@@ -224,7 +221,6 @@ class Device
 		if ($result != NULL && $result->num_rows >= 1)  
 		{
 			$row = $result -> fetch_assoc();
-			
 			return $row["DeviceName"];
 		}
 		else 
@@ -247,7 +243,6 @@ class Device
 		if ($result != NULL && $result->num_rows >= 1)  
 		{
 			$row = $result -> fetch_assoc();
-			
 			return $row["RoomName"];
 		}
 		else 
