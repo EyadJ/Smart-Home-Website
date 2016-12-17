@@ -3,11 +3,9 @@
 
 	$UserID = $_GET["var"];
 
-	//check if $_GET["var"] was manuplated and changed to other admin's ID
-	if(user::isAdmin($UserID))
-	{
-		header("Location:../views/HomePage.php");
-	}
+	//check if $_GET["var"] was manuplated and changed to a wrong user id or other admin's ID
+	if(!user::isUserExists($UserID) || user::isAdmin($UserID))
+		header("Location:../views/Rooms.php");
 
 	$row = user::getUserDetailsByID($UserID);
 	
@@ -36,7 +34,9 @@
 				<tr><td>Renter The New Password </td>
 				<td><input type="password" name="NewPassConf" required style="width:90px;"/></td></tr>
 				
-				<tr><th colspan="2"><input type="submit" class="button" name="UpdatePass" value="Update Password" style="width:140px;"/></th></tr>
+				<tr><th colspan="2"><input type="submit" class="button" name="UpdatePass" value="Update Password" style="width:140px;"/>
+				<img align="right" src="../controllers/images/change-password2.png" width="34px" style="position:absolute;"/>
+				</th></tr>
 			</table>
 		</form>';
 		

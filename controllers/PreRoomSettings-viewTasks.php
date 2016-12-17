@@ -73,7 +73,7 @@
 			//form and table header	(one task)
 
 			echo"<table id='viewAllTasksTable' style=' border: none;'>
-				<tr style='line-height: 16px;'>
+				<tr style='line-height: 16px;' id='TasktableHeader'>
 				<th width='10%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Task Name</th>
 				<th width='6.5%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Repeat Daily</th>
 				<th width='15%' style='border-bottom: 2px solid black; border-top: 2px solid black;'>Selected Sensor</th>
@@ -170,7 +170,7 @@
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------//
 				//TASK NAME
 			
-			echo"<tr class='taskDiv $text'>
+			echo"<tr class='taskDiv $text' id='task_tr'>
 				<td style='border-bottom: 2px solid black; border-top: 2px solid black;'><b>$row[TaskName]</b></td>
 			
 				<td style='border-bottom: 2px solid black; border-top: 2px solid black;'>";
@@ -282,15 +282,15 @@
 					{
 						if($DeviceName === "Alarm" && $ReqDevState == 1)	//ALARM
 						{
-							echo"<table 
+							echo"<table class='device_table'
 							onmouseover='showAlarmDetails(this.nextSibling.nextSibling);' 
 							onmouseout='hideAlarmDetails(this.nextSibling.nextSibling);' 
 							style='width:80px; margin:5; border:0; display:inline;'>
 							<tr><td>
-							<img src='../controllers/images/devices/" . $DeviceImgPath . "' width='40' height='40' />
+							<img src='../controllers/images/devices/" . $DeviceImgPath . "' width='40px' height='40px' class='device_img'/>
 							<img src='../controllers/images/info.png' style='width:12px; height:12px; position:absolute; top:1px; right:1px;'/>
 							</td></tr><tr><td style='border:0;'>
-							<img src='../controllers/images/$additional' height='20' />
+							<img src='../controllers/images/$additional' height='20px' class='device_status'/>
 							</td></tr></table>";
 							
 							echo"
@@ -311,15 +311,15 @@
 						{
 							$Resolution = $taskCamerasArray[$CurrentDevID]["Resolution"];
 							
-							echo"<table 
+							echo"<table class='device_table'
 							onmouseover='showCameraDetails(this.nextSibling.nextSibling);' 
 							onmouseout='hideCameraDetails(this.nextSibling.nextSibling);' 
 							style='width:80px; margin:5; border:0; display:inline;'>
 							<tr><td>
-							<img src='../controllers/images/devices/" . $DeviceImgPath . "' width='40' height='40' />
+							<img src='../controllers/images/devices/" . $DeviceImgPath . "' width='40px' height='40px' class='device_img'/>
 							<img src='../controllers/images/info.png' style='width:12px; height:12px; position:absolute; top:1px; right:1px;'/>
 							</td></tr><tr><td style='border:0;'>
-							<img src='../controllers/images/$additional' height='20' />
+							<img src='../controllers/images/$additional' height='20px' class='device_status'/>
 							</td></tr></table>";
 							
 							echo"
@@ -346,10 +346,10 @@
 						}
 						else
 						{
-							echo"<table style='width:80px; margin:5; border:0; display:inline;'><tr><td>
-							<img src='../controllers/images/devices/" . $DeviceImgPath . "' width='40' height='40' />
+							echo"<table class='device_table' style='width:80px; margin:5; border:0; display:inline;'><tr><td>
+							<img src='../controllers/images/devices/" . $DeviceImgPath . "' width='40px' height='40px' class='device_img'/>
 							</td></tr><tr><td style='border:0;'>
-							<img src='../controllers/images/$additional' height='20' />
+							<img src='../controllers/images/$additional' height='20px' class='device_status'/>
 							</td></tr></table>";
 						}
 					}
@@ -417,9 +417,9 @@
 						//if the current user is an admin or if he is the one who created the task
 						if($isAdmin || $UserID == $UWCT_UID)		
 							echo"<a href='EditTask.php?var=$TaskID&referrer=RoomSettings.php?var=$RoomID' style='text-decoration:none;'>
-							<img src='../controllers/images/edit4.png' width='30' height='30' /></a>";
+							<img src='../controllers/images/edit4.png' width='30px' height='30px' /></a>";
 						else
-							echo"<img src='../controllers/images/edit-not-available.png' width='20' height='20' />";
+							echo"<img src='../controllers/images/edit-not-available.png' width='20px' height='20px' />";
 						
 						echo "</td></tr>";
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------//						

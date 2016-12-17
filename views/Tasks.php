@@ -8,6 +8,26 @@
 
   <link href="../controllers/style.css?d=<?php echo time(); ?>" rel="stylesheet"/>
   
+  <style>
+@media (max-width:680px) 
+{ 
+	#task_tr{ font-size:11px;}
+	
+	#TasktableHeader{ font-size:13px;}
+	
+	.device_status{ height:15px;}
+	
+	.device_table{ width:40px;}
+	
+	.device_img{ width:35px; height:35px;}
+} 
+
+
+.room_settings_icon{ opacity: 0.8; }
+
+.room_settings_icon:hover{ opacity: 1.0; }
+
+  </style>
    
   <script>
   
@@ -165,7 +185,7 @@ include_once("../controllers/Header.php");
 				" />
 	</a>
 	
-<div class="hidden-right-div-secondary-title" style="width:100px;"><b>Your Tasks</b></div>
+<div class="hidden-right-div-secondary-title" style="width:115px;"><b>Active Tasks</b></div>
 
 	
 </div>
@@ -188,7 +208,7 @@ include_once("../controllers/Header.php");
 		<br />
 		
 		
-            <div class="right-div-secondary-title" style="width:100px;"><b>Your Tasks</b></div>
+            <div class="right-div-secondary-title" style="width:115px;"><b>Active Tasks</b></div>
             		
 					
 			<div style=" margin-left:auto; margin-right:auto; width:50px;">

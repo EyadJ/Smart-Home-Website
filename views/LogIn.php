@@ -16,6 +16,8 @@ table {
     </style>
 
 	<script>
+	
+	//this function was borrowed from stack_over_flow
 	function getParameterByName(name, url) 
 	{
 		if (!url) url = window.location.href;
@@ -82,7 +84,7 @@ function LogInFormSubmit()
 			</th></tr>
 		</table>
 	 
-<!---------------------------------------------- HEADER---------------------------------------------->	 
+<!----------------------------------------------HEADER START---------------------------------------------->
 	 
 <div id="page-header">
 	<div class="page-logo2">
@@ -90,7 +92,7 @@ function LogInFormSubmit()
 	</div>
 </div>
 		
-<!--------------------------------------------------------------------------------------------------->	 
+<!-----------------------------------------------HEADER END-----------------------------------------------> 
 		
 	<div style="width:25%; position:absolute; top:15%; bottom:50%; left: 0; right: 0; margin: auto; ">
 

@@ -1,10 +1,26 @@
 <?php /*error_reporting(0);*/ session_start(); if(!isset($_SESSION["Email"])){ header("Location: LogIn.php"); } ?>
 
+<?php
+include_once("../controllers/PreSecurityCameras-SecurityChecks.php");
+?> 
+
 <html>
 <head>
 <title>Security Cameras</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="../controllers/style.css?d=<?php echo time(); ?>" rel="stylesheet"/>
 
+   <style>
+ 
+@media (max-width:480px) 
+{ 
+	#right-div2
+	{
+		margin-left:40%;
+	}
+
+} 
+  </style>
+  
 <script>
  
 function HideUnhideDiv1() 
@@ -159,11 +175,12 @@ include_once("../controllers/Header.php");
 			
 			
 				
-			<div style="right:76%; top:263px; width:105px; position:fixed; padding-left:20px; padding-right:10px; padding-top:4px; border-radius :15px; background: #fff; ">
+			<div style="right:76%; top:311px; width:105px; position:fixed; padding-left:20px; padding-right:10px; 
+			padding-top:4px; border-radius :15px; background: #fff; ">
 				
 				
 				<div class="right-div-secondary-title" 
-				style="width:94px; height:15px; font-size:15px; position:fixed; top:289px; margin-left:-3px; 
+				style="width:94px; height:15px; font-size:15px; position:fixed; top:340px; margin-left:-3px; 
 				padding-top:1px; padding-bottom:4px; padding-left:4px; padding-right:4px;"><b>View Options</b></div>
 				
 				<br />

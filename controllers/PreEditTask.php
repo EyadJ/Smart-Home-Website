@@ -145,7 +145,7 @@
 		<label><input type='checkbox' name='DisableTaskOnTime' id='DisableTaskOnTime' onchange='DisableTaskOnTimeValueHandling();' $text11/>
 		Disable Task on </label>
 		<input type='time' name='DisableTaskOnTimeValue' id='DisableTaskOnTimeValue' onchange='DisableTaskOnTimeHandling();' $text9/>
-		
+		<span style='margin-left:55px;'>(Choose Both or None)</span>
 		</td></tr>";
 		
 	//--------------------------------------------------------------------------//
@@ -520,6 +520,8 @@
 			}
 			else
 			{
+				$DeviceName = str_replace(' ', '', $DeviceName);
+				
 				echo"<table 
 				style='
 				width:120px; display:inline-table; 
@@ -527,11 +529,14 @@
 				'>
 				<tr><td colspan='2'><img src='../controllers/images/devices/$DeviceImgPath' width='60' height='60' /></td></tr>
 				
-				<tr><td colspan='2'><label>Don't Change<input type='radio' name='$currentDevID' value='-1' $option1/></label></td></tr>
+				<tr><td colspan='2'><label>Don't Change<input type='radio' name='$currentDevID'
+				id='" . $DeviceName . "_noChange_button' value='-1' $option1/></label></td></tr>
 				
-				<tr><td><label>OFF<input type='radio' name='$currentDevID' value='0' $option3/></label></td>
+				<tr><td><label>OFF<input type='radio' name='$currentDevID'
+				id='" . $DeviceName . "_off_button' value='0' $option3/></label></td>
 				
-				<td><label>ON<input type='radio' name='$currentDevID' value='1' $option2/></label></td></tr>
+				<td><label>ON<input type='radio' name='$currentDevID'
+				id='" . $DeviceName . "_on_button' value='1' $option2/></label></td></tr>
 				</table>";
 			}
 		}

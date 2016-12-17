@@ -142,15 +142,15 @@ include_once("../controllers/Header.php");
 &nbsp;&nbsp;<input type="text" name="email" maxlength="35" required/> &nbsp;
     </td>
     </tr>
-<tr><td>Cell Phone</td><td align=left>
-&nbsp;&nbsp;<input type="number" name="CellPhone" /> &nbsp; (Format: 0512345678)
+<tr><td>Cell Phone</td><td align="left">
+&nbsp;&nbsp;<input type="number" name="CellPhone" required/> &nbsp; (Format: 0512345678)
         </td>
     </tr>
-	<tr><td>Password</td><td align=left>
+	<tr><td>Password</td><td align="left">
 &nbsp;&nbsp;<input type="password" name="Pass" required/>
         </td>
     </tr>
-    <tr><td>Confirm Password</td><td align=left>
+    <tr><td>Confirm Password</td><td align="left">
 &nbsp;&nbsp;<input type="password" name="ConPass" required/>
         </td></tr>
 		

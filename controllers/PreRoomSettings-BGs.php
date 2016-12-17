@@ -57,7 +57,7 @@
 					<img src='../controllers/images/Select-hand3.png' 
 					width='50px' 
 					height='50px'
-					style='
+					style='background:rgba(255,255,255,0.7); border:1px solid gray; border-radius: 20px;
 					z-index:1;
 					position:relative;
 					top:237px;

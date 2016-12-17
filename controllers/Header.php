@@ -1,4 +1,5 @@
 <?php
+	ob_start();
 	require_once("../models/critical.php");
 	require_once("../models/user.php");
 

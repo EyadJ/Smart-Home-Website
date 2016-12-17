@@ -97,6 +97,7 @@
 		{
 			$sensorTypeID = $row["SensorTypeID"];
 			$sensorTypeIdArray[$i] =  $sensorTypeID;
+			
 			/*
 			10 Motion Sensor		(the value of not detecting anything for a period of time)
 			11 Smoke Detector		(Does not Have a value)-----------------------------------
@@ -213,9 +214,11 @@
 		
 		while($row = $Devices->fetch_assoc()) 
 		{
+			$DeviceName = $row["DeviceName"];
+			
 			if($row["isVisible"])
 			{
-				if($row["DeviceName"] == "Alarm")
+				if($DeviceName == "Alarm")
 				{
 					echo "<table 
 					style='
@@ -243,7 +246,7 @@
 					
 					</table>";
 				}
-				else if($row["DeviceName"] == "Security Camera")
+				else if($DeviceName == "Security Camera")
 				{
 					
 					echo"<table style='
@@ -304,15 +307,23 @@
 				}	
 				else
 				{
+					$DeviceName = str_replace(' ', '', $DeviceName);
+					
 					echo"<table 
 					style='
 					width:120px; display:inline-table; 
 					margin-right:5px; margin-left:5px; margin-top:1px; margin-bottom:1px;
 					'>
 					<tr><td colspan='2'><img src='../controllers/images/devices/$row[DeviceImgPath_on]' width='60' height='60' /></td></tr>
-					<tr><td colspan='2'><label>Don't Change<input type='radio' name='$row[DeviceID]' value='-1' checked/></label></td></tr>
-					<tr><td><label>OFF<input type='radio' name='$row[DeviceID]' value='0'/></label></td>
-					<td><label>ON<input type='radio' name='$row[DeviceID]' value='1'/></label></td></tr>
+					
+					<tr><td colspan='2'><label>Don't Change<input type='radio' name='$row[DeviceID]' 
+					id='" . $DeviceName . "_noChange_button' value='-1' checked/></label></td></tr>
+					
+					<tr><td><label>OFF<input type='radio' name='$row[DeviceID]' 
+					id='" . $DeviceName . "_off_button' value='0'/></label></td>
+					
+					<td><label>ON<input type='radio' name='$row[DeviceID]' 
+					id='" . $DeviceName . "_on_button' value='1'/></label></td></tr>
 					</table>";
 				}
 			}	

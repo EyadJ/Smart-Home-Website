@@ -14,6 +14,13 @@
 .DeviceDiv:hover{
 	background-color:#CCCCCC;
 }
+
+.room_settings_icon{
+	 opacity: 0.5;
+}
+.room_settings_icon:hover{
+	opacity: 1.0;
+}
 </style>  
 
   <script>

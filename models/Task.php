@@ -275,6 +275,24 @@ class Task
 		else 
 			return NULL;
 	}
+	
+	public static function getAllUsersEnabledTasksForOneRoom($RoomID) 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) {
+		  die('unable to connect to database [' . $db->connect_error .']');
+		}
+		$RoomID = $db->escape_string($RoomID);
+		
+		$sql = "SELECT * FROM task WHERE RoomID = $RoomID AND isDeleted = 0 AND isDisabled = 0";
+				
+		$result = $db->query($sql);
+	 
+		if ($result != NULL && $result->num_rows >= 1)  
+			return $result;
+		else 
+			return NULL;
+	}
 
 	public static function getTaskDevices($TaskID) 
 	{

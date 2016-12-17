@@ -1,4 +1,4 @@
-<?php /*error_reporting(0);*/ session_start(); if(!isset($_SESSION["Email"])){ header("Location: LogIn.php"); } ?>
+<?php /*error_reporting(0);*/ session_start(); if(!isset($_SESSION["Email"]) || !$_SESSION["isAdmin"]){ header("Location: Rooms.php"); } ?>
 
 <html>
 <head>
@@ -33,7 +33,7 @@ function unHideFilters()
 		
 	if (x=="none")
 	{
-		document.getElementById("FiltersDiv").style.display ="block";	
+		document.getElementById("FiltersDiv").style.display ="table";	
 	}
 	else
 	{
@@ -41,82 +41,54 @@ function unHideFilters()
 	}
 }
 
-function roomsVisibility(RoomID) 
+function updateVisibleLogRecords(x, RecordCategoryID) 
 {
+	var visibleValue = x.checked;
+
+	var recordClassName = "LogCategory_" + RecordCategoryID + "";
 	var displayText = "none";
-	if(RoomID == 0)
-	{
-		displayText = "block";
-	}
-	var roomsArray = document.getElementsByClassName("roomDiv");
-		
 	
-	for(var i = 0; i < roomsArray.length; i++)
-	{
-		roomsArray[i].style.display = displayText;
-	}	
+	if(visibleValue == true)
+		displayText = "table-row";
 	
-	if(RoomID != 0)
-	{
-		document.getElementById(RoomID).style.display = "block";	
-	}
+	var logRecordsArray = document.getElementsByClassName(recordClassName);
+	
+	for(var i = 0; i < logRecordsArray.length; i++)
+		logRecordsArray[i].style.display = displayText;
 }
 
-function usersTasksVisibility(UserID) 
+function showAllLogRecords(x) 
 {
+	var showAllValue = x.checked;
+
 	var displayText = "none";
-	if(UserID == 0)
+	var displayText2 = false;
+	
+	if(showAllValue == true)
 	{
 		displayText = "table-row";
+		displayText2 = true;
 	}
-	var roomsArray = document.getElementsByClassName("taskDiv");
-		
-	for(var i = 0; i < roomsArray.length; i++)
-	{
-		roomsArray[i].style.display = displayText;
-	}	
 	
-	if(UserID != 0)
-	{
-		var roomsArray = document.getElementsByClassName(UserID);
-			
-		for(var i = 0; i < roomsArray.length; i++)
-		{
-			roomsArray[i].style.display = "table-row";
-		}	
-	}
+	//-----------------//
+	var logRecordsArray = document.getElementsByClassName("logRecord");
+	
+	for(var i = 0; i < logRecordsArray.length; i++)
+		logRecordsArray[i].style.display = displayText;
+	//-----------------//
+	
+	//-----------------//
+	var LogCategoryfiltersArray = document.getElementsByClassName("LogCategoryfilter");
+	
+	for(var i = 0; i < LogCategoryfiltersArray.length; i++)
+		LogCategoryfiltersArray[i].checked = displayText2;
+	//-----------------//
 }
 
-function showAlarmDetails(x) 
+function updateSqlOrderBy(x) 
 {
-	x.style.display = "inline-table";	
+	window.location.href = "Log.php?Order=" + x + "";
 }
-
-function hideAlarmDetails(x) 
-{
-	x.style.display = "none";	
-}
-
-function showCameraDetails(x) 
-{
-	x.style.display = "inline-table";	
-}
-
-function hideCameraDetails(x) 
-{
-	x.style.display = "none";	
-}
-
-function ShowEnableTaskOnTime(x) 
-{
-	x.style.display = "inline-table";	
-}
-
-function HideEnableTaskOnTime(x) 
-{
-	x.style.display = "none";	
-}
-
   </script>
   
   
@@ -192,20 +164,16 @@ include_once("../controllers/Header.php");
 			<div style=" margin-left:auto; margin-right:auto; width:50px;">
 	
 			<a  href="#" onclick="unHideFilters();return false;" style="text-decoration:none; ">
-				<div class="tooltip"><span class="tooltiptext">Filter the Tasks</span>
+				<div class="tooltip"><span class="tooltiptext" style="width:140px;">Filter Log Records</span>
 					<img align="center" id="abc" src="../controllers/images/filter.png" width="55" height="55" />
 					<img src='../controllers/images/info.png' style='width:12px; height:12px; position:absolute; top:1px; right:1px;'/>
 				</div>
 			</a>
 		</div>	
 		
-	<table style="background-color:white; border:0px solid transparent;"> 
-			
 		<?php
 		include_once("../controllers/PreLog.php");
 		?>
-		
-	</table>
 	
 	
        	<br /><br /><br />

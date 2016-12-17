@@ -30,8 +30,8 @@ class PrintSideMenu
 		
 		$text = "<a style='text-decoration: none;' href=" . $pageNoSpace . ".php><li class='li-menu "
 		. $isOpen . "'>".
-		"Users" . 
-		"<img  style='position:absolute; right:10%; margin-top:2px; width:38px;' src='../controllers/images/Users.png' />".
+		"&nbsp;<span class='menu-item-text'>Users</span>" . 
+		"<img style='position:absolute; right:10%; margin-top:2px; width:38px;' src='../controllers/images/Users.png' />".
 		"</li></a>";
 		
 		$text .= "<img width='23px' height='86px;' style='position:absolute; right:100%;' src='../controllers/images/admin.png'/>";
@@ -42,9 +42,9 @@ class PrintSideMenu
 		if($pageNoSpace == $page)
 			$isOpen = "open";
 		
-		$text .= "<a style='text-decoration: none;' href=" . $pageNoSpace . ".php><li class='li-menu "
+		$text .= "<a style='text-decoration: none;' href=" . $pageNoSpace . ".php?Order=DESC><li class='li-menu "
 		. $isOpen . "'>".
-		"Log" . 
+		"&nbsp;<span class='menu-item-text'>Log</span>" . 
 		"<img  style='position:absolute; right:10%; margin-top:2px; width:38px;' src='../controllers/images/Log.png' />".
 		"</li></a>";
 		
@@ -89,7 +89,7 @@ class PrintSideMenu
 			}
 			
 		$text .= "<a style='text-decoration: none;' href=" . $pageNoSpace . ".php><li class='li-menu "
-		. $isOpen . "'>" . $additional . $pages[$i] . "</li> </a>" ;
+		. $isOpen . "'>" . $additional . "&nbsp;<span class='menu-item-text'>" . $pages[$i] . "</span>" . "</li> </a>" ;
 	}
 
     return $text;

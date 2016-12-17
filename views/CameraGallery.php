@@ -1,5 +1,11 @@
 <?php /*error_reporting(0);*/ session_start(); if(!isset($_SESSION["Email"]) || $_SESSION["isAdmin"] == FALSE){ header("Location: LogIn.php"); } ?>
 
+
+<?php
+include_once("../controllers/PreCameraGallery-SecurityChecks.php");
+?> 
+
+
 <html>
 <head>
 <title>Camera Gallery</title>
@@ -12,7 +18,7 @@
 .roomDiv:hover{
 	background-color:#CCCCCC;
 }
-</style>  
+</style>
    
   <script>
   

@@ -8,8 +8,7 @@ require_once("config.php");
 
 class User
 {
-	
-	public static function addNewUser($userName, $Title, $email, $CellPhone, $password, $imgPath) 
+	public static function addNewUser($userName, $Title, $email, $CellPhone, $password, $AdminUserName) 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) 
@@ -23,17 +22,25 @@ class User
 		$email = $db->escape_string($email);
 		$CellPhone = $db->escape_string($CellPhone);
 		$password = $db->escape_string($password);
-		$imgPath = $db->escape_string($imgPath);
+		$AdminUserName = $db->escape_string($AdminUserName);
 
-		$sql = "INSERT INTO user (UserName, Title, Email, CellPhone, Password, UserImagePath) "
-		  . " VALUES ('$userName', '$Title', '$email', $CellPhone, '$password', '$imgPath');";
+		$sql = "INSERT INTO user (UserName, Title, Email, CellPhone, Password) "
+		  . " VALUES ('$userName', '$Title', '$email', $CellPhone, '$password')";
 
 		$db->query($sql);
-
+		
 		if ($db->affected_rows == 1) // one record has been inserted to database successfully
-			return TRUE;
+		{
+			$NewlyCreatedUserID = $db->insert_id;
+
+			//-----------------------------------LOG START-----------------------------------//
+			$db->query("INSERT INTO log (RecordCategoryID, Description) "
+					. " VALUES (15, 'Admin ($AdminUserName) added a new user ($userName)')");
+			//------------------------------------LOG END------------------------------------//
+			return $NewlyCreatedUserID;
+		}
 		else 
-			return FALSE;
+			return NULL;
 	}
 
 	public static function logInAttempt($email, $pass) 
@@ -45,15 +52,38 @@ class User
 
 		$email = $db->escape_string($email);
 		$pass = $db->escape_string($pass);
+		
 		$sql = "SELECT UserID FROM user WHERE Email = '$email' AND Password = '$pass';";
-		//var_dump($sql);
 		
 		$result = $db->query($sql);
-	 
+		//echo $db->insert_id;
+		
 		if ($result != NULL && $result->num_rows >= 1)  // id number exists
+		{
+			//-----------------------------------LOG START-----------------------------------//
+			$UserID = user::getIdByEmail($email);
+			$UserName = user::getUserName($UserID);
+			$isAdmin = user::isAdmin($UserID);
+		
+			$UserOrAdmin = "User";
+			if($isAdmin) $UserOrAdmin = "Admin";
+				
+			$db->query("INSERT INTO log (RecordCategoryID, Description) "
+					. " VALUES (22, '$UserOrAdmin ($UserName) has successfully logged in')");
+					
+			//------------------------------------LOG END------------------------------------//
 			return TRUE;
+		}
 		else 
+		{
+			//-----------------------------------LOG START-----------------------------------//
+			
+			$db->query("INSERT INTO log (RecordCategoryID, Description) "
+					. " VALUES (21, 'Failed log in attempt with Email ($email) & Password ($pass)')");
+			
+			//------------------------------------LOG END------------------------------------//
 			return FALSE;
+		}
 	}
 
 	public static function getUserDetailsByID($UserID) 
@@ -93,7 +123,7 @@ class User
 			return NULL;
 	}
 
-	public static function deleteUser($UserID) 
+	public static function deleteUser($UserID, $AdminUserName) 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) 
@@ -103,12 +133,20 @@ class User
 
 		$UserID = $db->escape_string($UserID);
 		
+		$UserName = user::getUserName($UserID);
+		
 		$sql = "DELETE FROM user WHERE UserID = $UserID;";
 		
 		$result = $db->query($sql);
 
 		if ($result) //is true 
+		{	
+			//-----------------------------------LOG START-----------------------------------//
+			$db->query("INSERT INTO log (RecordCategoryID, Description) "
+					. " VALUES (16, 'Admin ($AdminUserName) deleted user ($UserName)')");
+			//------------------------------------LOG END------------------------------------//
 			return TRUE;
+		}	
 		else 
 			return FALSE; 
 	}
@@ -297,12 +335,21 @@ class User
 			. " WHERE UserID = $UserID;";
 
 		if ($db->query($sql)) //TRUE
+		{
+			//-----------------------------------LOG START-----------------------------------//
+			$AdminOrUser = "User"; if(user::isAdmin($UserID)) $AdminOrUser = "Admin"; 
+			
+			$db->query("INSERT INTO log (RecordCategoryID, Description) "
+					. " VALUES (28, '$AdminOrUser ($UserName) changed his/her personal settings')");
+			//------------------------------------LOG END------------------------------------//
+			
 			return TRUE;
+		}
 		else 
 			return FALSE;
 	}
 	
-	public static function modifyUserDetails_AdminRights ($UserID, $UserName, $Email, $CellPhone, $Title, $isDisabled, $SendEmail, $SendSMS) 
+	public static function modifyUserDetails_AdminRights ($UserID, $UserName, $Email, $CellPhone, $Title, $isDisabled, $SendEmail, $SendSMS, $AdminUserName) 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) 
@@ -319,6 +366,8 @@ class User
 		$SendEmail = $db->escape_string($SendEmail);
 		$SendSMS = $db->escape_string($SendSMS);
 
+		$isDisabled_DB = user::isDisabled($UserID);
+		
 		$sql = "UPDATE user "
 			. " SET UserName = '$UserName'," 
 			. " Email = '$Email'," 
@@ -330,12 +379,26 @@ class User
 			. " WHERE UserID = $UserID;";
 
 		if ($db->query($sql)) //TRUE
+		{
+			//-----------------------------------LOG START-----------------------------------//
+			if(!$isDisabled_DB && $isDisabled)	//Admin Disabled User Account
+				
+				$db->query("INSERT INTO log (RecordCategoryID, Description)
+				VALUES (17, 'Admin ($AdminUserName) disabled the account of user ($UserName)')");
+				
+			else if($isDisabled_DB && !$isDisabled)	//Admin Enabled User Account
+	
+				$db->query("INSERT INTO log (RecordCategoryID, Description)
+				VALUES (18, 'Admin ($AdminUserName) Enabled the account of user ($UserName)')");
+			//------------------------------------LOG END------------------------------------//
+
 			return TRUE;
+		}
 		else 
 			return FALSE;
 	}
 	
-	public static function modifyUserImagePath ($UserID, $UserImagePath) 
+	public static function modifyUserImagePath ($UserID, $UserImagePath)
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) 
@@ -355,7 +418,7 @@ class User
 			return FALSE;
 	}
 	
-	public static function AuthoriseRoom($UserID, $RoomID)
+	public static function AuthoriseRoom($UserID, $RoomID, $AdminUserName)
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) 
@@ -365,18 +428,36 @@ class User
 		$UserID = $db->escape_string($UserID);
 		$RoomID = $db->escape_string($RoomID);
 		
+		$UserName = user::getUserName($UserID);
+		
+		//-----------------------Get Room Name---------------------------------//
+		$result = $db->query("SELECT RoomName FROM room WHERE RoomID = $RoomID");
+		$row = $result -> fetch_assoc();
+		
+		$RoomName = $row["RoomName"];
+		//---------------------------------------------------------------------//
+		
 		$sql = "INSERT INTO user_authorized_rooms (UserID, RoomID)
 		VALUES ($UserID, $RoomID);";
-
+		
 		$db->query($sql);
 
-		if ($db->affected_rows == 1) 
+		if ($db->affected_rows == 1)
+		{
+			//-----------------------------------LOG START-----------------------------------//
+				
+				$db->query("INSERT INTO log (RecordCategoryID, Description)
+				VALUES (19, 'Admin ($AdminUserName) authorized ($RoomName) to user ($UserName)')");
+			
+			//------------------------------------LOG END------------------------------------//
+			
 			return TRUE;
+		}	
 		else 
 			return FALSE;
 	}
 
-	public static function unAuthoriseRoom($UserID, $RoomID)
+	public static function unAuthoriseRoom($UserID, $RoomID, $AdminUserName)
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) 
@@ -386,6 +467,15 @@ class User
 
 		$UserID = $db->escape_string($UserID);
 		$RoomID = $db->escape_string($RoomID);
+		
+		$UserName = user::getUserName($UserID);
+		
+		//-----------------------Get Room Name---------------------------------//
+		$result = $db->query("SELECT RoomName FROM room WHERE RoomID = $RoomID");
+		$row = $result -> fetch_assoc();
+		
+		$RoomName = $row["RoomName"];
+		//---------------------------------------------------------------------//
 		
 		$sql = "DELETE FROM user_authorized_rooms WHERE 
 		UserID = $UserID AND
@@ -394,7 +484,16 @@ class User
 		$result = $db->query($sql);
 
 		if ($result) //is true 
+		{
+			//-----------------------------------LOG START-----------------------------------//
+				
+				$db->query("INSERT INTO log (RecordCategoryID, Description)
+				VALUES (20, 'Admin ($AdminUserName) unauthorized ($RoomName) from user ($UserName)')");
+			
+			//------------------------------------LOG END------------------------------------//
+			
 			return TRUE;
+		}
 		else 
 			return FALSE; 
 	}
@@ -494,9 +593,45 @@ class User
 			return FALSE;
 	}
 	
-	
-	
+	public static function getUserImagePath($UserID) 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) {
+		  die('unable to connect to database [' . $db->connect_error .']');
+		}
 
+		$UserID = $db->escape_string($UserID);
+		
+		$sql = "SELECT UserImagePath FROM user WHERE UserID = $UserID";
+
+		$result = $db->query($sql);
+	 
+		if ($result != NULL && $result->num_rows >= 1)  // id number exists
+		{ 			
+			$row = $result->fetch_assoc();
+			return $row["UserImagePath"];
+		}
+		else 
+			return NULL;
+	}
+	
+	public static function isUserExists($UserID) 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) {
+		  die('error: unable to connect to database');
+		}
+		$UserID = $db->escape_string($UserID);
+
+		if(!is_numeric($UserID)) return FALSE;
+		
+		$result = $db->query("SELECT UserName FROM user WHERE UserID = '$UserID';");
+	 
+		if ($result != NULL && $result->num_rows >= 1)  // id number exists
+			return TRUE;
+		else 
+			return FALSE;
+	}
 
 
 

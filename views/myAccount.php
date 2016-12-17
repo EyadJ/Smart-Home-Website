@@ -131,7 +131,9 @@ include_once("../controllers/Header.php");
 						<tr><td>Renter The New Password </td>
 						<td><input type="password" name="NewPassConf" required style="width:90px;"/></td></tr>
 						
-						<tr><th colspan="2"><input type="submit" class="button" name="UpdatePass" value="Update Password" style="width:140px;"/></th></tr>
+						<tr><th colspan="2"><input align="center" type="submit" class="button" name="UpdatePass" value="Update Password" style="width:140px;"/>
+						<img align="right" src="../controllers/images/change-password2.png" width="34px" style="position:absolute;"/>
+						</th></tr>
 					</table>
 				</form>
 				

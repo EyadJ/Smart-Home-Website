@@ -10,7 +10,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <link href="../controllers/style.css?d=<?php echo time(); ?>" rel="stylesheet"/>
-  
+ 
+  <style>
+@media (max-width:680px) 
+{ 
+	#task_tr{ font-size:10px;}
+	
+	#TasktableHeader{ font-size:11px;}
+	
+	.device_status{ height:15px;}
+	
+	.device_table{ width:40px;}
+	
+	.device_img{ width:35px; height:35px;}
+} 
+  </style>
+      
   <script>
   
 function unHideUpload() 
@@ -80,6 +95,26 @@ function HideAllButParameter(x)
 		else
 			array[i].style.display = "none";
 	}
+	
+	//Hide devices when detecting gas (gas sensor chosen)
+	if(x === 11)
+	{
+		document.getElementById("RoofLamp_off_button").disabled = true;
+		document.getElementById("RoofLamp_on_button").disabled = true;
+		document.getElementById("RoofLamp_noChange_button").checked = true;
+		
+		document.getElementById("AC_off_button").disabled = true;
+		document.getElementById("AC_on_button").disabled = true;
+		document.getElementById("AC_noChange_button").checked = true;
+	}
+	else
+	{
+		document.getElementById("RoofLamp_off_button").disabled = false;
+		document.getElementById("RoofLamp_on_button").disabled = false;
+		
+		document.getElementById("AC_off_button").disabled = false;
+		document.getElementById("AC_on_button").disabled = false;
+	}
 }
 
 function UnhideMotionSensorSecondaryOption() 
@@ -139,32 +174,60 @@ function ShowAnotherActionDate()
 }
 
 function EnableTaskOnTimeHandling() 
-{
+{	
 	if(document.getElementById("EnableTaskOnTimeValue").value)
 		document.getElementById("EnableTaskOnTime").checked = true;
 	else
 		document.getElementById("EnableTaskOnTime").checked = false;
+	
+	handleRequiredForEnabledAndDisabled();
 }
 
 function EnableTaskOnTimeValueHandling() 
 {
 	if(!document.getElementById("EnableTaskOnTime").checked)
 		document.getElementById("EnableTaskOnTimeValue").value = null;
+	
+	handleRequiredForEnabledAndDisabled();
 }
 
 function DisableTaskOnTimeHandling() 
-{
+{	
 	if(document.getElementById("DisableTaskOnTimeValue").value)
 		document.getElementById("DisableTaskOnTime").checked = true;
 	else
 		document.getElementById("DisableTaskOnTime").checked = false;
+	
+	handleRequiredForEnabledAndDisabled();
 }
 
 function DisableTaskOnTimeValueHandling() 
 {
 	if(!document.getElementById("DisableTaskOnTime").checked)
 		document.getElementById("DisableTaskOnTimeValue").value = null;
+	
+	handleRequiredForEnabledAndDisabled();
 }
+
+function handleRequiredForEnabledAndDisabled() 
+{
+	var x = document.getElementById("EnableTaskOnTimeValue");
+	var y = document.getElementById("DisableTaskOnTimeValue");
+	var z = document.getElementById("EnableTaskOnTime");
+	var m = document.getElementById("DisableTaskOnTime");
+	
+	if(x.value || y.value || z.checked || m.checked)
+	{
+		x.required = true;
+		y.required = true;
+	}
+	else if(!x.value && !y.value && !z.checked && !m.checked)
+	{
+		x.required = false;
+		y.required = false;
+	}
+}
+	
 //
 //CREATE-NEW-TASK FORM POPUPS - [END]
 //

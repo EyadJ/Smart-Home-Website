@@ -10,6 +10,10 @@
 	$AllRooms = room::getAllRoomsDetails();
 	//
 	
+	//check if $_GET["var"] was manuplated and changed to a wrong user id or other admin's ID
+	if(!user::isUserExists($UserID) || user::isAdmin($UserID))
+		header("Location:../views/Rooms.php");
+	
 	//User Image Path
 	$UserImagePath = user::getUserImagePath($UserID);
 	$UserName = user::getUserName($UserID);

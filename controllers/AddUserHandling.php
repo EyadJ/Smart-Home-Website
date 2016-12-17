@@ -5,18 +5,18 @@
 	
 	$AdminUserName = $_SESSION["UserName"];
 	
-	$target_dir = "../controllers/images/users/";
-	$basename = basename($_FILES["fileToUpload"]["name"]);
-	
-	$target_file = $target_dir . $basename;
-	$uploadOk = 1;
-	$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
-	
 	$NewlyCreatedUserID = user::addNewUser($_POST['userName'], $_POST['Title'],
 			$_POST['email'], $_POST['CellPhone'], $_POST['Pass'], $AdminUserName);
-	
-	if($NewlyCreatedUserID != NULL)
+			
+	if($NewlyCreatedUserID != NULL && isset($_FILES["fileToUpload"]["name"]))
 	{
+		$target_dir = "../controllers/images/users/";
+		$basename = basename($_FILES["fileToUpload"]["name"]);
+
+		$target_file = $target_dir . $basename;
+		$uploadOk = 1;
+		$imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
+
 		// Check if image file is a actual image or fake image
 		if(isset($_POST["submit"])) {
 			$check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
@@ -30,7 +30,7 @@
 		}
 		
 		// Check file size
-		if ($_FILES["fileToUpload"]["size"] > 2500000) {
+		if ($_FILES["fileToUpload"]["size"] > 1500000) {
 			echo "Sorry, your file is too large.";
 			$uploadOk = 0;
 		}

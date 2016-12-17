@@ -7,15 +7,19 @@ require_once("config.php");
 
 class Log
 {
-	public static function getAllLog() 
+	public static function getAllLog($sqlOrderBy) 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) {
 		  die('unable to connect to database [' . $db->connect_error .']');
 		}
-		$RoomID = $db->escape_string($RoomID);
 
-		$sql = "SELECT * FROM log";
+		$sqlOrderBy = $db->escape_string($sqlOrderBy); 
+		
+		$sql = "SELECT * FROM log l, log_category lc 
+				WHERE l.RecordCategoryID = lc.RecordCategoryID 
+				ORDER BY EntryDate $sqlOrderBy";
+				
 		$result = $db->query($sql);
 	 
 		if ($result != NULL && $result->num_rows >= 1)  
@@ -30,7 +34,6 @@ class Log
 		if ($db->connect_errno > 0) {
 		  die('unable to connect to database [' . $db->connect_error .']');
 		}
-		$RoomID = $db->escape_string($RoomID);
 
 		$sql = "SELECT RecordCategoryID, CategoryName, isImportant FROM log_category";
 		$result = $db->query($sql);

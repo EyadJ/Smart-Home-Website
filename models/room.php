@@ -35,7 +35,7 @@ class Room
 		}
 
 		$RoomID = $db->escape_string($RoomID);
-		$sql = "SELECT RoomName FROM room WHERE roomID = '$RoomID';";
+		$sql = "SELECT RoomName FROM room WHERE roomID = $RoomID;";
 
 		$result = $db->query($sql);
 	 
@@ -58,7 +58,7 @@ public static function getAllRoomBackgrounds($RoomID)
 		}
 
 		$RoomID = $db->escape_string($RoomID);
-		$sql = "SELECT ImgPath FROM room_backgrounds WHERE roomID = '$RoomID';";
+		$sql = "SELECT ImgPath FROM room_backgrounds WHERE roomID = $RoomID;";
 
 		$result = $db->query($sql);
 	 
@@ -187,7 +187,23 @@ public static function getRoomSelectedBackground($RoomID)
 			return  FALSE;
 	}
 	
-
+	public static function isRoomExists($RoomID) 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) {
+		  die('error: unable to connect to database');
+		}
+		$RoomID = $db->escape_string($RoomID);
+		
+		if(!is_numeric($RoomID)) return FALSE;
+		
+		$result = $db->query("SELECT RoomName FROM room WHERE roomID = $RoomID;");
+	 
+		if ($result != NULL && $result->num_rows >= 1) 
+			return TRUE;
+		else 
+			return FALSE;
+	}
 
 
 
