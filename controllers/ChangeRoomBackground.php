@@ -7,6 +7,6 @@
 
 	room::modifyRoomImagePath($RoomID, $RoomName);
 
-	header("Location: ../views/RoomSettings.php?var=$RoomID");
+	header("Location: ../views/RoomSettings.php?RoomID=$RoomID");
 
 ?>

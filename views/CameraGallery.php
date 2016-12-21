@@ -42,9 +42,14 @@ var lastImgID = 0;
 
 function displayPreview(imgSrc, imgID, width) 
 {
+	document.getElementById("arrow_right").style.display = "inline";
+	document.getElementById("arrow_left").style.display = "inline";
+	
 	document.getElementById("preview").src = imgSrc;
 	
 	lastImgID = imgID;
+	
+	document.getElementById("imgDate").innerHTML = document.getElementById(("imgDate_" + lastImgID + "")).value;
 	
 	x = document.getElementById("preview");
 	
@@ -75,6 +80,8 @@ function nextImg(y)
 	ImgID = "imgID_" + lastImgID + "";
 	
 	var z = document.getElementById(ImgID);
+	
+	document.getElementById("imgDate").innerHTML = document.getElementById(("imgDate_" + lastImgID + "")).value;
 	
 	if(z != null)
 	{
@@ -128,15 +135,19 @@ window.onkeydown = function(event){ if ( event.keyCode == 27 ) hidePreview(); };
 			<img src="../controllers/images/Red_X.png" width="30px" height="30px"/>
 			</a></div>
 			
-			<img src="../controllers/images/arrow-left.png" width="50px" height="50px" 
-			onclick='nextImg(-1);return false;' id="arrow_left"
+			<a href='#' onclick="nextImg(-1);return false;" style="text-decoration:none; ">
+			<img src="../controllers/images/arrow-left.png" width="50px" height="50px" id="arrow_left"
 			style="position:absolute; left:-5px; top:0; bottom:0; margin:auto;"/>
+			</a>
 			
-			<img src="../controllers/images/arrow-right.png" width="50px" height="50px"
-			onclick='nextImg(1);return false;' id="arrow_right"
+			<a href='#' onclick="nextImg(1);return false;" style="text-decoration:none; ">
+			<img src="../controllers/images/arrow-right.png" width="50px" height="50px" id="arrow_right"
 			style="position:absolute; right:-5px; top:0; bottom:0; margin:auto;"/>
+			</a>
 			
 			<img src="../controllers/images/default-thumbnail.jpg" id="preview"/>
+			<br />
+			<p id="imgDate" align="center"></p>
 			
 		</div>
 		

@@ -55,7 +55,7 @@
 			$insertedSuccessfully = room::addNewImageToRoomBGs($RoomID, $basename, $UserName, $isAdmin);
 			//echo $insertedSuccessfully;
 			
-			header("Location: ../views/RoomSettings.php?var=$RoomID");
+			header("Location: ../views/RoomSettings.php?RoomID=$RoomID");
 		}
 		else 
 		{

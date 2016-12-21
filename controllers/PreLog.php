@@ -4,9 +4,12 @@
 
 	$isAdmin = $_SESSION["isAdmin"];
 	$UserID = $_SESSION["UserID"];
-	$sqlOrderBy = $_GET["Order"];
 	
+	//CHECK is the user deleted veriable Order from the URL
+	if (isset($_GET["Order"])) $sqlOrderBy = $_GET["Order"];
+	else $sqlOrderBy = "DESC";
 	
+	//CHECK is the user manuplated veriable Order in the URL
 	if($sqlOrderBy !== "ASC" && $sqlOrderBy !== "DESC")
 		$sqlOrderBy = "DESC";
 	
@@ -57,7 +60,8 @@
 	</select>";
 	
 	echo"</th></tr></table>
-		<table></table>";
+		<table style='border:1px solid black; background-color:black;'>
+		<tr><td style='height:1px; padding:0px; background-color:black;'></td></tr></table>";
 	//
 	//
 	//

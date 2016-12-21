@@ -88,7 +88,7 @@ function LogInFormSubmit()
 	 
 <div id="page-header">
 	<div class="page-logo2">
-	 <a href="HomePage.php"><img height="68px;" src="../controllers/images/Capture.PNG"/></a>
+	 <a href="HomePage.php"><img height="68px;" src="../controllers/images/Capture.png"/></a>
 	</div>
 </div>
 		

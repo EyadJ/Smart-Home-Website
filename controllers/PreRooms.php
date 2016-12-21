@@ -48,7 +48,7 @@
 				
 				<div style='width:240px; margin-right:auto; margin-left:auto;'>
 				
-				<a href='RoomSettings.php?var=". $RoomID ."' > 
+				<a href='RoomSettings.php?RoomID=". $RoomID ."' > 
 				
 				<img src='../controllers/images/settings-icon (1).png' width='40px' height='40px' class='room_settings_icon'
 				
@@ -76,7 +76,7 @@
 				//--------------------------------------------------------------------------------------------------------------//
 				//
 				//
-				//--------------------------------------------Water Tanks--------------------------------------------------//
+				//--------------------------------------------Water Tank--------------------------------------------------//
 				
 				if($RoomID == 110)	//CHECK if this is the room (outside the house) that has the water tanks
 				{

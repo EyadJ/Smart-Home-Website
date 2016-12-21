@@ -139,7 +139,7 @@
 		($UserID, $RoomID, $TaskName, $ActionTime, $SelectedSensorValue, $repeatDaily, $ActionDate, $selectedSensorID, 
 		$AlarmDuration, $AlarmInterval, $Devices, $NotifyByEmail, $EnableTaskOnTime, $DisableTaskOnTime, $UserName, $isAdmin);
 	
-		header("Location: ../views/RoomSettings.php?var=$RoomID");
+		header("Location: ../views/RoomSettings.php?RoomID=$RoomID");
 	
 	}
 		

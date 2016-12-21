@@ -59,21 +59,11 @@
 		
 		<input type='date' name='ActionDate' id='AnotherActionDate' style='float:right; display:none; width:130px;'/>
 		
-		</div>";
-		
-		//------Notify By Email-----//
-		echo"</td><td width='130px'>
-		<div class='tooltip'><span class='tooltiptext' style='margin-left:90px; margin-top:-70px;'>You Can Find this Option in Your Account Settings</span>
-			<label><input type='checkbox' name='NotifyByEmail'/> 
-			Notify me by Email / SMS</label>
-			<img src='../controllers/images/info.png' style='width:12px; height:12px; position:absolute; top:-8px; right:0px;'/>
-		</div>
-		
-		</td></tr>";
+		</div></td></tr>";
 		
 		
 		//--Enable/Disable Task on Time--//
-		echo"<tr><td colspan='3'>
+		echo"<tr><td colspan='2'>
 		
 		<label><input type='checkbox' name='EnableTaskOnTime' id='EnableTaskOnTime' onchange='EnableTaskOnTimeValueHandling();'/>
 		Enable Task on </label>
@@ -85,19 +75,22 @@
 		Disable Task on </label>
 		<input type='time' name='DisableTaskOnTimeValue' id='DisableTaskOnTimeValue' onchange='DisableTaskOnTimeHandling();'/>
 		
+		<span style='margin-left:55px;'><b>(Choose Both or None)</b></span>
 		</td></tr>";
 		
 	//--------------------------------------------------------------------------//
 		//SENSORS
 		
 		echo "<tr><th width='10%'>Select one Sensor</th>
-				<td colspan='3'>";
+				<td colspan='2'>";
 		$i = 0;
 		while($row = $Sensors->fetch_assoc()) 
 		{
 			$sensorTypeID = $row["SensorTypeID"];
 			$sensorTypeIdArray[$i] =  $sensorTypeID;
-			
+			$SensorID = $row["SensorID"];
+			$SensorName = $row["SensorName"];
+			$SensorImgPath = $row["SensorImgPath"];
 			/*
 			10 Motion Sensor		(the value of not detecting anything for a period of time)
 			11 Smoke Detector		(Does not Have a value)-----------------------------------
@@ -106,7 +99,34 @@
 			20 Clock				(It has its own veriable (Time: not a number))
 			*/
 			
-			echo "<div style='display:inline-block; '>";
+			$width = "";
+			
+			if($sensorTypeID == 12) 
+				$width = "width:150px;"; 
+			
+			else if($sensorTypeID == 20) 
+				$width = "width:70px;";
+			//
+			//
+			$checkSelectedSensor = "";
+			
+			if($sensorTypeID == 15) 
+				$sensorTypeID = 10; 
+			
+			else if($sensorTypeID == 20) 
+				$checkSelectedSensor = "checked";
+			
+			echo "<div style='display:inline-block;'>
+				<label><input type='radio' name='sensors' value='$SensorID' onclick='HideAllButParameter($sensorTypeID);' $checkSelectedSensor/>
+				
+				<div class='tooltip'>
+				<span class='tooltiptext' style='$width'>$SensorName</span>
+				
+				<img src='../controllers/images/sensors/$SensorImgPath' width='60' height='60' />
+				
+				<img src='../controllers/images/info.png' style='width:12px; height:12px; position:absolute; top:1px; right:1px;'/>
+				</div>";
+		
 		
 			if($row["isVisible"])
 			{
@@ -120,9 +140,7 @@
 						$colorOfMotionText = "style='color:#666666;'";
 					}
 					
-					echo"<label><input type='radio' name='sensors' value='$row[SensorID]' onclick='HideAllButParameter(10);'/>
-					<img src='../controllers/images/sensors/$row[SensorImgPath]' width='60' height='60' /></label>
-					
+					echo"
 					<div id='10' style='display:none; width:350px;' class='SensorsValues'>
 					<table style='border:0;'><tr><td>
 					<label><input type='radio' name='MotionSensorOption' value='onDetection' onclick='HideMotionSensorSecondaryOption();' checked/>
@@ -141,13 +159,11 @@
 				}
 				else if ($sensorTypeID == 11) //Smoke
 				{
-					echo"<label><input type='radio' name='sensors' value='$row[SensorID]' onclick='HideAllButParameter(11);'/>
-					<img src='../controllers/images/sensors/$row[SensorImgPath]' width='60' height='60' /></label></div>";
+					//nothing
 				}
 				else if ($sensorTypeID == 12) //Temperature
 				{
-					echo"<label><input type='radio' name='sensors' value='$row[SensorID]' onclick='HideAllButParameter(12);'/>
-					<img src='../controllers/images/sensors/$row[SensorImgPath]' width='60' height='60' /></label></div>
+					echo"
 					<div id='12' style='display:none;'  class='SensorsValues'>
 					<table style='border:0;'>
 					<tr><td>Required Temperature</td><tr></tr><td>
@@ -158,8 +174,7 @@
 				}
 				else if ($sensorTypeID == 13) //Light
 				{
-					echo"<label><input type='radio' name='sensors'value='$row[SensorID]' onclick='HideAllButParameter(13);'/>
-					<img src='../controllers/images/sensors/$row[SensorImgPath]' width='60' height='60' /></label></div>
+					echo"
 					<div id='13' style='display:none; width:170px;' class='SensorsValues'>
 					<table style='border:0;'>
 					<tr><td>Required Light Status</td><tr></tr><td>
@@ -173,8 +188,7 @@
 				}
 				else if ($sensorTypeID == 14) //Ultrasonic (Water Tanks)
 				{
-					echo"<label><input type='radio' name='sensors' value='$row[SensorID]' onclick='HideAllButParameter(14);'/>
-					<img src='../controllers/images/sensors/$row[SensorImgPath]' width='60' height='60' /></label></div>
+					echo"
 					<div id='14' style='display:none; width:170px;' class='SensorsValues'>
 					<table style='border:0;'>
 					<tr><td>Action on water level</td><tr></tr><td>
@@ -192,8 +206,7 @@
 				}
 				else if ($sensorTypeID == 20) //Clock
 				{
-					echo"<label><input type='radio' name='sensors' value='$row[SensorID]' checked='checked' onclick='HideAllButParameter(20);'/>
-					<img src='../controllers/images/sensors/$row[SensorImgPath]' width='60' height='60' /></label></div>
+					echo"
 					<div id='20' class='SensorsValues' style='display:inline-block;'>
 					<table style='border:0;'>
 					<tr><td>Action Time</td><tr></tr><td><input type='time' name='ActionTime'/></td></tr>
@@ -209,8 +222,8 @@
 	//--------------------------------------------------------------------------//
 		//DEVICES
 		
-		echo "</tr><tr><th width='10%'>Select Device/s Required Action</th>
-				<td colspan='3'>";
+		echo "</tr><tr><th width='10%'>Select Required Action</th>
+				<td colspan='2'>";
 		
 		while($row = $Devices->fetch_assoc()) 
 		{
@@ -275,14 +288,14 @@
 					
 							<label style='float:left; display:inline-block; ' >
 							<input type='radio' name='cam-$row[DeviceID]-takeImgOrVideo' value='Img' checked/> Take </label>
-							<span id=''><input type='number' name='cam-$row[DeviceID]-TakeImagesQty' placeholder='(Pic Number)' value=1  
+							<span ><input type='number' name='cam-$row[DeviceID]-TakeImagesQty' placeholder='(Pic Number)' value=1  
 							style='width:35px;'/> Picture/s</span>
 							
 							</td></tr><tr><td>
 							
-							<label style='float:left;'><input type='radio' name='cam-$row[DeviceID]-takeImgOrVideo' value='Vid' disabled/> Take Video</label>
-							<span id=''><input type='number' name='cam-$row[DeviceID]-TakeVideoDuration' placeholder='(Min)' value=1
-							style='width:45px;' disabled/> Min</span>
+							<label style='float:left; '><input type='radio' name='cam-$row[DeviceID]-takeImgOrVideo' value='Vid' /> Take Video</label>
+							<span style=''><input type='number' name='cam-$row[DeviceID]-TakeVideoDuration' placeholder='(Min)' value=1
+							style='width:45px;'/> Min</span>
 							
 							</td></tr><tr><td>
 							
@@ -328,8 +341,27 @@
 				}
 			}	
 		}
+		//------Notify By Email-----//
+		echo"<table 
+			style='
+			width:120px; display:inline-table; 
+			margin-right:5px; margin-left:5px; margin-top:1px; margin-bottom:1px;'>
 			
-		echo "</tr><tr><th colspan='4' style='height:28px;'><input type='submit' class='button' name='Create' value='Create' />
+			<tr><td><img src='../controllers/images/sms-and-email.png' width='120px'/></td></tr>
+			
+			<tr><td>
+			<div class='tooltip'>
+			<span class='tooltiptext' style='margin-left:90px; margin-top:-70px;'>
+			You Can Find this Option in Your Account Settings</span>
+			
+			<label><input type='checkbox' name='NotifyByEmail'/> 
+			Notify me by Email / SMS</label>
+			<img src='../controllers/images/info.png' style='width:12px; height:12px; position:absolute; top:-8px; right:0px;'/>
+			
+			</div></td></tr></table>";
+		//-----------------//	
+			
+		echo "</tr><tr><th colspan='3' style='height:28px;'><input type='submit' class='button' name='Create' value='Create' />
 		</th></tr></table>
 		</form><br />";
 		

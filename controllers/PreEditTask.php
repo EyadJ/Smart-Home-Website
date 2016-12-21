@@ -101,24 +101,7 @@
 		
 		<input type='date' name='ActionDate' id='AnotherActionDate' value='$ActionDate' style='float:right; width:130px; $text6'/>
 		
-		</div>";
-		
-		//------------------Notify By Email----------------//
-		$text1 = ""; 
-		
-		$NotifyByEmail = $taskDetails["NotifyByEmail"];
-		
-		if($NotifyByEmail == TRUE)
-			$text1 = "checked";
-		
-		echo"</td><td width='130px'>
-		<div class='tooltip'><span class='tooltiptext' style='margin-left:90px; margin-top:-70px;'>You Can Find this Option in Your Account Settings</span>
-			<label><input type='checkbox' name='NotifyByEmail' $text1/> 
-			Notify me by Email / SMS</label>
-			<img src='../controllers/images/info.png' style='width:12px; height:12px; position:absolute; top:-8px; right:0px;'/>
-		</div>
-		
-		</td></tr>";
+		</div></td></tr>";
 		
 		
 		//---------Enable/Disable Task on Time----------//
@@ -134,7 +117,7 @@
 			$text11 = "checked";
 		}
 		
-		echo"<tr><td colspan='3'>
+		echo"<tr><td colspan='2'>
 		
 		<label><input type='checkbox' name='EnableTaskOnTime' id='EnableTaskOnTime' onchange='EnableTaskOnTimeValueHandling();' $text10/>
 		Enable Task on </label>
@@ -145,14 +128,15 @@
 		<label><input type='checkbox' name='DisableTaskOnTime' id='DisableTaskOnTime' onchange='DisableTaskOnTimeValueHandling();' $text11/>
 		Disable Task on </label>
 		<input type='time' name='DisableTaskOnTimeValue' id='DisableTaskOnTimeValue' onchange='DisableTaskOnTimeHandling();' $text9/>
-		<span style='margin-left:55px;'>(Choose Both or None)</span>
+		
+		<span style='margin-left:55px;'><b>(Choose Both or None)</b></span>
 		</td></tr>";
 		
 	//--------------------------------------------------------------------------//
 		//SENSORS
 		
 		echo "<tr><th width='10%'>Select one Sensor</th>
-				<td colspan='3'>";
+				<td colspan='2'>";
 				
 		$SelectedSensorValue = $taskDetails["SelectedSensorValue"];	
 		$SelectedSensorID = $taskDetails["SensorID"];	
@@ -160,6 +144,9 @@
 		$i = 0;
 		while($row = $Sensors->fetch_assoc()) 
 		{
+			$SensorID = $row["SensorID"];
+			$SensorName = $row["SensorName"];
+			$SensorImgPath = $row["SensorImgPath"];
 			$sensorTypeID = $row["SensorTypeID"];
 			$sensorTypeIdArray[$i] =  $sensorTypeID;
 			/*
@@ -174,14 +161,27 @@
 			$SelectedSensorDisplay = "none";
 			$SelectedSensorValueText = "";
 			//
-			if($row["SensorID"] == $SelectedSensorID)
+			if($SensorID == $SelectedSensorID)
 			{
 				$checkSelectedSensor = "checked";
 				$SelectedSensorDisplay = "inline-block";
 				$SelectedSensorValueText = "value='$SelectedSensorValue'";
 			}
 			
-			echo "<div style='display:inline-block; '>";
+			$width = ""; if($sensorTypeID == 12) $width = "width:150px;"; else if($sensorTypeID == 20) $width = "width:70px;";
+
+			if($sensorTypeID == 15) $sensorTypeID = 10;
+			
+			echo "<div style='display:inline-block;'>
+				<label><input type='radio' name='sensors' value='$SensorID' onclick='HideAllButParameter($sensorTypeID);' $checkSelectedSensor/>
+				
+				<div class='tooltip'>
+				<span class='tooltiptext' style='$width'>$SensorName</span>
+				
+				<img src='../controllers/images/sensors/$SensorImgPath' width='60' height='60' /></label>
+				
+				<img src='../controllers/images/info.png' style='width:12px; height:12px; position:absolute; top:1px; right:1px;'/>
+				</div>";
 		
 		
 			if ($sensorTypeID == 10 || $sensorTypeID == 15) //Motion or IR
@@ -208,9 +208,7 @@
 					$colorOfMotionText = "style='color:#666666;'";
 				}
 					
-				echo"<label><input type='radio' name='sensors' value='$row[SensorID]' onclick='HideAllButParameter(10);' $checkSelectedSensor/>
-				<img src='../controllers/images/sensors/$row[SensorImgPath]' width='60' height='60'/></label>
-				
+				echo"
 				<div id='10' style='display:$SelectedSensorDisplay; width:350px;' class='SensorsValues'>
 				<table style='border:0;'><tr><td>
 				<label><input type='radio' name='MotionSensorOption' value='onDetection' onclick='HideMotionSensorSecondaryOption();' $text1/>
@@ -229,14 +227,12 @@
 			}
 			else if ($sensorTypeID == 11) //Smoke
 			{
-				echo"<label><input type='radio' name='sensors' value='$row[SensorID]' onclick='HideAllButParameter(11);' $checkSelectedSensor/>
-				<img src='../controllers/images/sensors/$row[SensorImgPath]' width='60' height='60'/></label></div>";
+				//nothing
 			}
 			else if ($sensorTypeID == 12) //Temperature
 			{
 				
-				echo"<label><input type='radio' name='sensors' value='$row[SensorID]' onclick='HideAllButParameter(12);' $checkSelectedSensor/>
-				<img src='../controllers/images/sensors/$row[SensorImgPath]' width='60' height='60'/></label></div>
+				echo"
 				<div id='12' style='display:$SelectedSensorDisplay;' class='SensorsValues'>
 				<table style='border:0;'>
 				<tr><td>Required Temperature</td><tr></tr><td>
@@ -254,8 +250,7 @@
 				else if ($SelectedSensorValue == 0) //Sunset
 					$text2 = "selected";
 				
-				echo"<label><input type='radio' name='sensors'value='$row[SensorID]' onclick='HideAllButParameter(13);' $checkSelectedSensor/>
-				<img src='../controllers/images/sensors/$row[SensorImgPath]' width='60' height='60'/></label></div>
+				echo"
 				<div id='13' style='display:$SelectedSensorDisplay; width:170px;' class='SensorsValues'>
 				<table style='border:0;'>
 				<tr><td>Required Light Status</td><tr></tr><td>
@@ -269,8 +264,7 @@
 			}
 			else if ($sensorTypeID == 14) //Ultrasonic (Water Tanks)
 			{
-				echo"<label><input type='radio' name='sensors' value='$row[SensorID]' onclick='HideAllButParameter(14);' $checkSelectedSensor/>
-				<img src='../controllers/images/sensors/$row[SensorImgPath]' width='60' height='60' /></label></div>
+				echo"
 				<div id='14' style='display:$SelectedSensorDisplay; width:170px;' class='SensorsValues'>
 				<table style='border:0;'>
 				<tr><td>Action on water level</td><tr></tr><td>
@@ -291,8 +285,7 @@
 			}
 			else if ($sensorTypeID == 20) //Clock
 			{
-				echo"<label><input type='radio' name='sensors' value='$row[SensorID]' onclick='HideAllButParameter(20);' $checkSelectedSensor/>
-				<img src='../controllers/images/sensors/$row[SensorImgPath]' width='60' height='60'/></label></div>
+				echo"
 				<div id='20' class='SensorsValues' style='display:$SelectedSensorDisplay;'>
 				<table style='border:0;'>
 				<tr><td>Action Time</td><tr></tr><td><input type='time' name='ActionTime' value = '$taskDetails[ActionTime]' /></td></tr>
@@ -308,8 +301,8 @@
 	//--------------------------------------------------------------------------//
 		//DEVICES
 		
-		echo "</tr><tr><th width='10%'>Select Device/s Required Action</th>
-				<td colspan='3'>";
+		echo "</td></tr><tr><th width='10%'>Select Required Action</th>
+				<td colspan='2'>";
 		
 		$devices_Original = device::getDevicesDetailsByRoomID($RoomID);
 		$devicesArray;
@@ -402,7 +395,7 @@
 				width:120px; display:inline-table; 
 				margin-right:5px; margin-left:5px; margin-top:1px; margin-bottom:1px;
 				'>
-				<tr><td colspan='2'><img src='../controllers/images/devices/$DeviceImgPath' width='60' height='60' /></td></tr>
+				<tr><td colspan='2'><img src='../controllers/images/devices/$DeviceImgPath' width='60px' height='60px' /></td></tr>
 				
 				<tr><td colspan='2'><label>Don't Change<input type='radio' 
 				name='$currentDevID' value='-1' onchange='HideAlarmDetails();' $option1/></label></td></tr>
@@ -422,12 +415,13 @@
 				</table></td></tr>
 				
 				</table>";
+				
 			}
 			else if($DeviceName == "Security Camera")
 			{
 				
 				$option1 = ""; $option2 = ""; $option3 = ""; $option4 = ""; 
-				$option5 = ""; $option6 = ""; $option7 = "disabled";  $displayStatus1 = "none"; 
+				$option5 = ""; $option6 = ""; $option7 = "";  $displayStatus1 = "none"; 
 				$TakeImage = 1; $TakeVideo = 1; $Resolution = 480;
 				
 				$ReqDevState = $taskCamerasArray[$currentDevID]["ReqDevState"];
@@ -451,7 +445,7 @@
 					else														//takeVideo selected
 					{
 						$TakeVideo = $taskCamerasArray[$currentDevID]["TakeVideo"];
-						//$option7 = "checked";
+						$option7 = "checked";
 					}
 					
 					$Resolution = $taskCamerasArray[$currentDevID]["Resolution"];
@@ -459,7 +453,7 @@
 				
 				echo"<table style='
 				display:inline-table; width:120px; margin-right:5px; margin-left:5px; margin-top:1px; margin-bottom:1px; '>
-				<tr><td colspan='2'><img src='../controllers/images/devices/$DeviceImgPath' width='60' height='60' /></td></tr>
+				<tr><td colspan='2'><img src='../controllers/images/devices/$DeviceImgPath' width='60px' height='60px' /></td></tr>
 				
 				<tr><td colspan='2'><label>Don't Change<input type='radio' name='$currentDevID' value='-1' 
 				onchange='cameraSettings(this);' $option1/></label></td></tr>
@@ -474,17 +468,17 @@
 				echo "<tr style='display:$displayStatus2;'><td colspan='2'>
 						<table style='width:220px; margin:1px;'><tr><td>	
 				
-					<label><input type='radio' name='cam-$currentDevID-takeImgOrVideo' value='Img' checked/> Take </label>
+					<label style='float:left;'><input type='radio' name='cam-$currentDevID-takeImgOrVideo' value='Img' checked/> Take </label>
 					
-					<span id=''><input type='number' name='cam-$currentDevID-TakeImagesQty' 
+					<span ><input type='number' name='cam-$currentDevID-TakeImagesQty' 
 					placeholder='(Pic Number)' value=$TakeImage style='width:35px;' $option6/> Picture/s</span>
 					
 					</td></tr><tr><td>
 					
-					<label><input type='radio' name='cam-$currentDevID-takeImgOrVideo' value='Vid' $option7 /> Take Video</label>
+					<label style='float:left;'><input type='radio' name='cam-$currentDevID-takeImgOrVideo' value='Vid' $option7 /> Take Video</label>
 					
-					<span id=''><input type='number' name='cam-$currentDevID-TakeVideoDuration' 
-					placeholder='(Min)' value=$TakeVideo style='width:45px;' disabled/>Min</span>
+					<span style=''><input type='number' name='cam-$currentDevID-TakeVideoDuration' 
+					placeholder='(Min)' value=$TakeVideo style='width:45px;'/>Min</span>
 					
 					</td></tr><tr><td>
 						
@@ -527,7 +521,7 @@
 				width:120px; display:inline-table; 
 				margin-right:5px; margin-left:5px; margin-top:1px; margin-bottom:1px;
 				'>
-				<tr><td colspan='2'><img src='../controllers/images/devices/$DeviceImgPath' width='60' height='60' /></td></tr>
+				<tr><td colspan='2'><img src='../controllers/images/devices/$DeviceImgPath' width='60px' height='60px' /></td></tr>
 				
 				<tr><td colspan='2'><label>Don't Change<input type='radio' name='$currentDevID'
 				id='" . $DeviceName . "_noChange_button' value='-1' $option1/></label></td></tr>
@@ -542,6 +536,33 @@
 		}
 		//--------------------------------------------------------------------------//
 		
+		//------Notify By Email-----//
+		
+		$text1 = ""; 
+		
+		$NotifyByEmail = $taskDetails["NotifyByEmail"];
+		
+		if($NotifyByEmail == TRUE)
+			$text1 = "checked";
+		
+		echo"<table 
+				style='
+				width:120px; display:inline-table; 
+				margin-right:5px; margin-left:5px; margin-top:1px; margin-bottom:1px;
+				'>
+			<tr><td><img src='../controllers/images/sms-and-email.png' width='120px'/></td></tr>
+			
+			<tr><td>
+			<div class='tooltip'>
+			<span class='tooltiptext' style='margin-left:90px; margin-top:-70px;'>
+			You Can Find this Option in Your Account Settings</span>
+			
+			<label><input type='checkbox' name='NotifyByEmail' $text1/> 
+			Notify me by Email / SMS</label>
+			<img src='../controllers/images/info.png' style='width:12px; height:12px; position:absolute; top:-8px; right:0px;'/>
+			
+			</div></td></tr></table></td></tr>";
+		//-----------------------//	
 		
 		//------------------isDisabled----------------
 		$text1 = ""; 
@@ -551,7 +572,7 @@
 		if($isDisabled == TRUE)
 			$text1 = "checked";
 		
-		echo"</tr><tr><td colspan='4' style='background-color:#CCCCCC;'>
+		echo"<tr><td colspan='3' style='background-color:#CCCCCC;'>
 		<label><input type='checkbox' name='isDisabled' $text1/> 
 		<b>Disable Task</b></label>
 		
@@ -560,7 +581,7 @@
 		//--------------------------------------------------------------------------//	
 		//FOOTER
 		
-		echo "<tr ><th colspan='4' style='height:28px;'>
+		echo "<tr ><th colspan='3' style='height:28px;'>
 		
 		<input type='submit' class='button' value='Save' name='Save' style='font-weight:bold; margin-left:3px;' />&nbsp;
 		
@@ -569,7 +590,7 @@
 		$isDefault = $taskDetails["isDefault"];
 		
 		if(!$isDefault)
-		{	
+		{
 			echo"<a href='#' onclick='deleteTaskMsg($TaskID,";
 			echo '"remove"';
 			echo");return false;' style='text-decoration:none;'>

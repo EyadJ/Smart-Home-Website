@@ -51,6 +51,7 @@
 				$sensorID = $row["SensorID"];
 				//
 				$sensors[$sensorID]["SensorTypeID"] = $row["SensorTypeID"];
+				$sensors[$sensorID]["SensorName"] = $row["SensorName"];
 				$sensors[$sensorID]["SensorImgPath"] = $row["SensorImgPath"];
 			}
 			//
@@ -201,9 +202,18 @@
 				echo "</td><td style='border-bottom: 2px solid black; border-top: 2px solid black;'>";
 				
 				$sensorTypeID = $sensors[$selectedSensorID]["SensorTypeID"];
+				$SensorName = $sensors[$selectedSensorID]["SensorName"];
 				$sensorImgPath = $sensors[$selectedSensorID]["SensorImgPath"];
 				
-				echo"<img src='../controllers/images/sensors/" . $sensorImgPath . "' width='40' height='40' />";
+				$width = ""; if($sensorTypeID == 12) $width = "width:150px;"; else if($sensorTypeID == 20) $width = "width:70px;";
+					
+				echo"<div class='tooltip'>
+				<span class='tooltiptext' style='$width'>$SensorName</span>
+				
+				<img src='../controllers/images/sensors/$sensorImgPath' width='40' height='40' />
+				
+				<img src='../controllers/images/info.png' style='width:12px; height:12px; position:absolute; top:-3px; right:-3px;'/>
+				</div>";
 				
 				if ($sensorTypeID == 10 || $sensorTypeID == 15) //Motion or IR
 				{
@@ -416,7 +426,7 @@
 					
 						//if the current user is an admin or if he is the one who created the task
 						if($isAdmin || $UserID == $UWCT_UID)		
-							echo"<a href='EditTask.php?var=$TaskID&referrer=RoomSettings.php?var=$RoomID' style='text-decoration:none;'>
+							echo"<a href='EditTask.php?var=$TaskID&referrer=RoomSettings.php?RoomID=$RoomID' style='text-decoration:none;'>
 							<img src='../controllers/images/edit4.png' width='30px' height='30px' /></a>";
 						else
 							echo"<img src='../controllers/images/edit-not-available.png' width='20px' height='20px' />";

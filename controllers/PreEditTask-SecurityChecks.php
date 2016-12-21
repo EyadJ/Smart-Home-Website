@@ -5,6 +5,9 @@
 
 	$isAdmin = $_SESSION["isAdmin"];
 	$UserID = $_SESSION["UserID"];
+	
+	if(!isset($_GET["var"]) || !isset($_GET["referrer"])) header("Location: ../views/Rooms");
+	
 	$TaskID = $_GET["var"];
 	$referrer = $_GET["referrer"];
 	

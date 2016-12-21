@@ -11,13 +11,92 @@ include_once("../controllers/PreSecurityCameras-SecurityChecks.php");
 
    <style>
  
-@media (max-width:480px) 
+  
+@media (min-width:641px) 
 { 
+
+	#right-div1
+	{
+		width:24%; 
+		min-width:325px; 
+		display:inline-block; 
+		position:absolute; 
+		left:0%; 
+		top:90px;
+	}
+	
 	#right-div2
 	{
-		margin-left:40%;
+		width:24%; 
+		min-width:325px; 
+		display:inline-block; 
+		position:absolute; 
+		left:26%; 
+		top:90px;
+	}
+	
+	#right-div1-minus
+	{
+		visibility:hidden; 
+	}	
+	
+	#right-div2-minus
+	{
+		visibility:hidden; 
+	}
+}
+ 
+@media (max-width:640px) 
+{ 
+
+	#viewOptions
+	{
+		display:none;
+	}
+	
+	#right-div1
+	{
+		margin-left:25%;
+		width:50%;
+		min-width:650px;
+		display:block;
+		position:relative;
+		margin-left:25%;
+		left:0px;
+		top:0px;
 	}
 
+	#right-div2
+	{
+		margin-left:25%;
+		width:50%;
+		min-width:650px;
+		display:block;
+		position:relative;
+		margin-left:25%;
+		left:0px;
+		top:0px;
+	}
+	
+	#right-div1-hidden
+	{
+		display:none;
+	}
+	
+	#right-div2-hidden
+	{
+		display:none;
+	}
+
+	#right-div1-minus
+	{
+		visibility:visible;
+	}
+
+	#right-div2-minus
+	{
+		visibility:visible;
+	}
 } 
   </style>
   
@@ -110,8 +189,8 @@ function increaseDivsSizeBackToNormal()
 	y.style.left ="0px";
 	y.style.top ="0px";
 	
-	document.getElementById("camera2").style.marginTop = "-80px";
-	document.getElementById("camera2").style.marginBottom = "-100px";
+	//document.getElementById("camera2").style.marginTop = "-80px";
+	//document.getElementById("camera2").style.marginBottom = "-100px";
 	
 	document.getElementById("right-div1-minus").style.visibility ="visible";	
 	document.getElementById("right-div2-minus").style.visibility ="visible";	
@@ -176,7 +255,7 @@ include_once("../controllers/Header.php");
 			
 				
 			<div style="right:76%; top:311px; width:105px; position:fixed; padding-left:20px; padding-right:10px; 
-			padding-top:4px; border-radius :15px; background: #fff; ">
+			padding-top:4px; border-radius :15px; background: #fff;" id="viewOptions">
 				
 				
 				<div class="right-div-secondary-title" 
@@ -219,9 +298,9 @@ include_once("../controllers/Header.php");
 
 
 	<div id="right-div1" class="right-div" 
-	style="width:24%; min-width:325px; display:inline-block; position:absolute; left:0%; top:90px;">
+	>
 
-	<span id="right-div1-minus" style="visibility:hidden;">
+	<span id="right-div1-minus">
 		<a  href="#" onclick="HideUnhideDiv1();return false;" style="text-decoration:none;">	
 		<img src="../controllers/images/div-minus-red.png"
 				id="div-minus1"
@@ -272,9 +351,9 @@ include_once("../controllers/Header.php");
 		</div>
 	
 		<div id="right-div2" class="right-div"
-		style="width:24%; min-width:325px; display :inline-block; position:absolute; left:26%; top:90px;">
+		>
 	
-		<span id="right-div2-minus" style="visibility:hidden;">
+		<span id="right-div2-minus">
 		<a href="#" onclick="HideUnhideDiv2();return false;" style="text-decoration:none;">	
 			<img src="../controllers/images/div-minus-red.png"
 				id="div-minus1"

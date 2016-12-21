@@ -8,7 +8,7 @@
 
 	$isAdmin = $_SESSION["isAdmin"];
 	$UserID = $_SESSION["UserID"];
-	$RoomID = $_GET["var"];
+	$RoomID = $_GET["RoomID"];
 	
 	//CHECK if $_GET["var"]; (RoomID) is manipulated by the user and if he 
 	//isn't allowed to modify that room's settings

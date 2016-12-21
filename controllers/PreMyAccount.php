@@ -22,26 +22,24 @@
 	<tr><th colspan="3">Modify Your Account Settings</th></tr>
 	
 	<tr><td>Name</td><td align="left" align="center">
-	<input type="text"  id="name" value="'.$row["UserName"].'" name="UserName" maxlength="25" readonly/> Unchangeable
-		<font color="red"><label ></label></font>
+	<input type="text"  id="name" value="'.$row["UserName"].'" name="UserName" maxlength="25" style="color:gray;" readonly/>
+		
 		</td>
 		
 		<td rowspan="8" align="center">
 	<img src= "../controllers/images/users/'.$row["UserImagePath"].'" width="280px" height="240px" id="printed_image"/>
-	</td>
-		</tr>
+	
+	</td></tr>
 
 	<tr><td>Email</td><td align="left" align="center">
 	<input type="email" id="email" value="'.$row["Email"].'"name="Email" style="width:210px;" required/>
-		<font color="red"> <label ></label></font>
-		</td>
-		</tr>
+		
+		</td></tr>
 	 
 	<tr><td>Title</td><td align="left" >
-	<input type="tel" id="tel" value="'.$row["Title"].'" name="Title" style="width:110px;" readonly/> Unchangeable
-		<font color="red"> <label ></label></font>
-		</td>
-		</tr>
+	<input type="tel" id="tel" value="'.$row["Title"].'" name="Title" style="width:110px; color:gray;" readonly/>
+		
+		</td></tr>
 
 	<tr><td>Cell Phone</td><td align=left>
 		<input type="number" name="CellPhone" value=' . $row["CellPhone"] . ' alt="506807058"/>
@@ -58,8 +56,8 @@
 	<tr><td colspan="2"><label><b>
 	Send Message to my Email <input type="checkbox" name="SendEmail" '. $SendEmailValue .'/></b></label></td>
 	
-	<tr><td colspan="2"><label><b>
-	Send SMS to my Cell Phone <input type="checkbox" name="SendSMS" '. $SendSMSvalue .'/></b></label></td>
+	<tr><td colspan="2"><label style="color:gray;"><b>
+	Send SMS to my Cell Phone <input type="checkbox" name="SendSMS" '. $SendSMSvalue .' disabled/></b></label></td>
 
 	<tr><th align="center" colspan="3">
 	<input type="submit" class="button" value="Save" name="Save" style="font-weight:bold; margin-left:3px;" />

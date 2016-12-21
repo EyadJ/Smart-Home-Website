@@ -14,7 +14,7 @@
 		echo "
 		<div id='page-header'>
 			<div class='website-logo'>
-				<a href='HomePage.php'><img width='250px;' src='../controllers/images/Capture.PNG'/></a>
+				<a href='HomePage.php'><img width='250px;' src='../controllers/images/Capture.png'/></a>
 			</div>";
 			
 			if($isSmokeDetectorOn)
