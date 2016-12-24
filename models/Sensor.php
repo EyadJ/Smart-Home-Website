@@ -95,13 +95,9 @@ class sensor
 			
 			$sensorValue = $row["SensorValue"];
 			
-			$WaterTankLevel[1] = 100; $WaterTankLevel[2] = 90; $WaterTankLevel[3] = 80;
-			$WaterTankLevel[4] = 70; $WaterTankLevel[5] = 60; $WaterTankLevel[6] = 60;
-			$WaterTankLevel[7] = 50; $WaterTankLevel[8] = 50; $WaterTankLevel[9] = 40;
-			$WaterTankLevel[10] = 40; $WaterTankLevel[11] = 30; $WaterTankLevel[12] = 30;
-			$WaterTankLevel[13] = 20; $WaterTankLevel[14] = 20; $WaterTankLevel[15] = 10;
-			$WaterTankLevel[16] = 0;
-
+			for($i = 16, $j = 0; $i > 5; $i--, $j += 10)
+				$WaterTankLevel[$i] = $j;
+		
 			$waterTankLevelInPercentage = $WaterTankLevel[$sensorValue];
 
 			return $waterTankLevelInPercentage;

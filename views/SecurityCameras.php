@@ -10,9 +10,8 @@ include_once("../controllers/PreSecurityCameras-SecurityChecks.php");
   <link href="../controllers/style.css?d=<?php echo time(); ?>" rel="stylesheet"/>
 
    <style>
- 
   
-@media (min-width:641px) 
+@media (min-width:1271px) 
 { 
 
 	#right-div1
@@ -46,7 +45,7 @@ include_once("../controllers/PreSecurityCameras-SecurityChecks.php");
 	}
 }
  
-@media (max-width:640px) 
+@media (max-width:1270px) 
 { 
 
 	#viewOptions

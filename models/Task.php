@@ -56,6 +56,10 @@ class Task
 			if (isset($DisableTaskOnTime))
 				$db->query("UPDATE task SET DisableTaskOnTime = '$DisableTaskOnTime' WHERE TaskID = $newlyCreatedTaskID");
 			
+			//CHECK if User Who Created Task System Admin, SET task as a default task
+			if(task::isUserSystemAdmin($UserID))
+				$db->query("UPDATE task SET isDefault = 1 WHERE TaskID = $newlyCreatedTaskID");
+		
 			//
 			// NEXT INSERT - TABLE: task_devices 	&	 TABLE: task_camera (if applicable) //
 			//
@@ -358,7 +362,6 @@ class Task
 		if ($db->connect_errno > 0) {
 		  die('unable to connect to database [' . $db->connect_error .']');
 		}
-
 		$TaskID = $db->escape_string($TaskID);
 
 		$sql = "SELECT isDefault FROM task WHERE TaskID = $TaskID";
@@ -370,6 +373,28 @@ class Task
 			
 			if($row["isDefault"] == 1) return TRUE;
 			else if($row["isDefault"] == 0) return FALSE;	
+		}
+		else 
+			return FALSE;
+	}
+	
+	public static function isDisabled($TaskID) 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) {
+		  die('unable to connect to database [' . $db->connect_error .']');
+		}
+		$TaskID = $db->escape_string($TaskID);
+
+		$sql = "SELECT isDisabled FROM task WHERE TaskID = $TaskID";
+		$result = $db->query($sql);
+	 
+		if ($result != NULL && $result->num_rows >= 1)  
+		{
+			$row = $result->fetch_assoc();	
+			
+			if($row["isDisabled"] == 1) return TRUE;
+			else if($row["isDisabled"] == 0) return FALSE;	
 		}
 		else 
 			return FALSE;
@@ -387,8 +412,9 @@ class Task
 		$TaskName = task::getTaskName($TaskID);
 		$RoomID = task::getRoomIdByTaskId($TaskID);
 		
-		if(task::isDefault($TaskID)) return FALSE; //isDefault Task is not deletable (only disablable)
-	
+		//if this user is not system admin, AND if the task isDefault, then Task is not deletable (only disableble)
+		if($UserName !== "System Admin" && task::isDefault($TaskID)) return FALSE; 
+		
 		$sql = "DELETE FROM task_devices WHERE TaskID = $TaskID;";
 		$result = $db->query($sql);
 		
@@ -435,7 +461,8 @@ class Task
 		}
 		$TaskID = $db->escape_string($TaskID);
 		
-		if(task::isDefault($TaskID)) return FALSE; //isDefault Task is not deletable (only disableble)
+		//if this user is not system admin, AND if the task isDefault, then Task is not deletable (only disableble)
+		if($UserName !== "System Admin" && task::isDefault($TaskID)) return FALSE; 
 	
 		$sql = "UPDATE task SET isDeleted = 1 WHERE TaskID = $TaskID;";
 		$result = $db->query($sql);
@@ -464,6 +491,50 @@ class Task
 					. " VALUES (27, '$AdminOrUser ($UserName) deleted task ($TaskName) from room ($RoomName)')");
 			//-------------------------------------------------LOG END-------------------------------------------------//
 			
+			return TRUE;
+		}
+		else
+			return FALSE; 
+	}
+	
+	public static function EnableOrDisableTask($TaskID, $UserName, $isAdmin) 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) 
+		{
+			die('error: unable to connect to database');
+		}
+		$TaskID = $db->escape_string($TaskID);
+		
+		$isDisabledValue = 1; if(task::isDisabled($TaskID)) $isDisabledValue = 0; 
+		
+		$sql = "UPDATE task SET isDisabled = $isDisabledValue WHERE TaskID = $TaskID;";
+		$result = $db->query($sql);
+		
+		if ($result)
+		{
+			//this table: (table_status) is updated to tell the Java system a change has occured, in order to increase performance
+			//
+			$db->query("UPDATE table_status SET isTableUpdated = 1 WHERE TableName = 'Task';");
+			//--------------------------------------------------------------------------------------------------------------------
+			
+			//-------------------------------------------------LOG START-------------------------------------------------//
+				$AdminOrUser = "User"; if($isAdmin) $AdminOrUser = "Admin"; 
+				
+				$RoomID = task::getRoomIdByTaskId($TaskID);
+				
+				//-----------------------Get Room Name---------------------------------//
+				$result = $db->query("SELECT RoomName FROM room WHERE RoomID = $RoomID");
+				$row = $result -> fetch_assoc();
+			
+				$RoomName = $row["RoomName"];
+				//---------------------------------------------------------------------//
+			
+				$db->query("INSERT INTO log (RecordCategoryID, Description) "
+						. " VALUES (26, '$AdminOrUser ($UserName) edited task ($TaskName) in room ($RoomName)')");
+				//-------------------------------------------------LOG END-------------------------------------------------//
+				
+				
 			return TRUE;
 		}
 		else
@@ -514,6 +585,20 @@ class Task
 		}
 		else 
 			return NULL;
+	}	
+	
+	public static function isUserSystemAdmin($UserID) 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) {
+		  die('unable to connect to database [' . $db->connect_error .']');
+		}
+		$UserID = $db->escape_string($UserID);
+		
+		if($UserID == 1)// user is system admin (id = 1)
+			return TRUE;
+		else
+			return FALSE;
 	}
 	
 	public static function getOneTask($TaskID) 
@@ -522,7 +607,6 @@ class Task
 		if ($db->connect_errno > 0) {
 		  die('unable to connect to database [' . $db->connect_error .']');
 		}
-		
 		$TaskID = $db->escape_string($TaskID);
 		
 		$sql = "SELECT * FROM task WHERE TaskID = $TaskID";
@@ -541,7 +625,6 @@ class Task
 		if ($db->connect_errno > 0) {
 		  die('unable to connect to database [' . $db->connect_error .']');
 		}
-
 		$TaskID = $db->escape_string($TaskID);
 
 		$sql = "SELECT TaskName FROM task WHERE TaskID = $TaskID";

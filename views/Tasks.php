@@ -9,19 +9,23 @@
   <link href="../controllers/style.css?d=<?php echo time(); ?>" rel="stylesheet"/>
   
   <style>
-@media (max-width:680px) 
+@media (max-width:1550px) 
 { 
-	#task_tr{ font-size:11px;}
+	#task_tr{ font-size:10px;}
 	
-	#TasktableHeader{ font-size:13px;}
+	#TasktableHeader{ font-size:11px;}
 	
 	.device_status{ height:15px;}
 	
-	.device_table{ width:40px;}
+	.device_table{ width:40px; margin:0;}
 	
 	.device_img{ width:35px; height:35px;}
-} 
+}
 
+@media (min-width:1551px) 
+{ 
+	.device_table{ width:40px; margin:5;}
+}
 
 .room_settings_icon{ opacity: 0.8; }
 

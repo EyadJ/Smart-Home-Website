@@ -11,13 +11,19 @@
 	$TaskID = $_GET["var"];
 	$referrer = $_GET["referrer"];
 	
-	$RoomID = task::getRoomIdByTaskId($TaskID);
+	//Multiple Security Checks
+	$isUserSystemAdmin = user::isSystemAdmin($UserID);
 	$isUsrAthrisd = user::isUserAutherisedToEditTask($UserID, $TaskID);
+	$RoomID = task::getRoomIdByTaskId($TaskID);
 	$taskDetails = task::getOneTask($TaskID);
 	
-	//CHECK	
-	//if user manipulated the task id (3 checks)
-	if($RoomID == NULL || !$isUsrAthrisd || $taskDetails == NULL) 
-		header("Location: ../views/$referrer"); 
-			
+	//current user is not System Admin (go in and check)
+	if(!$isUserSystemAdmin)
+	{
+		//CHECK	
+		//if user manipulated the task id (2 checks) OR IF HE IS NOT AUTHERISED TO EDIT THE TASK
+		if($RoomID == NULL || $taskDetails == NULL || !$isUsrAthrisd) 
+			header("Location: ../views/$referrer"); 
+	}
+	
 ?>

@@ -197,7 +197,9 @@ function deleteTaskMsg(TaskID, action)
 	
 	var referrer = document.getElementById("referrer").value;	
 	
-	document.getElementById("deleteTaskForm").action="../controllers/DeleteTaskHandling.php?var=" + TaskID + "&action=" + action + "&referrer="+ referrer + "";
+	var url = "../controllers/DeleteTaskHandling.php?var=" + TaskID + "&action=" + action + "&referrer="+ referrer + "";
+	
+	document.getElementById("deleteTaskForm").action = url;
 }
 
 function deleteTaskSubmitClicked() 

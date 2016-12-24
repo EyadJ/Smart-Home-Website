@@ -8,15 +8,26 @@
 
 	$isAdmin = $_SESSION["isAdmin"];
 	$UserID = $_SESSION["UserID"];
+	
+	if(!isset($_GET["var"]) || !isset($_GET["referrer"])) header("Location: ../views/Rooms");
+	
 	$TaskID = $_GET["var"];
 	$referrer = $_GET["referrer"];
 	
-	$RoomID = task::getRoomIdByTaskId($TaskID);
+	//Multiple Security Checks
+	$isUserSystemAdmin = user::isSystemAdmin($UserID);
 	$isUsrAthrisd = user::isUserAutherisedToEditTask($UserID, $TaskID);
+	$RoomID = task::getRoomIdByTaskId($TaskID);
 	$taskDetails = task::getOneTask($TaskID);
 	
-	//CHECK
-	if($RoomID == NULL || !$isUsrAthrisd || $taskDetails == NULL) header("Location: ../views/$referrer"); //if user manipulated the task id (3 checks)
+	//current user is not System Admin (go in and check)
+	if(!$isUserSystemAdmin)
+	{
+		//CHECK	
+		//if user manipulated the task id (2 checks) OR IF HE IS NOT AUTHERISED TO EDIT THE TASK
+		if($RoomID == NULL || $taskDetails == NULL || !$isUsrAthrisd) 
+			header("Location: ../views/$referrer"); 
+	}
 	
 	//
 	//^^^^^ALREADY INCLUDED IN (PreEditTask-SecurityChecks.php)- LEFT FOR CONVENIENCE^^^^^^
@@ -578,7 +589,7 @@
 		
 		</td></tr>";
 		
-		//--------------------------------------------------------------------------//	
+		//-------------------------------------------------------------------------------------------------------------------//	
 		//FOOTER
 		
 		echo "<tr ><th colspan='3' style='height:28px;'>
@@ -587,9 +598,11 @@
 		
 		<input type='reset' class='button'  value='Reset' />&nbsp;";
 		
+		//---------------------------------Delete Task------------------------------//	
 		$isDefault = $taskDetails["isDefault"];
 		
-		if(!$isDefault)
+		//if user is system admin, if not (||) check if the task is a default task, if it is, go in
+		if($isUserSystemAdmin || !$isDefault)
 		{
 			echo"<a href='#' onclick='deleteTaskMsg($TaskID,";
 			echo '"remove"';
@@ -597,6 +610,7 @@
 			<button class='button'  type = 'button' style='color:red;'>Delete</button>	</a>";
 		}
 		else	//$isDefault == TRUE (Undeleteable)
+		{
 			echo"<div style=' margin-left:auto; margin-right:auto; width:50px; display:inline;'>
 					<div class='tooltip'>
 						<span class='tooltiptext'>
@@ -605,6 +619,8 @@
 						<button class='button' type = 'button' style='color:gray;' disabled>Delete</button>
 					</div>
 				</div>";
+		}
+		//--------------------------------------------------------------------------//	
 		
 		echo"&nbsp;<a href='../views/$referrer'><button class='button' type = 'button'>Cancel</button></a>
 		

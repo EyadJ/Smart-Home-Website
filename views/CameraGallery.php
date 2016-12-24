@@ -49,6 +49,7 @@ function displayPreview(imgSrc, imgID, width)
 	
 	lastImgID = imgID;
 	
+	document.getElementById("CameraName").innerHTML = document.getElementById(("imgCamera_" + lastImgID + "")).value;
 	document.getElementById("imgDate").innerHTML = document.getElementById(("imgDate_" + lastImgID + "")).value;
 	
 	x = document.getElementById("preview");
@@ -81,6 +82,7 @@ function nextImg(y)
 	
 	var z = document.getElementById(ImgID);
 	
+	document.getElementById("CameraName").innerHTML = document.getElementById(("imgCamera_" + lastImgID + "")).value;
 	document.getElementById("imgDate").innerHTML = document.getElementById(("imgDate_" + lastImgID + "")).value;
 	
 	if(z != null)
@@ -147,7 +149,11 @@ window.onkeydown = function(event){ if ( event.keyCode == 27 ) hidePreview(); };
 			
 			<img src="../controllers/images/default-thumbnail.jpg" id="preview"/>
 			<br />
-			<p id="imgDate" align="center"></p>
+			
+			<div align="center">
+			<b><span id="CameraName" align="center"></span> </b>
+			(<span id="imgDate" align="center"></span>)
+			</div>
 			
 		</div>
 		

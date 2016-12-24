@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 21, 2016 at 09:23 PM
+-- Generation Time: Dec 24, 2016 at 06:27 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -148,30 +148,30 @@ CREATE TABLE `device` (
 
 INSERT INTO `device` (`DeviceID`, `RoomID`, `DeviceName`, `DeviceState`, `isVisible`, `isStatusChanged`, `GateNum`, `Watts`, `lastStatusChange`, `DeviceImgPath_on`, `DeviceImgPath_off`) VALUES
 (101, 101, 'Roof Lamp', b'0', b'1', b'0', 91, 120, '2016-12-14 17:21:59', 'Roof_Lamp_on.png', 'Roof_Lamp_off.png'),
-(102, 101, 'AC', b'0', b'1', b'0', 103, 1800, '2016-12-14 17:22:01', 'cooler_on.png', 'cooler_off.png'),
+(102, 101, 'AC', b'0', b'1', b'1', 103, 1800, '2016-12-22 14:54:15', 'cooler_on.png', 'cooler_off.png'),
 (103, 101, 'Curtains', b'0', b'1', b'1', -1, 0, '2016-12-16 11:19:11', 'curtains_opened.png', 'curtains_closed.png'),
 (104, 101, 'Alarm', b'0', b'1', b'0', 75, 0, '2016-12-02 21:41:20', 'alarm.png', 'alarm_off.png'),
-(201, 102, 'Roof Lamp', b'1', b'1', b'1', 92, 60, '2016-12-21 09:49:12', 'Roof_Lamp_on.png', 'Roof_Lamp_off.png'),
-(202, 102, 'AC', b'1', b'1', b'1', 101, 1200, '2016-12-21 09:49:57', 'cooler_on.png', 'cooler_off.png'),
+(201, 102, 'Roof Lamp', b'0', b'1', b'1', 92, 60, '2016-12-23 20:25:49', 'Roof_Lamp_on.png', 'Roof_Lamp_off.png'),
+(202, 102, 'AC', b'0', b'1', b'1', 101, 1200, '2016-12-22 09:24:40', 'cooler_on.png', 'cooler_off.png'),
 (203, 102, 'Curtains', b'0', b'1', b'1', -1, 0, '2016-12-14 19:49:13', 'curtains_opened.png', 'curtains_closed.png'),
 (204, 102, 'Alarm', b'0', b'1', b'0', 78, 0, '2016-12-14 17:22:14', 'alarm.png', 'alarm_off.png'),
-(401, 104, 'Roof Lamp', b'0', b'1', b'0', 93, 60, '2016-12-14 17:22:16', 'Roof_Lamp_on.png', 'Roof_Lamp_off.png'),
-(402, 104, 'AC', b'0', b'1', b'0', 102, 1200, '2016-12-14 17:22:19', 'cooler_on.png', 'cooler_off.png'),
-(403, 104, 'Curtains', b'0', b'1', b'0', -1, 0, '2016-12-14 17:22:21', 'curtains_opened.png', 'curtains_closed.png'),
-(404, 104, 'Alarm', b'0', b'1', b'0', 79, 0, '2016-12-14 17:22:24', 'alarm.png', 'alarm_off.png'),
+(401, 104, 'Roof Lamp', b'0', b'1', b'1', 93, 60, '2016-12-23 20:25:47', 'Roof_Lamp_on.png', 'Roof_Lamp_off.png'),
+(402, 104, 'AC', b'0', b'1', b'1', 102, 1200, '2016-12-23 09:06:53', 'cooler_on.png', 'cooler_off.png'),
+(403, 104, 'Curtains', b'0', b'1', b'1', -1, 0, '2016-12-23 09:06:51', 'curtains_opened.png', 'curtains_closed.png'),
+(404, 104, 'Alarm', b'0', b'1', b'1', 79, 0, '2016-12-23 09:06:50', 'alarm.png', 'alarm_off.png'),
 (501, 105, 'Roof Lamp', b'0', b'1', b'1', 94, 180, '2016-12-19 09:05:13', 'Roof_Lamp_on.png', 'Roof_Lamp_off.png'),
-(502, 105, 'AC', b'1', b'1', b'1', 100, 2400, '2016-12-19 09:05:06', 'cooler_on.png', 'cooler_off.png'),
-(503, 105, 'Curtains', b'1', b'1', b'1', -1, 0, '2016-12-19 09:05:09', 'curtains_opened.png', 'curtains_closed.png'),
+(502, 105, 'AC', b'0', b'1', b'1', 100, 2400, '2016-12-23 20:25:46', 'cooler_on.png', 'cooler_off.png'),
+(503, 105, 'Curtains', b'0', b'1', b'1', -1, 0, '2016-12-23 20:25:48', 'curtains_opened.png', 'curtains_closed.png'),
 (504, 105, 'Alarm', b'0', b'1', b'0', 80, 0, '2016-12-02 21:41:20', 'alarm.png', 'alarm_off.png'),
 (601, 106, 'Roof Lamp', b'0', b'1', b'0', 95, 120, '2016-12-02 21:41:20', 'Roof_Lamp_on.png', 'Roof_Lamp_off.png'),
-(602, 106, 'AC', b'0', b'1', b'1', 99, 1800, '2016-12-14 23:16:24', 'cooler_on.png', 'cooler_off.png'),
+(602, 106, 'AC', b'0', b'1', b'1', 99, 1800, '2016-12-23 09:07:05', 'cooler_on.png', 'cooler_off.png'),
 (604, 106, 'Alarm', b'0', b'1', b'0', 76, 0, '2016-12-14 17:22:35', 'alarm.png', 'alarm_off.png'),
 (801, 108, 'Roof Lamp', b'0', b'1', b'0', 96, 60, '2016-12-02 21:41:20', 'Roof_Lamp_on.png', 'Roof_Lamp_off.png'),
 (901, 109, 'Roof Lamp', b'0', b'1', b'0', 97, 120, '2016-12-02 21:41:21', 'Roof_Lamp_on.png', 'Roof_Lamp_off.png'),
 (902, 109, 'Garage Door', b'0', b'1', b'0', -1, 0, '2016-12-02 21:41:21', 'Garage-door_open.png', 'Garage-door_closed.png'),
 (1001, 110, 'Security Camera', b'0', b'1', b'0', 107, 0, '2016-11-28 21:00:00', 'security-camera_on.png', 'security-camera_off.png'),
 (1002, 110, 'Security Camera', b'0', b'1', b'0', 108, 0, '2016-11-28 21:00:00', 'security-camera_on.png', 'security-camera_off.png'),
-(1004, 110, 'Alarm', b'0', b'1', b'0', 77, 0, '2016-12-14 17:21:52', 'alarm.png', 'alarm_off.png'),
+(1004, 110, 'Alarm', b'0', b'1', b'0', 77, 0, '2016-12-23 09:03:19', 'alarm.png', 'alarm_off.png'),
 (1005, 110, 'Water Pump', b'0', b'0', b'0', 82, 0, '2016-12-14 19:21:00', 'water-tank.png', 'water-tank.png');
 
 -- --------------------------------------------------------
@@ -331,7 +331,6 @@ CREATE TABLE `ip_address` (
   `ID` int(2) NOT NULL,
   `DeviceName` varchar(25) NOT NULL,
   `IPaddress` varchar(15) CHARACTER SET utf8 NOT NULL,
-  `CameraID` int(4) DEFAULT NULL,
   `RotationBy` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -339,12 +338,12 @@ CREATE TABLE `ip_address` (
 -- Dumping data for table `ip_address`
 --
 
-INSERT INTO `ip_address` (`ID`, `DeviceName`, `IPaddress`, `CameraID`, `RotationBy`) VALUES
-(1, 'Router', '192.168.1.1', NULL, NULL),
-(2, 'Raspberry Pi', '192.168.1.99', NULL, NULL),
-(3, 'Relay Switch', '192.168.1.102', NULL, NULL),
-(4, 'Security Camera 1', '192.168.1.100', 1001, 270),
-(5, 'Security Camera 2', '192.168.1.101', 1002, 0);
+INSERT INTO `ip_address` (`ID`, `DeviceName`, `IPaddress`, `RotationBy`) VALUES
+(1, 'Router', '192.168.1.1', NULL),
+(2, 'Raspberry Pi', '192.168.1.99', NULL),
+(3, 'Relay Switch', '192.168.1.102', NULL),
+(4, 'Security Camera 1', '192.168.1.100', 270),
+(5, 'Security Camera 2', '192.168.1.101', 0);
 
 -- --------------------------------------------------------
 
@@ -368,7 +367,7 @@ INSERT INTO `log` (`LogRecordID`, `RecordCategoryID`, `isDeleted`, `Description`
 (1, 15, b'0', 'Admin (System Admin) added a new user (test)', '2016-12-11 16:45:53'),
 (2, 16, b'0', 'Admin (System Admin) deleted user (test)', '2016-12-11 16:55:18'),
 (4, 17, b'0', 'Admin (System Admin) disabled the account of user (Ahmad alghamdi)', '2016-12-11 17:10:30'),
-(5, 17, b'0', 'Admin (System Admin) Enabled the account of user (Ahmad alghamdi)', '2016-12-11 17:13:48'),
+(5, 18, b'0', 'Admin (System Admin) Enabled the account of user (Ahmad alghamdi)', '2016-12-11 17:13:48'),
 (7, 19, b'0', 'Admin (System Admin) authorized (House_Parameters) to user (Ahmad alghamdi)', '2016-12-11 17:56:21'),
 (9, 20, b'0', 'Admin (System Admin) unauthorized (House_Parameters) from user (Ahmad alghamdi)', '2016-12-11 17:56:24'),
 (12, 15, b'0', 'Admin (System Admin) added a new user (test test2)', '2016-12-12 13:06:21'),
@@ -400,11 +399,6 @@ INSERT INTO `log` (`LogRecordID`, `RecordCategoryID`, `isDeleted`, `Description`
 (60, 24, b'0', 'Admin (System Admin) [Opened] the (Curtains) in (Ahmad_Room)', '2016-12-14 16:49:12'),
 (61, 24, b'0', 'Admin (System Admin) [Closed] the (Curtains) in (Ahmad_Room)', '2016-12-14 16:49:13'),
 (62, 21, b'0', 'Failed log in attempt with Email (system.admin@gmail.com) & Password (1234)', '2016-12-14 18:29:37'),
-(63, 21, b'0', 'Failed log in attempt with Email (system.admin@gmail.com) & Password (1234)', '2016-12-14 18:29:42'),
-(64, 21, b'0', 'Failed log in attempt with Email (system.admin@gmail.com) & Password (1234)', '2016-12-14 18:29:47'),
-(65, 21, b'0', 'Failed log in attempt with Email (system.admin@gmail.com) & Password (123)', '2016-12-14 18:29:55'),
-(66, 21, b'0', 'Failed log in attempt with Email (system.admin@gmail.com) & Password (1234)', '2016-12-14 18:30:02'),
-(67, 21, b'0', 'Failed log in attempt with Email (system.admin@gmail.com) & Password (1234)', '2016-12-14 18:30:22'),
 (68, 22, b'0', 'Admin (System Admin) has successfully logged in', '2016-12-14 18:30:48'),
 (69, 23, b'0', 'Admin (System Admin) turned the (AC) [ON] in (Ahmad_Room)', '2016-12-14 20:16:17'),
 (70, 23, b'0', 'Admin (System Admin) turned the (AC) [OFF] in (Ahmad_Room)', '2016-12-14 20:16:18'),
@@ -416,11 +410,10 @@ INSERT INTO `log` (`LogRecordID`, `RecordCategoryID`, `isDeleted`, `Description`
 (76, 20, b'0', 'Admin (System Admin) unauthorized (Ahmad_Room) from user (System Admin)', '2016-12-14 20:55:23'),
 (77, 23, b'0', 'Admin (System Admin) turned the (AC) [ON] in (Ahmad_Room)', '2016-12-15 09:21:11'),
 (78, 23, b'0', 'Admin (System Admin) turned the (AC) [OFF] in (Ahmad_Room)', '2016-12-15 09:21:12'),
-(79, 21, b'0', 'Failed log in attempt with Email (system.admin@gmail.com) & Password (1234)', '2016-12-15 10:18:12'),
 (80, 22, b'0', 'Admin (System Admin) has successfully logged in', '2016-12-15 10:18:25'),
 (81, 22, b'0', 'Admin (System Admin) has successfully logged in', '2016-12-15 14:56:42'),
 (82, 17, b'0', 'Admin (System Admin) disabled the account of user (Huda Azzahrani)', '2016-12-15 15:11:30'),
-(83, 17, b'0', 'Admin (System Admin) Enabled the account of user (Huda Azzahrani)', '2016-12-15 15:11:33'),
+(83, 18, b'0', 'Admin (System Admin) Enabled the account of user (Huda Azzahrani)', '2016-12-15 15:11:33'),
 (84, 19, b'0', 'Admin (System Admin) authorized (House_Parameters) to user (Ahmad alghamdi)', '2016-12-15 15:11:40'),
 (85, 20, b'0', 'Admin (System Admin) unauthorized (House_Parameters) from user (Ahmad alghamdi)', '2016-12-15 15:11:41'),
 (86, 15, b'0', 'Admin (System Admin) added a new user (Riyad Jaamour)', '2016-12-16 03:04:15'),
@@ -448,11 +441,7 @@ INSERT INTO `log` (`LogRecordID`, `RecordCategoryID`, `isDeleted`, `Description`
 (108, 11, b'0', 'Task (Boy Room after no Motion) in Ahmad_Room Executed with (Motion Sensor) and Turned ( Roof Lamp [false] ), ( AC [false] ), ( Curtains [false] )', '2016-12-15 04:03:02'),
 (109, 11, b'0', 'Task (Parents Room Motion) in Parents_Room Executed with (Motion Sensor) and Turned ( Roof Lamp [true] ), ( AC [true] ), ( Curtains [true] )', '2016-12-15 04:03:35'),
 (110, 11, b'0', 'Task (Parents Room after no Motion) in Parents_Room Executed with (Motion Sensor) and Turned ( Roof Lamp [false] ), ( Curtains [false] )', '2016-12-15 04:06:21'),
-(111, 13, b'0', 'Task (Water) in House_Parameters Executed with (Ultrasonic) The Water level in the tank has reached 40%.', '2016-12-15 04:07:10'),
-(112, 13, b'0', 'Task (Water) in House_Parameters Executed with (Ultrasonic) The Water level in the tank has reached 40%.', '2016-12-15 04:07:14'),
 (113, 13, b'0', 'Task (Water) in House_Parameters Executed with (Ultrasonic) The Water level in the tank has reached 40%.', '2016-12-15 04:07:20'),
-(114, 13, b'0', 'Task (Water) in House_Parameters Executed with (Ultrasonic) The Water level in the tank has reached 40%.', '2016-12-15 04:07:25'),
-(115, 13, b'0', 'Task (Water) in House_Parameters Executed with (Ultrasonic) The Water level in the tank has reached 40%.', '2016-12-15 04:07:29'),
 (116, 11, b'0', 'Task (Parents Room Motion) in Parents_Room Executed with (Motion Sensor) and Turned ( Roof Lamp [true] ), ( AC [true] ), ( Curtains [true] )', '2016-12-15 04:08:57'),
 (117, 11, b'0', 'Task (Parents Room after no Motion) in Parents_Room Executed with (Motion Sensor) and Turned ( Roof Lamp [false] ), ( Curtains [false] )', '2016-12-15 04:09:59'),
 (118, 11, b'0', 'Task (Boy Room after no Motion) in Ahmad_Room Executed with (Motion Sensor) and Turned ( Roof Lamp [false] ), ( AC [false] ), ( Curtains [false] )', '2016-12-15 04:11:27'),
@@ -460,24 +449,13 @@ INSERT INTO `log` (`LogRecordID`, `RecordCategoryID`, `isDeleted`, `Description`
 (132, 25, b'0', 'Admin (System Admin) created a task with name (testin) in room (Garage)', '2016-12-16 18:24:31'),
 (133, 27, b'0', 'Admin (System Admin) deleted task (testin) from room (Garage)', '2016-12-16 18:24:36'),
 (134, 27, b'0', 'Admin (System Admin) deleted task (testin) from room (Garage)', '2016-12-16 18:24:54'),
-(135, 13, b'0', 'Task (Water) in House_Parameters Executed with (Ultrasonic) The Water level in the tank has reached 40%.', '2016-12-17 08:35:33'),
-(136, 13, b'0', 'Task (Water) in House_Parameters Executed with (Ultrasonic) The Water level in the tank has reached 40%.', '2016-12-17 08:35:34'),
 (137, 11, b'0', 'Task (AC ON) in Parents_Room Executed with (Temperature Sensor) and Turned ( AC [true] )', '2016-12-17 08:35:48'),
-(138, 13, b'0', 'Task (Water) in House_Parameters Executed with (Ultrasonic) The Water level in the tank has reached 40%.', '2016-12-17 08:39:26'),
 (139, 13, b'0', 'Task (Water) in House_Parameters Executed with (Ultrasonic) The Water level in the tank has reached 40%.', '2016-12-17 08:41:09'),
-(169, 13, b'0', 'Task (Water) in House_Parameters Executed with (Ultrasonic) The Water level in the tank has reached 40%.', '2016-12-17 09:25:25'),
-(170, 13, b'0', 'Task (Water) in House_Parameters Executed with (Ultrasonic) The Water level in the tank has reached 40%.', '2016-12-17 09:30:17'),
 (171, 11, b'0', 'Task (Garage Motion) in Garage Executed with (Motion Sensor) and Turned ( Roof Lamp [true] )', '2016-12-17 09:30:34'),
-(172, 13, b'0', 'Task (Water) in House_Parameters Executed with (Ultrasonic) The Water level in the tank has reached 40%.', '2016-12-17 09:31:09'),
 (173, 11, b'0', 'Task (Garage after no Motion) in Garage Executed with (Motion Sensor) and Turned ( Roof Lamp [false] )', '2016-12-17 09:31:38'),
-(174, 13, b'0', 'Task (Water) in House_Parameters Executed with (Ultrasonic) The Water level in the tank has reached 40%.', '2016-12-17 09:32:38'),
-(175, 13, b'0', 'Task (Water) in House_Parameters Executed with (Ultrasonic) The Water level in the tank has reached 40%.', '2016-12-17 09:32:40'),
-(176, 13, b'0', 'Task (Water) in House_Parameters Executed with (Ultrasonic) The Water level in the tank has reached 40%.', '2016-12-17 09:33:28'),
 (177, 13, b'0', 'Task (Water) in House_Parameters Executed with (Ultrasonic) The Water level in the tank has reached 40%.', '2016-12-17 09:34:00'),
-(178, 13, b'0', 'Task (Water) in House_Parameters Executed with (Ultrasonic) The Water level in the tank has reached 40%.', '2016-12-17 09:45:54'),
 (179, 23, b'0', 'Admin (System Admin) turned the (Roof Lamp) [ON] in (Parents_Room)', '2016-12-17 09:52:00'),
 (180, 23, b'0', 'Admin (System Admin) turned the (Roof Lamp) [OFF] in (Parents_Room)', '2016-12-17 09:52:02'),
-(181, 21, b'0', 'Failed log in attempt with Email (medo2011r@gmail.com) & Password (1234)', '2016-12-20 08:10:31'),
 (182, 22, b'0', 'Admin (System Admin) has successfully logged in', '2016-12-20 08:10:38'),
 (183, 22, b'0', 'Admin (System Admin) has successfully logged in', '2016-12-20 08:19:56'),
 (184, 22, b'0', 'Admin (System Admin) has successfully logged in', '2016-12-20 09:46:59'),
@@ -573,7 +551,122 @@ INSERT INTO `log` (`LogRecordID`, `RecordCategoryID`, `isDeleted`, `Description`
 (274, 26, b'0', 'Admin (System Admin) edited task (Camera) in room (House_Parameters)', '2016-12-21 20:38:16'),
 (275, 26, b'0', 'Admin (System Admin) edited task (Camera) in room (House_Parameters)', '2016-12-21 20:38:24'),
 (276, 25, b'0', 'Admin (System Admin) created a task with name (test security) in room (House_Parameters)', '2016-12-21 20:39:39'),
-(277, 27, b'0', 'Admin (System Admin) deleted task (test security) from room (House_Parameters)', '2016-12-21 20:40:34');
+(277, 27, b'0', 'Admin (System Admin) deleted task (test security) from room (House_Parameters)', '2016-12-21 20:40:34'),
+(278, 23, b'0', 'Admin (System Admin) turned the (AC) [OFF] in (Ahmad_Room)', '2016-12-22 09:24:40'),
+(280, 22, b'0', 'Admin (System Admin) has successfully logged in', '2016-12-22 10:15:52'),
+(281, 23, b'0', 'Admin (System Admin) turned the (AC) [ON] in (Parents_Room)', '2016-12-22 14:54:14'),
+(282, 23, b'0', 'Admin (System Admin) turned the (AC) [OFF] in (Parents_Room)', '2016-12-22 14:54:15'),
+(283, 26, b'0', 'Admin (System Admin) edited task (Living Room Motion Room after no Motion) in room (Living_Room)', '2016-12-22 14:55:07'),
+(284, 26, b'0', 'Admin (System Admin) edited task (Living Room Motion Room after no Motion) in room (Living_Room)', '2016-12-22 14:55:11'),
+(285, 22, b'0', 'Admin (System Admin) has successfully logged in', '2016-12-23 08:58:02'),
+(286, 15, b'0', 'Admin (System Admin) added a new user (test)', '2016-12-23 09:00:27'),
+(288, 22, b'0', 'User (test) has successfully logged in', '2016-12-23 09:03:26'),
+(289, 19, b'0', 'Admin (System Admin) authorized (Sarah_Room) to user (test)', '2016-12-23 09:05:49'),
+(290, 19, b'0', 'Admin (System Admin) authorized (Kitchen) to user (test)', '2016-12-23 09:05:56'),
+(291, 23, b'0', 'User (test) turned the (Roof Lamp) [ON] in (Sarah_Room)', '2016-12-23 09:06:45'),
+(292, 23, b'0', 'User (test) turned the (AC) [ON] in (Sarah_Room)', '2016-12-23 09:06:47'),
+(293, 24, b'0', 'User (test) [Opened] the (Curtains) in (Sarah_Room)', '2016-12-23 09:06:48'),
+(294, 23, b'0', 'User (test) turned the (Alarm) [ON] in (Sarah_Room)', '2016-12-23 09:06:50'),
+(295, 23, b'0', 'User (test) turned the (Alarm) [OFF] in (Sarah_Room)', '2016-12-23 09:06:50'),
+(296, 24, b'0', 'User (test) [Closed] the (Curtains) in (Sarah_Room)', '2016-12-23 09:06:51'),
+(297, 23, b'0', 'User (test) turned the (AC) [OFF] in (Sarah_Room)', '2016-12-23 09:06:53'),
+(298, 23, b'0', 'User (test) turned the (AC) [ON] in (Kitchen)', '2016-12-23 09:07:04'),
+(299, 23, b'0', 'User (test) turned the (AC) [OFF] in (Kitchen)', '2016-12-23 09:07:05'),
+(300, 25, b'0', 'User (test) created a task with name (fajer prayer) in room (Sarah_Room)', '2016-12-23 09:17:54'),
+(301, 21, b'0', 'Failed log in attempt with Email (mkb_2011@hotmail.com) & Password (123)', '2016-12-23 09:23:00'),
+(302, 22, b'0', 'Admin (System Admin) has successfully logged in', '2016-12-23 09:23:18'),
+(303, 17, b'0', 'Admin (System Admin) disabled the account of user (test)', '2016-12-23 09:26:04'),
+(304, 22, b'0', 'User (test) has successfully logged in', '2016-12-23 09:26:10'),
+(305, 20, b'0', 'Admin (System Admin) unauthorized (Kitchen) from user (test)', '2016-12-23 10:29:53'),
+(306, 20, b'0', 'Admin (System Admin) unauthorized (Sarah_Room) from user (test)', '2016-12-23 10:29:54'),
+(307, 19, b'0', 'Admin (System Admin) authorized (Sarah_Room) to user (test)', '2016-12-23 10:30:29'),
+(308, 19, b'0', 'Admin (System Admin) authorized (Kitchen) to user (test)', '2016-12-23 10:30:30'),
+(309, 20, b'0', 'Admin (System Admin) unauthorized (Kitchen) from user (test)', '2016-12-23 10:46:59'),
+(310, 19, b'0', 'Admin (System Admin) authorized (Kitchen) to user (test)', '2016-12-23 10:47:01'),
+(311, 19, b'0', 'Admin (System Admin) authorized (Bathroom) to user (test)', '2016-12-23 10:47:41'),
+(312, 20, b'0', 'Admin (System Admin) unauthorized (Bathroom) from user (test)', '2016-12-23 10:47:42'),
+(313, 27, b'0', 'Admin (System Admin) deleted task (fajer prayer) from room (Sarah_Room)', '2016-12-23 10:48:48'),
+(314, 20, b'0', 'Admin (System Admin) unauthorized (Kitchen) from user (test)', '2016-12-23 10:48:54'),
+(315, 20, b'0', 'Admin (System Admin) unauthorized (Sarah_Room) from user (test)', '2016-12-23 10:48:55'),
+(316, 16, b'0', 'Admin (System Admin) deleted user (test)', '2016-12-23 10:49:13'),
+(317, 17, b'0', 'Admin (System Admin) disabled the account of user (Sarah Alghamdi)', '2016-12-23 10:51:10'),
+(318, 18, b'0', 'Admin (System Admin) Enabled the account of user (Sarah Alghamdi)', '2016-12-23 10:51:14'),
+(319, 22, b'0', 'Admin (Abdullah Alghamdi) has successfully logged in', '2016-12-23 10:53:35'),
+(320, 22, b'0', 'User (Huda Azzahrani) has successfully logged in', '2016-12-23 10:54:33'),
+(321, 21, b'0', 'Failed log in attempt with Email (abdullah.alghamdi@gmail.com) & Password (12345)', '2016-12-23 10:56:16'),
+(325, 22, b'0', 'Admin (Abdullah Alghamdi) has successfully logged in', '2016-12-23 10:56:53'),
+(326, 22, b'0', 'Admin (Abdullah Alghamdi) has successfully logged in', '2016-12-23 11:44:16'),
+(327, 25, b'0', 'Admin (Abdullah Alghamdi) created a task with name (test admin) in room (Parents_Room)', '2016-12-23 11:45:24'),
+(328, 27, b'0', 'Admin (Abdullah Alghamdi) deleted task (test admin) from room (Parents_Room)', '2016-12-23 11:46:19'),
+(334, 22, b'0', 'Admin (System Admin) has successfully logged in', '2016-12-23 11:48:57'),
+(335, 22, b'0', 'Admin (Abdullah Alghamdi) has successfully logged in', '2016-12-23 11:58:38'),
+(336, 22, b'0', 'Admin (System Admin) has successfully logged in', '2016-12-23 11:58:50'),
+(339, 21, b'0', 'Failed log in attempt with Email (Ahmad.alghamdi@hotmail.com) & Password (123321)', '2016-12-23 12:02:51'),
+(341, 22, b'0', 'Admin (Abdullah Alghamdi) has successfully logged in', '2016-12-23 12:03:25'),
+(343, 22, b'0', 'Admin (Abdullah Alghamdi) has successfully logged in', '2016-12-23 12:04:00'),
+(344, 25, b'0', 'Admin (Abdullah Alghamdi) created a task with name (Fajer Prayer) in room (Ahmad_Room)', '2016-12-23 12:05:11'),
+(345, 22, b'0', 'Admin (System Admin) has successfully logged in', '2016-12-23 12:07:41'),
+(346, 22, b'0', 'Admin (Abdullah Alghamdi) has successfully logged in', '2016-12-23 12:37:29'),
+(347, 25, b'0', 'Admin (Abdullah Alghamdi) created a task with name (new task) in room (Kitchen)', '2016-12-23 12:53:16'),
+(348, 27, b'0', 'Admin (Abdullah Alghamdi) deleted task (new task) from room (Kitchen)', '2016-12-23 12:53:34'),
+(349, 22, b'0', 'Admin (System Admin) has successfully logged in', '2016-12-23 12:53:44'),
+(350, 25, b'0', 'Admin (System Admin) created a task with name (tempratue task) in room (Kitchen)', '2016-12-23 12:54:14'),
+(351, 27, b'0', 'Admin (System Admin) deleted task (tempratue task) from room (Kitchen)', '2016-12-23 13:23:49'),
+(352, 22, b'0', 'Admin (Abdullah Alghamdi) has successfully logged in', '2016-12-23 13:24:04'),
+(353, 27, b'0', 'Admin (Abdullah Alghamdi) deleted task (Fajer Prayer) from room (Ahmad_Room)', '2016-12-23 13:24:42'),
+(354, 26, b'0', 'Admin (Abdullah Alghamdi) edited task () in room (Parents_Room)', '2016-12-23 14:56:43'),
+(355, 26, b'0', 'Admin (Abdullah Alghamdi) edited task () in room (Parents_Room)', '2016-12-23 14:56:45'),
+(356, 26, b'0', 'Admin (Abdullah Alghamdi) edited task () in room (Parents_Room)', '2016-12-23 14:56:46'),
+(357, 26, b'0', 'Admin (Abdullah Alghamdi) edited task () in room (Parents_Room)', '2016-12-23 14:56:49'),
+(358, 26, b'0', 'Admin (Abdullah Alghamdi) edited task () in room (Parents_Room)', '2016-12-23 14:56:51'),
+(359, 26, b'0', 'Admin (Abdullah Alghamdi) edited task () in room (Parents_Room)', '2016-12-23 14:56:52'),
+(360, 26, b'0', 'Admin (Abdullah Alghamdi) edited task () in room (Parents_Room)', '2016-12-23 14:56:57'),
+(361, 26, b'0', 'Admin (Abdullah Alghamdi) edited task () in room (Parents_Room)', '2016-12-23 14:56:58'),
+(362, 26, b'0', 'Admin (Abdullah Alghamdi) edited task () in room (Parents_Room)', '2016-12-23 14:57:00'),
+(363, 26, b'0', 'Admin (Abdullah Alghamdi) edited task () in room (Parents_Room)', '2016-12-23 14:57:01'),
+(364, 22, b'0', 'User (Huda Azzahrani) has successfully logged in', '2016-12-23 14:57:12'),
+(365, 22, b'0', 'Admin (System Admin) has successfully logged in', '2016-12-23 14:57:31'),
+(366, 22, b'0', 'Admin (Abdullah Alghamdi) has successfully logged in', '2016-12-23 14:58:20'),
+(367, 26, b'0', 'Admin (Abdullah Alghamdi) edited task () in room (Parents_Room)', '2016-12-23 14:59:18'),
+(368, 26, b'0', 'Admin (Abdullah Alghamdi) edited task () in room (Parents_Room)', '2016-12-23 14:59:20'),
+(369, 26, b'0', 'Admin (Abdullah Alghamdi) edited task () in room (Parents_Room)', '2016-12-23 14:59:22'),
+(370, 26, b'0', 'Admin (Abdullah Alghamdi) edited task () in room (Parents_Room)', '2016-12-23 18:05:23'),
+(371, 26, b'0', 'Admin (Abdullah Alghamdi) edited task () in room (Parents_Room)', '2016-12-23 18:05:32'),
+(372, 22, b'0', 'User (Ahmad alghamdi) has successfully logged in', '2016-12-23 19:37:03'),
+(373, 25, b'0', 'User (Ahmad alghamdi) created a task with name (Work Alarm) in room (Ahmad_Room)', '2016-12-23 19:38:19'),
+(376, 22, b'0', 'User (Sarah Alghamdi) has successfully logged in', '2016-12-23 19:50:21'),
+(377, 22, b'0', 'Admin (System Admin) has successfully logged in', '2016-12-23 19:52:14'),
+(378, 19, b'0', 'Admin (System Admin) authorized (Kitchen) to user (Sarah Alghamdi)', '2016-12-23 19:53:55'),
+(379, 19, b'0', 'Admin (System Admin) authorized (Living_Room) to user (Sarah Alghamdi)', '2016-12-23 19:54:23'),
+(380, 19, b'0', 'Admin (System Admin) authorized (Living_Room) to user (Ahmad alghamdi)', '2016-12-23 19:54:39'),
+(381, 22, b'0', 'User (Sarah Alghamdi) has successfully logged in', '2016-12-23 19:54:54'),
+(382, 22, b'0', 'Admin (System Admin) has successfully logged in', '2016-12-23 19:55:19'),
+(383, 19, b'0', 'Admin (System Admin) authorized (Living_Room) to user (Huda Azzahrani)', '2016-12-23 19:55:25'),
+(384, 22, b'0', 'User (Sarah Alghamdi) has successfully logged in', '2016-12-23 19:55:34'),
+(385, 22, b'0', 'User (Ahmad alghamdi) has successfully logged in', '2016-12-23 19:55:50'),
+(386, 22, b'0', 'Admin (Abdullah Alghamdi) has successfully logged in', '2016-12-23 19:56:15'),
+(387, 22, b'0', 'User (Sarah Alghamdi) has successfully logged in', '2016-12-23 19:57:32'),
+(388, 25, b'0', 'User (Sarah Alghamdi) created a task with name (Turn AC OFF when Cold) in room (Sarah_Room)', '2016-12-23 19:58:27'),
+(389, 22, b'0', 'User (Huda Azzahrani) has successfully logged in', '2016-12-23 19:58:55'),
+(390, 25, b'0', 'User (Huda Azzahrani) created a task with name (Turn AC ON) in room (Kitchen)', '2016-12-23 19:59:57'),
+(391, 22, b'0', 'Admin (System Admin) has successfully logged in', '2016-12-23 20:00:26'),
+(392, 22, b'0', 'Admin (Abdullah Alghamdi) has successfully logged in', '2016-12-23 20:01:44'),
+(393, 25, b'0', 'Admin (Abdullah Alghamdi) created a task with name (Gas and Fire Detection) in room (Kitchen)', '2016-12-23 20:02:31'),
+(394, 22, b'0', 'Admin (System Admin) has successfully logged in', '2016-12-23 20:06:04'),
+(395, 22, b'0', 'Admin (Abdullah Alghamdi) has successfully logged in', '2016-12-23 20:06:27'),
+(396, 25, b'0', 'Admin (Abdullah Alghamdi) created a task with name (Water Tank level 20%) in room (House_Parameters)', '2016-12-23 20:07:27'),
+(397, 26, b'0', 'Admin (Abdullah Alghamdi) edited task (Water Tank level 40%) in room (House_Parameters)', '2016-12-23 20:08:12'),
+(398, 26, b'0', 'Admin (Abdullah Alghamdi) edited task () in room (Parents_Room)', '2016-12-23 20:25:15'),
+(399, 26, b'0', 'Admin (Abdullah Alghamdi) edited task () in room (Parents_Room)', '2016-12-23 20:25:18'),
+(400, 26, b'0', 'Admin (Abdullah Alghamdi) edited task () in room (Parents_Room)', '2016-12-23 20:25:21'),
+(401, 26, b'0', 'Admin (Abdullah Alghamdi) edited task () in room (Parents_Room)', '2016-12-23 20:25:29'),
+(402, 23, b'0', 'Admin (Abdullah Alghamdi) turned the (AC) [OFF] in (Living_Room)', '2016-12-23 20:25:46'),
+(403, 23, b'0', 'Admin (Abdullah Alghamdi) turned the (Roof Lamp) [OFF] in (Sarah_Room)', '2016-12-23 20:25:47'),
+(404, 24, b'0', 'Admin (Abdullah Alghamdi) [Closed] the (Curtains) in (Living_Room)', '2016-12-23 20:25:48'),
+(405, 23, b'0', 'Admin (Abdullah Alghamdi) turned the (Roof Lamp) [OFF] in (Ahmad_Room)', '2016-12-23 20:25:49'),
+(406, 26, b'0', 'Admin (Abdullah Alghamdi) edited task () in room (Parents_Room)', '2016-12-23 20:26:37'),
+(407, 26, b'0', 'Admin (Abdullah Alghamdi) edited task () in room (Parents_Room)', '2016-12-23 20:26:41'),
+(408, 22, b'0', 'Admin (System Admin) has successfully logged in', '2016-12-23 20:39:36');
 
 -- --------------------------------------------------------
 
@@ -736,7 +829,7 @@ INSERT INTO `sensor` (`SensorID`, `SensorTypeID`, `RoomID`, `SenesorState`, `Sen
 (900, 20, 109, b'0', 0, b'1', -1, '2016-11-20 19:41:31'),
 (901, 10, 109, b'0', 0, b'1', 54, '2016-12-02 20:16:29'),
 (1000, 20, 110, b'0', 0, b'1', -1, '2016-11-20 19:43:22'),
-(1001, 15, 110, b'0', 0, b'1', 43, '2016-12-09 14:48:03'),
+(1001, 15, 110, b'0', 0, b'1', 43, '2016-12-23 09:02:58'),
 (1002, 14, 110, b'0', 6, b'1', -1, '2016-12-20 18:37:26'),
 (1003, 14, 110, b'0', 19, b'0', -1, '2016-12-02 21:47:42');
 
@@ -818,8 +911,8 @@ CREATE TABLE `table_status` (
 --
 
 INSERT INTO `table_status` (`TableID`, `TableName`, `isTableUpdated`, `LastUpdated`) VALUES
-(1, 'Device', b'1', '2016-12-07 13:16:22'),
-(2, 'Task', b'1', '2016-12-07 13:44:06');
+(1, 'Device', b'1', '2016-12-22 09:24:40'),
+(2, 'Task', b'1', '2016-12-22 14:55:07');
 
 -- --------------------------------------------------------
 
@@ -854,24 +947,29 @@ CREATE TABLE `task` (
 
 INSERT INTO `task` (`TaskID`, `UserID`, `RoomID`, `SensorID`, `isDeleted`, `isDisabled`, `isDefault`, `TaskName`, `ActionTime`, `repeatDaily`, `ActionDate`, `AlarmDuration`, `AlarmInterval`, `SelectedSensorValue`, `DateCreated`, `NotifyByEmail`, `EnableTaskOnTime`, `DisableTaskOnTime`) VALUES
 (6, 1, 108, 801, b'0', b'0', b'1', 'open lights on motion sensor', NULL, b'1', NULL, -1, -1, -1, '2016-10-26 18:50:03', b'0', NULL, NULL),
-(61, 1, 101, 101, b'0', b'0', b'0', 'Parents Room Motion', NULL, b'1', NULL, -1, -1, -1, '2016-12-16 21:22:01', b'1', NULL, NULL),
-(65, 1, 102, 201, b'0', b'0', b'0', 'Boy Room Motion', NULL, b'1', NULL, -1, -1, -1, '2016-12-08 08:55:50', b'0', NULL, NULL),
-(66, 1, 102, 201, b'0', b'0', b'0', 'Boy Room after no Motion', NULL, b'1', NULL, -1, -1, 1, '2016-12-08 08:56:14', b'0', NULL, NULL),
-(70, 1, 101, 101, b'0', b'0', b'0', 'Parents Room after no Motion', NULL, b'1', NULL, -1, -1, 1, '2016-12-16 21:12:48', b'0', NULL, NULL),
-(71, 1, 104, 401, b'0', b'0', b'0', 'Girl Room Motion', NULL, b'1', NULL, -1, -1, -1, '2016-12-21 06:34:51', b'0', NULL, NULL),
-(72, 1, 104, 401, b'0', b'0', b'0', 'Girl Room after no Motion', NULL, b'1', NULL, -1, -1, 1, '2016-12-08 09:05:00', b'0', NULL, NULL),
-(74, 1, 105, 501, b'0', b'1', b'0', 'Living Room Motion', NULL, b'1', NULL, -1, -1, -1, '2016-12-08 09:50:11', b'0', NULL, NULL),
-(75, 1, 105, 501, b'0', b'1', b'0', 'Living Room Motion Room after no Motion', NULL, b'1', NULL, -1, -1, 1, '2016-12-08 10:04:17', b'0', NULL, NULL),
-(76, 1, 106, 601, b'0', b'0', b'0', 'Kitchen Motion', NULL, b'1', NULL, -1, -1, -1, '2016-12-08 09:07:45', b'0', NULL, NULL),
-(77, 1, 106, 601, b'0', b'0', b'0', 'Kitchen after no Motion', NULL, b'1', NULL, -1, -1, 1, '2016-12-21 20:33:40', b'0', NULL, NULL),
-(78, 1, 108, 801, b'0', b'0', b'0', 'Bathroom after no Motion', NULL, b'1', NULL, -1, -1, 1, '2016-12-08 09:11:03', b'0', NULL, NULL),
-(79, 1, 109, 901, b'0', b'0', b'0', 'Garage Motion', NULL, b'1', NULL, -1, -1, -1, '2016-12-08 09:11:37', b'0', NULL, NULL),
-(80, 1, 109, 901, b'0', b'0', b'0', 'Garage after no Motion', NULL, b'1', NULL, -1, -1, 1, '2016-12-08 09:11:55', b'0', NULL, NULL),
-(81, 1, 101, 102, b'0', b'0', b'0', 'AC ON', NULL, b'1', NULL, -1, -1, 25, '2016-12-08 10:22:30', b'0', NULL, NULL),
-(82, 1, 101, 103, b'0', b'0', b'0', 'Light', NULL, b'1', NULL, -1, -1, 0, '2016-12-19 07:15:56', b'0', NULL, NULL),
-(83, 1, 110, 1001, b'0', b'0', b'0', 'Camera', NULL, b'1', NULL, -1, -1, -1, '2016-12-21 20:38:24', b'0', NULL, NULL),
-(84, 1, 110, 1002, b'0', b'0', b'0', 'Water', NULL, b'1', NULL, -1, -1, 40, '2016-12-11 17:11:29', b'1', NULL, NULL),
-(85, 1, 101, 100, b'0', b'0', b'0', 'Fajer prayer', '05:40:00', b'1', NULL, 1, 0, 0, '2016-12-19 07:09:24', b'0', NULL, NULL);
+(61, 1, 101, 101, b'0', b'0', b'1', 'Parents Room Motion', NULL, b'1', NULL, -1, -1, -1, '2016-12-16 21:22:01', b'1', NULL, NULL),
+(65, 1, 102, 201, b'0', b'0', b'1', 'Boy Room Motion', NULL, b'1', NULL, -1, -1, -1, '2016-12-08 08:55:50', b'0', NULL, NULL),
+(66, 5, 102, 201, b'0', b'0', b'0', 'Boy Room after no Motion', NULL, b'1', NULL, -1, -1, 1, '2016-12-08 08:56:14', b'0', NULL, NULL),
+(70, 3, 101, 101, b'0', b'1', b'0', 'Parents Room after no Motion', NULL, b'1', NULL, -1, -1, 1, '2016-12-16 21:12:48', b'0', NULL, NULL),
+(71, 1, 104, 401, b'0', b'0', b'1', 'Girl Room Motion', NULL, b'1', NULL, -1, -1, -1, '2016-12-21 06:34:51', b'0', NULL, NULL),
+(72, 7, 104, 401, b'0', b'0', b'0', 'Girl Room after no Motion', NULL, b'1', NULL, -1, -1, 1, '2016-12-08 09:05:00', b'0', NULL, NULL),
+(74, 1, 105, 501, b'0', b'1', b'1', 'Living Room Motion', NULL, b'1', NULL, -1, -1, -1, '2016-12-08 09:50:11', b'0', NULL, NULL),
+(75, 1, 105, 501, b'0', b'1', b'1', 'Living Room Motion Room after no Motion', NULL, b'1', NULL, -1, -1, 1, '2016-12-22 14:55:11', b'0', NULL, NULL),
+(76, 1, 106, 601, b'0', b'0', b'1', 'Kitchen Motion', NULL, b'1', NULL, -1, -1, -1, '2016-12-08 09:07:45', b'0', NULL, NULL),
+(77, 4, 106, 601, b'0', b'0', b'0', 'Kitchen after no Motion', NULL, b'1', NULL, -1, -1, 1, '2016-12-21 20:33:40', b'0', NULL, NULL),
+(78, 3, 108, 801, b'0', b'0', b'0', 'Bathroom after no Motion', NULL, b'1', NULL, -1, -1, 1, '2016-12-08 09:11:03', b'0', NULL, NULL),
+(79, 1, 109, 901, b'0', b'0', b'1', 'Garage Motion', NULL, b'1', NULL, -1, -1, -1, '2016-12-08 09:11:37', b'0', NULL, NULL),
+(80, 3, 109, 901, b'0', b'0', b'0', 'Garage after no Motion', NULL, b'1', NULL, -1, -1, 1, '2016-12-08 09:11:55', b'0', NULL, NULL),
+(81, 4, 101, 102, b'0', b'0', b'0', 'AC ON', NULL, b'1', NULL, -1, -1, 25, '2016-12-08 10:22:30', b'0', NULL, NULL),
+(82, 4, 101, 103, b'0', b'0', b'0', 'Light', NULL, b'1', NULL, -1, -1, 0, '2016-12-19 07:15:56', b'0', NULL, NULL),
+(83, 1, 110, 1001, b'0', b'0', b'1', 'Camera', NULL, b'1', NULL, -1, -1, -1, '2016-12-21 20:38:24', b'0', NULL, NULL),
+(84, 3, 110, 1002, b'0', b'0', b'0', 'Water Tank level 40%', NULL, b'1', NULL, -1, -1, 40, '2016-12-23 20:08:12', b'1', NULL, NULL),
+(85, 3, 101, 100, b'0', b'0', b'0', 'Fajer prayer', '05:40:00', b'1', NULL, 1, 0, 0, '2016-12-19 07:09:24', b'0', NULL, NULL),
+(93, 5, 102, 200, b'0', b'0', b'0', 'Work Alarm', '07:06:00', b'1', NULL, 10, 2, 0, '2016-12-23 19:38:19', b'0', NULL, NULL),
+(94, 7, 104, 402, b'0', b'0', b'0', 'Turn AC OFF when Cold', NULL, b'1', NULL, -1, -1, 20, '2016-12-23 19:58:27', b'0', NULL, NULL),
+(95, 4, 106, 602, b'0', b'0', b'0', 'Turn AC ON', NULL, b'1', NULL, -1, -1, 30, '2016-12-23 19:59:57', b'0', NULL, NULL),
+(96, 1, 106, 604, b'0', b'0', b'1', 'Gas and Fire Detection', NULL, b'1', NULL, -1, -1, 0, '2016-12-23 20:02:31', b'1', NULL, NULL),
+(97, 3, 110, 1002, b'0', b'0', b'0', 'Water Tank level 20%', NULL, b'1', NULL, -1, -1, 20, '2016-12-23 20:07:27', b'1', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -896,7 +994,9 @@ INSERT INTO `task_camera` (`TaskID`, `DeviceID`, `RequiredDeviceStatus`, `TakeIm
 (83, 1001, 1, 8, -1, 480),
 (83, 1002, 1, 1, -1, 480),
 (84, 1001, -1, -1, -1, -1),
-(84, 1002, -1, -1, -1, -1);
+(84, 1002, -1, -1, -1, -1),
+(97, 1001, -1, -1, -1, -1),
+(97, 1002, -1, -1, -1, -1);
 
 -- --------------------------------------------------------
 
@@ -972,7 +1072,22 @@ INSERT INTO `task_devices` (`TaskID`, `DeviceID`, `RequiredDeviceStatus`) VALUES
 (85, 101, 1),
 (85, 102, 0),
 (85, 103, -1),
-(85, 104, 1);
+(85, 104, 1),
+(93, 201, 1),
+(93, 202, 0),
+(93, 203, 1),
+(93, 204, 1),
+(94, 401, -1),
+(94, 402, 0),
+(94, 403, -1),
+(94, 404, -1),
+(95, 601, -1),
+(95, 602, 1),
+(95, 604, -1),
+(96, 601, -1),
+(96, 602, -1),
+(96, 604, -1),
+(97, 1004, -1);
 
 -- --------------------------------------------------------
 
@@ -1000,10 +1115,10 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`UserID`, `Email`, `UserName`, `Title`, `Password`, `isAdmin`, `isDisabled`, `UserImagePath`, `CellPhone`, `SendEmail`, `SendSMS`) VALUES
 (1, 'mkb_2011@hotmail.com', 'System Admin', 'Admin', '1234', b'1', b'0', 'superAdmin.png', 542991095, b'1', b'0'),
-(3, 'abdullah.alghamdi@gmail.com', 'Abdullah Alghamdi', 'Father', '123321', b'1', b'0', 'abdullah.jpg', 555555555, b'1', b'0'),
-(4, 'Huda.Azzahrani@gmail.com', 'Huda Azzahrani', 'Mother', '12345', b'0', b'0', 'huda.png', 548251871, b'1', b'0'),
-(5, 'Ahmad.alghamdi@hotmail.com', 'Ahmad alghamdi', 'Son', '15432', b'0', b'0', 'ahmad.jpg', 548922584, b'0', b'0'),
-(7, 'Sarah.alghamdi@gmail.com', 'Sarah Alghamdi', 'Daughter', '44332211', b'0', b'0', 'sarah.png', 584965482, b'1', b'0');
+(3, 'eyad.jaamour@gmail.com', 'Abdullah Alghamdi', 'Father', '123321', b'1', b'0', 'abdullah.jpg', 555555555, b'1', b'0'),
+(4, 'medo2011r@gmail.com', 'Huda Azzahrani', 'Mother', '12345', b'0', b'0', 'huda.png', 548251871, b'1', b'0'),
+(5, 'eyad.jaamour@hotmail.com', 'Ahmad alghamdi', 'Son', '15432', b'0', b'0', 'ahmad.jpg', 548922584, b'0', b'0'),
+(7, 'meedoobak@gmail.com', 'Sarah Alghamdi', 'Daughter', '44332211', b'0', b'0', 'sarah.png', 584965482, b'1', b'0');
 
 -- --------------------------------------------------------
 
@@ -1022,10 +1137,14 @@ CREATE TABLE `user_authorized_rooms` (
 
 INSERT INTO `user_authorized_rooms` (`UserID`, `RoomID`) VALUES
 (4, 101),
+(4, 105),
 (4, 106),
 (5, 102),
+(5, 105),
 (5, 109),
-(7, 104);
+(7, 104),
+(7, 105),
+(7, 106);
 
 --
 -- Indexes for dumped tables
@@ -1067,8 +1186,7 @@ ALTER TABLE `gpio_pins`
 -- Indexes for table `ip_address`
 --
 ALTER TABLE `ip_address`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `CameraID` (`CameraID`);
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indexes for table `log`
@@ -1192,7 +1310,7 @@ ALTER TABLE `ip_address`
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `LogRecordID` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=278;
+  MODIFY `LogRecordID` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=409;
 --
 -- AUTO_INCREMENT for table `log_category`
 --
@@ -1212,12 +1330,12 @@ ALTER TABLE `system_settings`
 -- AUTO_INCREMENT for table `task`
 --
 ALTER TABLE `task`
-  MODIFY `TaskID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `TaskID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `UserID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `UserID` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- Constraints for dumped tables
 --
@@ -1238,14 +1356,7 @@ ALTER TABLE `device`
 -- Constraints for table `device_stepper_motor`
 --
 ALTER TABLE `device_stepper_motor`
-  ADD CONSTRAINT `device_stepper_motor_ibfk_1` FOREIGN KEY (`DeviceID`) REFERENCES `device` (`DeviceID`),
-  ADD CONSTRAINT `device_stepper_motor_ibfk_2` FOREIGN KEY (`GateNum1`) REFERENCES `gpio_pins` (`PinID`);
-
---
--- Constraints for table `ip_address`
---
-ALTER TABLE `ip_address`
-  ADD CONSTRAINT `ip_address_ibfk_1` FOREIGN KEY (`CameraID`) REFERENCES `device` (`DeviceID`);
+  ADD CONSTRAINT `device_stepper_motor_ibfk_1` FOREIGN KEY (`DeviceID`) REFERENCES `device` (`DeviceID`);
 
 --
 -- Constraints for table `log`

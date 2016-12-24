@@ -47,8 +47,25 @@ class Log
 			return NULL;
 	}
 	
-	
-	
+	public static function getNotificationCenterLog() 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) {
+		  die('unable to connect to database [' . $db->connect_error .']');
+		}
+
+		$sql = "SELECT * FROM log l, log_category lc 
+				WHERE l.RecordCategoryID = lc.RecordCategoryID 
+				AND l.RecordCategoryID IN (12, 13, 14, 21)
+				ORDER BY EntryDate DESC";
+				
+		$result = $db->query($sql);
+	 
+		if ($result != NULL && $result->num_rows >= 1)  
+			return $result;
+		else 
+			return NULL;
+	}
 	
 }
 

@@ -99,6 +99,7 @@
 					$TaskID = $row["TaskID"];
 					$TaskCreationDate = $row["DateCreated"];
 					$SelectedSensorValue = $row["SelectedSensorValue"];
+					$isDisabled = $row["isDisabled"];
 					$UWCT_UID = $row["UserID"];		//UserWhoCreatedTask_UserID
 					$UWCT_UN = $AllUsersArray[$UWCT_UID]["UserName"];		//UserWhoCreatedTask_UserName
 					$UWCT_IP = $AllUsersArray[$UWCT_UID]["UserImagePath"];		//UserWhoCreatedTask_ImagePath
@@ -136,11 +137,11 @@
 					}
 					//
 					//
-					if($row["isDisabled"] == 1)
+					if($isDisabled == 1)
 					{
 						$isDisabledValue = "x-red.png";
 					}
-					else // if($row["isDisabled"] == 0)
+					else // if($isDisabled == 0)
 					{
 						$isDisabledValue = "Checkmark1.png";
 					}
@@ -261,12 +262,12 @@
 				else if ($sensorTypeID == 20) //Clock
 				{
 					echo"<br /><b>Action Time</b><br />
-					<input type='time' name='ActionTime' value = '$row[ActionTime]' style='width:100px;' readonly/>";
+					<input type='text' name='ActionTime' value = '$row[ActionTime]' style='width:60px;' readonly/>";
 				}
 				
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------//			
 				//DEVICES
-					
+				
 				echo "</td><td style='border-bottom: 2px solid black; border-top: 2px solid black;'>";
 				
 				for ($i = 0; $i < count($devices); $i++)
@@ -295,7 +296,7 @@
 							echo"<table class='device_table'
 							onmouseover='showAlarmDetails(this.nextSibling.nextSibling);' 
 							onmouseout='hideAlarmDetails(this.nextSibling.nextSibling);' 
-							style='width:80px; margin:5; border:0; display:inline;'>
+							style='width:80px; border:0; display:inline;'>
 							<tr><td>
 							<img src='../controllers/images/devices/" . $DeviceImgPath . "' width='40px' height='40px' class='device_img'/>
 							<img src='../controllers/images/info.png' style='width:12px; height:12px; position:absolute; top:1px; right:1px;'/>
@@ -324,7 +325,7 @@
 							echo"<table class='device_table'
 							onmouseover='showCameraDetails(this.nextSibling.nextSibling);' 
 							onmouseout='hideCameraDetails(this.nextSibling.nextSibling);' 
-							style='width:80px; margin:5; border:0; display:inline;'>
+							style='width:80px; border:0; display:inline;'>
 							<tr><td>
 							<img src='../controllers/images/devices/" . $DeviceImgPath . "' width='40px' height='40px' class='device_img'/>
 							<img src='../controllers/images/info.png' style='width:12px; height:12px; position:absolute; top:1px; right:1px;'/>
@@ -356,7 +357,7 @@
 						}
 						else
 						{
-							echo"<table class='device_table' style='width:80px; margin:5; border:0; display:inline;'><tr><td>
+							echo"<table class='device_table' style='width:80px; border:0; display:inline;'><tr><td>
 							<img src='../controllers/images/devices/" . $DeviceImgPath . "' width='40px' height='40px' class='device_img'/>
 							</td></tr><tr><td style='border:0;'>
 							<img src='../controllers/images/$additional' height='20px' class='device_status'/>
@@ -421,17 +422,57 @@
 						}
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------//						
 					//EDIT TASK
-						
-						echo "<td style='border-bottom: 2px solid black; border-top: 2px solid black;'>";
 					
-						//if the current user is an admin or if he is the one who created the task
-						if($isAdmin || $UserID == $UWCT_UID)		
-							echo"<a href='EditTask.php?var=$TaskID&referrer=RoomSettings.php?RoomID=$RoomID' style='text-decoration:none;'>
-							<img src='../controllers/images/edit4.png' width='30px' height='30px' /></a>";
-						else
-							echo"<img src='../controllers/images/edit-not-available.png' width='20px' height='20px' />";
+						echo "<td style='border-bottom: 2px solid black; border-top: 2px solid black;'>";
 						
-						echo "</td></tr>";
+							$IsUserWhoCreatedTaskSystemAdmin = user::isUserWhoCreatedTaskSystemAdmin($TaskID);
+							$isUserSystemAdmin = user::isSystemAdmin($UserID);
+							
+							//multiple CHECKs
+							//if the current user is System Admin, OR if the current user created the task, OR if the task was not creadted by System Admin and the current user is Admin
+							if($isUserSystemAdmin || $UserID == $UWCT_UID || (!$IsUserWhoCreatedTaskSystemAdmin && $isAdmin))		
+							{
+								echo"<a href='EditTask.php?var=$TaskID&referrer=Tasks.php' style='text-decoration:none;'>
+								<img src='../controllers/images/edit4.png' width='30px' height='30px' /></a>";
+							}
+							else
+							{
+								if($IsUserWhoCreatedTaskSystemAdmin && $isAdmin) //if the task was creadted by System Admin and the current user is Admin
+								{
+									if($isDisabled)
+									{
+										echo"<div class='tooltip'>
+										<span class='tooltiptext'>Click to Enable</span>
+										
+										<a href='../controllers/EnableOrDisableTaskHandling.php?var=$TaskID&referrer=RoomSettings.php?RoomID=$RoomID' style='text-decoration:none;'>
+										<img src='../controllers/images/task-disabled.png' height='20px' /></a>
+										
+										<img src='../controllers/images/info.png' style='width:12px; height:12px; position:absolute; top:-12px; right:1px;'/>
+										</div>";
+									}
+									else // Enabled
+									{
+										echo"<div class='tooltip'>
+										<span class='tooltiptext'>Click to Disable</span>
+										
+										<a href='../controllers/EnableOrDisableTaskHandling.php?var=$TaskID&referrer=RoomSettings.php?RoomID=$RoomID' style='text-decoration:none;'>
+										<img src='../controllers/images/task-enabled.png' height='20px' /></a>
+										
+										<img src='../controllers/images/info.png' style='width:12px; height:12px; position:absolute; top:-12px; right:1px;'/>
+										</div>";
+									}
+								}
+								else // normal user (not Admin)
+								{
+									echo"<div class='tooltip'>
+									<span class='tooltiptext'>You can&#39;t edit this task</span>
+									<img src='../controllers/images/edit-not-available.png' width='20px' height='20px' />
+									<img src='../controllers/images/info.png' style='width:12px; height:12px; position:absolute; top:-12px; right:1px;'/>
+									</div>";
+								}
+							}
+							echo "</td></tr>";
+							
 //--------------------------------------------------------------------------------------------------------------------------------------------------------------//						
 			}
 			echo "</table>";

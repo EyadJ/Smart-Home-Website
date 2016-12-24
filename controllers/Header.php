@@ -3,7 +3,13 @@
 	require_once("../models/critical.php");
 	require_once("../models/user.php");
 
-	if (isset($_SESSION["UserName"])) 
+	$UserID = $_SESSION["UserID"];
+	$isAdmin = $_SESSION["isAdmin"];
+	$UserName = $_SESSION["UserName"];
+	
+	$userNameColor = ""; if($isSystemAdmin = user::isSystemAdmin($UserID)) $userNameColor = "color:red;";
+	
+	if (isset($UserName)) 
 	{
 		$isSmokeDetectorOn = critical::isSmokeDetectorOn();
 		$isHouseParametersBreached = critical::isHouseParametersBreached();
@@ -40,9 +46,9 @@
 			}
 			
 			echo"<div class='user-settings' >
-				<div class='welcome-name'>Welcome <b>" . $_SESSION["UserName"] . "</b></div>	&nbsp;&nbsp;";
+				<div class='welcome-name'>Welcome <b style='$userNameColor'>" . $UserName . "</b></div>	&nbsp;&nbsp;";
 
-				if($_SESSION["isAdmin"] || user::isUserAutherisedForRoom($_SESSION["UserID"], 110))
+				if($isAdmin || user::isUserAutherisedForRoom($UserID, 110))
 				{
 					echo"<a class='tooltip' href='../views/SecurityCameras.php' style='text-decoration:none;'>
 					<span style='right:17px; margin-top:10px;' class='tooltiptext'>Security Cameras</span>
@@ -55,9 +61,9 @@
 					</a>";
 				}
 				
-				if($_SESSION["isAdmin"])
+				if($isAdmin)
 				{
-					echo"<a class='tooltip' href='notificationCenter.php' style='text-decoration:none;'>
+					echo"<a class='tooltip' href='NotificationCenter.php' style='text-decoration:none;'>
 					<span style='right:17px; margin-top:10px; width:140px;' class='tooltiptext'>Notification Center</span>
 					<img style='margin-top:35px; padding-right:3px;' width='20px' src='../controllers/images/notification.png' />
 					</a>";

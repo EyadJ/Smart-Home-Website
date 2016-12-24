@@ -217,6 +217,31 @@ class User
 			return FALSE;
 	}	
 	
+	public static function isSystemAdmin($UserID)
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) {
+		  die('error: unable to connect to database');
+		}
+		$UserID = $db->escape_string($UserID);
+		
+		$sql = "SELECT UserName FROM user WHERE UserID = $UserID;";
+		$result = $db->query($sql);
+	 
+		if ($result != NULL && $result->num_rows >= 1)  // id number exists
+		{ 			
+			$row = $result->fetch_assoc();
+			$UserName  = $row['UserName'];
+			
+			if($UserName === "System Admin") 
+				return TRUE;
+			else
+				return FALSE;
+		}
+		else 
+			return FALSE;
+	}	
+	
 	public static function isDisabled($UserID) 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
@@ -264,7 +289,6 @@ class User
 		if ($db->connect_errno > 0) {
 		  die('unable to connect to database [' . $db->connect_error .']');
 		}
-
 		$UserID = $db->escape_string($UserID);
 		$RoomID = $db->escape_string($RoomID);
 		
@@ -280,6 +304,27 @@ class User
 			return FALSE;
 	}
 	
+	public static function isUserHaveTaskInThisRoom($UserID, $RoomID) 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) {
+		  die('unable to connect to database [' . $db->connect_error .']');
+		}
+		$UserID = $db->escape_string($UserID);
+		$RoomID = $db->escape_string($RoomID);
+		
+		$sql = "SELECT * FROM task 
+				WHERE RoomID = $RoomID
+				AND UserID = $UserID";
+
+		$result = $db->query($sql);
+	 
+		if ($result != NULL && $result->num_rows >= 1)  // at least one task exists
+			return TRUE;
+		else 
+			return FALSE;
+	}
+	
 	public static function isUserAutherisedToEditTask($UserID, $TaskID) 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
@@ -289,28 +334,62 @@ class User
 		$UserID = $db->escape_string($UserID);
 		$TaskID = $db->escape_string($TaskID);
 		
-		if(!user::isAdmin($UserID))		//if he isn't admin go in & check if he created the task
+		$IsUserWhoCreatedTaskSystemAdmin = user::isUserWhoCreatedTaskSystemAdmin($TaskID);
+		$isUserSystemAdmin = user::isSystemAdmin($UserID);
+		
+		//User Who Created Task is not System Admin
+		if(!$IsUserWhoCreatedTaskSystemAdmin)
 		{
-			$sql = "SELECT UserID FROM task WHERE TaskID = $TaskID";
-			
-			$result = $db->query($sql);
-			
-			if($result != NULL && $result->num_rows >= 1)
+			if(!user::isAdmin($UserID))		//if he isn't admin go in & check if he created the task
 			{
-				$row = $result->fetch_assoc();
+				$sql = "SELECT UserID FROM task WHERE TaskID = $TaskID";
 				
-				if($UserID == $row["UserID"])
-					return TRUE;
-				else 
-					return FALSE;
+				$result = $db->query($sql);
+				
+				if($result != NULL && $result->num_rows >= 1)
+				{
+					$row = $result->fetch_assoc();
+					
+					if($UserID == $row["UserID"])
+						return TRUE;
+					else 
+						return FALSE;
+				}
+				else
+					return FALSE;	
 			}
-			else
-				return FALSE;	
+			else //isAdmin = Autherized
+				return TRUE;
 		}
-		else //isAdmin = Autherized
-			return TRUE;
+		else if ($IsUserWhoCreatedTaskSystemAdmin && !$isUserSystemAdmin) //User Who Created Task is System Admin and the current user isn't
+			return FALSE;	//not autherized
 	}
 
+	public static function isUserWhoCreatedTaskSystemAdmin($TaskID) 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) {
+		  die('unable to connect to database [' . $db->connect_error .']');
+		}
+		$TaskID = $db->escape_string($TaskID);
+		
+		$sql = "SELECT UserID FROM task WHERE TaskID = $TaskID";
+				
+		$result = $db->query($sql);
+	 
+		if ($result != NULL && $result->num_rows >= 1)  
+		{
+			$row = $result->fetch_assoc();	
+			
+			if($row["UserID"] == 1) 
+				return TRUE;
+			else
+				return FALSE;
+		}
+		else 
+			return FALSE;
+	}
+	
 	public static function modifyUserDetails ($UserID, $UserName, $Email, $CellPhone, $SendEmail, $SendSMS) 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);

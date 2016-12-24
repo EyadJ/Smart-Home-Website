@@ -63,6 +63,8 @@ function LogInFormSubmit()
 	document.getElementById("LogInForm").submit();	
 }
 
+window.onkeydown = function(event){ if ( event.keyCode == 13 ) LogInFormSubmit(); };
+
 </script>
 </head>
 <body onload="checkPass();">

@@ -30,7 +30,6 @@
 
 	while($row = $AllRooms->fetch_assoc()) 
 	{
-			
 		$RoomID = $row['RoomID'];
 		$isAutherised = user::isUserAutherisedForRoom($UserID, $RoomID) ;
 		
@@ -38,19 +37,43 @@
 		
 		if($isAutherised)
 		{
-			echo "<a style='text-decoration:none; color:black;' 
-			href='../controllers/UserAuthorisedRoomsHandling.php?var=" . $UserID . "&var2=" . $RoomID . "&var3=unAuthorise' />
-			<div class='roomDiv'
-			style='
-			width:240px; height:305px; display:inline-block; padding-right:5px; padding-left:5px;			
-			margin-right:2.5px; margin-left:2.5px; margin-bottom:5px; margin-top:5px; border-left: 2px solid black; 
-			border-right: 2px solid black; border-bottom: 2px solid black; border-top: 2px solid black;'>
-			
-			<B>".$row['RoomName']."</B><br />
-			<img src='../controllers/images/Checkmark1.png' width='40px' height='40px'
-			style='z-index:0; position:absolute; margin-top:0px; margin-left:200px; '/>";
+			if(user::isUserHaveTaskInThisRoom($UserID, $RoomID))
+			{
+				echo "
+				<a><div class='roomDiv'
+				style='
+				width:240px; height:305px; display:inline-block; padding-right:5px; padding-left:5px;			
+				margin-right:2.5px; margin-left:2.5px; margin-bottom:5px; margin-top:5px; border-left: 2px solid black; 
+				border-right: 2px solid black; border-bottom: 2px solid black; border-top: 2px solid black;'>
+				
+				<B>".$row['RoomName']."</B><br />
+				
+				<div class='tooltip' style='z-index:0; position:absolute; margin-top:0px; margin-left:200px;'>
+				<span class='tooltiptext' style=' width:110px;'>This user has task/s in this room, Please delete them first</span>
+				
+				<img src='../controllers/images/Checkmark1.png' width='40px' height='40px'
+				/>
+				
+				<img src='../controllers/images/info.png' style='width:12px; height:12px; position:absolute; top:-1px; right:-2px;'/>
+				</div>";
+			}
+			else // isUserHaveTaskInThisRoom == FALSE
+			{
+				echo "<a style='text-decoration:none; color:black;' 
+				href='../controllers/UserAuthorisedRoomsHandling.php?var=" . $UserID . "&var2=" . $RoomID . "&var3=unAuthorise' />
+				<div class='roomDiv'
+				style='
+				width:240px; height:305px; display:inline-block; padding-right:5px; padding-left:5px;			
+				margin-right:2.5px; margin-left:2.5px; margin-bottom:5px; margin-top:5px; border-left: 2px solid black; 
+				border-right: 2px solid black; border-bottom: 2px solid black; border-top: 2px solid black;'>
+				
+				<B>".$row['RoomName']."</B><br />
+				<img src='../controllers/images/Checkmark1.png' width='40px' height='40px'
+				style='z-index:0; position:absolute; margin-top:0px; margin-left:200px; '/>";
+				
+			}
 		}
-		else	//!$isAutherised
+		else	// $isAutherised == FALSE
 		{
 			echo "<a style='text-decoration:none; color:black;' 
 			href='../controllers/UserAuthorisedRoomsHandling.php?var=" . $UserID . "&var2=" . $RoomID . "&var3=Authorise' >
