@@ -48,7 +48,7 @@
 	
 	echo "<tr><td colspan='3' style='background-color:#CCCCCC; padding:0px;'><label>
 	<a href='#' onclick='showAllLogRecords(this.firstChild);return false;' style='text-decoration:none; display:block; width:100%;'>	
-	<input type='checkbox' style='display:none;'/><u><b>Show All</b></u>
+	<input type='checkbox' style='display:none;'/><u><b>Show All</b></u> <b style='color:#990000;'>(" . log::getLogCount() . ")</b>
 	</label></a></td></tr>";
 	
 	

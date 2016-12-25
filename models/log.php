@@ -67,6 +67,25 @@ class Log
 			return NULL;
 	}
 	
+	public static function getLogCount() 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) {
+		  die('unable to connect to database [' . $db->connect_error .']');
+		}
+		$sql = "SELECT COUNT(*) FROM log";
+				
+		$result = $db->query($sql);
+	 
+		if ($result != NULL && $result->num_rows >= 1)  
+		{	
+			$row = $result->fetch_assoc();
+			return $row["COUNT(*)"];
+		}
+		else 
+			return 0;
+	}
+	
 }
 
 

@@ -442,7 +442,7 @@
 									if($isDisabled)
 									{
 										echo"<div class='tooltip'>
-										<span class='tooltiptext'>Click to Enable</span>
+										<span class='tooltiptext' style='width:80px;'>Click to Enable</span>
 										
 										<a href='../controllers/EnableOrDisableTaskHandling.php?var=$TaskID&referrer=RoomSettings.php?RoomID=$RoomID' style='text-decoration:none;'>
 										<img src='../controllers/images/task-disabled.png' height='20px' /></a>
@@ -453,7 +453,7 @@
 									else // Enabled
 									{
 										echo"<div class='tooltip'>
-										<span class='tooltiptext'>Click to Disable</span>
+										<span class='tooltiptext' style='width:80px;'>Click to Disable</span>
 										
 										<a href='../controllers/EnableOrDisableTaskHandling.php?var=$TaskID&referrer=RoomSettings.php?RoomID=$RoomID' style='text-decoration:none;'>
 										<img src='../controllers/images/task-enabled.png' height='20px' /></a>

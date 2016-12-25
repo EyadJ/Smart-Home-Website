@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 24, 2016 at 06:27 AM
+-- Generation Time: Dec 25, 2016 at 10:04 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -171,7 +171,7 @@ INSERT INTO `device` (`DeviceID`, `RoomID`, `DeviceName`, `DeviceState`, `isVisi
 (902, 109, 'Garage Door', b'0', b'1', b'0', -1, 0, '2016-12-02 21:41:21', 'Garage-door_open.png', 'Garage-door_closed.png'),
 (1001, 110, 'Security Camera', b'0', b'1', b'0', 107, 0, '2016-11-28 21:00:00', 'security-camera_on.png', 'security-camera_off.png'),
 (1002, 110, 'Security Camera', b'0', b'1', b'0', 108, 0, '2016-11-28 21:00:00', 'security-camera_on.png', 'security-camera_off.png'),
-(1004, 110, 'Alarm', b'0', b'1', b'0', 77, 0, '2016-12-23 09:03:19', 'alarm.png', 'alarm_off.png'),
+(1004, 110, 'Alarm', b'0', b'1', b'0', 77, 0, '2016-12-24 18:07:35', 'alarm.png', 'alarm_off.png'),
 (1005, 110, 'Water Pump', b'0', b'0', b'0', 82, 0, '2016-12-14 19:21:00', 'water-tank.png', 'water-tank.png');
 
 -- --------------------------------------------------------
@@ -666,7 +666,9 @@ INSERT INTO `log` (`LogRecordID`, `RecordCategoryID`, `isDeleted`, `Description`
 (405, 23, b'0', 'Admin (Abdullah Alghamdi) turned the (Roof Lamp) [OFF] in (Ahmad_Room)', '2016-12-23 20:25:49'),
 (406, 26, b'0', 'Admin (Abdullah Alghamdi) edited task () in room (Parents_Room)', '2016-12-23 20:26:37'),
 (407, 26, b'0', 'Admin (Abdullah Alghamdi) edited task () in room (Parents_Room)', '2016-12-23 20:26:41'),
-(408, 22, b'0', 'Admin (System Admin) has successfully logged in', '2016-12-23 20:39:36');
+(408, 22, b'0', 'Admin (System Admin) has successfully logged in', '2016-12-23 20:39:36'),
+(409, 22, b'0', 'Admin (System Admin) has successfully logged in', '2016-12-24 20:48:21'),
+(410, 22, b'0', 'Admin (System Admin) has successfully logged in', '2016-12-25 04:49:07');
 
 -- --------------------------------------------------------
 
@@ -1310,7 +1312,7 @@ ALTER TABLE `ip_address`
 -- AUTO_INCREMENT for table `log`
 --
 ALTER TABLE `log`
-  MODIFY `LogRecordID` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=409;
+  MODIFY `LogRecordID` int(7) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=411;
 --
 -- AUTO_INCREMENT for table `log_category`
 --
