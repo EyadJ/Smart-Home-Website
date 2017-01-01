@@ -2,9 +2,8 @@
 
 	include_once("../models/device.php");
 
-	$text = "";
-	echo "<tr><td>";
-
+	$text = "<tr><td>";
+	
 	$Multimedia = device::getAllGalleryMultimedia();
 	
 	$oldMultimediaDate = "";
@@ -24,22 +23,21 @@
 			$oldMultimediaDate = $multimediaDate;
 			
 			if($IDcounter != 1000)
-			{
-				$text .= "<table style='border:0px solid black; margin-top:2px; width:90%; background-color:black;'>
-				<tr><td style='height:1px; padding:0px;'></td></tr></table>
-				<table style='border:0px solid black; margin-top:2px; width:80%; background-color:black;'>
-				<tr><td style='height:1px; padding:0px;'></td></tr></table><br />";
-			}		
+				$text .= "</td></tr></table>
+						<h3 align='left' style='background-color:#CCCCCC; width:160px; margin-bottom:-11px; margin-top:40px;'>$multimediaDate</h3>
+						<table><tr><td>";
+
+			else //$IDcounter == 1000
+				$text .= "<h3 align='left' style='background-color:#CCCCCC; width:160px; margin-bottom:-11px; margin-top:40px;'>$multimediaDate</h3>
+						<table><tr><td>";
 			
-			$text .= "<h3 align='left' style='background-color:#CCCCCC; width:160px;'>$multimediaDate</h3>
-			
-			<table style='border:0px solid black; margin-top:-11px; margin-bottom:2px; width:100%; background-color:black;'>
-			<tr><td style='height:1px; padding:0px; background-color:#FFFFFF;'></td></tr></table>";
+			$text .= "<table style='border:0px solid black; margin-top:-11px; margin-bottom:2px; width:100%; background-color:black;'>
+					<tr><td style='height:1px; padding:0px; background-color:#FFFFFF;'></td></tr></table>";
 		}
 	
-		$x = 480; $y = 640;
-		$height = $x / 3.2; $width = $y / 3.2; $cameraName = "Side Camera"; 
-		if ($cameraID == 1001){ $height = $y / 3.2; $width = $x / 3.2; $cameraName = "Roof Camera"; }
+		$x = 133; $y = 178; //$x = 480; $y = 640;
+		$height = $x; $width = $y; $cameraName = "Side Camera"; 
+		if ($cameraID == 1001){ $height = $y; $width = $x; $cameraName = "Roof Camera"; }
 		
 		$text .= "<div
 		style='width:" . $width . "px; height:" . $height. "px; display:inline-block; padding:0px;			
@@ -52,8 +50,9 @@
 			onclick='displayPreview(this.src,$IDcounter,$width);return false;' id='imgID_$IDcounter' />
 			<input type='hidden' value='$multimediaDate' id='imgDate_$IDcounter'/>	
 			<input type='hidden' value='$cameraName' id='imgCamera_$IDcounter'/> ";	
+			$IDcounter++;
 		}
-		else
+		else //$isImage == FALSE (Video)
 		{
 			$text .= "
 			<video width='$width' height='$height' controls>
@@ -63,13 +62,8 @@
 		}
 		
 		$text .= "</div>";
-		$IDcounter++;
 	}
-	
-	$text .= "<table style='border:0px solid black; margin-top:2px; width:90%; background-color:black;'>
-				<tr><td style='height:1px; padding:0px;'></td></tr></table>
-				<table style='border:0px solid black; margin-top:2px; width:80%; background-color:black;'>
-				<tr><td style='height:1px; padding:0px;'></td></tr></table><br />";
+	$text .= "</td></tr></table>";
 				
 	echo"$text</td></tr>";
 

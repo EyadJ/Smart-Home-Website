@@ -159,7 +159,7 @@ include_once("../controllers/Header.php");
     
     </td>
     </tr>
-    <tr><td colspan="2" style="background-color:#CCCCCC;"><b>Please add the required rooms for this user to control after the user is created</b></td></tr>
+    <tr><td colspan="2" style="background-color:#CCCCCC; color:red;"><b>Please add the required rooms for this user to control after the user is created</b></td></tr>
 <tr><th align="left" colspan="2" height="27px">
 
 <div style="width:230px; margin-left:auto; margin-right:auto; ">

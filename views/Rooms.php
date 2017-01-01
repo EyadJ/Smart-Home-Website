@@ -23,27 +23,6 @@
 }
 </style>  
 
-  <script>
-  
-function HideUnhideDiv1() 
-{
-	var x = document.getElementById("right-div1").style.display;	
-	
-	if (x=="none")
-	{
-		document.getElementById("right-div1").style.display ="inline";
-		document.getElementById("right-div1-hidden").style.display ="none";
-	}
-	else
-	{
-		document.getElementById("right-div1").style.display ="none";
-		document.getElementById("right-div1-hidden").style.display ="inline";
-	}
-}
-
-  </script>
-  
-  
 </head>
 <body onload='AC_countDown_Update();'>
  
@@ -134,11 +113,26 @@ include_once("../controllers/Header.php");
         </div>
 	</div>
 
-</body>
 <script>
 
+function HideUnhideDiv1() 
+{
+	var x = document.getElementById("right-div1").style.display;	
+	
+	if (x=="none")
+	{
+		document.getElementById("right-div1").style.display ="inline";
+		document.getElementById("right-div1-hidden").style.display ="none";
+	}
+	else
+	{
+		document.getElementById("right-div1").style.display ="none";
+		document.getElementById("right-div1-hidden").style.display ="inline";
+	}
+}
+
 	var AC_countDown = document.getElementsByClassName("AC_countDown");
-	var AC_countDown_ID = document.getElementById("AC_countDown_ID"); // only for the folloing if statement
+	var AC_countDown_ID = document.getElementById("AC_countDown_ID"); // only for the following if statement
 	
 	if(AC_countDown_ID != null)
 	{
@@ -173,5 +167,7 @@ include_once("../controllers/Header.php");
 		}
 	}
 	</script>
+	
+	</body>
 </html>
 

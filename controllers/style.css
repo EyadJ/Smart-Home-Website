@@ -134,7 +134,7 @@ table {
 
 #page-container {
     position: relative;
-    margin-top: 120px;
+    margin-top: 90px;
 }
 
 .menu {
@@ -142,7 +142,7 @@ table {
     width: 150px;
     //min-width: 120px;
     position: fixed;
-    top: 90px;
+    top: 155px;
     //left: 15%;
 	right:75.5%;
     z-index: 2;
@@ -152,7 +152,7 @@ table {
 	.menu {   
 	width: 120px;
     position: fixed;
-    top: 90px;
+    top: 155px;
     left: 5%;
 	//right:75.5%;
     z-index: 2;
@@ -166,7 +166,7 @@ table {
 	.menu {   
 	width: 60px;
     position: fixed;
-    top: 90px;
+    top: 155px;
     left: 3%;
 	//right:75.5%;
     z-index: 2;

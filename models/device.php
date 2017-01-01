@@ -142,7 +142,7 @@ class Device
 		if ($db->connect_errno > 0) {
 		  die('unable to connect to database [' . $db->connect_error .']');
 		}
-		$sql = "SELECT * FROM camera_gallery";
+		$sql = "SELECT * FROM camera_gallery ORDER BY imgDate DESC";
 		$result = $db->query($sql);
 	 
 		if ($result != NULL && $result->num_rows >= 1)  
@@ -171,7 +171,8 @@ class Device
 			$lastStatusChange = strtotime($row["lastStatusChange"]);
 			$now = time();
 			
-			$RemainingSeconds = $lastStatusChange - $now - 10800 + 30;
+			$RemainingSeconds = $lastStatusChange - $now + 30;
+			//$RemainingSeconds = $lastStatusChange - $now - 10800 + 30;
 			
 			if($RemainingSeconds > 30 || $RemainingSeconds < 0 )
 				return 0;

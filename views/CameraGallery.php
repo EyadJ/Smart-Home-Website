@@ -45,7 +45,11 @@ function displayPreview(imgSrc, imgID, width)
 	document.getElementById("arrow_right").style.display = "inline";
 	document.getElementById("arrow_left").style.display = "inline";
 	
+	var z = document.getElementById("imgID_" + imgID + "");
+	
 	document.getElementById("preview").src = imgSrc;
+	document.getElementById("preview").width = z.width * 3.6 * 0.9;
+	document.getElementById("preview").height = z.height * 3.6 * 0.9;
 	
 	lastImgID = imgID;
 	
@@ -54,12 +58,12 @@ function displayPreview(imgSrc, imgID, width)
 	
 	x = document.getElementById("preview");
 	
-	if(width === (480/3.2))
+	if(width === (133))
 	{
 		x.style.marginLeft = "80px";
 		x.style.marginTop = "0px";
 	}
-	else if(width === (640/3.2))
+	else if(width === (178))
 	{
 		x.style.marginTop = "80px";
 		x.style.marginLeft = "0px";
@@ -79,7 +83,6 @@ function nextImg(y)
 {
 	lastImgID = lastImgID + y;
 	ImgID = "imgID_" + lastImgID + "";
-	
 	var z = document.getElementById(ImgID);
 	
 	document.getElementById("CameraName").innerHTML = document.getElementById(("imgCamera_" + lastImgID + "")).value;
@@ -91,17 +94,19 @@ function nextImg(y)
 		document.getElementById("arrow_left").style.display = "inline";
 		
 		document.getElementById("preview").src = z.src;
+		document.getElementById("preview").width = z.width * 3.6 * 0.9;
+		document.getElementById("preview").height = z.height * 3.6 * 0.9;
 		
 		//----------------------------------------------//
 		x = document.getElementById("preview");
 		var width = z.width;
 		
-		if(width === (480/3.2))
+		if(width === (133))
 		{
 			x.style.marginLeft = "80px";
 			x.style.marginTop = "0px";
 		}
-		else if(width === (640/3.2))
+		else if(width === (178))
 		{
 			x.style.marginTop = "80px";
 			x.style.marginLeft = "0px";
@@ -118,7 +123,19 @@ function nextImg(y)
 	}
 }
 
-window.onkeydown = function(event){ if ( event.keyCode == 27 ) hidePreview(); };
+window.onkeydown = function(event)
+{ 
+	var previewDim = document.getElementById("previewDim").style.display;
+
+	if ( event.keyCode == 27 ) //escape
+		hidePreview(); 
+	
+	else if ( event.keyCode == 37 && previewDim !== "none") //left arrow
+		nextImg(-1);
+
+	else if ( event.keyCode == 39 && previewDim !== "none") //right arrow 
+		nextImg(1); 
+};
 
   </script>
   
@@ -130,7 +147,7 @@ window.onkeydown = function(event){ if ( event.keyCode == 27 ) hidePreview(); };
 	 
 	 
 	<div class="dim" id="previewDim"></div>
-		<div class="dialog" id="previewDiv" style="width:640px; height:640px; background-color:#CCCCCC;">
+		<div class="dialog" id="previewDiv" style="width:576px; height:576px; background-color:#CCCCCC;">
 			
 			<div style="position:absolute; right:15px; top:15px;">
 			<a href='#' onclick="hidePreview();return false;" style="text-decoration:none; ">
