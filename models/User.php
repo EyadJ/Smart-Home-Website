@@ -24,9 +24,11 @@ class User
 		$password = $db->escape_string($password);
 		$AdminUserName = $db->escape_string($AdminUserName);
 
+		$password = password_hash($password, PASSWORD_DEFAULT);
+		
 		$sql = "INSERT INTO user (UserName, Title, Email, CellPhone, Password) "
 		  . " VALUES ('$userName', '$Title', '$email', $CellPhone, '$password')";
-
+		  
 		$db->query($sql);
 		
 		if ($db->affected_rows == 1) // one record has been inserted to database successfully
@@ -49,17 +51,16 @@ class User
 		if ($db->connect_errno > 0) {
 		  die('unable to connect to database [' . $db->connect_error .']');
 		}
-
 		$email = $db->escape_string($email);
 		$pass = $db->escape_string($pass);
+		 
+		$isPassCorrect = user::isPasswordCorrect($email, $pass);
+		$ip_address = $_SERVER['REMOTE_ADDR'];
 		
-		$sql = "SELECT UserID FROM user WHERE Email = '$email' AND Password = '$pass';";
-		
-		$result = $db->query($sql);
-		//echo $db->insert_id;
-		
-		if ($result != NULL && $result->num_rows >= 1)  // id number exists
+		if ($isPassCorrect)  // password is correct
 		{
+			$db->query("DELETE FROM system_settings WHERE logInAttempt_IP = '$ip_address';");
+			
 			//-----------------------------------LOG START-----------------------------------//
 			$UserID = user::getIdByEmail($email);
 			$UserName = user::getUserName($UserID);
@@ -67,23 +68,122 @@ class User
 		
 			$UserOrAdmin = "User";
 			if($isAdmin) $UserOrAdmin = "Admin";
-				
+			
 			$db->query("INSERT INTO log (RecordCategoryID, Description) "
 					. " VALUES (22, '$UserOrAdmin ($UserName) has successfully logged in')");
 					
 			//------------------------------------LOG END------------------------------------//
 			return TRUE;
 		}
-		else 
+		else // password is NOT correct (security to restrict same IP address from brute-forcing)
 		{
+			$sql = "SELECT * FROM system_settings WHERE logInAttempt_IP = '$ip_address';";
+			$result = $db->query($sql);
+		
+			if ($result != NULL && $result->num_rows >= 1)  // ip exists
+			{
+				$row = $result -> fetch_assoc();
+				$recordID = $row["ID"];
+				$logInAttemptsCount = $row["logInAttempt_count"] + 1;
+				
+				$db->query("UPDATE system_settings SET logInAttempt_count = $logInAttemptsCount WHERE ID = $recordID");
+			}
+			else // first time failed log in attempt frp, this IP
+			{
+				$db->query("INSERT INTO system_settings (logInAttempt_IP, logInAttempt_count) VALUES ('$ip_address', 1)");
+			}
 			//-----------------------------------LOG START-----------------------------------//
 			
 			$db->query("INSERT INTO log (RecordCategoryID, Description) "
-					. " VALUES (21, 'Failed log in attempt with Email ($email) & Password ($pass)')");
+					. " VALUES (21, 'Failed log in attempt with Email ($email) & IP Address ($ip_address)')");
 			
 			//------------------------------------LOG END------------------------------------//
 			return FALSE;
 		}
+	}
+
+	public static function LogInAttemptsCount() 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) {
+		  die('unable to connect to database [' . $db->connect_error .']');
+		}
+		$ip_address = $_SERVER['REMOTE_ADDR'];
+		
+		$sql = "SELECT * FROM system_settings WHERE logInAttempt_IP = '$ip_address';";
+		$result = $db->query($sql);
+	
+		if ($result != NULL && $result->num_rows >= 1)  // ip exists
+		{
+			$row = $result -> fetch_assoc();
+			$logInAttemptsCount = $row["logInAttempt_count"];
+			
+			return $logInAttemptsCount;
+		}
+		else //first log in attempt
+			return 0;
+	}
+	
+	public static function WaitingTimeAfterLogInAttempts() 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) {
+		  die('unable to connect to database [' . $db->connect_error .']');
+		}
+		$ip_address = $_SERVER['REMOTE_ADDR'];
+		
+		$sql = "SELECT * FROM system_settings WHERE logInAttempt_IP = '$ip_address';";
+		$result = $db->query($sql);
+	
+		if ($result != NULL && $result->num_rows >= 1)  // ip exists
+		{
+			$row = $result -> fetch_assoc();
+			$logInAttemptsCount = $row["logInAttempt_count"];
+			$lastStatusChange = strtotime($row["lastUpdated"]);
+			$now = time();
+			$timeSinceLastLogInAttempt = $lastStatusChange - $now;
+			
+			if($timeSinceLastLogInAttempt + (60 * 5) < 0)
+			{
+				$db->query("DELETE FROM system_settings WHERE logInAttempt_IP = '$ip_address';");
+				return 0;
+			}
+			else if($logInAttemptsCount < 5)
+				return 0;
+			
+			else if ($logInAttemptsCount == 5)
+				return $timeSinceLastLogInAttempt + 60; //seconds
+			
+			else if ($logInAttemptsCount < 10)
+				return 0;
+			
+			else if ($logInAttemptsCount >= 10)
+				return $timeSinceLastLogInAttempt + (60 * 5); //seconds
+		}
+		else //first log in attempt
+			return 0;
+	}
+	
+	public static function isPasswordCorrect($email, $pass) 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) {
+		  die('unable to connect to database [' . $db->connect_error .']');
+		}
+		$email = $db->escape_string($email);
+		$pass = $db->escape_string($pass);
+				
+		$sql = "SELECT Password FROM user WHERE Email = '$email';";
+		$result = $db->query($sql);
+		
+		$row = $result -> fetch_assoc();
+		$db_pass = $row["Password"];
+		
+		if ($pass === $db_pass || password_verify($pass, $db_pass))  // password is correct
+			return TRUE;
+			
+		else 
+			return FALSE;
 	}
 
 	public static function getUserDetailsByID($UserID) 
@@ -92,7 +192,6 @@ class User
 		if ($db->connect_errno > 0) {
 		  die('unable to connect to database [' . $db->connect_error .']');
 		}
-
 		$UserID = $db->escape_string($UserID);
 		$sql = "SELECT * FROM user WHERE UserID = $UserID";
 
@@ -633,24 +732,24 @@ class User
 			return NULL;
 	}
 	
-	public static function UpdatePassword($UserID, $OldPass, $NewPass) 
+	public static function UpdatePassword($Email, $OldPass, $NewPass) 
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) 
 		{
 			die('error: unable to connect to database');
 		}
-		$UserID = $db->escape_string($UserID);
+		$Email = $db->escape_string($Email);
 		$OldPass = $db->escape_string($OldPass);
 		$NewPass = $db->escape_string($NewPass);
-
-		$sql = "SELECT Password FROM user WHERE UserID = $UserID;";	
-		$result = $db->query($sql);
+		$UserID = user::getIdByEmail($Email);
 		
-		$row = $result -> fetch_assoc();
-			
-		if($row["Password"] == $OldPass)	//Old Password is Correct
+		$isPassCorrect = user::isPasswordCorrect($Email, $OldPass);
+		
+		if($isPassCorrect)	//Old Password is Correct
 		{
+			$NewPass = password_hash($NewPass, PASSWORD_DEFAULT);
+			
 			$sql = "UPDATE user SET Password = '$NewPass' WHERE UserID = $UserID;";	
 		
 			if ($db->query($sql)) //TRUE
@@ -682,6 +781,8 @@ class User
 		$UserID = $db->escape_string($UserID);
 		$NewPass = $db->escape_string($NewPass);
 
+		$NewPass = password_hash($NewPass, PASSWORD_DEFAULT);
+		
 		$sql = "UPDATE user SET Password = '$NewPass' WHERE UserID = $UserID;";	
 	
 		if ($db->query($sql)) //TRUE

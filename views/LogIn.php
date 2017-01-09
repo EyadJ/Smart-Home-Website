@@ -35,11 +35,48 @@ table {
 	{
 		if(unSuccessfullLogIn === "InCorrectPassword")
 		{
-			document.getElementById("logInProblemMessage").innerHTML = 
-			"<font color='red'><b>The Email or Password is Not Correct!</b></font>";
+			var text = "<font color='red'><b>The Email or Password is Not Correct!</b></font>";
 			document.getElementById("logInProblemDialog").style.display ="block";	
 			document.getElementById("ProblemDialogMsgDim").style.display ="block";	
 			document.getElementById("OKbutton").focus();
+			
+			var count = getParameterByName('count');
+			var time = getParameterByName('time');
+			
+			if(count < 5)
+			{
+				text = text + "<br />After (" + (5 - count) + ") Wrong Entries you will wait 1 Minute";
+				document.getElementById("logInProblemMessage").innerHTML = text;
+			}
+			else if (count == 5)
+			{
+				text = text + "<br />Please wait <div id='timer' style='color:white; font-weight: bold; background:black;'>" + 
+				"<span id='time'></span></div> Minutes before trying again";
+				
+				document.getElementById("logInProblemMessage").innerHTML = text;
+				
+				assignTimerValue(time);
+				
+				document.getElementById("OKbutton").style.display = "none";
+				document.getElementById("logInProblemDialog").style.height = "180px";
+			}			
+			else if (count < 10)
+			{
+				text = text + "<br />After (" + (10 - count) + ") Wrong Entries you will wait 5 Minutes";
+				document.getElementById("logInProblemMessage").innerHTML = text;
+			}
+			else if (count >= 10)
+			{
+				text = text + "<br />Please wait <div id='timer' style='color:white; font-weight: bold; background:black;'>" + 
+				"<span id='time'></span></div> Minutes before trying again";
+				
+				document.getElementById("logInProblemMessage").innerHTML = text;
+				
+				assignTimerValue(time);
+				
+				document.getElementById("OKbutton").style.display = "none";
+				document.getElementById("logInProblemDialog").style.height = "180px";
+			}
 		}
 		else if(unSuccessfullLogIn === "AccountDisabled")
 		{
@@ -62,8 +99,47 @@ function LogInFormSubmit()
 {
 	document.getElementById("LogInForm").submit();	
 }
+	
+function startTimer(duration, display) 
+{
+    var timer = duration, minutes, seconds;
+	
+    refreshIntervalId = setInterval(function () 
+	{
+        minutes = parseInt(timer / 60, 10);
+        seconds = parseInt(timer % 60, 10);
 
-window.onkeydown = function(event){ if ( event.keyCode == 13 ) LogInFormSubmit(); };
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+
+        if (--timer < 0) 
+		{
+			clearInterval(refreshIntervalId);
+			window.location.href = "LogIn.php";
+        }
+    }, 1000);
+	
+}
+
+function assignTimerValue(Minutes) 
+{	
+	display = document.querySelector('#time');
+	startTimer(Minutes, display);
+}
+
+window.onkeydown = function(event)
+{ 
+	if ( event.keyCode == 13 ) //Enter
+		LogInFormSubmit(); 
+	
+	else if ( event.keyCode == 116) //F5
+	{
+		window.stop();
+		window.location.href = "../controllers/LogInHandling.php";
+	}
+};
 
 </script>
 </head>
@@ -75,7 +151,7 @@ window.onkeydown = function(event){ if ( event.keyCode == 13 ) LogInFormSubmit()
 	 
 	 <div class="dim" id="ProblemDialogMsgDim"></div>  
 		<table class="dialog" id="logInProblemDialog" style="width:310px; height:110px; max-height:130px; border: 2px solid black;">
-			<tr><td style="padding-top:30px;">
+			<tr><td>
 			<b><h3 id="logInProblemMessage"></h3></b>
 			</td></tr>
 			<tr><th style="height:30px;">	

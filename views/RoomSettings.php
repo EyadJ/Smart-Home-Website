@@ -351,7 +351,7 @@ include_once("../controllers/Header.php");
 			
 					<a  href="#" onclick="unHideNewTask();return false;" style="text-decoration:none; ">
 						<div class="tooltip"><span class="tooltiptext">Create New Task</span>
-							<img  id="abc" src="../controllers/images/task-add1.png" width="60" height="60" />
+							<img src="../controllers/images/task-add1.png" width="60" height="60" />
 							<img src='../controllers/images/info.png' style='width:12px; height:12px; position:absolute; top:1px; right:1px;'/>
 						</div>
 					</a>

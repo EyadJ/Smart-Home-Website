@@ -432,7 +432,7 @@
 							//if the current user is System Admin, OR if the current user created the task, OR if the task was not creadted by System Admin and the current user is Admin
 							if($isUserSystemAdmin || $UserID == $UWCT_UID || (!$IsUserWhoCreatedTaskSystemAdmin && $isAdmin))		
 							{
-								echo"<a href='EditTask.php?var=$TaskID&referrer=Tasks.php' style='text-decoration:none;'>
+								echo"<a href='EditTask.php?var=$TaskID&referrer=RoomSettings.php?RoomID=$RoomID' style='text-decoration:none;'>
 								<img src='../controllers/images/edit4.png' width='30px' height='30px' /></a>";
 							}
 							else

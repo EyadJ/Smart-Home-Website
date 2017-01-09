@@ -2,7 +2,7 @@
 
 	include_once("../models/device.php");
 
-	$text = "<tr><td>";
+	$text = "<table style='background-color:white; border:0px solid transparent;'><tr><td>";
 	
 	$Multimedia = device::getAllGalleryMultimedia();
 	
@@ -65,6 +65,9 @@
 	}
 	$text .= "</td></tr></table>";
 				
-	echo"$text</td></tr>";
+	echo"$text</td></tr></table>
+	
+	<input type='hidden' name='minCountValue' value='1000' id='minCountValue'/>
+	<input type='hidden' name='maxCountValue' value='$IDcounter' id='maxCountValue'/>";
 
 ?>

@@ -81,15 +81,20 @@ function hidePreview()
 
 function nextImg(y) 
 {
+	var minCountValue = parseInt(document.getElementById("minCountValue").value);
+	var maxCountValue = parseInt(document.getElementById("maxCountValue").value);
+	
 	lastImgID = lastImgID + y;
-	ImgID = "imgID_" + lastImgID + "";
-	var z = document.getElementById(ImgID);
 	
-	document.getElementById("CameraName").innerHTML = document.getElementById(("imgCamera_" + lastImgID + "")).value;
-	document.getElementById("imgDate").innerHTML = document.getElementById(("imgDate_" + lastImgID + "")).value;
-	
-	if(z != null)
+	if(lastImgID >= minCountValue && lastImgID < maxCountValue)
 	{
+		var ImgID = "imgID_" + lastImgID + "";
+		
+		var z = document.getElementById(ImgID);
+		
+		document.getElementById("CameraName").innerHTML = document.getElementById(("imgCamera_" + lastImgID + "")).value;
+		document.getElementById("imgDate").innerHTML = document.getElementById(("imgDate_" + lastImgID + "")).value;
+		
 		document.getElementById("arrow_right").style.display = "inline";
 		document.getElementById("arrow_left").style.display = "inline";
 		
@@ -114,7 +119,10 @@ function nextImg(y)
 	}
 	else
 	{
-		lastImgID = lastImgID - y;
+		if(lastImgID <= minCountValue+1)
+			lastImgID = minCountValue;
+		else if(lastImgID > maxCountValue)
+			lastImgID = maxCountValue;
 		
 		if(y == 1)
 			document.getElementById("arrow_right").style.display = "none";
@@ -238,15 +246,11 @@ include_once("../controllers/Header.php");
 		
             <div class="right-div-secondary-title" style="width:188px;"><b>View Camera Gallery</b></div>
             		
-		
-	<table style="background-color:white; border:0px solid transparent;"> 
 			
 		<?php
 		include_once("../controllers/PreCameraGallery.php");
 		?>
 		
-	</table>
-	
 	
        	<br /><br /><br />
 		</div>

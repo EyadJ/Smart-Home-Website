@@ -9,7 +9,9 @@
 	$UserID = $_SESSION["UserID"];
 	$Rooms;
 	
-	if ($isAdmin == TRUE)
+	
+	//-------------------View all Rooms Motion Sensor status (if there is movements)--------------------//
+	if ($isAdmin)
 		$Rooms = room::getAllRoomsDetails();
 		
 	else	//$isAdmin == FALSE (print only rooms which are autherized to some user)
@@ -18,6 +20,65 @@
 	//CHECK if there is not aurtorized rooms for this user
 	if(isset($Rooms))
 	{
+		echo"<div style=' margin-left:auto; margin-right:auto; width:70px;'>
+				<div class='tooltip'><span class='tooltiptext' style='width:170px;'>Movements in Rooms</span>
+					<img src='../controllers/images/motion-sensor1.png' width='70px' height='70px'/>
+					<img src='../controllers/images/info.png' style='width:12px; height:12px; position:absolute; top:1px; right:1px;'/>
+				</div>
+			</div>
+			<table style='background-color:white; border: 0px; margin-top:0px;'><tr><td style=' border: 0px;'>";
+		
+		$movementInAnyRoom = TRUE;
+		while($row = $Rooms->fetch_assoc()) 
+		{
+			$RoomID = $row['RoomID'];
+			$RoomImgPath = $row['RoomImgPath'];
+			
+			$status = sensor::getMotionSensorStatusByRoomID($RoomID);
+			
+			if($status) // ON
+			{
+				echo"<div style='width:64px; height:64px; background-color:#999999; display:inline-block; border-radius:10px; margin-right:10px; '>
+				<img src='../controllers/images/rooms/$RoomImgPath' width='60px' height='60px' style='padding:2px;'/>
+				<div  style='width:34px; height:34px; display:inline-block; margin-top:-20px; right:1px; 
+				background-color:#F2F2F2; border-radius:10px; border: 2px #999999 solid; opacity: 0.9; padding-top:2px;'>
+				<img src='../controllers/images/motion-sensor.png' width='30px' height='30px'/>
+				</div></div>";
+				
+				$movementInAnyRoom = FALSE;
+			}
+			else // OFF
+			{
+				echo"<div style='width:64px; height:64px; background-color:#CCCCCC; display:inline-block; border-radius:10px; margin-right:10px; opacity:0.4;'>
+				<img src='../controllers/images/rooms/$RoomImgPath' width='60px' height='60px' style='padding:2px;'/>
+				</div>";
+			}
+		}
+		if($movementInAnyRoom)
+		{
+			echo "<table style='border:0; margin-bottom:-3px;'><tr>
+				<th style='border:0; height:30px; font-family:Courier New, Courier, monospace; font-size:18px; font-weight:800;'>
+				No Movement was Detected in Any Room
+				</th>
+				</tr></table>";
+		}
+		echo "</td></tr></table>
+		<table style='border:1px solid black; background-color:black;'>
+		<tr><td style='height:1px; padding:0px; background-color:black;'></td></tr></table>";
+	//--------------------------------------------------------------------------------------------------//
+	//
+	//
+	
+	//--------------------------------Full-Detail Rooms Table-------------------------------------------//
+	echo "<table style='background-color:white; border:0px solid transparent;'> ";
+	
+	if ($isAdmin)
+		$Rooms = room::getAllRoomsDetails();
+		
+	else	//$isAdmin == FALSE (print only rooms which are autherized to some user)
+		$Rooms = user::getUserAutherisedRooms($UserID);
+
+		
 		$counter=0;
 		echo "<tr align='center'>";
 		
@@ -172,4 +233,5 @@
 			</th>
 			</tr></table>";
 	}
+	echo"</table>";
 ?>

@@ -93,12 +93,12 @@
 				
 				<img src='../controllers/images/rooms/".$r_Row['RoomImgPath'].
 				"' style='margin-right:auto; margin-left:auto; width:80px; '/>
-				</td></tr></table>
 				
 				<a href='RoomSettings.php?RoomID=". $RoomID ."' style='text-decoration:none;'> 
-				<img src='../controllers/images/edit.png' width='40px' class='room_settings_icon' 
-				style='z-index:0; margin-bottom:-18px; margin-right:20px;'/>
-				</a>";
+				<img src='../controllers/images/edit.png' width='35px' class='room_settings_icon' 
+				style='z-index:0; margin-bottom:-8px; margin-right:-10px; display:absolute; border: 3px solid gray; border-radius:15px;'/>
+				
+				</a></td></tr></table>";
 				
 			//------------------------------------------------------------------------------------//	
 			//------------------------------------------------------------------------------------//	

@@ -140,10 +140,8 @@ table {
 .menu {
     
     width: 150px;
-    //min-width: 120px;
     position: fixed;
-    top: 155px;
-    //left: 15%;
+    top: 60px;
 	right:75.5%;
     z-index: 2;
 }
@@ -152,9 +150,8 @@ table {
 	.menu {   
 	width: 120px;
     position: fixed;
-    top: 155px;
+    top: 60px;
     left: 5%;
-	//right:75.5%;
     z-index: 2;
 	} 
 }
@@ -166,9 +163,8 @@ table {
 	.menu {   
 	width: 60px;
     position: fixed;
-    top: 155px;
+    top: 60px;
     left: 3%;
-	//right:75.5%;
     z-index: 2;
 	} 
 }

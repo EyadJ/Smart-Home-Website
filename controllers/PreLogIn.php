@@ -2,18 +2,17 @@
 
 	$email = "";
 	$pass = "";	
-	$rememberMe="";
-	$string = "";
+	$rememberMe= "";
 		
 	if (isset($_COOKIE["Email"]) && isset($_COOKIE["Pass"])) 
 	{
 		$email_from_cookie = $_COOKIE["Email"];
 		$pass_from_cookie = $_COOKIE["Pass"];
 		
-		$email = "value=".$email_from_cookie;
-		$pass = "value=".$pass_from_cookie;
+		$email = "value='" . $email_from_cookie . "'";
+		$pass  = "value='" . $pass_from_cookie . "'";
 		
-		$rememberMe = "checked=checked";
+		$rememberMe = "checked='checked'";
 	}
 
 	echo"<td>Username</td><td><input name='Email' type='email' $email id='username' required/></td></tr>

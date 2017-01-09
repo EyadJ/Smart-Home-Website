@@ -522,7 +522,7 @@ class Task
 				$AdminOrUser = "User"; if($isAdmin) $AdminOrUser = "Admin"; 
 				
 				$RoomID = task::getRoomIdByTaskId($TaskID);
-				
+				$TaskName = task::getTaskName($TaskID);
 				//-----------------------Get Room Name---------------------------------//
 				$result = $db->query("SELECT RoomName FROM room WHERE RoomID = $RoomID");
 				$row = $result -> fetch_assoc();

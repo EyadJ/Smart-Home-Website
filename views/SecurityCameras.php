@@ -222,10 +222,11 @@ window.onresize = function() {
 	document.getElementById("right-div2").style.height = document.getElementById("right-div1").style.height;
 }
 
+setTimeout(function(){ setCamera2Dimensions(); window.stop(); }, 500);
 </script>
 
 </head>
-<body onload="setCamera2Dimensions();">
+<body >
  
 	<div class="allcontainer">
 
@@ -253,12 +254,12 @@ include_once("../controllers/Header.php");
 			
 			
 				
-			<div style="right:76%; top:311px; width:105px; position:fixed; padding-left:20px; padding-right:10px; 
+			<div style="right:76%; top:281px; width:105px; position:fixed; padding-left:20px; padding-right:10px; 
 			padding-top:4px; border-radius :15px; background: #fff;" id="viewOptions">
 				
 				
 				<div class="right-div-secondary-title" 
-				style="width:94px; height:15px; font-size:15px; position:fixed; top:340px; margin-left:-3px; 
+				style="width:94px; height:15px; font-size:15px; position:fixed; top:310px; margin-left:-3px; 
 				padding-top:1px; padding-bottom:4px; padding-left:4px; padding-right:4px;"><b>View Options</b></div>
 				
 				<br />
@@ -349,8 +350,7 @@ include_once("../controllers/Header.php");
 							
 		</div>
 	
-		<div id="right-div2" class="right-div"
-		>
+		<div id="right-div2" class="right-div">
 	
 		<span id="right-div2-minus">
 		<a href="#" onclick="HideUnhideDiv2();return false;" style="text-decoration:none;">	
@@ -364,7 +364,7 @@ include_once("../controllers/Header.php");
 				"/>
 		</a></span>
 
-		<div class="right-div-secondary-title" style="width:166px;"><b>Security Camera 2</b></div>
+		<div class="right-div-secondary-title" style="width:166px; "><b>Security Camera 2</b></div>
 	
 		<img style="margin-left:14%;" src="http://admin:@192.168.1.100/video.cgi" id="camera2"
 		alt="Cannot Establish Connection with this Camera" class="rotate270"

@@ -95,16 +95,10 @@ include_once("../controllers/Header.php");
 		
 		
             <div class="right-div-secondary-title" style="width:161px;"><b>Rooms & Devices</b></div>
-            		
-		
-	<table style="background-color:white; border:0px solid transparent;"> 
-			
+            
 		<?php
 		include_once("../controllers/PreRooms.php");
 		?>
-		
-	</table>
-	
 	
        	<br /><br /><br />
 		</div>

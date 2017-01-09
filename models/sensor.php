@@ -20,7 +20,7 @@ class sensor
 		$RoomID = $db->escape_string($RoomID);
 
 		$sql = "SELECT * FROM sensor s, sensor_type st
-				WHERE RoomID = '$RoomID' AND
+				WHERE RoomID = $RoomID AND
 				s.SensorTypeID = st.SensorTypeID AND 
 				isVisible = 1";
 		$result = $db->query($sql);
@@ -63,7 +63,7 @@ class sensor
 		$RoomID = $db->escape_string($RoomID);
 
 		$sql = "SELECT * FROM sensor s, sensor_type st
-				WHERE s.RoomID = '$RoomID' AND
+				WHERE s.RoomID = $RoomID AND
 				s.SensorTypeID = st.SensorTypeID AND 
 				s.SensorTypeID = 12";
 				
@@ -78,7 +78,7 @@ class sensor
 			return NULL;
 	}
 
-	public static function getWaterTankLevel() 
+	public static function getWaterTankLevel()
 	{
 		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
 		if ($db->connect_errno > 0) {
@@ -106,7 +106,26 @@ class sensor
 			return NULL;
 	}
 
+public static function getMotionSensorStatusByRoomID($RoomID) 
+	{
+		$db = new mysqli(HOST_NAME, USERNAME, PASSWORD, DATABASE);
+		if ($db->connect_errno > 0) {
+		  die('unable to connect to database [' . $db->connect_error .']');
+		}
+		$RoomID = $db->escape_string($RoomID);
 
+		$sql = "SELECT SenesorState FROM sensor WHERE RoomID = $RoomID AND SensorTypeID = 10";
+				
+		$result = $db->query($sql);
+	 
+		if ($result != NULL && $result->num_rows >= 1)  
+		{
+			$row = $result->fetch_assoc();
+			return $row["SenesorState"];
+		}
+		else 
+			return FALSE;
+	}
 
 	
 	

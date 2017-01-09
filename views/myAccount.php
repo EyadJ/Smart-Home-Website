@@ -117,25 +117,6 @@ include_once("../controllers/Header.php");
 					</a>
 				</div>
 				
-				<form method="post" action="../controllers/ChangePasswordHandling.php" >
-					<table id="ChangePWtable" style="display:none; margin-left:auto; margin-right:auto; width:350px;">
-					
-						<tr><th colspan="2">Change Password</th></tr>
-
-						<tr><td>Enter The Old Password </td>
-						<td><input type="password" name="OldPass" required style="width:90px;"/></td></tr>
-						
-						<tr><td>Enter The New Password </td>
-						<td><input type="password" name="NewPass" required style="width:90px;"/></td></tr>
-						
-						<tr><td>Renter The New Password </td>
-						<td><input type="password" name="NewPassConf" required style="width:90px;"/></td></tr>
-						
-						<tr><th colspan="2"><input align="center" type="submit" class="button" name="UpdatePass" value="Update Password" style="width:140px;"/>
-						<img align="right" src="../controllers/images/change-password2.png" width="34px" style="position:absolute;"/>
-						</th></tr>
-					</table>
-				</form>
 				
 <?php 
 	include_once("../controllers/PreMyAccount.php");
